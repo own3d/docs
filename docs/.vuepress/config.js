@@ -26,7 +26,7 @@ module.exports = {
    *
    * ref：https://vuepress.vuejs.org/config/#base
    */
-  base: "/",
+  base: "/docs/",
 
   /**
    * Theme configuration, here is the default theme configuration for VuePress.
