@@ -84,6 +84,14 @@ module.exports = {
           ]
         },
         {
+          title: 'OWN3D Music',
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            'music/ddex',
+          ]
+        },
+        {
           title: 'OWN3D Pro Chatbot',
           sidebarDepth: 2,
           collapsable: false,
