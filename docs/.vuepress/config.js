@@ -72,7 +72,6 @@ module.exports = {
             'authorization',
             'own3d-pro-api',
             'own3d-tv-api',
-            'jukebox-api',
             'examples',
           ]
         },
