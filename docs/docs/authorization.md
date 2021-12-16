@@ -97,6 +97,16 @@ $response = \Http::post('https://id.stream.tv/oauth/token', [
 // Get the access token from the response
 $access_token = $response->json()['access_token'];
 ```
+
+## Token Expiration
+
+Typically, the `/oauth/token` endpoint will return a `expires_in` field that indicates the number of seconds until the token expires.
+
+By default, access tokens expire after 15 days and refresh tokens after 30 days. 
+This means after expiration of the access token, you will need to use the refresh token within 15 days to get a new access token. 
+If you don't use the refresh token within 30 days, the user will be required to re-authenticate.
+
+
 ## Scopes
 
 With Scope, you can specify the level of access that the application is requesting. 
