@@ -106,6 +106,8 @@ By default, access tokens expire after 15 days and refresh tokens after 30 days.
 This means after expiration of the access token, you will need to use the refresh token within 15 days to get a new access token. 
 If you don't use the refresh token within 30 days, the user will be required to re-authenticate.
 
+Personal access tokens having a lifetime of 6 months. These tokens cannot be refreshed automatically.
+
 
 ## Scopes
 
