@@ -49,6 +49,78 @@ A voucher is a coupon code that entitles the holder to a discount, or that may b
 
 ## API Reference
 
+### Get Entitlements
+
+Entitlements are SKUs that are granted to a user.
+
+#### Authentication
+
+- [User Access Token](authorization.md#types-of-tokens)
+- [`entitlements:read` Scope](authorization.md#scopes)
+
+#### URL
+
+```text
+GET https://api.own3d.tv/v2/entitlements
+```
+
+#### Pagination Support
+
+[Simple pagination](concepts.md) is supported.
+
+#### Return Values
+
+| Parameter | Type | Description |
+| -------- | ---- | ----------- |
+| `data` | `array` | Array of entitlements |
+| `data.id` | `string` | UUID of the entitlement |
+| `data.order_id` | `string?` | UUID of the order that the entitlement belongs to |
+| `data.type` | `string` | Source of entitlement |
+| `data.sku_id` | `string` | SKU UUID of the entitlement |
+| `data.sku_type` | `string` | SKU type of the entitlement |
+| `data.sku` | `string` | SKU Object of the entitlement |
+| `data.product_id` | `string` | Product ID of the entitlement |
+| `data.metadata` | `object` | Metadata of the entitlement |
+
+#### SKU Types and Their Object Structure
+
+##### SKU Type: `product`
+
+| Parameter | Type | Description |
+| -------- | ---- | ----------- |
+| `data.sku.id` | `string` | UUID of the product |
+| `data.sku.files` | `array` | Array of files of the product |
+| `data.sku.files.id` | `string` | UUID of the file |
+| `data.sku.files.locale` | `string` | Locale of the file |
+
+Download a specific file of a product:
+
+> Note: The given entitlement must be a type of `product`, otherwise the endpoint will return a `400` error.
+
+```http request
+GET https://api.own3d.tv/v2/entitlements/{entitlement}/download
+Authorization: Bearer <user_access_token>
+Content-Type: application/json
+Accept: application/json
+
+{
+  "locale": "en"
+}
+```
+
+##### SKU Type: `license_key`
+
+| Parameter | Type | Description |
+| -------- | ---- | ----------- |
+| `data.sku.license_key` | `string` | License key of the entitlement |
+
+##### SKU Type: `maker_session`
+
+| Parameter | Type | Description |
+| -------- | ---- | ----------- |
+| `data.sku.download_url` | `string` | URL to download the session |
+| `data.sku.thumbnail_url` | `string` | URL to download the thumbnail |
+
 <open-api-documentation specs="http://api-docs.internal.stream.tv/swagger/spec.json" base-url="https://api.own3d.tv" />
 
 
