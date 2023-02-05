@@ -10,7 +10,7 @@ $borderColor = #eaecef
 $codeBgColor = lighten($textColor, 10%)
 
 $vue-color = #cec6f5
-$bg-color = #0e0e12
+$bg-color = #16161C
 $MQNarrow = 959px
 $MQMobile = 719px
 $MQMobileNarrow = 419px
@@ -20,6 +20,11 @@ body, html
   color desaturate(lighten($bg-color, 80%), 50%)
 
 .theme-default-content code
+  background-color: #23232d;
+  color: lighten($bg-color, 80%);
+
+.theme-default-content blockquote
+  background-color: #23232d;
   color: lighten($bg-color, 80%);
 
 .custom-block.tip
