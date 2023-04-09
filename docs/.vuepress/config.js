@@ -95,6 +95,15 @@ module.exports = {
           ]
         },
         {
+          title: 'OWN3D Alerts',
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            'alerts/',
+            'alerts/template-parameters',
+          ]
+        },
+        {
           title: 'OWN3D Pro Chatbot',
           sidebarDepth: 2,
           collapsable: false,
