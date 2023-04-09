@@ -19,7 +19,7 @@ Trace:
 npm manifest: 
   {
     "license": "Creative Commons Attribution-ShareAlike 4.0 International",
-    "description": "The official developer documentation for StreamTV.",
+    "description": "The official developer documentation for OWN3D.",
     "devDependencies": {
       "vuepress": "^1.8.2"
     },

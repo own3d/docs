@@ -6,11 +6,11 @@
 
 > Embedding the Jukebox SDK on commercial websites is not allowed without prior written permission. Please contact us at developers@stream.tv for more information.
 
-Jukebox offers a Player SDK to embed Jukebox as a whitelabel solution in the website. End users who want to use Jukebox Player need at least a free StreamTV account.
+Jukebox offers a Player SDK to embed Jukebox as a whitelabel solution in the website. End users who want to use Jukebox Player need at least a free OWN3D account.
 
 ### Authentication with Jukebox
 
-Use StreamTV Client Credentials.
+Use OWN3D Client Credentials.
 
 ### Example
 

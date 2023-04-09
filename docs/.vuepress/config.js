@@ -4,7 +4,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'StreamTV Developer Portal',
+  title: 'OWN3D Developer Portal',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         text: 'Discord',
-        link: 'https://discord.gg/NyejWgn/'
+        link: 'https://discord.gg/NyejWgn'
       },
       {
         text: 'Customer Support',
@@ -73,14 +73,17 @@ module.exports = {
             'own3d-pro-api',
             'own3d-tv-api',
             'examples',
+            'developer-guidelines',
           ]
         },
         {
-          title: 'OWN3D Pro Widgets',
+          title: 'OWN3D App Extensions',
           sidebarDepth: 2,
           collapsable: false,
           children: [
-            'widgets/',
+            'extensions/',
+            'extensions/designing-extensions',
+            'extensions/guidelines-and-policies',
           ]
         },
         {

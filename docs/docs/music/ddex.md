@@ -4,7 +4,7 @@
 
 DDEX is a standards setting organisation focused on the creation of digital value chain standards to make the exchange of data and information across the music industry more efficient.
 
-StreamTV supports the ERN (Electronic Release Notification) standard, for versions `3.8.2` and `4.1`.
+OWN3D supports the ERN (Electronic Release Notification) standard, for versions `3.8.2` and `4.1`.
 
 Our Party ID is:
 
@@ -12,8 +12,8 @@ Our Party ID is:
 
 ## FTP Accounts
 
-StreamTV supports the DDEX format and allows uploads through the FTP protocol. 
-Credentials can be requested through your StreamTV Partner Manager.
+OWN3D supports the DDEX format and allows uploads through the FTP protocol. 
+Credentials can be requested through your OWN3D Partner Manager.
 
 Server: `ddex.partners.jukebox.gg`
 

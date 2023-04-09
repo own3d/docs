@@ -1,5 +1,7 @@
 # OWN3D Shop API
 
+> **Information**: We're about to merge own3d.pro and own3d.tv API's.
+
 ## Terminology
 
 ### Asset

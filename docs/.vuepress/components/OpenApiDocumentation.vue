@@ -1,14 +1,20 @@
 <template>
   <div v-if="openapi">
-    <div v-for="(path, pathName) in openapi.paths" v-if="!isPrivate(pathName)">
-      <div v-for="(method, methodName) in path" class="card" :id="id(methodName, pathName)">
+    <div v-for="(path, pathName) in openapi.paths" v-if="!isPrivatePath(pathName)">
+      <div v-for="(method, methodName) in path" v-if="!isPrivateMethod(method)"
+           class="card" :id="id(methodName, pathName)">
         <div class="card-body">
-          <h3 style="margin-top: 0;">
-            <a :href="`#${id(methodName, pathName)}`" class="header-anchor">
-              #
-            </a>
-            <span :class="`badge badge-${methodName}`">{{ methodName.toUpperCase() }}</span>
-            {{ pathName }}
+          <h3 style="margin-top: 0;" class="d-flex">
+            <div>
+              <a :href="`#${id(methodName, pathName)}`" class="header-anchor">
+                #
+              </a>
+              <span :class="`badge badge-${methodName}`">{{ methodName.toUpperCase() }}</span>
+              {{ pathName }}
+            </div>
+            <div>
+              <span v-if="isDeprecated(method)" :class="`badge badge-deprecated`">Deprecated</span>
+            </div>
           </h3>
 
           {{ method.summary }}
@@ -93,8 +99,15 @@ export default {
   },
 
   methods: {
-    isPrivate(path) {
-      return path.startsWith('/admin');
+    isPrivatePath(pathName) {
+      return pathName.startsWith('/admin');
+    },
+    isPrivateMethod(method) {
+      // check if method has x-internal property
+      return method['x-internal'];
+    },
+    isDeprecated(method) {
+      return method.deprecated;
     },
     id(methodName, pathName) {
       // replace all `[]{}/` with dashes
@@ -139,6 +152,12 @@ export default {
           return 'Created';
         case '204':
           return 'No Content';
+        case '301':
+          return 'Moved Permanently';
+        case '302':
+          return 'Found';
+        case '307':
+          return 'Temporary Redirect';
         case '400':
           return 'Bad Request';
         case '401':
@@ -168,6 +187,10 @@ export default {
 </script>
 
 <style scoped>
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
   .small {
     font-size: 0.8em;
   }
@@ -180,6 +203,11 @@ export default {
     background-color: #a0a0a0;
     border-radius: 4px;
     color: #fff;
+    text-transform: uppercase;
+  }
+  .badge-deprecated {
+    color: #7e7e7e;
+    background-color: #181e23;
   }
   .badge-get {
     background-color: #504a6c;
@@ -201,6 +229,10 @@ export default {
     background-color: rgba(243, 156, 18, 0.4);
     color: #fff;
   }
+  .badge-301, .badge-302, .badge-307 {
+    background-color: rgba(0, 122, 166, 0.4);
+    color: #fff;
+  }
   .badge-500, .badge-502, .badge-503{
     background-color: rgba(221, 75, 57, 0.4);
     color: #fff;
@@ -210,13 +242,13 @@ export default {
   }
   .card-body {
     padding: 15px;
-    border: 1px solid #23232d;
+    border: 1px solid #181e23;
   }
   .card-header {
     padding: 10px 15px;
     border-left: 1px solid #292934;
     border-right: 1px solid #292934;
-    background-color: #23232d;
+    background-color: #181e23;
     font-weight: bold;
   }
   .table-responsive {
@@ -226,7 +258,7 @@ export default {
     border-collapse: collapse;
     display: block;
     overflow-x: auto;
-    border-color: #23232d;
+    border-color: #181e23;
   }
   .table table, th, td {
     border: 1px solid #292934;
