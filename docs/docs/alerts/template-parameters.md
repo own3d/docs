@@ -49,7 +49,7 @@ The following parameters are available for gift-subscribe alerts:
 | `tier`              | The tier of the subscription                                      |
 | `amount`            | The total amount of the subscription                              |
 | `cumulative_amount` | The total amount of the subscription including all previous gifts |
-| `months`            | The number of months the user has been subscribed                 |
+| `is_anonymous`      | Whether the subscription was anonymous                            |
 
 ## Twitch Cheer Alert Parameters
 
