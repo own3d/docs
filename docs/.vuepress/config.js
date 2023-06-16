@@ -82,16 +82,10 @@ module.exports = {
           collapsable: false,
           children: [
             'extensions/',
+            'extensions/extension-helper',
+            'extensions/syntax-for-forms',
             'extensions/designing-extensions',
             'extensions/guidelines-and-policies',
-          ]
-        },
-        {
-          title: 'OWN3D Music',
-          sidebarDepth: 2,
-          collapsable: false,
-          children: [
-            'music/ddex',
           ]
         },
         {
@@ -117,7 +111,15 @@ module.exports = {
             'chatbot/template-reference',
             'chatbot/all-commands',
           ]
-        }
+        },
+        {
+          title: 'OWN3D Music',
+          sidebarDepth: 2,
+          collapsable: false,
+          children: [
+            'music/ddex',
+          ]
+        },
       ],
     }
   },
