@@ -1,0 +1,40 @@
+# Alert Variations <Badge text="AE4" type="success"/>
+
+An alert variation is a specific configuration that defines how an alert should appear for a particular scenario. Each
+variation has its own set of `conditions` and `overrides`.
+
+We use [JsonLogic](https://jsonlogic.com/) to define alert variation conditions. Conditions are used to determine which
+variation should be used for a given alert. They are defined using logical operators and compare variables to specific
+values.
+
+### List of Global Variables <Badge text="AE4" type="success"/>
+
+The following variables are available for use in alert variation conditions for all alert types:
+
+| Variable  | Description                        |
+|-----------|------------------------------------|
+| `type`    | The type of alert.                 |
+| `enabled` | Whether the alert is enabled.      |
+| `random`  | A random number between 1 and 100. |
+
+### List of Alert Type Specific Variables <Badge text="AE4" type="success"/>
+
+Technically you can combine all [Message Template Parameters](./template-parameters.md) as variables in your alert
+variation conditions. For example, you can use `amount` to compare the amount of a donation or `name` to compare the
+name of the person who triggered the alert.
+
+```json
+{
+  "name": "Twitch Cheer",
+  "conditions": {
+    "and": [
+      {"===": [{"var": "type"}, "twitch-cheer"]},
+      {"===": [{"var": "enabled"}, true]},
+      {">=": [{"var": "amount"}, 1000]}
+    ]
+  },
+  "overrides": {
+    "title": "Thanks {{name}} for cheering over 1K bits!💃💃💃"
+  }
+}
+```

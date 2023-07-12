@@ -5,19 +5,25 @@ For our Alerts there are several `{{ parameters }}` that you can use to customiz
 Templates are always enclosed in double braces, for example `{{ name }}`.
 :::
 
+## Available Parameters in Alerts Engine 4 <Badge text="AE4" type="success"/>
+
+TBD
+
+## Available Parameters in Alerts Engine 3 <Badge text="AE3" type="error"/>
+
 Below you will find a list of existing parameters for each alert type:
 
-## Twitch Follow Alert Parameters
+### Twitch Follow Alert Parameters <Badge text="AE3" type="error"/>
 
-The following parameters are available for follow alerts:
+The following parameters are available for `follow` alerts:
 
 | Parameter | Description                       |
 |-----------|-----------------------------------|
 | `name`    | The name of the user who followed |
 
-## Twitch Subscribe Alert Parameters
+### Twitch Subscribe Alert Parameters <Badge text="AE3" type="error"/>
 
-The following parameters are available for subscribe alerts:
+The following parameters are available for `subscribe` alerts:
 
 | Parameter | Description                         |
 |-----------|-------------------------------------|
@@ -25,9 +31,9 @@ The following parameters are available for subscribe alerts:
 | `tier`    | The tier of the subscription        |
 | `is_gift` | Whether the subscription was gifted |
 
-## Twitch Re-Subscribe Alert Parameters
+### Twitch Re-Subscribe Alert Parameters <Badge text="AE3" type="error"/>
 
-The following parameters are available for re-subscribe alerts:
+The following parameters are available for `re-subscribe` alerts:
 
 | Parameter  | Description                                                |
 |------------|------------------------------------------------------------|
@@ -39,9 +45,9 @@ The following parameters are available for re-subscribe alerts:
 | `message`  | The message the user sent with the subscription            |
 | `emotes`   | The emotes the user sent with the subscription             |
 
-## Twitch Gift-Subscribe Alert Parameters
+### Twitch Gift-Subscribe Alert Parameters <Badge text="AE3" type="error"/>
 
-The following parameters are available for gift-subscribe alerts:
+The following parameters are available for `gift-subscribe` alerts:
 
 | Parameter           | Description                                                       |
 |---------------------|-------------------------------------------------------------------|
@@ -51,9 +57,9 @@ The following parameters are available for gift-subscribe alerts:
 | `cumulative_amount` | The total amount of the subscription including all previous gifts |
 | `is_anonymous`      | Whether the subscription was anonymous                            |
 
-## Twitch Cheer Alert Parameters
+### Twitch Cheer Alert Parameters <Badge text="AE3" type="error"/>
 
-The following parameters are available for cheer alerts:
+The following parameters are available for `cheer` alerts:
 
 | Parameter      | Description                              |
 |----------------|------------------------------------------|
@@ -62,16 +68,16 @@ The following parameters are available for cheer alerts:
 | `message`      | The message the user sent with the cheer |
 | `is_anonymous` | Whether the cheer was anonymous          |
 
-## Twitch Raid Alert Parameters
+### Twitch Raid Alert Parameters <Badge text="AE3" type="error"/>
 
-The following parameters are available for raid alerts:
+The following parameters are available for `raid` alerts:
 
 | Parameter | Description                                |
 |-----------|--------------------------------------------|
 | `name`    | The name of the user who raided            |
 | `count`   | The number of viewers the user raided with |
 
-## Twitch Charity Donation Alert Parameters
+### Twitch Charity Donation Alert Parameters <Badge text="AE3" type="error"/>
 
 The following parameters are available for charity donation alerts:
 

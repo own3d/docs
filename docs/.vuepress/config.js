@@ -95,6 +95,7 @@ module.exports = {
           children: [
             'alerts/',
             'alerts/template-parameters',
+            'alerts/variations',
           ]
         },
         {
