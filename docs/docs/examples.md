@@ -112,24 +112,54 @@ to display alerts, for example.
 ### Use Sockets with Socket.IO
 
 ```javascript
-import {io} from 'socket.io-client';
+import { io } from 'socket.io-client'
 
 // Connect to the socket
 const socket = io('https://socket-hel1-1.own3d.dev', {
     withCredentials: true, // Required for cookies
-});
+})
 
 // Join a room for the current user
 socket.on('connect', () => {
-    console.log(`Connected to socket server, id: ${socket.id}`);
-    socket.emit('room', '90a951d1-ea50-4fda-8c4d-275b81f7d219.twitch.106415581');
-});
+    console.log(`Connected to socket server, id: ${socket.id}`)
+    socket.emit('room', '90a951d1-ea50-4fda-8c4d-275b81f7d219.twitch.106415581')
+})
 
 // Listen for events
 socket.on('notifysub', (data) => {
-    console.log('Got a new event from the notification subscription service:', data);
-});
+    console.log('Got a new event from the notification subscription service:', data)
+})
 ```
+
+::: warning
+
+The socket server uses sticky sessions to distribute the load across multiple servers. If you're using NodeJS, you must
+use the `serverid` cookie to connect to the correct server, otherwise you will encounter connection issues.
+
+```javascript
+import { io } from 'socket.io-client'
+
+// List of available servers
+const servers = [
+    // The list of available servers is not public. 
+    // Please contact us if you need access to the list of available servers.
+]
+
+// Select a random server
+const server = servers[Math.floor(Math.random() * servers.length)]
+
+// Connect to the socket
+const socket = io('https://socket-hel1-1.own3d.dev', {
+    withCredentials: true, // Required for cookies
+    extraHeaders: {
+        Cookie: 'serverid=' + server, // Set the serverid cookie
+    },
+})
+
+// continue as usual
+```
+
+:::
 
 ### Use Sockets with OWN3D Extension Helper <Badge text="beta" type="warning"/>
 
@@ -139,10 +169,10 @@ Using the OWN3D Extension Helper, you can easily connect to the socket server an
 
 ```javascript
 OWN3D.ext.socket.on('notifysub', (data) => {
-    console.log('Got notify-sub event', data);
-});
+    console.log('Got notify-sub event', data)
+})
 
 OWN3D.ext.socket.on('browser-source-updated', (data) => {
-    console.log('Got browser-source-updated event', data);
-});
+    console.log('Got browser-source-updated event', data)
+})
 ```

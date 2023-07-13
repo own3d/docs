@@ -36,25 +36,25 @@ yarn add own3d/ext-types
 ```vue
 
 <script>
-console.log(`Running ${OWN3D.ext.version} on ${OWN3D.ext.environment}`);
+console.log(`Running ${OWN3D.ext.version} on ${OWN3D.ext.environment}`)
 
 OWN3D.ext.onAuthorized((data) => {
-  console.log('onAuthorized', data);
-});
+  console.log('onAuthorized', data)
+})
 
 OWN3D.ext.onContext((context, changed) => {
   for (const key of changed) {
-    console.log(`Context changed ${context[key]}`);
+    console.log(`Context changed ${context[key]}`)
   }
-});
+})
 
 OWN3D.ext.socket.on('notifysub', (data) => {
-  console.log('Got notify-sub event', data);
-});
+  console.log('Got notify-sub event', data)
+})
 
 OWN3D.ext.socket.on('browser-source-updated', (data) => {
-  console.log('Got browser-source-updated event', data);
-});
+  console.log('Got browser-source-updated event', data)
+})
 </script>
 ```
 
@@ -82,8 +82,8 @@ Registers a callback that is called when the extension is authorized.
 
 ```js
 OWN3D.ext.onAuthorized((data) => {
-    console.log('onAuthorized', data);
-});
+  console.log('onAuthorized', data)
+})
 ```
 
 #### `OWN3D.ext.onContext(callback)`
@@ -98,10 +98,10 @@ Registers a callback that is called when the context is updated.
 
 ```js
 OWN3D.ext.onContext((context, changed) => {
-    for (const key of changed) {
-        console.log(`Context changed ${context[key]}`);
-    }
-});
+  for (const key of changed) {
+    console.log(`Context changed ${context[key]}`)
+  }
+})
 ```
 
 ### `OWN3D.ext.socket`
@@ -114,8 +114,8 @@ The socket module is an event emitter. It provides a set of functions, so you ca
 
 ```js
 OWN3D.ext.socket.on('notifysub', (data) => {
-    console.log('Got notify-sub event', data);
-});
+    console.log('Got notify-sub event', data)
+})
 ```
 
 ### `OWN3D.ext.ipc`
@@ -151,7 +151,7 @@ Sends a message to the supervisor.
 ##### Example
 
 ```js
-OWN3D.ext.ipc.send('test', { foo: 'bar' });
+OWN3D.ext.ipc.send('test', { foo: 'bar' })
 ```
 
 #### `OWN3D.ext.ipc.on(channel, listener)`
@@ -167,6 +167,6 @@ Registers a listener for a channel.
 
 ```js
 OWN3D.ext.ipc.on('test', (payload) => {
-    console.log('Got test message', payload);
-});
+  console.log('Got test message', payload)
+})
 ```
