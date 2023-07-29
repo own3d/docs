@@ -1,0 +1,431 @@
+{
+  "version": "4",
+  "variations": [
+    {
+      "name": "Follow",
+      "type": "follow",
+      "description": "Someone follows/subscribes your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the user who followed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Subscribe",
+      "type": "subscribe",
+      "description": "Someone subscribes/become a member to your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the user who subscribed"
+            },
+            {
+              "name": "tier",
+              "type": "enum",
+              "default": "1000",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "1000"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "2000"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "3000"
+                }
+              ],
+              "description": "The tier of the subscription"
+            },
+            {
+              "name": "is_gift",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether the subscription was gifted"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Re-Subscribe",
+      "type": "re-subscribe",
+      "description": "Someone re-subscribes/renews their membership to your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the user who re-subscribed"
+            },
+            {
+              "name": "tier",
+              "type": "enum",
+              "default": "1000",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "1000"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "2000"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "3000"
+                }
+              ],
+              "description": "The tier of the subscription"
+            },
+            {
+              "name": "months",
+              "type": "number",
+              "default": 1,
+              "description": "The number of months the user has been subscribed"
+            },
+            {
+              "name": "streak",
+              "type": "number",
+              "default": 1,
+              "description": "The number of months the user has been subscribed in a row"
+            },
+            {
+              "name": "duration",
+              "type": "number",
+              "default": 1,
+              "description": "The number of months the user has been subscribed in total"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "description": "The message the user sent with the subscription"
+            },
+            {
+              "name": "emotes",
+              "type": "string",
+              "default": "",
+              "description": "The emotes the user sent with the subscription"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Gift-Subscribe",
+      "type": "gift-subscribe",
+      "description": "Someone gifted a subscription/membership to your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "gifter",
+              "type": "string",
+              "default": "twitch",
+              "description": "The name of the user who gifted the subscription"
+            },
+            {
+              "name": "tier",
+              "type": "enum",
+              "default": "1000",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "1000"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "2000"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "3000"
+                }
+              ],
+              "description": "The tier of the subscription"
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "description": "The total amount of the subscription"
+            },
+            {
+              "name": "cumulative_amount",
+              "type": "number",
+              "default": 1,
+              "description": "The total amount of the subscription including all previous gifts"
+            },
+            {
+              "name": "is_anonymous",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether the subscription was anonymous"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cheer",
+      "type": "cheer",
+      "description": "Someone cheers on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the user who cheered"
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "description": "The amount of bits the user cheered"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "description": "The message the user sent with the cheer"
+            },
+            {
+              "name": "is_anonymous",
+              "type": "boolean",
+              "default": false,
+              "description": "Whether the cheer was anonymous"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Raid",
+      "type": "raid",
+      "description": "Someone raids your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the user who raided"
+            },
+            {
+              "name": "count",
+              "type": "number",
+              "default": 1,
+              "description": "The number of viewers the user raided with"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hype Train Begin",
+      "type": "channel.hype_train.begin",
+      "description": "A hype train begins on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Shoutout Create",
+      "type": "channel.shoutout.create",
+      "description": "A shoutout is created on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Shoutout Receive",
+      "type": "channel.shoutout.receive",
+      "description": "A shoutout is received on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Channel Points Reward",
+      "type": "channel_points.redemption.add",
+      "description": "Someone redeems a channel points reward on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Super Chat",
+      "type": "superchat",
+      "description": "Someone purchased a elevated chat to highlight their message in your chat",
+      "platforms": [
+        {
+          "type": "youtube",
+          "parameters": [],
+          "localization": {
+            "name": "Super Chat",
+            "description": "Someone purchased a Super Chat to highlight their message in your YouTube chat"
+          }
+        },
+        {
+          "type": "twitch",
+          "parameters": [],
+          "localization": {
+            "name": "Hype Chat",
+            "description": "Someone purchased a Hype Chat to highlight their message in your Twitch chat"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super Sticker",
+      "type": "supersticker",
+      "description": "Someone purchased Super Sticker to highlight their message in your YouTube live chat",
+      "platforms": [
+        {
+          "type": "youtube",
+          "parameters": []
+        }
+      ]
+    },
+    {
+      "name": "Tip",
+      "type": "donation",
+      "description": "Someone tips to your channel",
+      "platforms": [
+        {
+          "type": "own3d",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "description": "The name of the user who tipped"
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "description": "The amount of money the user tipped"
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "description": "The currency of the tip"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "description": "The message the user sent with the tip"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Charity-Donation",
+      "type": "charity-donation",
+      "description": "Someone donates to your Twitch charity campaign",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "campaign_id",
+              "type": "string",
+              "default": "twitch",
+              "description": "The ID of the campaign"
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "twitch",
+              "description": "The name of the user who donated"
+            },
+            {
+              "name": "charity_name",
+              "type": "string",
+              "default": "twitch",
+              "description": "The name of the charity"
+            },
+            {
+              "name": "charity_description",
+              "type": "string",
+              "default": "twitch",
+              "description": "The description of the charity"
+            },
+            {
+              "name": "charity_website",
+              "type": "string",
+              "default": "twitch",
+              "description": "The website of the charity"
+            },
+            {
+              "name": "charity_logo",
+              "type": "string",
+              "default": "twitch",
+              "description": "The logo of the charity"
+            },
+            {
+              "name": "amount_value",
+              "type": "number",
+              "default": "1",
+              "description": "The value of the donation"
+            },
+            {
+              "name": "amount_currency",
+              "type": "string",
+              "default": "twitch",
+              "description": "The currency of the donation"
+            },
+            {
+              "name": "amount_decimal_places",
+              "type": "number",
+              "default": "1",
+              "description": "The number of decimal places of the donation"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

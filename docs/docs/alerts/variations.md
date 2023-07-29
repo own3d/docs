@@ -11,11 +11,12 @@ values.
 
 The following variables are available for use in alert variation conditions for all alert types:
 
-| Variable  | Description                        |
-|-----------|------------------------------------|
-| `type`    | The type of alert.                 |
-| `enabled` | Whether the alert is enabled.      |
-| `random`  | A random number between 1 and 100. |
+| Variable   | Description                        |
+|------------|------------------------------------|
+| `type`     | The type of alert.                 |
+| `platform` | The type of alert.                 |
+| `enabled`  | Whether the alert is enabled.      |
+| `random`   | A random number between 1 and 100. |
 
 ### List of Alert Type Specific Variables <Badge text="AE4" type="success"/>
 
@@ -28,7 +29,8 @@ name of the person who triggered the alert.
   "name": "Twitch Cheer",
   "conditions": {
     "and": [
-      {"===": [{"var": "type"}, "twitch-cheer"]},
+      {"===": [{"var": "type"}, "cheer"]},
+      {"===": [{"var": "platform"}, "twitch"]},
       {"===": [{"var": "enabled"}, true]},
       {">=": [{"var": "amount"}, 1000]}
     ]
