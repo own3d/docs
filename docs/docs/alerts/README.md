@@ -158,7 +158,7 @@ The AE3 Migration API allows you to migrate your existing alert sets to AE4. It 
 set as input and migrates it to AE4.
 
 ```http request
-POST https://api.own3d.pro/v1/alerts/1/migrate
+POST https://api.own3d.pro/v1/alert-configs/{id}/migrate
 Accept: application/json
 Content-Type: application/json
 Authorization: Bearer <token>
