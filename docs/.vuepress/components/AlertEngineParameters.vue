@@ -5,7 +5,7 @@
         <h3 :id="`#${platform.type}-${variation.type}-parameters`">
           <a :href="`#${platform.type}-${variation.type}-parameters`" class="header-anchor">#</a>
           {{ formatPlatform(platform.type) }} {{ variation.name }} Alert Parameters
-          <span data-v-217a43d9="" class="badge success" style="vertical-align: top;">AE{{ specs.version }}</span>
+          <span data-v-217a43d9="" class="ae-badge" style="vertical-align: top;">AE{{ specs.version }}</span>
         </h3>
 
         <p>Type: <code>{{ variation.type }}</code>, Platform: <code>{{ platform.type }}</code></p>
@@ -85,5 +85,16 @@ export default {
 
 table {
   width: 100%;
+}
+.ae-badge {
+  vertical-align: top;
+  background-color: #42b983;
+  display: inline-block;
+  font-size: 14px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 3px;
+  padding: 0 6px;
+  color: #fff;
 }
 </style>

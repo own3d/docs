@@ -57,6 +57,7 @@ Here's an example of an alert set configuration in JSON format:
 ```json
 {
   "id": 490885,
+  "version": 4,
   "user_id": 1,
   "active": true,
   "default": {
