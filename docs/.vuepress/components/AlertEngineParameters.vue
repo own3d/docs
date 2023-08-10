@@ -17,7 +17,7 @@
             <tr>
               <th>Name</th>
               <th>Type</th>
-              <th>Default</th>
+              <th>Example</th>
               <th>Description</th>
             </tr>
             </thead>
@@ -25,7 +25,7 @@
             <tr v-for="parameter in platform.parameters">
               <td><code>{{ parameter.name }}</code></td>
               <td><code>{{ parameter.type }}</code></td>
-              <td><code>{{ parameter.default }}</code></td>
+              <td><code>{{ parameter.example }}</code></td>
               <td style="width: 100%">
                 {{ parameter.description }}
                 <div class="small" v-if="parameter.type === 'enum'">

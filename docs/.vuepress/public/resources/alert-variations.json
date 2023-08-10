@@ -17,6 +17,18 @@
               "description": "The name of the user who followed"
             }
           ]
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "GhostZero",
+              "description": "The name of the user who subscribed"
+            }
+          ]
         }
       ]
     },
@@ -62,6 +74,25 @@
               "default": false,
               "example": false,
               "description": "Whether the subscription was gifted"
+            }
+          ]
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "GhostZero",
+              "description": "The name of the user who became a member"
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "Ehrenmann/frau",
+              "description": "The name of the Level at which the user is a member"
             }
           ]
         }
@@ -113,7 +144,7 @@
             {
               "name": "streak",
               "type": "number",
-              "default": null,
+              "default": 0,
               "example": 1,
               "description": "The number of months the user has been subscribed in a row. Null if not shared."
             },
@@ -143,6 +174,39 @@
                 }
               ],
               "description": "The emotes the user sent with the subscription"
+            }
+          ]
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "GhostZero",
+              "description": "The name of the user who became a member"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the membership"
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "Ehrenmann/frau",
+              "description": "The name of the Level at which the user is a member"
+            },
+            {
+              "name": "months",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of months the user has been a member"
             }
           ]
         }
@@ -204,6 +268,32 @@
               "default": false,
               "example": false,
               "description": "Whether the subscription was anonymous"
+            }
+          ]
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "gifter",
+              "type": "string",
+              "default": "",
+              "example": "GhostZero",
+              "description": "The name of the user who became a member"
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "Ehrenmann/frau",
+              "description": "The name of the Level at which the user is a member"
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The total amount of the subscription"
             }
           ]
         }
@@ -326,7 +416,43 @@
       "platforms": [
         {
           "type": "youtube",
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "GhostZero",
+              "description": "The name of the user who purchased the Super Chat"
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the Super Chat"
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "???",
+              "description": "The tier for the paid message"
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 0,
+              "example": 1000000,
+              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000"
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "example": "USD",
+              "description": "The currency in which the fund was made"
+            }
+          ],
           "localization": {
             "name": "Super Chat",
             "description": "Someone purchased a Super Chat to highlight their message in your YouTube chat"
@@ -349,7 +475,43 @@
       "platforms": [
         {
           "type": "youtube",
-          "parameters": []
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "GhostZero",
+              "description": "The name of the user who purchased the Super Sticker"
+            },
+            {
+              "name": "sticker",
+              "type": "string",
+              "default": "",
+              "example": "???",
+              "description": "The unique ID of the Super Sticker"
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "???",
+              "description": "The tier for the paid sticker"
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 0,
+              "example": 1000000,
+              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000"
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "example": "USD",
+              "description": "The currency in which the fund was made"
+            }
+          ]
         }
       ]
     },
@@ -446,7 +608,7 @@
             {
               "name": "amount_value",
               "type": "number",
-              "default": null,
+              "default": 0,
               "example": 10000,
               "description": "The value of the donation"
             },
