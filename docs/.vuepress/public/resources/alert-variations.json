@@ -446,22 +446,22 @@
             {
               "name": "amount_value",
               "type": "number",
-              "default": "",
-              "example": "10000",
+              "default": null,
+              "example": 10000,
               "description": "The value of the donation"
             },
             {
               "name": "amount_currency",
               "type": "string",
-              "default": "",
+              "default": "USD",
               "example": "USD",
               "description": "The currency of the donation"
             },
             {
               "name": "amount_decimal_places",
               "type": "number",
-              "default": "2",
-              "example": "2",
+              "default": 2,
+              "example": 2,
               "description": "The number of decimal places of the donation"
             }
           ]
