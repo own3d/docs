@@ -72,7 +72,8 @@ Here's an example of an alert set configuration in JSON format:
       "name": "Twitch Cheer",
       "conditions": {
         "and": [
-          {"===": [{"var": "type"}, "twitch-cheer"]},
+          {"===": [{"var": "type"}, "cheer"]},
+          {"===": [{"var": "platform"}, "twitch"]},
           {"===": [{"var": "enabled"}, true]},
           {">=": [{"var": "amount"}, 1000]}
         ]
@@ -153,9 +154,11 @@ Authorization: Bearer <token>
 // Generates a url for the default alert browser source:
 {"browser_source_type": "alerts"}
 // Generates a url for the effect alert browser source:
-{"browser_source_type": "efect-alerts"}
+{"browser_source_type": "effect-alerts"}
 // Generates a url for the scene browser source:
 {"browser_source_type": "scenes", "identifier": "99dafea3-1675-476c-8582-b5bf3c90cdda"}
+// Generates a url for the goalbars browser source:
+{"browser_source_type": "goalbars", "identifier": "xxxxxxxxx"}
 ```
 
 **Response:**
