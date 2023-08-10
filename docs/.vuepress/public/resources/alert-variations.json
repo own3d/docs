@@ -142,7 +142,7 @@
             {
               "name": "gifter",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The name of the user who gifted the subscription"
             },
             {
@@ -372,37 +372,37 @@
             {
               "name": "campaign_id",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The ID of the campaign"
             },
             {
               "name": "name",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The name of the user who donated"
             },
             {
               "name": "charity_name",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The name of the charity"
             },
             {
               "name": "charity_description",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The description of the charity"
             },
             {
               "name": "charity_website",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The website of the charity"
             },
             {
               "name": "charity_logo",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The logo of the charity"
             },
             {
@@ -414,7 +414,7 @@
             {
               "name": "amount_currency",
               "type": "string",
-              "default": "twitch",
+              "default": "",
               "description": "The currency of the donation"
             },
             {

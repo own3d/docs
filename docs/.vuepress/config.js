@@ -90,7 +90,7 @@ module.exports = {
         },
         {
           title: 'OWN3D Alerts',
-          sidebarDepth: 2,
+          sidebarDepth: 1,
           collapsable: false,
           children: [
             'alerts/',

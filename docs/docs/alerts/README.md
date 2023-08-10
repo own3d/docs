@@ -42,16 +42,18 @@ operators and compare variables to specific values.
 
 ::: v-pre
 Message templates allow you to customize the text displayed in alerts. Parameters are placeholders in the template that
-get replaced with actual values during rendering. For example, `{{ name }}` could be replaced with the name of the person
-who triggered the alert.
+get replaced with actual values during rendering. For example, `{{ name }}` could be replaced with the name of the
+person who triggered the alert.
 :::
 
-You can find more about message template parameters in the [Message Template Parameters](./template-parameters.md) guide.
+You can find more about message template parameters in the [Message Template Parameters](./template-parameters.md)
+guide.
 
 ## Alert Set Configuration Example <Badge text="AE4" type="success"/>
 
 Here's an example of an alert set configuration in JSON format:
 
+<!-- @formatter:off -->
 ```json
 {
   "id": 490885,
@@ -82,55 +84,34 @@ Here's an example of an alert set configuration in JSON format:
   ]
 }
 ```
+<!-- @formatter:on -->
 
 In this example, we have an alert set configuration with an `id`, `user_id`, and `active` status. The `default` template
 defines the default settings for alerts. The `variations` list contains different variations of alerts with their
 conditions and overrides.
 
-## Example of Existing Types in Alerts Engine 4 <Badge text="AE4" type="success"/>
-
-::: warning
-In **Alerts Engine 4 (AE4)** we changed the naming of alert types. We added the platform name from the alert type. For
-example, `follow` will become `twitch-follow`. This is to make it easier to customize alerts for different platforms.
-
-You can migrate your existing alert sets to AE4 by using the [AE3 Migration API](#ae3-migration-api).
-:::
+## Example of Existing Types in AE4 <Badge text="AE4" type="success"/>
 
 ::: tip
 **Technical Terms Recommendations:** We kept the same wording for alerts with the same intend. Follow (Twitch),
 Subscribe (YouTube) and Follow (Kick) will become `-follow`. Also for Subscribe (Twitch), Member (YouTube) and
 Subscribe (Kick) will become `-subscribe`.
+
+**Migration:** You can migrate your existing alert sets to AE4 by using the [AE3 Migration API](#ae3-migration-api).
 :::
 
 Here's a table listing some existing types of alerts and the platforms they are associated with:
 
-| Template                   | Description                                               | Platform |
-|----------------------------|-----------------------------------------------------------|----------|
-| `twitch-follow`            | Someone follows/subscribes your Twitch channel            | Twitch   |
-| `twitch-gift-subscribe`    | Someone gifted a subscription to your Twitch channel      | Twitch   |
-| `twitch-subscribe`         | Someone subscribes/become a member to your Twitch channel | Twitch   |
-| `twitch-cheer`             | Someone cheers on your Twitch channel                     | Twitch   |
-| `twitch-raid`              | Someone raids your Twitch channel                         | Twitch   |
-| `twitch-shoutout`          | You shout-outed some other Twitch channel                 | Twitch   |
-| `twitch-shoutout-received` | Someone shout-outed your Twitch channel                   | Twitch   |
-| `youtube-follow`           | Someone subscribes your YouTube channel                   | YouTube  |
-| `youtube-subscribe`        | Someone become a member to your YouTube channel           | YouTube  |
-| `youtube-super-chat`       | Someone super-chat to your YouTube channel                | YouTube  |
-| `tiktok-follow`            | Someone follows your TikTok channel                       | TikTok   |
-| `tiktok-video-gift`        | Someone video gift to your TikTok channel                 | TikTok   |
-| `kick-follow`              | Someone follows/subscribes your Kick channel              | Kick     |
-| `kick-gift-subscribe`      | Someone gifted a subscription to your Kick channel        | Kick     |
-| `kick-subscribe`           | Someone subscribes/become a member to your Kick channel   | Kick     |
-| `own3d-donation`           | Someone pledges to your channel                           | OWN3D    |
+<alert-engine-types />
 
 **Note:** The table above provides examples of existing alert templates, their descriptions, and the platforms they are
 associated with. These templates can be customized and extended based on your specific needs.
 
-## Example of Variations in Alerts Engine 4 <Badge text="AE4" type="success"/>
+## Example of Variations in AE4 <Badge text="AE4" type="success"/>
 
 You will find a full list of all available variations in the [Alerts Engine 4 (AE4) Variations](./variations.md) guide.
 
-## Example of Existing Types in Alerts Engine 3 <Badge text="deprecated" type="error"/>
+## Example of Existing Types in AE4 <Badge text="deprecated" type="error"/>
 
 ::: danger
 **Alerts Engine 3 (AE3)** is deprecated and will be removed in the future. We recommend migrating to AE4 as soon as
@@ -148,11 +129,55 @@ Here's a table listing some existing types of alerts:
 | `raid`           | Someone raids your channel                    |
 | `donation`       | Someone donates to your channel               |
 
-## Example of Variations in Alerts Engine 3 <Badge text="deprecated" type="error"/>
+## Example of Variations in AE4 <Badge text="deprecated" type="error"/>
 
 We do not provide a list of variations for AE3 since it is deprecated. Please use AE4 instead.
 
-## AE3 Migration API <Badge text="in development" type="error"/>
+## API-Reference
+
+### Generate Browser Source URL's
+
+You can generate all browser source url's for your alert sets using the following API endpoint:
+
+**Request:**
+
+```http request
+POST https://api.own3d.pro/v1/browser-source/generate
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer <token>
+
+// Generates a url for a specific alert browser source:
+{"browser_source_type": "alerts", "identifier": "490885"} // identifiers must be a string
+// Generates a url for the default alert browser source:
+{"browser_source_type": "alerts"}
+// Generates a url for the effect alert browser source:
+{"browser_source_type": "efect-alerts"}
+// Generates a url for the scene browser source:
+{"browser_source_type": "scenes", "identifier": "99dafea3-1675-476c-8582-b5bf3c90cdda"}
+```
+
+**Response:**
+
+```json
+{
+  "id": 9958,
+  "identifier": "490885",
+  "browser_source_type": "alerts",
+  "access_token": "99dafcbb-adf8-40aa-bd91-4bbca308e665",
+  "user_id": "1",
+  "created_at": "2023-08-09T19:02:41.000000Z",
+  "updated_at": "2023-08-09T19:02:41.000000Z",
+  "browser_source_url": "https://browser-source.own3d.tv/alerts/99dafcbb-adf8-40aa-bd91-4bbca308e665"
+}
+```
+
+### AE3 Migration API
+
+::: danger
+This is a one-way migration from AE3 to AE4! Once you migrate your alert sets to AE4, you cannot migrate them back to
+AE3. Use this API with caution!
+:::
 
 The AE3 Migration API allows you to migrate your existing alert sets to AE4. It is a REST API that takes an AE3 alert
 set as input and migrates it to AE4.

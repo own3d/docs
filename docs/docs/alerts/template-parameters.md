@@ -5,11 +5,11 @@ For our Alerts there are several `{{ parameters }}` that you can use to customiz
 Templates are always enclosed in double braces, for example `{{ name }}`.
 :::
 
-## Available Parameters in Alerts Engine 4 <Badge text="AE4" type="success"/>
+## Available Parameters in AE4 <Badge text="AE4" type="success"/>
 
-TBD
+<alert-engine-parameters />
 
-## Available Parameters in Alerts Engine 3 <Badge text="AE3" type="error"/>
+## Available Parameters in AE3 <Badge text="AE3" type="error"/>
 
 Below you will find a list of existing parameters for each alert type:
 

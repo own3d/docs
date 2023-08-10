@@ -24,6 +24,12 @@ Technically you can combine all [Message Template Parameters](./template-paramet
 variation conditions. For example, you can use `amount` to compare the amount of a donation or `name` to compare the
 name of the person who triggered the alert.
 
+You can also find a list of existing parameters for each alert type using
+the [resources/alert-variations.json](https://dev.own3d.tv/resources/alert-variations.json) api endpoint.
+
+Here is an example of an alert variation configuration for a Twitch Cheer alert:
+
+<!-- @formatter:off -->
 ```json
 {
   "name": "Twitch Cheer",
@@ -40,3 +46,4 @@ name of the person who triggered the alert.
   }
 }
 ```
+<!-- @formatter:on -->
