@@ -13,6 +13,7 @@
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who followed"
             }
           ]
@@ -31,12 +32,14 @@
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who subscribed"
             },
             {
               "name": "tier",
               "type": "enum",
               "default": "1000",
+              "example": "1000",
               "options": [
                 {
                   "name": "Tier 1",
@@ -57,6 +60,7 @@
               "name": "is_gift",
               "type": "boolean",
               "default": false,
+              "example": false,
               "description": "Whether the subscription was gifted"
             }
           ]
@@ -75,12 +79,14 @@
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who re-subscribed"
             },
             {
               "name": "tier",
               "type": "enum",
               "default": "1000",
+              "example": "1000",
               "options": [
                 {
                   "name": "Tier 1",
@@ -101,30 +107,41 @@
               "name": "months",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The number of months the user has been subscribed"
             },
             {
               "name": "streak",
               "type": "number",
-              "default": 1,
-              "description": "The number of months the user has been subscribed in a row"
+              "default": null,
+              "example": 1,
+              "description": "The number of months the user has been subscribed in a row. Null if not shared."
             },
             {
               "name": "duration",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The number of months the user has been subscribed in total"
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
+              "example": "Love the stream! FevziGG",
               "description": "The message the user sent with the subscription"
             },
             {
               "name": "emotes",
-              "type": "string",
-              "default": "",
+              "type": "object",
+              "default": [],
+              "example": [
+                {
+                  "begin": 23,
+                  "end": 30,
+                  "id": "302976485"
+                }
+              ],
               "description": "The emotes the user sent with the subscription"
             }
           ]
@@ -143,12 +160,14 @@
               "name": "gifter",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who gifted the subscription"
             },
             {
               "name": "tier",
               "type": "enum",
               "default": "1000",
+              "example": "1000",
               "options": [
                 {
                   "name": "Tier 1",
@@ -169,18 +188,21 @@
               "name": "amount",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The total amount of the subscription"
             },
             {
               "name": "cumulative_amount",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The total amount of the subscription including all previous gifts"
             },
             {
               "name": "is_anonymous",
               "type": "boolean",
               "default": false,
+              "example": false,
               "description": "Whether the subscription was anonymous"
             }
           ]
@@ -199,24 +221,28 @@
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who cheered"
             },
             {
               "name": "amount",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The amount of bits the user cheered"
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
+              "example": "Love the stream! FevziGG",
               "description": "The message the user sent with the cheer"
             },
             {
               "name": "is_anonymous",
               "type": "boolean",
               "default": false,
+              "example": false,
               "description": "Whether the cheer was anonymous"
             }
           ]
@@ -235,12 +261,14 @@
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who raided"
             },
             {
               "name": "count",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The number of viewers the user raided with"
             }
           ]
@@ -337,24 +365,28 @@
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who tipped"
             },
             {
               "name": "amount",
               "type": "number",
               "default": 1,
+              "example": 1,
               "description": "The amount of money the user tipped"
             },
             {
               "name": "currency",
               "type": "string",
               "default": "USD",
+              "example": "USD",
               "description": "The currency of the tip"
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
+              "example": "Love the stream! FevziGG",
               "description": "The message the user sent with the tip"
             }
           ]
@@ -373,54 +405,63 @@
               "name": "campaign_id",
               "type": "string",
               "default": "",
+              "example": "123-abc-456-def",
               "description": "The ID of the campaign"
             },
             {
               "name": "name",
               "type": "string",
               "default": "",
+              "example": "GhostZero",
               "description": "The name of the user who donated"
             },
             {
               "name": "charity_name",
               "type": "string",
               "default": "",
+              "example": "Example Charity",
               "description": "The name of the charity"
             },
             {
               "name": "charity_description",
               "type": "string",
               "default": "",
+              "example": "Example Charity Description",
               "description": "The description of the charity"
             },
             {
               "name": "charity_website",
               "type": "string",
               "default": "",
+              "example": "https://example.com",
               "description": "The website of the charity"
             },
             {
               "name": "charity_logo",
               "type": "string",
               "default": "",
+              "example": "https://example.com/logo.png",
               "description": "The logo of the charity"
             },
             {
               "name": "amount_value",
               "type": "number",
-              "default": "1",
+              "default": "",
+              "example": "10000",
               "description": "The value of the donation"
             },
             {
               "name": "amount_currency",
               "type": "string",
               "default": "",
+              "example": "USD",
               "description": "The currency of the donation"
             },
             {
               "name": "amount_decimal_places",
               "type": "number",
-              "default": "1",
+              "default": "2",
+              "example": "2",
               "description": "The number of decimal places of the donation"
             }
           ]
