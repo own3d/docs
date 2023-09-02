@@ -396,7 +396,7 @@ following example shows how to receive the values from the form:
 
 ```typescript
 OWN3D.ext.onContext((context, changed) => {
-    // context['form'] contains the current form (TBC)
+    // context['inputs'] contains the current inputs (TBC)
     // context['values'] contains the values from the form
 });
 ```
