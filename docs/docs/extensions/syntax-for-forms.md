@@ -197,17 +197,20 @@ different UI.
 
 ```yaml
   - type: chips
-    id: font-style
+    id: battery
     attributes:
-      label: Font Style
-      value: bold
+      label: Battery
+      value: full
     options:
-      - label: Bold
-        value: bold
-        icon: bold
-      - label: Italic
-        value: italic
-        icon: italic
+      - label: Full
+        value: full
+        icon: battery-full
+      - label: Half
+        value: half
+        icon: battery-half
+      - label: Empty
+        value: empty
+        icon: battery-empty
 ```
 
 Resulting `values`:
@@ -215,7 +218,7 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "font-style": "bold"
+    "battery": "full"
   }
 }
 ```
@@ -262,17 +265,18 @@ Resulting `values`:
 
 ### Slider Field
 
-The `slider` field provides a beautiful slider that can be used to select a value. The `min` and `max` values are
+The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
 required.
 
 ```yaml
   - type: slider
-    id: font-size
+    id: age
     attributes:
-      label: Font Size
-      value: 14
-      min: 10
-      max: 50
+      label: Age
+      value: 18
+      min: 13
+      max: 99
+      step: 1
 ```
 
 Resulting `values`:
@@ -280,7 +284,7 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "font-size": 14
+    "age": 18
   }
 }
 ```
@@ -514,54 +518,21 @@ inputs:
         checked: true
       - label: Hide Old Chat Messages
         value: hide-old-chat-messages
-  - type: slider
-    id: font-size
+  - type: font-settings
+    id: font-settings
     attributes:
-      label: Font Size
-      value: 14
-      min: 10
-      max: 50
-  - type: color
-    id: font-color
-    attributes:
-      label: Font Color
-      description: The color of the font
-      value: #ffffff
-  - type: chips
-    id: font-style
-    attributes:
-      label: Font Style
-      value: bold
-    options:
-      - label: Bold
-        value: bold
-        icon: bold
-      - label: Italic
-        value: italic
-        icon: italic
-      - label: Underline
-        value: underline
-        icon: underline
-  - type: font-family
-    id: font-family
-    attributes:
-      label: Font Family
-      value: Impact
-  - type: chips
-    id: text-align
-    attributes:
-      label: Text Align
-      value: left
-    options:
-      - label: Left
-        value: left
-        icon: align-left
-      - label: Center
-        value: center
-        icon: align-center
-      - label: Right
-        value: right
-        icon: align-right
+      label: Font Settings
+      value:
+        font-color: "#ffffff"
+        font-family: Inter
+        font-weight: 400
+        font-size: 14
+        text-align: left
+        font-style: normal
+        letter-spacing: normal
+        line-height: 1.2
+    validations:
+      required: true
   - type: tags
     id: ignored-users
     attributes:
@@ -579,11 +550,16 @@ Values:
       "show-badges",
       "hide-old-chat-messages"
     ],
-    "font-size": 14,
-    "font-color": "#ffffff",
-    "font-style": "bold",
-    "font-family": "Impact",
-    "text-align": "left",
+    "font-settings": {
+      "font-color": "#ffffff",
+      "font-family": "Inter",
+      "font-weight": 400,
+      "font-size": 14,
+      "text-align": "left",
+      "font-style": "normal",
+      "letter-spacing": "normal",
+      "line-height": 1.2
+    },
     "ignored-users": [
       "user1",
       "user2"
@@ -605,54 +581,21 @@ inputs:
       value: Hello World
     validations:
       required: true
-  - type: slider
-    id: font-size
+  - type: font-settings
+    id: font-settings
     attributes:
-      label: Font Size
-      value: 14
-      min: 10
-      max: 50
-  - type: color
-    id: font-color
-    attributes:
-      label: Font Color
-      description: The color of the font
-      value: #ffffff
-  - type: chips
-    id: font-style
-    attributes:
-      label: Font Style
-      value: bold
-    options:
-      - label: Bold
-        value: bold
-        icon: bold
-      - label: Italic
-        value: italic
-        icon: italic
-      - label: Underline
-        value: underline
-        icon: underline
-  - type: font-family
-    id: font-family
-    attributes:
-      label: Font Family
-      value: Impact
-  - type: chips
-    id: text-align
-    attributes:
-      label: Text Align
-      value: left
-    options:
-      - label: Left
-        value: left
-        icon: align-left
-      - label: Center
-        value: center
-        icon: align-center
-      - label: Right
-        value: right
-        icon: align-right
+      label: Font Settings
+      value:
+        font-color: "#ffffff"
+        font-family: Inter
+        font-weight: 400
+        font-size: 14
+        text-align: left
+        font-style: normal
+        letter-spacing: normal
+        line-height: 1.2
+    validations:
+      required: true
 ```
 
 Values:
@@ -661,11 +604,16 @@ Values:
 {
   "values": {
     "text": "Hello World",
-    "font-size": 14,
-    "font-color": "#ffffff",
-    "font-style": "bold",
-    "font-family": "Impact",
-    "text-align": "left"
+    "font-settings": {
+      "font-color": "#ffffff",
+      "font-family": "Inter",
+      "font-weight": 400,
+      "font-size": 14,
+      "text-align": "left",
+      "font-style": "normal",
+      "letter-spacing": "normal",
+      "line-height": 1.2
+    }
   }
 }
 ```
@@ -1004,11 +952,19 @@ inputs:
       value: "#ffffff"
     validations:
       required: true
-  - type: font-family
-    id: font-family
+  - type: font-settings
+    id: font-settings
     attributes:
-      label: Font Family
-      value: Impact
+      label: Font Settings
+      value:
+        font-color: "#ffffff"
+        font-family: Inter
+        font-weight: 400
+        font-size: 14
+        text-align: left
+        font-style: normal
+        letter-spacing: normal
+        line-height: 1.2
     validations:
       required: true
 ```
