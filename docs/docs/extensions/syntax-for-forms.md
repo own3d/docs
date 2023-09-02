@@ -242,8 +242,9 @@ in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equi
         font-size: 14
         text-align: left
         font-style: normal
-        letter-spacing: normal
+        letter-spacing: 0
         line-height: 1.2
+        text-indent: 0
 ```
 
 Resulting `values`:
