@@ -81,6 +81,7 @@ Resulting `values`:
 ### Input Field
 
 The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
+The `type` attribute can be used to define the type of input. The `type` attribute is optional and defaults to `text`.
 
 ```yaml
   - type: input
@@ -89,6 +90,7 @@ The `input` field provides a simple text input. It can be used for text, numbers
       label: Text
       description: This is a description
       value: Hello World
+      type: text
     validations:
       required: true
 ```
