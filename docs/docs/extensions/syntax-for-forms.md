@@ -372,14 +372,19 @@ represented in the API:
     "checkbox": [
       "code-of-conduct"
     ],
-    "font-family": "Impact",
-    "font-style": "bold",
-    "font-size": 14,
+    "font-settings": {
+      "font-family": "Impact",
+      "font-style": "bold",
+      "font-size": 14
+    },
     "ignored-users": [
       "user1",
       "user2"
     ],
-    "image": "98f9fd85-0832-44fa-87d1-e24d9741f632"
+    "image": {
+      "id": "98f9fd85-0832-44fa-87d1-e24d9741f632",
+      "type": "file"
+    }
   }
 }
 ```
@@ -395,6 +400,8 @@ OWN3D.ext.onContext((context, changed) => {
     // context['values'] contains the values from the form
 });
 ```
+
+![img.png](../../images/extension-context.png)
 
 ## Examples
 
