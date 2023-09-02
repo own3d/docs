@@ -289,6 +289,44 @@ Resulting `values`:
 }
 ```
 
+### Border Radius Field
+
+The `border-radius` field provides a beautiful input that can be used to select a border radius value. The `value` is
+required and must be an object with the following properties: `multiple`, `radius`, `top-left`, `top-right`,
+`bottom-left` & `bottom-right`. The `multiple` will allow you to set the border radius for each corner individually.
+The `radius` value will be used when `multiple` is set to `false`.
+
+```yaml
+  - type: border-radius
+    id: border-radius
+    attributes:
+      label: Border Radius
+      value:
+        multiple: false
+        radius: 0
+        top-left: 0
+        top-right: 0
+        bottom-left: 0
+        bottom-right: 0
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "border-radius": {
+      "multiple": false,
+      "radius": 0,
+      "top-left": 0,
+      "top-right": 0,
+      "bottom-left": 0,
+      "bottom-right": 0
+    }
+  }
+}
+```
+
 ### Tags Field
 
 The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
