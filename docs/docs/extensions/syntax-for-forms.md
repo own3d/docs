@@ -220,17 +220,25 @@ Resulting `values`:
 }
 ```
 
-### Font Family Field
+### Font Settings Field
 
-The `font-family` field provides a dropdown menu with a list of available fonts. It provides a list of fonts that are
-available in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equivalent to Google Fonts).
+The `font-settings` field provides a multi input field for font settings. It provides a list of fonts that are available
+in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equivalent to Google Fonts).
 
 ```yaml
-  - type: font-family
-    id: font-family
+  - type: font-settings
+    id: font-settings
     attributes:
-      label: Font Family
-      value: Impact
+      label: Font Settings
+      value:
+        font-color: "#ffffff"
+        font-family: Inter
+        font-weight: 400
+        font-size: 14
+        text-align: left
+        font-style: normal
+        letter-spacing: normal
+        line-height: 1.2
 ```
 
 Resulting `values`:
@@ -238,7 +246,16 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "font-family": "Impact"
+    "font-settings": {
+      "font-color": "#ffffff",
+      "font-family": "Inter",
+      "font-weight": 400,
+      "font-size": 14,
+      "text-align": "left",
+      "font-style": "normal",
+      "letter-spacing": "normal",
+      "line-height": 1.2
+    }
   }
 }
 ```
