@@ -368,6 +368,12 @@ and `gif`. The max file size is 5MB by default.
 Multiple files can be uploaded by setting the `multiple` attribute to `true`. When multiple is set to `true`, the
 `value` will be an array of file ids & types.
 
+We offer multiple popups for selecting files. The `popup` attribute can be used to define which popup should be used.
+If you don't define a popup, the default popup `files` will be used. The following popups are available:
+
+- `files` - Allows you to select files from your OWN3D media library
+- `gifs` - Allows you to select GIFs from Tenor
+
 ```yaml
   - type: file
     id: image
