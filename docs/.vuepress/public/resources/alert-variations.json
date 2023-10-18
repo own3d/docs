@@ -4,6 +4,10 @@
     {
       "name": "Follow",
       "type": "follow",
+      "icon": {
+        "name": "heart",
+        "type": "solid"
+      },
       "description": "Someone follows/subscribes your channel",
       "platforms": [
         {
@@ -30,11 +34,31 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "GhostZero"
+          }
+        }
       ]
     },
     {
       "name": "Subscribe",
       "type": "subscribe",
+      "icon": {
+        "name": "star",
+        "type": "solid"
+      },
       "description": "Someone subscribes/become a member to your channel",
       "platforms": [
         {
@@ -96,11 +120,49 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "Tier 1",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "1000"
+          }
+        },
+        {
+          "name": "Tier 2",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "2000"
+          }
+        },
+        {
+          "name": "Tier 3",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "3000"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "Ehrenmann/frau"
+          }
+        }
       ]
     },
     {
       "name": "Re-Subscribe",
       "type": "re-subscribe",
+      "icon": {
+        "name": "star",
+        "type": "solid"
+      },
       "description": "Someone re-subscribes/renews their membership to your channel",
       "platforms": [
         {
@@ -210,11 +272,84 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "Tier 1",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "1000",
+            "months": 1,
+            "streak": 1,
+            "duration": 1,
+            "message": "Love the stream! FevziGG",
+            "emotes": [
+              {
+                "begin": 23,
+                "end": 30,
+                "id": "302976485"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Tier 2",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "2000",
+            "months": 1,
+            "streak": 1,
+            "duration": 1,
+            "message": "Love the stream! FevziGG",
+            "emotes": [
+              {
+                "begin": 23,
+                "end": 30,
+                "id": "302976485"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Tier 3",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "3000",
+            "months": 1,
+            "streak": 1,
+            "duration": 1,
+            "message": "Love the stream! FevziGG",
+            "emotes": [
+              {
+                "begin": 23,
+                "end": 30,
+                "id": "302976485"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "GhostZero",
+            "tier": "Ehrenmann/frau",
+            "months": 1,
+            "message": "Love the stream! FevziGG"
+          }
+        }
       ]
     },
     {
       "name": "Gift-Subscribe",
       "type": "gift-subscribe",
+      "icon": {
+        "name": "star",
+        "type": "solid"
+      },
       "description": "Someone gifted a subscription/membership to your channel",
       "platforms": [
         {
@@ -297,11 +432,59 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "Tier 1",
+          "platform": "twitch",
+          "parameters": {
+            "gifter": "GhostZero",
+            "tier": "1000",
+            "amount": 1,
+            "cumulative_amount": 1,
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "Tier 2",
+          "platform": "twitch",
+          "parameters": {
+            "gifter": "GhostZero",
+            "tier": "2000",
+            "amount": 1,
+            "cumulative_amount": 1,
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "Tier 3",
+          "platform": "twitch",
+          "parameters": {
+            "gifter": "GhostZero",
+            "tier": "3000",
+            "amount": 1,
+            "cumulative_amount": 1,
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "gifter": "GhostZero",
+            "tier": "Ehrenmann/frau",
+            "amount": 1
+          }
+        }
       ]
     },
     {
       "name": "Cheer",
       "type": "cheer",
+      "icon": {
+        "name": "gem",
+        "type": "solid"
+      },
       "description": "Someone cheers on your Twitch channel",
       "platforms": [
         {
@@ -337,11 +520,57 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "10",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "amount": 10,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "100",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "amount": 100,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "1k",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "amount": 1000,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "5k",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "amount": 5000,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        }
       ]
     },
     {
       "name": "Raid",
       "type": "raid",
+      "icon": {
+        "name": "user-group-simple",
+        "type": "solid"
+      },
       "description": "Someone raids your Twitch channel",
       "platforms": [
         {
@@ -363,55 +592,121 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "10",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "count": 10
+          }
+        },
+        {
+          "name": "50",
+          "platform": "twitch",
+          "parameters": {
+            "name": "GhostZero",
+            "count": 50
+          }
+        }
       ]
     },
     {
       "name": "Hype Train Begin",
       "type": "channel.hype_train.begin",
+      "icon": {
+        "name": "train",
+        "type": "solid"
+      },
       "description": "A hype train begins on your Twitch channel",
       "platforms": [
         {
           "type": "twitch",
           "parameters": []
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {}
+        }
       ]
     },
     {
       "name": "Shoutout Create",
       "type": "channel.shoutout.create",
+      "icon": {
+        "name": "megaphone",
+        "type": "solid"
+      },
       "description": "A shoutout is created on your Twitch channel",
       "platforms": [
         {
           "type": "twitch",
           "parameters": []
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {}
+        }
       ]
     },
     {
       "name": "Shoutout Receive",
       "type": "channel.shoutout.receive",
+      "icon": {
+        "name": "megaphone",
+        "type": "solid"
+      },
       "description": "A shoutout is received on your Twitch channel",
       "platforms": [
         {
           "type": "twitch",
           "parameters": []
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {}
+        }
       ]
     },
     {
       "name": "Channel Points Reward",
       "type": "channel_points.redemption.add",
+      "icon": {
+        "name": "coin",
+        "type": "solid"
+      },
       "description": "Someone redeems a channel points reward on your Twitch channel",
       "platforms": [
         {
           "type": "twitch",
           "parameters": []
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {}
+        }
       ]
     },
     {
       "name": "Super Chat",
       "type": "superchat",
+      "icon": {
+        "name": "message-dollar",
+        "type": "solid"
+      },
       "description": "Someone purchased a elevated chat to highlight their message in your chat",
       "platforms": [
         {
@@ -466,11 +761,28 @@
             "description": "Someone purchased a Hype Chat to highlight their message in your Twitch chat"
           }
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "GhostZero",
+            "message": "Love the stream! FevziGG",
+            "tier": "???",
+            "amount": 1000000,
+            "currency": "USD"
+          }
+        }
       ]
     },
     {
       "name": "Super Sticker",
       "type": "supersticker",
+      "icon": {
+        "name": "note-sticky",
+        "type": "solid"
+      },
       "description": "Someone purchased Super Sticker to highlight their message in your YouTube live chat",
       "platforms": [
         {
@@ -513,11 +825,28 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "GhostZero",
+            "sticker": "???",
+            "tier": "???",
+            "amount": 1000000,
+            "currency": "USD"
+          }
+        }
       ]
     },
     {
       "name": "Tip",
       "type": "donation",
+      "icon": {
+        "name": "money-bill-1",
+        "type": "solid"
+      },
       "description": "Someone tips to your channel",
       "platforms": [
         {
@@ -553,11 +882,37 @@
             }
           ]
         }
+      ],
+      "examples": [
+        {
+          "name": "$10",
+          "platform": "own3d",
+          "parameters": {
+            "name": "GhostZero",
+            "amount": 10,
+            "currency": "USD",
+            "message": "Love the stream! FevziGG"
+          }
+        },
+        {
+          "name": "$50",
+          "platform": "own3d",
+          "parameters": {
+            "name": "GhostZero",
+            "amount": 50,
+            "currency": "USD",
+            "message": "Love the stream! FevziGG"
+          }
+        }
       ]
     },
     {
       "name": "Charity-Donation",
       "type": "charity-donation",
+      "icon": {
+        "name": "hand-holding-dollar",
+        "type": "solid"
+      },
       "description": "Someone donates to your Twitch charity campaign",
       "platforms": [
         {
@@ -627,6 +982,23 @@
               "description": "The number of decimal places of the donation"
             }
           ]
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "campaign_id": "123-abc-456-def",
+            "name": "GhostZero",
+            "charity_name": "Example Charity",
+            "charity_description": "Example Charity Description",
+            "charity_website": "https://example.com",
+            "charity_logo": "https://example.com/logo.png",
+            "amount_value": 10000,
+            "amount_currency": "USD",
+            "amount_decimal_places": 2
+          }
         }
       ]
     }
