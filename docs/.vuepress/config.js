@@ -85,6 +85,7 @@ module.exports = {
             'extensions/extension-helper',
             'extensions/syntax-for-forms',
             'extensions/designing-extensions',
+            'extensions/monetization',
             'extensions/guidelines-and-policies',
           ]
         },
