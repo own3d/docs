@@ -2,8 +2,8 @@
 
 ## What is OAuth2?
 
-It is a standard protocol for allowing users to sign in to applications without requiring users to enter their credentials.
-Many platforms like Google, Facebook, and GitHub use OAuth2.
+It is a standard protocol for allowing users to sign in to applications without requiring users to enter their
+credentials. Many platforms like Google, Facebook, and GitHub use OAuth2.
 
 ### Terminology
 
@@ -17,8 +17,9 @@ Many platforms like Google, Facebook, and GitHub use OAuth2.
 
 ## Client Registration
 
-To getting started, with our API's, you need to request a client id and client secret. 
-You can do this by sending an email to developers@stream.tv with the subject "OAuth2 Client Registration" with the following information:
+To getting started, with our API's, you need to request a client id and client secret.
+You can do this by sending an email to developers@stream.tv with the subject "OAuth2 Client Registration" with the
+following information:
 
 - Your application's name
 - Your application's website
@@ -32,10 +33,10 @@ You can do this by sending an email to developers@stream.tv with the subject "OA
 
 We currently support two types of tokens:
 
-| Token Type | Description |
-| ---------- | ----------- |
-| User Access Token | An access token that grants the application access to a user's data. You can use this token to access the user's data. |
-| App Access Token | An access token that grants the application access to the application's API. Mostly intended for machine-to-machine communication. |
+| Token Type        | Description                                                                                                                        |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| User Access Token | An access token that grants the application access to a user's data. You can use this token to access the user's data.             |
+| App Access Token  | An access token that grants the application access to the application's API. Mostly intended for machine-to-machine communication. |
 
 User Access Tokens and App Access Tokens are both bearer tokens. Bearer tokens are used to authenticate the application.
 
@@ -50,13 +51,20 @@ User Access Tokens and App Access Tokens are both bearer tokens. Bearer tokens a
 
 ### Authorization Code Flow Example
 
-In the following example, we will use the authorization code flow to get an access token. 
+In the following example, we will use the authorization code flow to get an access token.
 To visualize the flow, we will use javascript to redirect the user to the authorization server.
 
 ```javascript
 // Redirect the user to the authorization server
 window.location.href = "https://id.stream.tv/oauth/authorize?client_id=<>&redirect_uri=<>&response_type=code&scope=<>";
 ```
+
+The user will then be redirected to the application with the authorization code in the URL. From there, the user must
+click on the "Authorize" button to grant the application access to the user's data:
+
+<div style="text-align: center">
+<img src="../images/oauth-authorization.png" alt="Authorization Code Flow" style="border: 1px solid #181e23; border-radius: 8px;"/>
+</div>
 
 After that we use php to get the access token from the authorization server.
 
@@ -75,8 +83,8 @@ $response = \Http::post('https://id.stream.tv/oauth/token', [
 $access_token = $response->json()['access_token'];
 ```
 
-If you are familiar with laravel, you may want to check our [own3d/id](https://github.com/own3d/id) package. 
-It is a laravel package that provides a simple way to work with our API's. 
+If you are familiar with laravel, you may want to check our [own3d/id](https://github.com/own3d/id) package.
+It is a laravel package that provides a simple way to work with our API's.
 
 ## Refresh Tokens
 
@@ -100,45 +108,47 @@ $access_token = $response->json()['access_token'];
 
 ## Token Expiration
 
-Typically, the `/oauth/token` endpoint will return a `expires_in` field that indicates the number of seconds until the token expires.
+Typically, the `/oauth/token` endpoint will return a `expires_in` field that indicates the number of seconds until the
+token expires.
 
-By default, access tokens expire after 15 days and refresh tokens after 30 days. 
-This means after expiration of the access token, you will need to use the refresh token within 15 days to get a new access token. 
+By default, access tokens expire after 15 days and refresh tokens after 30 days.
+This means after expiration of the access token, you will need to use the refresh token within 15 days to get a new
+access token.
 If you don't use the refresh token within 30 days, the user will be required to re-authenticate.
 
 Personal access tokens having a lifetime of 6 months. These tokens cannot be refreshed automatically.
 
-
 ## Scopes
 
-With Scope, you can specify the level of access that the application is requesting. 
+With Scope, you can specify the level of access that the application is requesting.
 We currently support the following scopes:
 
-| Scope | Description |
-| ------ | ----------- |
-| `academy:read` | Allows the application to read academy data. |
-| `academy:manage` | Allows the application to manage academy data. |
-| `alerts:manage` | Allows the application to manage alerts. |
-| `affiliate:manage` | Allows the application to manage affiliate links. |
-| `analytics:read` | Allows the application to read analytics data. |
-| `chatbot:read` | Allows the application to read chatbot data. |
-| `chatbot:manage` | Allows the application to manage chatbot data. |
-| `chatbot:manage:commands` | Allows the application to manage chatbot commands. |
-| `chatbot:manage:moderation` | Allows the application to manage chatbot moderation. |
-| `chatbot:manage:timers` | Allows the application to manage chatbot timers. |
-| `chatbot:manage:giveaways` | Allows the application to manage chatbot giveaways. |
-| `connections` | Allows the application to manage social media connections. |
-| `donations:read` | Allows the application to read donations data. |
-| `donations:manage` | Allows the application to manage donations data. |
-| `entitlements:read` | Allows the application to read entitlements data aka. purchased products. |
-| `extensions:read` | Allows the application to read extensions data. |
-| `extensions:manage` | Allows the application to manage extensions data, like changing configuration. |
-| `linkspree:manage` | Allows the application to manage linkspree links. |
-| `orders:manage` | Allows the application to manage orders data. |
-| `subscription:read` | Allows the application to read subscription data. |
-| `user:read` | Allows the application to read user data. |
-| `user:manage` | Allows the application to manage user data. |
-| `user:manage:credentials` | Allows the application to manage user credentials. |
-| `widgets:manage` | Allows the application to manage widgets data. |
+| Scope                       | Description                                                                    |
+|-----------------------------|--------------------------------------------------------------------------------|
+| `academy:read`              | Allows the application to read academy data.                                   |
+| `academy:manage`            | Allows the application to manage academy data.                                 |
+| `alerts:manage`             | Allows the application to manage alerts.                                       |
+| `affiliate:manage`          | Allows the application to manage affiliate links.                              |
+| `analytics:read`            | Allows the application to read analytics data.                                 |
+| `chatbot:read`              | Allows the application to read chatbot data.                                   |
+| `chatbot:manage`            | Allows the application to manage chatbot data.                                 |
+| `chatbot:manage:commands`   | Allows the application to manage chatbot commands.                             |
+| `chatbot:manage:moderation` | Allows the application to manage chatbot moderation.                           |
+| `chatbot:manage:timers`     | Allows the application to manage chatbot timers.                               |
+| `chatbot:manage:giveaways`  | Allows the application to manage chatbot giveaways.                            |
+| `connections`               | Allows the application to manage social media connections.                     |
+| `donations:read`            | Allows the application to read donations data.                                 |
+| `donations:manage`          | Allows the application to manage donations data.                               |
+| `entitlements:read`         | Allows the application to read entitlements data aka. purchased products.      |
+| `extensions:read`           | Allows the application to read extensions data.                                |
+| `extensions:manage`         | Allows the application to manage extensions data, like changing configuration. |
+| `linkspree:manage`          | Allows the application to manage linkspree links.                              |
+| `orders:manage`             | Allows the application to manage orders data.                                  |
+| `subscription:read`         | Allows the application to read subscription data.                              |
+| `user:read`                 | Allows the application to read user data.                                      |
+| `user:manage`               | Allows the application to manage user data.                                    |
+| `user:manage:credentials`   | Allows the application to manage user credentials.                             |
+| `widgets:manage`            | Allows the application to manage widgets data.                                 |
 
-You will also find all scopes in our [Scope](https://github.com/own3d/id/blob/master/src/Enums/Scope.php) Enum in GitHub.
+You will also find all scopes in our [Scope](https://github.com/own3d/id/blob/master/src/Enums/Scope.php) Enum in
+GitHub.
