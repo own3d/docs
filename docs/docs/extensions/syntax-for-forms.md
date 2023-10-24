@@ -9,14 +9,22 @@ Markup Language (XML). YAML is a superset of JSON, and YAML files can be parsed 
 ## Native Inputs
 
 Native inputs are inputs that are already available in the browser source. They are not defined in the form file.
-These are the native inputs (w-full = width-full; refers to the width of the form input):
+These are the native inputs:
 
-- **Title** (`w-full`)
-- **X-Position** (`w-1/2`), **Y-Position** (`w-1/2`)
-- **Width** (`w-1/2`), **Height** (`w-1/2`)
-- **Opacity** (`w-full`)
+- **Title**
+- **Transform**
+- **Filters** (only available for images and videos)
+- **Opacity**
 
-## Creating Forms For Browser Sources
+![img.png](../../images/syntax-for-forms-static.png)
+
+## Creating Forms For Extensions
+
+In opposite to native inputs, custom inputs are defined in the form file. These allow you to create custom inputs for
+your extension. Even our internal widgets are using this system. The following example shows how to create a form for a
+browser source:
+
+![img.png](../../images/syntax-for-forms-dynamic.png)
 
 Creating forms for browser sources is very easy. We use YAML syntax to define the inputs. The following example shows
 the syntax for a form with different input types:
@@ -403,6 +411,65 @@ When a file is uploaded using this field, OWN3D will store the file for you. The
 and will be available until the file is deleted. The `value` of the field will be the file id which can be used to
 retrieve the file using the [File Storage API](../file-storage.md).
 
+## Conditional Fields
+
+::: tip
+Conditional fields require additional review and may delay the review process. Please use them only when necessary and
+avoid using them for complex logic since they will decrease the performance of the form.
+:::
+
+Conditional fields allow you to show or hide fields based on the value of another field. Conditional fields are defined
+using the `if` attribute. The `if` attribute must be a valid JavaScript expression that returns a boolean value, and it
+can be used either for the field itself or for values in the `options` array. As of now, only `values` are available in
+the context.
+
+The following example shows how to use conditional fields in multiple ways:
+
+```yaml
+  - id: theme
+    type: dropdown
+    options:
+      - label: Default
+        value: default
+      - label: Legacy
+        value: legacy
+      - label: Bubbles
+        value: bubbles
+      - label: Zwietracht
+        value: discord
+    attributes:
+      label: Theme
+      value: default
+  - id: options
+    type: checkbox
+    options:
+      - label: Test Mode
+        value: test-mode
+      - if: "['default', 'legacy'].includes(values.theme)"
+        label: Show Badges
+        value: show-badges
+        checked: true
+      - if: "['default', 'legacy'].includes(values.theme)"
+        label: Show Avatars
+        value: show-avatars
+      - label: Hide Old Messages
+        value: hide-old-messages
+      - label: Hide Commands
+        value: hide-commands
+    attributes:
+      label: Options
+  - id: message-timeout
+    if: values.options['hide-old-messages']
+    type: input
+    attributes:
+      type: number
+      label: Message Cleanup
+      value: 30
+      description: The number of seconds to cleanup
+    validations:
+      required: true
+```
+
 ## Receiving Values
 
 ### Using the API
@@ -449,576 +516,3 @@ OWN3D.ext.onContext((context, changed) => {
 ```
 
 ![img.png](../../images/extension-context.png)
-
-## Examples
-
-### Example: `Alert Box` form
-
-```yaml
-id: 98fa037b-16c1-43ef-bcde-7144d243bac1
-inputs:
-  - type: resource
-    id: alert-set
-    attributes:
-      label: Alert Set
-      description: This is a description
-      value: 1337
-      multiple: false
-    resource:
-      resolver: fetch
-      endpoint: /v1/alerts-sets
-    options:
-      - label: Default Alert Set
-        value: default
-    validations:
-      required: true
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "alert-set": "1337"
-  }
-}
-```
-
-### Example: `Emote Wall` form
-
-```yaml
-id: 98f9fac6-88ad-4a81-a508-30d00e0baafb
-inputs:
-  - type: dropdown
-    id: animation
-    attributes:
-      label: Animation
-      value: 2
-      width: 1/2
-    options:
-      - label: Slide
-        value: slide
-      - label: Balloon Up
-        value: balloon-up
-      - label: Float Up
-        value: float-up
-      - label: Waterfall
-        value: waterfall
-      - label: Random
-        value: random
-  - type: checkbox
-    id: options
-    attributes:
-      label: Checkbox
-      description: This is a description
-    options:
-      - label: Spam Filter
-        value: spam-filter
-        checked: true
-  - type: slider
-    id: emotes-limit
-    attributes:
-      label: Emotes Limit
-      description: The maximum number of emotes to display
-      value: 100
-      min: 1
-      max: 250
-  - type: slider
-    id: duration
-    attributes:
-      label: Duration
-      description: The duration of the animation
-      value: 7
-      min: 1
-      max: 20
-  - type: slider
-    id: emote-size
-    attributes:
-      label: Emote Size
-      description: The size of the emotes
-      value: 70
-      min: 10
-      max: 250
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "animation": "slide",
-    "options": [
-      "spam-filter"
-    ],
-    "emotes-limit": 100,
-    "duration": 7,
-    "emote-size": 70
-  }
-}
-```
-
-### Example: `Chat` form
-
-```yaml
-id: 98f9fad4-24f7-477e-ab9d-2498c4b49d41
-inputs:
-  - type: checkbox
-    id: options
-    attributes:
-      label: Options
-    options:
-      - label: Show Badges
-        value: show-badges
-        checked: true
-      - label: Hide Old Chat Messages
-        value: hide-old-chat-messages
-  - type: font-settings
-    id: font-settings
-    attributes:
-      label: Font Settings
-      value:
-        font-color: "#ffffff"
-        font-family: Inter
-        font-weight: 400
-        font-size: 14
-        text-align: left
-        font-style: normal
-        letter-spacing: normal
-        line-height: 1.2
-    validations:
-      required: true
-  - type: tags
-    id: ignored-users
-    attributes:
-      label: Ignored Users
-      description: The users that will be ignored
-      value: [ ]
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "options": [
-      "show-badges",
-      "hide-old-chat-messages"
-    ],
-    "font-settings": {
-      "font-color": "#ffffff",
-      "font-family": "Inter",
-      "font-weight": 400,
-      "font-size": 14,
-      "text-align": "left",
-      "font-style": "normal",
-      "letter-spacing": "normal",
-      "line-height": 1.2
-    },
-    "ignored-users": [
-      "user1",
-      "user2"
-    ]
-  }
-}
-```
-
-### Example: `Text` form
-
-```yaml
-id: 98f9fae2-4535-4930-bfa8-5bdbaa4a9b24
-inputs:
-  - type: input
-    id: text
-    attributes:
-      label: Text
-      description: This is a description
-      value: Hello World
-    validations:
-      required: true
-  - type: font-settings
-    id: font-settings
-    attributes:
-      label: Font Settings
-      value:
-        font-color: "#ffffff"
-        font-family: Inter
-        font-weight: 400
-        font-size: 14
-        text-align: left
-        font-style: normal
-        letter-spacing: normal
-        line-height: 1.2
-    validations:
-      required: true
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "text": "Hello World",
-    "font-settings": {
-      "font-color": "#ffffff",
-      "font-family": "Inter",
-      "font-weight": 400,
-      "font-size": 14,
-      "text-align": "left",
-      "font-style": "normal",
-      "letter-spacing": "normal",
-      "line-height": 1.2
-    }
-  }
-}
-```
-
-### Example: `Image` form
-
-```yaml
-id: 98f9faea-209d-462a-94b5-2da1ba0367d4
-inputs:
-  - type: file
-    id: image
-    attributes:
-      label: Image
-      mimeTypes:
-        - image/*
-    validations:
-      required: true
-  - type: dropdown
-    id: display
-    attributes:
-      label: Display
-      value: cover
-    options:
-      - label: Cover
-        value: cover
-      - label: Contain
-        value: contain
-      - label: Fill
-        value: fill
-      - label: None
-        value: none
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "image": {
-      "id": "98f9fd85-0832-44fa-87d1-e24d9741f632",
-      "type": "file"
-    },
-    "display": "cover"
-  }
-}
-```
-
-### Example: `Image Carousel` form
-
-```yaml
-id: 98f9faea-209d-462a-94b5-2da1ba0367d4
-inputs:
-  - type: file
-    id: images
-    attributes:
-      label: Image
-      multiple: true
-      mimeTypes:
-        - image/*
-    validations:
-      required: true
-  - type: dropdown
-    id: display
-    attributes:
-      label: Display
-      value: cover
-    options:
-      - label: Cover
-        value: cover
-      - label: Contain
-        value: contain
-      - label: Fill
-        value: fill
-      - label: None
-        value: none
-  - type: input
-    id: duration
-    attributes:
-      label: Duration
-      description: The duration of each image in the carousel
-      value: 5
-    validations:
-      required: true
-  - type: input
-    id: delay
-    attributes:
-      label: Delay
-      description: The delay between each image in the carousel
-      value: 0
-    validations:
-      required: true
-  - type: input
-    id: fade-in-duration
-    attributes:
-      label: Fade In Duration
-      description: The duration of the fade in animation
-      value: 0
-    validations:
-      required: true
-  - type: input
-    id: fade-out-duration
-    attributes:
-      label: Fade Out Duration
-      description: The duration of the fade out animation
-      value: 0
-    validations:
-      required: true
-  - type: boolean
-    id: random
-    attributes:
-      label: Random
-      description: Whether the images should be displayed in a random order
-      value: true
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "image": [
-      {
-        "id": "98f9fd85-0832-44fa-87d1-e24d9741f632",
-        "type": "file"
-      },
-      {
-        "id": "98f9fd85-0832-44fa-87d1-e24d9741f632",
-        "type": "file"
-      }
-    ],
-    "display": "cover"
-  }
-}
-```
-
-### Example: `Video` form
-
-```yaml
-id: 98fb933d-04b6-4a75-bfb2-a0fbae83ad66
-inputs:
-  - type: file
-    id: video
-    attributes:
-      label: Video
-      mimeTypes:
-        - video/*
-    validations:
-      required: true
-  - type: dropdown
-    id: display
-    attributes:
-      label: Display
-      value: cover
-    options:
-      - label: Cover
-        value: cover
-      - label: Contain
-        value: contain
-      - label: Fill
-        value: fill
-      - label: None
-        value: none
-```
-
-Values:
-
-```json
-{
-  "values": {
-    "video": {
-      "id": "98f9fd85-0832-44fa-87d1-e24d9741f632",
-      "type": "file"
-    },
-    "display": "cover"
-  }
-}
-```
-
-### Example: `GIF` form
-
-TBD
-
-### Example: `Browser Source` form
-
-```yaml
-id: 98fb93bc-4232-4ead-a9fb-4cb74343a103
-inputs:
-  - type: input
-    id: url
-    attributes:
-      label: URL
-      description: The URL of the browser source
-      value: https://www.google.com
-    validations:
-      required: true
-```
-
-### Example: `HTML` form
-
-```yaml
-id: 98fb93b0-63ef-4f93-a8e2-63d298467088
-inputs:
-  - type: textarea
-    id: html
-    attributes:
-      label: HTML
-      description: The HTML of the source
-      value: |
-        <html>
-          <head>
-            <title>HTML Source</title>
-          </head>
-          <body>
-            <h1>Hello World</h1>
-          </body>
-        </html>
-    validations:
-      required: true
-  - type: textarea
-    id: css
-    attributes:
-      label: CSS
-      description: The CSS of the source
-      value: |
-        body {
-          background-color: #000000;
-        }
-  - type: textarea
-    id: js
-    attributes:
-      label: JavaScript
-      description: The JavaScript of the source
-      value: |
-        console.log('Hello World');
-```
-
-### Example: `Color Source` form
-
-```yaml
-id: 98fb93b0-63ef-4f93-a8e2-63d298467088
-inputs:
-  - type: color
-    id: color
-    attributes:
-      label: Color
-      description: The color of the source
-      value: #000000
-    validations:
-      required: true
-```
-
-### Example: `Scene Source` form <Badge text="experimental" type="warning"/>
-
-```yaml
-id: 98fb93b0-63ef-4f93-a8e2-63d298467088
-inputs:
-  - type: resource
-    id: scene
-    attributes:
-      label: Scene
-      description: This is a description
-      value: 1337
-      multiple: false
-      resource:
-        resolver: fetch
-        endpoint: /v1/scene-editor/scenes
-    validations:
-      required: true
-```
-
-### Example: `Goal Bars` form
-
-```yaml
-id: 98fb9908-094c-4345-a951-49dc88e4fea3
-inputs:
-  - type: resource
-    id: goal-bar
-    attributes:
-      label: Goal Bar
-      description: This is a description
-      value: 1337
-      multiple: false
-    resource:
-      resolver: fetch
-      endpoint: /v1/goal-bars
-    validations:
-      required: true
-```
-
-### Example: `Countdown` form
-
-```yaml
-id: 98fb998a-74e4-4345-be8a-efadbe234a8d
-inputs:
-  - type: input
-    id: seconds
-    attributes:
-      label: Seconds
-      description: The number of seconds to count down
-      value: 60
-    validations:
-      required: true
-```
-
-### Example: `Label` form
-
-```yaml
-id: 98fb998a-74e4-4345-be8a-efadbe234a8d
-inputs:
-  - type: dropdown
-    id: type
-    attributes:
-      label: Type
-      value: latest-follower
-    options:
-      - label: Latest Follower
-        value: latest-follower
-      - label: Latest Subscriber
-        value: latest-subscriber
-      - label: Latest Cheer
-        value: latest-cheer
-      - label: Latest Donation
-        value: latest-donation
-      - label: Top Cheer
-        value: top-cheer
-      - label: Top Donation
-        value: top-donation
-      - label: Countdown
-        value: countdown
-    validations:
-      required: true
-  - type: color
-    id: color
-    attributes:
-      label: Color
-      value: "#ffffff"
-    validations:
-      required: true
-  - type: font-settings
-    id: font-settings
-    attributes:
-      label: Font Settings
-      value:
-        font-color: "#ffffff"
-        font-family: Inter
-        font-weight: 400
-        font-size: 14
-        text-align: left
-        font-style: normal
-        letter-spacing: normal
-        line-height: 1.2
-    validations:
-      required: true
-```
