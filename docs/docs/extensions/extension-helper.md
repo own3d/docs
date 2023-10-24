@@ -109,6 +109,116 @@ OWN3D.ext.onContext((context, changed) => {
 })
 ```
 
+### `OWN3D.ext.coins`
+
+The coins module provides a set of functions to exchange coins for products. Coins are a digital good that can be
+purchased by users. Products are a set of items that can be exchanged for coins.
+
+**Products**
+
+Products are defined in the Developer Console. Products have a sku, a name, a cost. The cost is defined in coins. The
+cost is the amount of coins that are required to exchange for the product.
+
+| Property    | Type     | Description                                                        |
+|-------------|----------|--------------------------------------------------------------------|
+| sku         | `string` | The sku of the product.                                            |
+| name        | `string` | The name of the product.                                           |
+| cost        | `Cost`   | The cost of the product.                                           |
+| cost.amount | `number` | The amount of coins that are required to exchange for the product. |
+| cost.type   | `string` | The type of the cost. Can be `coins`.                              |
+| environment | `string` | The environment of the product. Can be `production` or `sandbox`.  |
+
+**Transactions**
+
+A transaction is a record of an exchange of coins for a product.
+
+| Property            | Type           | Description                                                                            |
+|---------------------|----------------|----------------------------------------------------------------------------------------|
+| id                  | `string`       | The id of the transaction.                                                             |
+| client_id           | `string`       | The id of the client.                                                                  |
+| user_id             | `string`       | The id of the user.                                                                    |
+| channel_id          | `string`       | The id of the channel.                                                                 |
+| subscription        | `Subscription` | The subscription that was exchanged for coins.                                         |
+| product             | `Product`      | The product that was exchanged for coins.                                              |
+| product.sku         | `string`       | The sku of the product.                                                                |
+| product.name        | `string`       | The name of the product.                                                               |
+| product.cost        | `Cost`         | The cost of the product.                                                               |
+| product.cost.amount | `number`       | The amount of coins that are required to exchange for the product.                     |
+| product.cost.type   | `string`       | The type of the cost. Can be `coins`.                                                  |
+| product.environment | `string`       | The environment of the product. Can be `production` or `sandbox`.                      |
+| product.recurrence  | `string`       | The recurrence of the product. Can be `one-time` or `weekly`, `monthly` or `yearly`.   |
+| metadata            | `Metadata`     | The key-value map of metadata that was sent with the transaction.                      |
+| status              | `string`       | The status of the transaction. Can be `pending`, `completed`, `cancelled` or `failed`. |
+
+#### `OWN3D.ext.coins.getProducts()`
+
+Returns a list of products available for exchange.
+
+##### Example
+
+```js
+OWN3D.ext.coins.getProducts().then((products) => {
+    console.log('Got products', products)
+})
+```
+
+#### `OWN3D.ext.coins.showCoinsBalance()`
+
+Shows the current coins balance.
+
+##### Example
+
+```js
+OWN3D.ext.coins.showCoinsBalance()
+```
+
+#### `OWN3D.ext.coins.useCoins(sku, metadata)`
+
+Exchange coins for a product.
+
+##### Parameters
+
+- `sku` - The sku of the product to exchange coins for.
+- `metadata` - The metadata to send with the transaction.
+
+##### Example
+
+```js
+OWN3D.ext.coins.useCoins('test', { foo: 'bar' })
+```
+
+#### `OWN3D.ext.coins.onTransactionComplete(callback)`
+
+Registers a callback that is called when a transaction is completed.
+
+##### Parameters
+
+- `callback` - A function that is called when a transaction is completed.
+
+##### Example
+
+```js
+OWN3D.ext.coins.onTransactionComplete((transaction) => {
+    console.log('Transaction completed', transaction)
+})
+```
+
+#### `OWN3D.ext.coins.onTransactionCancelled(callback)`
+
+Registers a callback that is called when a transaction is cancelled.
+
+##### Parameters
+
+- `callback` - A function that is called when a transaction is cancelled.
+
+##### Example
+
+```js
+OWN3D.ext.coins.onTransactionCancelled((transaction) => {
+    console.log('Transaction cancelled', transaction)
+})
+```
+
 ### `OWN3D.ext.socket`
 
 The socket module is an event emitter. It provides a set of functions, so you can listen to events from our event bus.
