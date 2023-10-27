@@ -17,7 +17,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who followed",
               "conditional": false
             }
@@ -30,7 +30,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who subscribed",
               "conditional": false
             }
@@ -42,14 +42,14 @@
           "name": "Default",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero"
+            "name": "Someone"
           }
         },
         {
           "name": "Default",
           "platform": "youtube",
           "parameters": {
-            "name": "GhostZero"
+            "name": "Someone"
           }
         }
       ]
@@ -70,7 +70,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who subscribed",
               "conditional": false
             },
@@ -113,7 +113,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who became a member",
               "conditional": false
             },
@@ -133,7 +133,7 @@
           "name": "Tier 1",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "1000"
           }
         },
@@ -141,7 +141,7 @@
           "name": "Tier 2",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "2000"
           }
         },
@@ -149,7 +149,7 @@
           "name": "Tier 3",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "3000"
           }
         },
@@ -157,7 +157,7 @@
           "name": "Default",
           "platform": "youtube",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "Ehrenmann/frau"
           }
         }
@@ -179,7 +179,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who re-subscribed",
               "conditional": false
             },
@@ -260,7 +260,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who became a member",
               "conditional": false
             },
@@ -296,7 +296,7 @@
           "name": "Tier 1",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "1000",
             "months": 1,
             "streak": 1,
@@ -315,7 +315,7 @@
           "name": "Tier 2",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "2000",
             "months": 1,
             "streak": 1,
@@ -334,7 +334,7 @@
           "name": "Tier 3",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "3000",
             "months": 1,
             "streak": 1,
@@ -353,7 +353,7 @@
           "name": "Default",
           "platform": "youtube",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "tier": "Ehrenmann/frau",
             "months": 1,
             "message": "Love the stream! FevziGG"
@@ -377,7 +377,7 @@
               "name": "gifter",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who gifted the subscription",
               "conditional": false
             },
@@ -436,7 +436,7 @@
               "name": "gifter",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who became a member",
               "conditional": true
             },
@@ -464,7 +464,7 @@
           "name": "Tier 1",
           "platform": "twitch",
           "parameters": {
-            "gifter": "GhostZero",
+            "gifter": "Someone",
             "tier": "1000",
             "amount": 1,
             "cumulative_amount": 1,
@@ -475,7 +475,7 @@
           "name": "Tier 2",
           "platform": "twitch",
           "parameters": {
-            "gifter": "GhostZero",
+            "gifter": "Someone",
             "tier": "2000",
             "amount": 1,
             "cumulative_amount": 1,
@@ -486,7 +486,7 @@
           "name": "Tier 3",
           "platform": "twitch",
           "parameters": {
-            "gifter": "GhostZero",
+            "gifter": "Someone",
             "tier": "3000",
             "amount": 1,
             "cumulative_amount": 1,
@@ -497,7 +497,7 @@
           "name": "Default",
           "platform": "youtube",
           "parameters": {
-            "gifter": "GhostZero",
+            "gifter": "Someone",
             "tier": "Ehrenmann/frau",
             "amount": 1
           }
@@ -520,7 +520,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who cheered",
               "conditional": false
             },
@@ -556,7 +556,7 @@
           "name": "10",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "amount": 10,
             "message": "Love the stream! FevziGG",
             "is_anonymous": false
@@ -566,7 +566,7 @@
           "name": "100",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "amount": 100,
             "message": "Love the stream! FevziGG",
             "is_anonymous": false
@@ -576,7 +576,7 @@
           "name": "1k",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "amount": 1000,
             "message": "Love the stream! FevziGG",
             "is_anonymous": false
@@ -586,7 +586,7 @@
           "name": "5k",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "amount": 5000,
             "message": "Love the stream! FevziGG",
             "is_anonymous": false
@@ -610,7 +610,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who raided",
               "conditional": false
             },
@@ -630,7 +630,7 @@
           "name": "10",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "count": 10
           }
         },
@@ -638,7 +638,7 @@
           "name": "50",
           "platform": "twitch",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "count": 50
           }
         }
@@ -748,7 +748,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who purchased the Super Chat",
               "conditional": false
             },
@@ -804,7 +804,7 @@
           "name": "Default",
           "platform": "youtube",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "message": "Love the stream! FevziGG",
             "tier": "???",
             "amount": 1000000,
@@ -829,7 +829,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who purchased the Super Sticker",
               "conditional": false
             },
@@ -873,7 +873,7 @@
           "name": "Default",
           "platform": "youtube",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "sticker": "???",
             "tier": "???",
             "amount": 1000000,
@@ -898,7 +898,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who tipped",
               "conditional": false
             },
@@ -934,7 +934,7 @@
           "name": "$10",
           "platform": "own3d",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "amount": 10,
             "currency": "USD",
             "message": "Love the stream! FevziGG"
@@ -944,7 +944,7 @@
           "name": "$50",
           "platform": "own3d",
           "parameters": {
-            "name": "GhostZero",
+            "name": "Someone",
             "amount": 50,
             "currency": "USD",
             "message": "Love the stream! FevziGG"
@@ -976,7 +976,7 @@
               "name": "name",
               "type": "string",
               "default": "",
-              "example": "GhostZero",
+              "example": "Someone",
               "description": "The name of the user who donated",
               "conditional": false
             },
@@ -1045,7 +1045,7 @@
           "platform": "twitch",
           "parameters": {
             "campaign_id": "123-abc-456-def",
-            "name": "GhostZero",
+            "name": "Someone",
             "charity_name": "Example Charity",
             "charity_description": "Example Charity Description",
             "charity_website": "https://example.com",
