@@ -18,8 +18,9 @@ software like OBS Studio. It helps you organize your alerts with different theme
 
 ### Alert Set Configuration
 
-An alert set configuration defines the settings for how an alert is displayed. It consists of a `default` template and a
-list of `variations` with specific overrides.
+An alert set configuration defines the settings for how an alert is displayed. It consists of a `default` template with
+global settings, a `defaults` template with type-based settings, and finally the list of `variations` with specific
+overrides.
 
 ### Alert Type
 
@@ -51,7 +52,14 @@ guide.
 
 ## Alert Set Configuration Example <Badge text="AE4" type="success"/>
 
-Here's an example of an alert set configuration in JSON format:
+:::tip
+**Understanding Defaults**: By default, the `default` section can be omitted. However, it's important to note that
+both `defaults` and `variations` are required components of an alert set configuration. Not providing
+type-specific `defaults` for certain alert types will result in the alert being disabled for those types. Similarly,
+omitting `variations` for specific types will also disable the alert for those types.
+:::
+
+Here's an illustrative example of an alert set configuration presented in JSON format:
 
 <!-- @formatter:off -->
 ```json
@@ -65,8 +73,20 @@ Here's an example of an alert set configuration in JSON format:
     "subtitle": null,
     "font_family": "Montserrat",
     "font_color": "#ffffff",
-    ...
+     ...
   },
+  "defaults": [
+    {
+      "platform": "twitch",
+      "type": "follow",
+      "name": "Follow",
+      "enabled": true,
+      "default": {
+        "title": "Thanks {{name}} for cheering!💃💃💃"
+      }
+    },
+    ...
+  ],
   "variations": [
     {
       "name": "Twitch Cheer",
@@ -88,11 +108,49 @@ Here's an example of an alert set configuration in JSON format:
 ```
 <!-- @formatter:on -->
 
-In this example, we have an alert set configuration with an `id`, `user_id`, and `active` status. The `default` template
-defines the default settings for alerts. The `variations` list contains different variations of alerts with their
-conditions and overrides.
+In this example, we provide an alert set configuration with essential properties such as `id`, `user_id`, and `active`
+status. The `default` template defines default settings for alerts, while the `defaults` list specifies default settings
+tailored to specific types of alerts. Additionally, the `variations` list encompasses various alert variations, each
+defined by their unique conditions and overrides.
 
-## Example of Existing Types in AE4 <Badge text="AE4" type="success"/>
+## Merging Template Settings <Badge text="AE4" type="success"/>
+
+When rendering a final alert in AE4, multiple templates come into play. These templates are merged together in a
+specific order to determine the ultimate alert appearance. The merging process unfolds as follows:
+
+1. **AE4 Global Defaults:** These settings represent the default configurations that apply universally to all alerts
+   within AE4. These global defaults are established within OWN3D's Alerts Engine's internal settings.
+
+2. **AE4 Alert Set Default:** These configurations are specific to a particular alert set and are customizable through
+   the `default` property of any alert set. They serve as the default settings for all alerts contained within that set.
+
+3. **AE4 Alert Set Defaults for Type:** These settings are tailored to a particular type of alert within an alert set
+   and can be adjusted through the `defaults` property within the alert set. They provide default configurations for
+   alerts of that specific type. Each type of alert is associated with a combined `type` and `platform` key.
+
+4. **AE4 Alert Set Variation Overrides:** These settings are the most precise and specific, applying to individual
+   variations of alerts within a set. They can be defined within the `overrides` property of a variation, enabling
+   fine-grained customization of each alert's appearance and behavior.
+
+It's essential to understand that AE4 may find multiple variations that match a single alert. In such cases, the
+overrides from the matched variations are merged together to create the final alert appearance.
+
+Here's a visual representation of the merge process:
+
+```text
+graph TD
+    A[AE4 Global Defaults] --> B[AE4 Alert Set Default]
+    B --> C[AE4 Alert Set Defaults for Type]
+    C --> D[AE4 Alert Set Variation Overrides]
+    D --> E[AE4 Final Alert Template]
+```
+
+![Alerts Engine 4 (AE4) Merging Process](../../images/merging-template-settings.png)
+
+This step-by-step merging ensures that alerts in AE4 have a well-defined and predictable appearance, allowing for
+customization at various levels to meet specific requirements.
+
+## Example of Existing Types <Badge text="AE4" type="success"/>
 
 ::: tip
 **Technical Terms Recommendations:** We kept the same wording for alerts with the same intend. Follow (Twitch),
@@ -109,31 +167,9 @@ Here's a table listing some existing types of alerts and the platforms they are 
 **Note:** The table above provides examples of existing alert templates, their descriptions, and the platforms they are
 associated with. These templates can be customized and extended based on your specific needs.
 
-## Example of Variations in AE4 <Badge text="AE4" type="success"/>
+## Example of Variations <Badge text="AE4" type="success"/>
 
 You will find a full list of all available variations in the [Alerts Engine 4 (AE4) Variations](./variations.md) guide.
-
-## Example of Existing Types in AE4 <Badge text="deprecated" type="error"/>
-
-::: danger
-**Alerts Engine 3 (AE3)** is deprecated and will be removed in the future. We recommend migrating to AE4 as soon as
-possible using the [AE3 Migration API](#ae-migration-api).
-:::
-
-Here's a table listing some existing types of alerts:
-
-| Template         | Description                                   |
-|------------------|-----------------------------------------------|
-| `follow`         | Someone follows your channel                  |
-| `gift-subscribe` | Someone gifted a subscription to your channel |
-| `subscribe`      | Someone subscribes to your channel            |
-| `cheer`          | Someone cheers on your channel                |
-| `raid`           | Someone raids your channel                    |
-| `donation`       | Someone donates to your channel               |
-
-## Example of Variations in AE4 <Badge text="deprecated" type="error"/>
-
-We do not provide a list of variations for AE3 since it is deprecated. Please use AE4 instead.
 
 ## API-Reference
 
