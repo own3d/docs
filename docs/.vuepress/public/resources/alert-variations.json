@@ -21,7 +21,10 @@
               "description": "The name of the user who followed",
               "conditional": false
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} is now following!"
+          }
         },
         {
           "type": "youtube",
@@ -34,7 +37,10 @@
               "description": "The name of the user who subscribed",
               "conditional": false
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} is now following!"
+          }
         }
       ],
       "examples": [
@@ -104,7 +110,10 @@
               "description": "Whether the subscription was gifted",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} just subscribed!"
+          }
         },
         {
           "type": "youtube",
@@ -125,7 +134,10 @@
               "description": "The name of the Level at which the user is a member",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} just subscribed!"
+          }
         }
       ],
       "examples": [
@@ -251,7 +263,11 @@
               "description": "The emotes the user sent with the subscription",
               "conditional": false
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} just resubbed for {{months}} months!",
+            "subtitle": "{{message}}"
+          }
         },
         {
           "type": "youtube",
@@ -288,7 +304,11 @@
               "description": "The number of months the user has been a member",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} just resubbed for {{months}} months!",
+            "subtitle": "{{message}}"
+          }
         }
       ],
       "examples": [
@@ -427,7 +447,10 @@
               "description": "Whether the subscription was anonymous",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{gifter}} gifted a {{tier}} sub to {{name}}!"
+          }
         },
         {
           "type": "youtube",
@@ -456,7 +479,10 @@
               "description": "The total amount of the subscription",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{gifter}} gifted a {{tier}} sub to {{name}}!"
+          }
         }
       ],
       "examples": [
@@ -548,7 +574,11 @@
               "description": "Whether the cheer was anonymous",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} cheered! x{{amount}}",
+            "subtitle": "{{message}}"
+          }
         }
       ],
       "examples": [
@@ -622,7 +652,10 @@
               "description": "The number of viewers the user raided with",
               "conditional": true
             }
-          ]
+          ],
+          "default": {
+            "title": "{{name}} is raiding with a party of {{count}}!"
+          }
         }
       ],
       "examples": [
@@ -655,7 +688,10 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": []
+          "parameters": [],
+          "default": {
+            "chat_message": "Hype Train is starting! Get on board!"
+          }
         }
       ],
       "examples": [
@@ -677,14 +713,20 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": []
+          "parameters": [],
+          "default": {
+            "chat_message": "Shoutout to {{name}}! Check out their stream at {{url}}!"
+          }
         }
       ],
       "examples": [
         {
           "name": "Default",
           "platform": "twitch",
-          "parameters": {}
+          "parameters": {
+            "name": "Someone",
+            "url": "twitch.tv/someone"
+          }
         }
       ]
     },
@@ -699,14 +741,19 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": []
+          "parameters": [],
+          "default": {
+            "chat_message": "Just got a shoutout from {{name}}!"
+          }
         }
       ],
       "examples": [
         {
           "name": "Default",
           "platform": "twitch",
-          "parameters": {}
+          "parameters": {
+            "name": "Someone"
+          }
         }
       ]
     },
@@ -721,7 +768,8 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": []
+          "parameters": [],
+          "default": {}
         }
       ],
       "examples": [
@@ -785,6 +833,7 @@
               "conditional": true
             }
           ],
+          "default": {},
           "localization": {
             "name": "Super Chat",
             "description": "Someone purchased a Super Chat to highlight their message in your YouTube chat"
@@ -793,6 +842,7 @@
         {
           "type": "twitch",
           "parameters": [],
+          "default": {},
           "localization": {
             "name": "Hype Chat",
             "description": "Someone purchased a Hype Chat to highlight their message in your Twitch chat"
@@ -865,7 +915,8 @@
               "description": "The currency in which the fund was made",
               "conditional": true
             }
-          ]
+          ],
+          "default": {}
         }
       ],
       "examples": [
@@ -926,7 +977,8 @@
               "description": "The message the user sent with the tip",
               "conditional": false
             }
-          ]
+          ],
+          "default": {}
         }
       ],
       "examples": [
@@ -1036,7 +1088,8 @@
               "description": "The number of decimal places of the donation",
               "conditional": false
             }
-          ]
+          ],
+          "default": {}
         }
       ],
       "examples": [
