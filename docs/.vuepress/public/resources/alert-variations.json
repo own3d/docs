@@ -18,7 +18,8 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who followed"
+              "description": "The name of the user who followed",
+              "conditional": false
             }
           ]
         },
@@ -30,7 +31,8 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who subscribed"
+              "description": "The name of the user who subscribed",
+              "conditional": false
             }
           ]
         }
@@ -69,7 +71,8 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who subscribed"
+              "description": "The name of the user who subscribed",
+              "conditional": false
             },
             {
               "name": "tier",
@@ -90,14 +93,16 @@
                   "value": "3000"
                 }
               ],
-              "description": "The tier of the subscription"
+              "description": "The tier of the subscription",
+              "conditional": true
             },
             {
               "name": "is_gift",
               "type": "boolean",
               "default": false,
               "example": false,
-              "description": "Whether the subscription was gifted"
+              "description": "Whether the subscription was gifted",
+              "conditional": true
             }
           ]
         },
@@ -109,14 +114,16 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who became a member"
+              "description": "The name of the user who became a member",
+              "conditional": false
             },
             {
               "name": "tier",
               "type": "string",
               "default": "",
               "example": "Ehrenmann/frau",
-              "description": "The name of the Level at which the user is a member"
+              "description": "The name of the Level at which the user is a member",
+              "conditional": true
             }
           ]
         }
@@ -173,7 +180,8 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who re-subscribed"
+              "description": "The name of the user who re-subscribed",
+              "conditional": false
             },
             {
               "name": "tier",
@@ -194,35 +202,40 @@
                   "value": "3000"
                 }
               ],
-              "description": "The tier of the subscription"
+              "description": "The tier of the subscription",
+              "conditional": true
             },
             {
               "name": "months",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The number of months the user has been subscribed"
+              "description": "The number of months the user has been subscribed",
+              "conditional": true
             },
             {
               "name": "streak",
               "type": "number",
               "default": 0,
               "example": 1,
-              "description": "The number of months the user has been subscribed in a row. Null if not shared."
+              "description": "The number of months the user has been subscribed in a row. Null if not shared.",
+              "conditional": true
             },
             {
               "name": "duration",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The number of months the user has been subscribed in total"
+              "description": "The number of months the user has been subscribed in total",
+              "conditional": true
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
               "example": "Love the stream! FevziGG",
-              "description": "The message the user sent with the subscription"
+              "description": "The message the user sent with the subscription",
+              "conditional": false
             },
             {
               "name": "emotes",
@@ -235,7 +248,8 @@
                   "id": "302976485"
                 }
               ],
-              "description": "The emotes the user sent with the subscription"
+              "description": "The emotes the user sent with the subscription",
+              "conditional": false
             }
           ]
         },
@@ -247,28 +261,32 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who became a member"
+              "description": "The name of the user who became a member",
+              "conditional": false
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
               "example": "Love the stream! FevziGG",
-              "description": "The message the user sent with the membership"
+              "description": "The message the user sent with the membership",
+              "conditional": false
             },
             {
               "name": "tier",
               "type": "string",
               "default": "",
               "example": "Ehrenmann/frau",
-              "description": "The name of the Level at which the user is a member"
+              "description": "The name of the Level at which the user is a member",
+              "conditional": true
             },
             {
               "name": "months",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The number of months the user has been a member"
+              "description": "The number of months the user has been a member",
+              "conditional": true
             }
           ]
         }
@@ -360,7 +378,8 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who gifted the subscription"
+              "description": "The name of the user who gifted the subscription",
+              "conditional": false
             },
             {
               "name": "tier",
@@ -381,28 +400,32 @@
                   "value": "3000"
                 }
               ],
-              "description": "The tier of the subscription"
+              "description": "The tier of the subscription",
+              "conditional": true
             },
             {
               "name": "amount",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The total amount of the subscription"
+              "description": "The total amount of the subscription",
+              "conditional": true
             },
             {
               "name": "cumulative_amount",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The total amount of the subscription including all previous gifts"
+              "description": "The total amount of the subscription including all previous gifts",
+              "conditional": true
             },
             {
               "name": "is_anonymous",
               "type": "boolean",
               "default": false,
               "example": false,
-              "description": "Whether the subscription was anonymous"
+              "description": "Whether the subscription was anonymous",
+              "conditional": true
             }
           ]
         },
@@ -414,21 +437,24 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who became a member"
+              "description": "The name of the user who became a member",
+              "conditional": true
             },
             {
               "name": "tier",
               "type": "string",
               "default": "",
               "example": "Ehrenmann/frau",
-              "description": "The name of the Level at which the user is a member"
+              "description": "The name of the Level at which the user is a member",
+              "conditional": true
             },
             {
               "name": "amount",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The total amount of the subscription"
+              "description": "The total amount of the subscription",
+              "conditional": true
             }
           ]
         }
@@ -495,28 +521,32 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who cheered"
+              "description": "The name of the user who cheered",
+              "conditional": false
             },
             {
               "name": "amount",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The amount of bits the user cheered"
+              "description": "The amount of bits the user cheered",
+              "conditional": true
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
               "example": "Love the stream! FevziGG",
-              "description": "The message the user sent with the cheer"
+              "description": "The message the user sent with the cheer",
+              "conditional": false
             },
             {
               "name": "is_anonymous",
               "type": "boolean",
               "default": false,
               "example": false,
-              "description": "Whether the cheer was anonymous"
+              "description": "Whether the cheer was anonymous",
+              "conditional": true
             }
           ]
         }
@@ -581,14 +611,16 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who raided"
+              "description": "The name of the user who raided",
+              "conditional": false
             },
             {
               "name": "count",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The number of viewers the user raided with"
+              "description": "The number of viewers the user raided with",
+              "conditional": true
             }
           ]
         }
@@ -717,35 +749,40 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who purchased the Super Chat"
+              "description": "The name of the user who purchased the Super Chat",
+              "conditional": false
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
               "example": "Love the stream! FevziGG",
-              "description": "The message the user sent with the Super Chat"
+              "description": "The message the user sent with the Super Chat",
+              "conditional": false
             },
             {
               "name": "tier",
               "type": "string",
               "default": "",
               "example": "???",
-              "description": "The tier for the paid message"
+              "description": "The tier for the paid message",
+              "conditional": true
             },
             {
               "name": "amount",
               "type": "number",
               "default": 0,
               "example": 1000000,
-              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000"
+              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000",
+              "conditional": true
             },
             {
               "name": "currency",
               "type": "string",
               "default": "USD",
               "example": "USD",
-              "description": "The currency in which the fund was made"
+              "description": "The currency in which the fund was made",
+              "conditional": true
             }
           ],
           "localization": {
@@ -793,35 +830,40 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who purchased the Super Sticker"
+              "description": "The name of the user who purchased the Super Sticker",
+              "conditional": false
             },
             {
               "name": "sticker",
               "type": "string",
               "default": "",
               "example": "???",
-              "description": "The unique ID of the Super Sticker"
+              "description": "The unique ID of the Super Sticker",
+              "conditional": true
             },
             {
               "name": "tier",
               "type": "string",
               "default": "",
               "example": "???",
-              "description": "The tier for the paid sticker"
+              "description": "The tier for the paid sticker",
+              "conditional": true
             },
             {
               "name": "amount",
               "type": "number",
               "default": 0,
               "example": 1000000,
-              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000"
+              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000",
+              "conditional": true
             },
             {
               "name": "currency",
               "type": "string",
               "default": "USD",
               "example": "USD",
-              "description": "The currency in which the fund was made"
+              "description": "The currency in which the fund was made",
+              "conditional": true
             }
           ]
         }
@@ -857,28 +899,32 @@
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who tipped"
+              "description": "The name of the user who tipped",
+              "conditional": false
             },
             {
               "name": "amount",
               "type": "number",
               "default": 1,
               "example": 1,
-              "description": "The amount of money the user tipped"
+              "description": "The amount of money the user tipped",
+              "conditional": true
             },
             {
               "name": "currency",
               "type": "string",
               "default": "USD",
               "example": "USD",
-              "description": "The currency of the tip"
+              "description": "The currency of the tip",
+              "conditional": true
             },
             {
               "name": "message",
               "type": "string",
               "default": "",
               "example": "Love the stream! FevziGG",
-              "description": "The message the user sent with the tip"
+              "description": "The message the user sent with the tip",
+              "conditional": false
             }
           ]
         }
@@ -923,63 +969,72 @@
               "type": "string",
               "default": "",
               "example": "123-abc-456-def",
-              "description": "The ID of the campaign"
+              "description": "The ID of the campaign",
+              "conditional": true
             },
             {
               "name": "name",
               "type": "string",
               "default": "",
               "example": "GhostZero",
-              "description": "The name of the user who donated"
+              "description": "The name of the user who donated",
+              "conditional": false
             },
             {
               "name": "charity_name",
               "type": "string",
               "default": "",
               "example": "Example Charity",
-              "description": "The name of the charity"
+              "description": "The name of the charity",
+              "conditional": true
             },
             {
               "name": "charity_description",
               "type": "string",
               "default": "",
               "example": "Example Charity Description",
-              "description": "The description of the charity"
+              "description": "The description of the charity",
+              "conditional": false
             },
             {
               "name": "charity_website",
               "type": "string",
               "default": "",
               "example": "https://example.com",
-              "description": "The website of the charity"
+              "description": "The website of the charity",
+              "conditional": false
             },
             {
               "name": "charity_logo",
               "type": "string",
               "default": "",
               "example": "https://example.com/logo.png",
-              "description": "The logo of the charity"
+              "description": "The logo of the charity",
+              "conditional": false
             },
             {
               "name": "amount_value",
               "type": "number",
               "default": 0,
               "example": 10000,
-              "description": "The value of the donation"
+              "description": "The value of the donation",
+              "conditional": true
             },
             {
               "name": "amount_currency",
               "type": "string",
               "default": "USD",
               "example": "USD",
-              "description": "The currency of the donation"
+              "description": "The currency of the donation",
+              "conditional": true
             },
             {
               "name": "amount_decimal_places",
               "type": "number",
               "default": 2,
               "example": 2,
-              "description": "The number of decimal places of the donation"
+              "description": "The number of decimal places of the donation",
+              "conditional": false
             }
           ]
         }
