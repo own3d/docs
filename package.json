@@ -2,8 +2,12 @@
   "license": "Creative Commons Attribution-ShareAlike 4.0 International",
   "description": "The official developer documentation for OWN3D.",
   "devDependencies": {
-    "axios": "^0.24.0",
-    "vuepress": "^1.8.2"
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.16",
+    "axios": "^0.27.2",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vuepress": "^2.0.0-rc.0"
   },
   "scripts": {
     "docs:dev": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && vuepress dev docs",
