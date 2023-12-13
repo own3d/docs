@@ -6,7 +6,7 @@ to maximize its impact.
 
 Here are some tips for designing your OWN3D Extension:
 
-## Color Guidelines <Badge text="closed beta" type="warning"/>
+## Color Guidelines
 
 ![app example](../../images/extensions-example_title.png)
 
@@ -21,7 +21,7 @@ and our app. Consider using the following guidelines when selecting your colors:
 
 - Consider using the brand colors from OWN3D to ensure consistency with the platform.
 
-## App Discovery Guidelines <Badge text="closed beta" type="warning"/>
+## App Discovery Guidelines
 
 ![app discovery](../../images/extensions-discovery.png)
 
@@ -36,7 +36,7 @@ the following guidelines when designing your app discovery experience:
 
 ![app detail page](../../images/extensions-detail-page.png)
 
-## UI Recommendations <Badge text="closed beta" type="warning"/>
+## UI Recommendations
 
 When designing the user interface (UI) for your OWN3D Extension, it's important to consider the following
 recommendations:
@@ -51,3 +51,16 @@ recommendations:
 
 By following these guidelines, you can ensure that your OWN3D Extension is well designed, user-friendly, and easy to
 discover. Happy designing!
+
+## Forms and Input Fields
+
+When designing forms and input fields for your Scene Editor Widget Extension, it's important to consider the following
+recommendations:
+
+- Use the configuration page to allow users to customize unrelated settings.
+
+- Use English as the default language for all text labels and descriptions. We will translate Form labels and
+  descriptions into other languages. If you want to provide translations for your app, please contact us.
+
+- Do not use forms and input fields for any sensitive information. This includes, but is not limited to, passwords,
+  credit card numbers, social security numbers, and other personally identifiable information, etc.

@@ -221,3 +221,16 @@ Create a shoutout command `!so <username>`:
     Please define a valid user with "!so <username>".
 {% endif %}
 ```
+
+### Hug
+
+Create a shoutout command `!hug <username>`:
+
+```twig
+{% set user = user(args[1]) %}
+{% if user %}
+    {{ attribute(irc.tags, 'display-name') }} hugs {{ user.name }} <3
+{% else %}
+    Use "!hug <username>".
+{% endif %} 
+```

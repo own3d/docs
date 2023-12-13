@@ -1,4 +1,4 @@
-# Guidelines and Policies <Badge text="closed beta" type="warning"/>
+# Guidelines and Policies
 
 OWN3D Apps, also known as Extensions, are Single Page Application (SPA) apps that are embedded into our app via iframes.
 These apps provide additional functionality and features to our users.

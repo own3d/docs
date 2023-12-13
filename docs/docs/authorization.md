@@ -18,7 +18,7 @@ credentials. Many platforms like Google, Facebook, and GitHub use OAuth2.
 ## Client Registration
 
 To getting started, with our API's, you need to request a client id and client secret.
-You can do this by sending an email to developers@stream.tv with the subject "OAuth2 Client Registration" with the
+You can do this by fill out the [OAuth2 Client Registration](https://forms.gle/4miiLAksbFTEGg3c6) form with the
 following information:
 
 - Your application's name
