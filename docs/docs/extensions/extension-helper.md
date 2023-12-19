@@ -27,14 +27,12 @@ yarn add own3d/ext-types
 > This script must be added as the first script before any other scripts to pass the review.
 
 ```html
-
 <script src="https://extension-files.ext-own3d.tv/latest/own3d-ext.js"></script>
 ```
 
 3. Use the extension helper
 
 ```vue
-
 <script>
   console.log(`Running ${OWN3D.ext.version} on ${OWN3D.ext.environment}`)
 
