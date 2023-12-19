@@ -36,6 +36,12 @@ the following guidelines when designing your app discovery experience:
 
 ![app detail page](../../images/extensions-detail-page.png)
 
+Sizes and formats of screenshots and other materials:
+
+- Screenshots: 1024x768px and in .png or .jpg format
+- Discovery Image: 500x250px, and in .png or .jpg format (no transparency)
+- Icon: 40x40px, and in .png or .jpg format
+
 ## UI Recommendations
 
 When designing the user interface (UI) for your OWN3D Extension, it's important to consider the following

@@ -36,25 +36,25 @@ yarn add own3d/ext-types
 ```vue
 
 <script>
-console.log(`Running ${OWN3D.ext.version} on ${OWN3D.ext.environment}`)
+  console.log(`Running ${OWN3D.ext.version} on ${OWN3D.ext.environment}`)
 
-OWN3D.ext.onAuthorized((data) => {
-  console.log('onAuthorized', data)
-})
+  OWN3D.ext.onAuthorized((data) => {
+    console.log('onAuthorized', data)
+  })
 
-OWN3D.ext.onContext((context, changed) => {
-  for (const key of changed) {
-    console.log(`Context changed ${context[key]}`)
-  }
-})
+  OWN3D.ext.onContext((context, changed) => {
+    for (const key of changed) {
+      console.log(`Context changed ${context[key]}`)
+    }
+  })
 
-OWN3D.ext.socket.on('notifysub', (data) => {
-  console.log('Got notify-sub event', data)
-})
+  OWN3D.ext.socket.on('notifysub', (data) => {
+    console.log('Got notify-sub event', data)
+  })
 
-OWN3D.ext.socket.on('browser-source-updated', (data) => {
-  console.log('Got browser-source-updated event', data)
-})
+  OWN3D.ext.socket.on('browser-source-updated', (data) => {
+    console.log('Got browser-source-updated event', data)
+  })
 </script>
 ```
 
@@ -78,11 +78,22 @@ Registers a callback that is called when the extension is authorized.
 
 - `callback` - A function that is called when the extension is authorized.
 
+The callback receives an object with the following properties:
+
+| Parameter      | Type     | Description                                                                                                        |
+|----------------|----------|--------------------------------------------------------------------------------------------------------------------|
+| `client_id`    | `string` | The client id of the extension.                                                                                    | 
+| `client_token` | `string` | JWT token that can be used for OWN3D API requests. [Usage of Extension Client Tokens](tokens-and-client-tokens.md) |
+| `channel_id`   | `object` | The user id of the channel where the extension is installed.                                                       |
+| `user_id`      | `object` | The user id of the user who interacts with the extension.                                                          |
+| `scopes`       | `object` | The scopes of the user who interacts with the extension.                                                           |
+| `token`        | `object` | JWT token that should be used for any Extension Backend request.                                                   |
+
 ##### Example
 
 ```js
 OWN3D.ext.onAuthorized((data) => {
-  console.log('onAuthorized', data)
+    console.log('onAuthorized', data)
 })
 ```
 
@@ -98,9 +109,9 @@ Registers a callback that is called when the context is updated.
 
 ```js
 OWN3D.ext.onContext((context, changed) => {
-  for (const key of changed) {
-    console.log(`Context changed ${context[key]}`)
-  }
+    for (const key of changed) {
+        console.log(`Context changed ${context[key]}`)
+    }
 })
 ```
 
@@ -167,6 +178,6 @@ Registers a listener for a channel.
 
 ```js
 OWN3D.ext.ipc.on('test', (payload) => {
-  console.log('Got test message', payload)
+    console.log('Got test message', payload)
 })
 ```

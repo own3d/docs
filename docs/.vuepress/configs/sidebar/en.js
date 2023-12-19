@@ -20,6 +20,7 @@ export const sidebarEn = {
             children: [
                 '/docs/extensions/README.md',
                 '/docs/extensions/extension-helper.md',
+                '/docs/extensions/tokens-and-client-tokens.md',
                 '/docs/extensions/syntax-for-forms.md',
                 '/docs/extensions/designing-extensions.md',
                 '/docs/extensions/guidelines-and-policies.md',
