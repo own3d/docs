@@ -833,20 +833,12 @@
               "conditional": true
             }
           ],
-          "default": {},
-          "localization": {
-            "name": "Super Chat",
-            "description": "Someone purchased a Super Chat to highlight their message in your YouTube chat"
-          }
+          "default": {}
         },
         {
           "type": "twitch",
           "parameters": [],
-          "default": {},
-          "localization": {
-            "name": "Hype Chat",
-            "description": "Someone purchased a Hype Chat to highlight their message in your Twitch chat"
-          }
+          "default": {}
         }
       ],
       "examples": [
