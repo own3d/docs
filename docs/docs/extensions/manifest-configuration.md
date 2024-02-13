@@ -136,6 +136,44 @@ oauth:
 
 :::
 
+::: details Extension with Monetization support
+
+Monetization is a new feature that allows you to sell products and subscriptions within your extension. This feature is
+currently in development and is only available to a limited number of developers.
+
+Deprecation of SKU's can only be done inside the Developer Console. Deprecating a SKU will not affect existing
+subscriptions or in-app purchases that have been made and will only prevent new purchases of the SKU.
+
+```yaml
+schema_version: 1
+id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
+name: Extension that offers monetization
+version: 0.0.0
+description: Extension that includes monetization
+summary: An example extension boilerplate
+store_presence:
+  images:
+    logo: assets/logo.png
+compatibilities:
+  config:
+    path: config.html
+monetization:
+  in_app_purchase:
+    products:
+      - sku: product-sku
+        name: Product Name
+        description: Product Description
+        price: 100
+  subscriptions:
+    - sku: subscription-sku
+      name: Subscription Name
+      description: Subscription Description
+      recurrence: weekly
+      price: 100
+```
+
+:::
+
 ## Manifest Keys
 
 ### `schema_version`
