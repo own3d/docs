@@ -1,4 +1,4 @@
-# Extension Helper <Badge text="closed beta" type="warning"/>
+# Extension Helper <Badge text="public beta" type="warning"/>
 
 ## Terminology
 
@@ -46,12 +46,8 @@ yarn add own3d/ext-types
     }
   })
 
-  OWN3D.ext.socket.on('notifysub', (data) => {
-    console.log('Got notify-sub event', data)
-  })
-
-  OWN3D.ext.socket.on('browser-source-updated', (data) => {
-    console.log('Got browser-source-updated event', data)
+  OWN3D.ext.socket.on('remote-config', (data) => {
+    console.log('Config changed', data)
   })
 </script>
 ```
@@ -122,8 +118,8 @@ The socket module is an event emitter. It provides a set of functions, so you ca
 ##### Example
 
 ```js
-OWN3D.ext.socket.on('notifysub', (data) => {
-    console.log('Got notify-sub event', data)
+OWN3D.ext.socket.on('remote-config', (data) => {
+  console.log('Config changed', data)
 })
 ```
 
@@ -178,4 +174,75 @@ Registers a listener for a channel.
 OWN3D.ext.ipc.on('test', (payload) => {
     console.log('Got test message', payload)
 })
+```
+
+### `OWN3D.ext.config` <Badge text="public beta" type="warning"/>
+
+::: warning
+**Do not store sensitive data in the Remote Config!** The Remote Config is not encrypted and can be accessed by anyone
+who interacts with the extension.
+:::
+
+The config namespace allows streamers and developers to store and retrieve data. To learn more about the Remote Config
+Service, see the [Remote Config](remote-config.md) documentation.
+
+#### `OWN3D.ext.config.getSegments(): Promise<ConfigSegments>` <Badge text="public beta" type="warning"/>
+
+Get all segments.
+
+##### Example
+
+```js
+OWN3D.ext.config.getSegments().then((segments) => {
+    console.log('Segments', segments)
+})
+```
+
+#### `OWN3D.ext.config.setSegment(segment, content): Promise<void>` <Badge text="public beta" type="warning"/>
+
+Set the value of a key.
+
+##### Parameters
+
+- `segment` - The segment to set the value of.
+- `content` - The content to set (object).
+
+##### Example
+
+```js
+OWN3D.ext.config.setSegment('test', { foo: 'bar' })
+```
+
+### `OWN3D.ext.features` <Badge text="closed beta" type="warning"/>
+
+::: warning
+The `OWN3D.ext.features` module is currently not supported in the public beta.
+:::
+
+The feature-flag namespace provides information about the current global feature flags.
+
+#### `OWN3D.ext.features.isEnabled(feature: string)` <Badge text="closed beta" type="warning"/>
+Returns whether the current feature flag is enabled.
+
+##### Parameters
+
+- `feature` - The feature to check.
+
+##### Example
+
+```js
+if (OWN3D.ext.features.isEnabled('feature-flag')) {
+    console.log('Feature flag is enabled')
+}
+```
+
+#### `OWN3D.ext.features.getFeatures()` <Badge text="closed beta" type="warning"/>
+
+Returns a list of all available feature flags.
+
+##### Example
+
+```js
+console.log('Features', OWN3D.ext.features.getFeatures())
+// Features [ 'feature-flag' ]
 ```

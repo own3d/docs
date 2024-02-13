@@ -1,4 +1,4 @@
-# Remote Config <Badge text="closed beta" type="warning"/>
+# Remote Config <Badge text="public beta" type="warning"/>
 
 ## Introduction
 
@@ -72,14 +72,14 @@ await OWN3D.ext.config.setSegment('broadcaster', {
 
 ## Listen to changes of the Remote Config Service
 
-::: danger
-This feature is not yet implemented.
-:::
-
-To listen to changes of the Remote Config, you can use the following code snippet:
+To listen to Remote Config changes, you can use the following code snippet, but be aware that you will receive
+config changes from all extensions installed by the content creator:
 
 ```js
 OWN3D.ext.socket.on('remote-config', (data) => {
+    // Only handle changes from your extension
+    if (data.extension_id !== 'your_extension_id') return
+    
     console.log('Config changed', data)
 })
 ```
@@ -90,3 +90,4 @@ OWN3D.ext.socket.on('remote-config', (data) => {
 |----------------|----------|-----------------------------------------------------------------------|
 | `segments`     | `object` | The segments of the Remote Config that have changed.                  |
 | `extension_id` | `string` | The extension id of the extension that has changed the Remote Config. |
+| `channel_id`   | `string` | The channel id of the channel where the extension is installed.       |

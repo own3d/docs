@@ -1,4 +1,4 @@
-# Syntax for Forms <Badge text="closed beta" type="warning"/>
+# Syntax for Forms <Badge text="public beta" type="warning"/>
 
 ## About YAML Syntax
 
@@ -410,6 +410,90 @@ Resulting `values`:
 When a file is uploaded using this field, OWN3D will store the file for you. The file will be stored in the OWN3D CDN
 and will be available until the file is deleted. The `value` of the field will be the file id which can be used to
 retrieve the file using the [File Storage API](../file-storage.md).
+
+### Platforms Field
+
+The `platforms` fields allows you to select a single or multiple streaming platform connection. It works like
+the `checkbox` field, but with a different UI, and it will automatically fetch the available platforms from
+the Connections API and pass them to the extension context. The `value` will be an array of selected platforms.
+
+```yaml
+  - type: platforms
+    id: connections
+    options:
+      - value: twitch
+      - value: youtube
+    attributes:
+      label: Platforms
+      multiple: false
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "platforms": [
+      "twitch",
+      "youtube"
+    ]
+  },
+  "context": {
+    "connections": [
+      {
+        "platform": "twitch",
+        "channel_id": "1337"
+      },
+      {
+        "platform": "youtube",
+        "channel_id": "1337"
+      }
+    ]
+  }
+}
+```
+
+### Button Field
+
+::: warning
+The `button` field is currently not supported in the scene editor.
+:::
+
+The `button` field allows you to create a button that can be used to trigger an action. It will emit an event through
+the extension IPC module when the button is clicked. There is no `value` for this field.
+
+```yaml
+  - type: button
+    id: button
+    attributes:
+      label: Button
+      value: Click Me
+```
+
+Emitted event:
+
+```js
+OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
+    console.log('Got click event', payload)
+})
+```
+
+### Link Field
+
+::: warning
+The `link` field is currently not supported in the scene editor.
+:::
+
+The `link` field allows you to create a link that can be used to navigate to a specific URL. It will open the link in a
+new tab. There is no `value` for this field.
+
+```yaml
+  - type: link
+    id: link
+    attributes:
+      label: Link
+      value: https://example.com
+```
 
 ## Conditional Fields
 

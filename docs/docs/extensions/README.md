@@ -1,4 +1,4 @@
-# Getting Started <Badge text="closed beta" type="warning"/>
+# Getting Started <Badge text="public beta" type="warning"/>
 
 ## What is an Extension?
 
@@ -9,6 +9,8 @@ installation. The backend must be hosted by the extension author themselves.
 ![extension example](../../images/extensions.png)
 
 ## Types of Extensions
+
+There are two main use-case types of extensions:
 
 ### Dashboard Extensions
 
@@ -22,11 +24,32 @@ a real-time heart rate monitor or informative widgets like a leaderboard, donati
 
 These widgets can also be added to the OBS Studio installation using browser sources.
 
+## Compatibilities
+
+Extensions support different compatibilities. Each compatibility represents a "feature" of the extension. For example,
+a compatibility can be a "**browser-source**" or "**standalone**", which allows the extension to be used as Scene Editor
+Widget or as a Standalone App in the OWN3D Pro Dashboard.
+
+You can also add additional compatibilities to your extension, like "**config**", which allows you to add a
+configuration page to your extension details page allowing the streamer to configure your extension.
+
+Here is a list of all supported compatibilities:
+
+- **Scene Editor Widget Extension**: The `browser-source` compatibility allows the extension to be used as a Scene
+  Editor Widget.
+- **Standalone Extension**: The `standalone` compatibility allows the extension to be used as a Standalone App in the
+  OWN3D Pro Dashboard.
+- **Configuration Page**: The `config` compatibility allows you to add a configuration page to your extension details
+  page allowing the streamer to configure your extension.
+
+Other compatibilities are planned for the future.
+
+![extension example](../../images/extensions.png)
+
 ## Create your first Extension
 
-Since custom extensions are still in the closed beta, you need to request access through
-our [extension request form](https://forms.gle/uWdQXunZGPCEFrXVA). Coming 2024, you can create your own extensions
-using our developer portal. After you getting access to the closed beta, you can start creating your own extensions.
+You can create your own extensions
+using our [Developer Console](https://console.dev.own3d.tv).
 
 ![extension example](../../images/extensions-example.png)
 
@@ -107,7 +130,23 @@ deprecation.
 
 ## Access Control
 
-You can control who can access your extension. There are three different types of access control:
+::: tip
+Extensions are currently only available to selected users. We are working on making extensions available to all OWN3D
+users in the next few months.
+:::
+
+You can control who has access to your extension. This applies both to extensions in development and to released
+extensions that are available in our [App Discovery](designing-extensions.md#app-discovery-guidelines).
+
+In general, extensions are available to all OWN3D users. However, you can restrict access to your extension by using
+the Content Creator Allowlist.
+
+To install allow-listed extensions, users must visit the "**Invite Only**" section of the App Discovery page, where they
+can find and install extensions that are not available to the general public:
+
+![chrome_8zJyvF2Fg8.png](..%2F..%2Fimages%2Fchrome_8zJyvF2Fg8.png)
+
+There are three different types of access control for your extension available:
 
 ### Public Access
 

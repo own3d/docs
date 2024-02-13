@@ -52,7 +52,15 @@ User Access Tokens and App Access Tokens are both bearer tokens. Bearer tokens a
 ### Authorization Code Flow Example
 
 In the following example, we will use the authorization code flow to get an access token.
-To visualize the flow, we will use javascript to redirect the user to the authorization server.
+To visualize the flow, we will use javascript to redirect the user to the authorization server. You will find your
+client id in the [Passport Client](https://console.dev.own3d.tv/resources/passport-clients) section of the OWN3D
+Developer Console.
+
+::: tip
+Ensure that you have added the redirect URI to
+your [Passport Client](https://console.dev.own3d.tv/resources/passport-clients) in the OWN3D Developer Console.
+Otherwise, the authorization server will throw a "**Client authentication failed**" error.
+:::
 
 ```javascript
 // Redirect the user to the authorization server

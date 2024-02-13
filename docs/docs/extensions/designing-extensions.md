@@ -1,4 +1,4 @@
-# Designing Extensions <Badge text="closed beta" type="warning"/>
+# Designing Extensions
 
 OWN3D Extensions are a key part of the OWN3D platform, providing users with new and engaging ways to interact with the
 content they love. As a developer, it's important to make sure your OWN3D Extension is well designed and user-friendly
