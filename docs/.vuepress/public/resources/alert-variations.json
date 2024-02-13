@@ -23,7 +23,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} is now following!"
+            "title": "{{name}} is now following" ,
+            "subtitle": "Welcome to the community!",
+            "chat_message": "Thank you for the follow, {{name}}."
           }
         },
         {
@@ -112,7 +114,8 @@
             }
           ],
           "default": {
-            "title": "{{name}} just subscribed!"
+            "title": "{{name}} just subscribed",
+            "chat_message": "{{name}} just subscribed. Thanks for your support!"
           }
         },
         {
@@ -136,7 +139,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} just subscribed!"
+            "title": "{{name}} just subscribed",
+            "subtitle": "Hello there!",
+            "chat_message": "{{name}} just subscribed to my channel. Welcome to the community!"
           }
         }
       ],
@@ -265,8 +270,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} just resubbed for {{months}} months!",
-            "subtitle": "{{message}}"
+            "title": "{{name}} just resubbed for the {{months}}. month",
+            "subtitle": "{{message}}",
+            "chat_message": "{{name}} just subscribed for the {{months}}. month. Thanks for your support!"
           }
         },
         {
@@ -306,8 +312,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} just resubbed for {{months}} months!",
-            "subtitle": "{{message}}"
+            "title": "{{name}} is a member for the {{months}}. month",
+            "subtitle": "Thanks a million!",
+            "chat_message": "Your continued membership greatly supports this channel - thank you, {{name}}!"
           }
         }
       ],
@@ -449,7 +456,9 @@
             }
           ],
           "default": {
-            "title": "{{gifter}} gifted a {{tier}} sub to {{name}}!"
+            "title": "{{gifter}} gifted a {{tier}} sub",
+            "subtitle": "Thanks for the community gift!",
+            "chat_message": "{{gifter}}, thank you for your community gift!"
           }
         },
         {
@@ -481,7 +490,9 @@
             }
           ],
           "default": {
-            "title": "{{gifter}} gifted a {{tier}} sub to {{name}}!"
+            "title": "{{gifter}} gifted {{amount}} memberships",
+            "subtitle": "Thanks for the community gift!",
+            "chat_message": "{{gifter}}, thank you for your community gift!"
           }
         }
       ],
@@ -576,8 +587,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} cheered! x{{amount}}",
-            "subtitle": "{{message}}"
+            "title": "{{name}} cheered {{amount}} Bits",
+            "subtitle": "{{message}}",
+            "chat_message": "Thanks for the cheer, {{name}}!"
           }
         }
       ],
@@ -654,7 +666,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} is raiding with a party of {{count}}!"
+            "title": "{{name}} is raiding with a party of {{count}}",
+            "subtitle": "Hello there!",
+            "chat_message": "Welcome raiders! Thank you for the raid, {{name}}!"
           }
         }
       ],
@@ -690,7 +704,7 @@
           "type": "twitch",
           "parameters": [],
           "default": {
-            "chat_message": "Hype Train is starting! Get on board!"
+            "chat_message": "Choo Choo - the Hype Train started! Subs and cheers make you part of the Hype Train."
           }
         }
       ],
@@ -715,7 +729,7 @@
           "type": "twitch",
           "parameters": [],
           "default": {
-            "chat_message": "Shoutout to {{name}}! Check out their stream at {{url}}!"
+            "chat_message": "Shoutout to {{name}}! Check out their stream at {{url}}."
           }
         }
       ],
@@ -743,7 +757,7 @@
           "type": "twitch",
           "parameters": [],
           "default": {
-            "chat_message": "Just got a shoutout from {{name}}!"
+            "chat_message": "My channel received a shoutout from {{name}}, big thanks!"
           }
         }
       ],
@@ -768,8 +782,27 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": [],
-          "default": {}
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who redeemed the Reward",
+              "conditional": false
+            },
+            {
+              "name": "reward_title",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The title of the Reward",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} redeemed {{reward_title}}"
+          }
         }
       ],
       "examples": [
@@ -833,7 +866,9 @@
               "conditional": true
             }
           ],
-          "default": {}
+          "default": {
+            "chat_message": "{{name}} just sent a Super Chat for {{amount}}{{currency}}. Thanks for your support!"
+          }
         },
         {
           "type": "twitch",
@@ -908,7 +943,9 @@
               "conditional": true
             }
           ],
-          "default": {}
+          "default": {
+            "chat_message": "{{name}} just sent a Super Sticker for {{amount}}{{currency}}. Thanks for your support!"
+          }
         }
       ],
       "examples": [
@@ -970,7 +1007,11 @@
               "conditional": false
             }
           ],
-          "default": {}
+          "default": {
+            "title": "{{name}} tipped {{amount}}{{currency}}",
+            "subtitle": "Appreciate your donation!",
+            "chat_message": "Thanks for the donation and for supporting the channel, {{name}}!"
+          }
         }
       ],
       "examples": [
@@ -1081,7 +1122,11 @@
               "conditional": false
             }
           ],
-          "default": {}
+          "default": {
+            "title": "{{name}} donated {{amount_value}}{{amount_currency}} for {{charity_name}}",
+            "subtitle": "Thanks for the donation!",
+            "chat_message": "{{name}} just donated {{amount_value}}{{amount_currency}} for {{charity_name}}. Thanks for your contribution!"
+          }
         }
       ],
       "examples": [
