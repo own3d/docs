@@ -171,6 +171,10 @@ h1, h2, h3, h4, h5, h6 {
 
 
 html.dark {
+  body {
+    background-color: var(--c-bg) !important;
+  }
+
   // brand colors
   --c-brand: #ff9602;
   --c-brand-light: #ff9602;
