@@ -41,6 +41,8 @@ const token = jwt.sign({
 
 ## Read from the Remote Config Service
 
+### Read using the Extension Helper
+
 To read from the Remote Config, you can use the following code snippet:
 
 ```js
@@ -55,7 +57,36 @@ The `config` object contains the following properties:
 | `broadcaster` | `object` | The broadcaster segment of the Remote Config. |
 | `developer`   | `object` | The developer segment of the Remote Config.   |
 
+### Read using the Remote Config API
+
+To read from the Remote Config, you can use the following code snippet:
+
+```js
+const response = await fetch('https://ext.own3d.pro/v1/remote-configs/segments', {
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer <token>',
+        'Content-Type': 'application/json',
+    },
+})
+
+const config = await response.json()
+```
+
 ## Write to the Remote Config Service
+
+To write to the Remote Config, you can either use the [Extension Helper](extension-helper.md) or use the Remote Config API.
+However, writing to the `global` or `developer` segment is only possible using the Remote Config API.
+
+The API only accept objects as values. If you want to store a string, you need to wrap it in an object. Arrays will be
+stored as objects with numeric keys.
+
+We highly recommend to only write to specific keys of the Remote Config, instead of overwriting the whole segment. This
+will help to avoid conflicts with other services writing to the Remote Config.
+
+To empty a segment, you can send an empty object.
+
+### Write using the Extension Helper
 
 ::: warning
 Inside the Extension, you can only write to the `broadcaster` segment of the Remote Config. To write to the `global`
@@ -67,6 +98,23 @@ To write to the Remote Config, you can use the following code snippet:
 ```js
 await OWN3D.ext.config.setSegment('broadcaster', {
     foo: 'bar',
+})
+```
+
+### Write using the Remote Config API
+
+To write to the Remote Config, you can use the following code snippet:
+
+```js
+const response = await fetch('https://ext.own3d.pro/v1/remote-configs/segments', {
+    method: 'POST',
+    headers: {
+        'Authorization': 'Bearer <token>',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        broadcaster: {foo: "bar"}
+    }),
 })
 ```
 
