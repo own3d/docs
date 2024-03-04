@@ -75,9 +75,18 @@ If you haven't already, you need
 to [install the Deno runtime](https://docs.deno.com/runtime/manual/getting_started/installation)
 and the [OWN3D CLI](#) using the following command:
 
+**Install Deno on Windows:**
+
 ```bash
 irm https://deno.land/install.ps1 | iex
 ```
+
+**Install Deno on Linux:**
+
+```bash
+curl -fsSL https://deno.land/x/install/install.sh | sh
+```
+
 
 After installing Deno, you can install the OWN3D CLI using the following command:
 
