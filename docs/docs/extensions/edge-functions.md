@@ -84,7 +84,7 @@ irm https://deno.land/install.ps1 | iex
 **Install Deno on Linux:**
 
 ```bash
-curl -fsSL https://deno.land/x/install/install.sh | sh
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
 
