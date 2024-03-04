@@ -82,7 +82,7 @@ irm https://deno.land/install.ps1 | iex
 After installing Deno, you can install the OWN3D CLI using the following command:
 
 ```bash
-deno install -A --no-check -r -f https://deno.land/x/own3d/cli.ts
+deno install -A --no-check -r -f https://cli.own3d.dev/own3d.ts
 ```
 
 You can confirm `own3d` is installed by running the following command:
