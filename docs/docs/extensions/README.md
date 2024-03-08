@@ -35,12 +35,11 @@ configuration page to your extension details page allowing the streamer to confi
 
 Here is a list of all supported compatibilities:
 
-- **Scene Editor Widget Extension**: The `browser-source` compatibility allows the extension to be used as a Scene
-  Editor Widget.
-- **Standalone Extension**: The `standalone` compatibility allows the extension to be used as a Standalone App in the
-  OWN3D Pro Dashboard.
-- **Configuration Page**: The `config` compatibility allows you to add a configuration page to your extension details
-  page allowing the streamer to configure your extension.
+| ID | Name                          | Description                                                                                                                                         |
+|----|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2  | Standalone Extension          | The `browser-source` compatibility allows the extension to be used as a Scene Editor Widget.                                                        |
+| 4  | Scene Editor Widget Extension | The `standalone` compatibility allows the extension to be used as a Standalone App in the OWN3D Pro Dashboard.                                      |
+| 5  | Configuration Page            | The `config` compatibility allows you to add a configuration page to your extension details page allowing the streamer to configure your extension. |
 
 Other compatibilities are planned for the future.
 

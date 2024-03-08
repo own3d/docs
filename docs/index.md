@@ -12,7 +12,7 @@ features:
 - title: Chatbot Documentation
   details: The Chatbot documentation contains all the information you need to extend the OWN3D chatbot with your own commands and features.
 footer: Made with ❤ by StreamTV - Web illustration by Storyset
----__
+---
 
 <hr/>
 
