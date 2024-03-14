@@ -9,12 +9,11 @@ export const sidebarEn = {
                 '/docs/authorization.md',
                 '/docs/own3d-pro-api.md',
                 '/docs/own3d-tv-api.md',
-                '/docs/examples.md',
                 '/docs/developer-guidelines.md',
             ],
         },
         {
-            text: 'OWN3D App Extensions',
+            text: 'OWN3D Extensions',
             sidebarDepth: 2,
             collapsable: false,
             children: [
@@ -35,6 +34,7 @@ export const sidebarEn = {
                 '/docs/alerts/README.md',
                 '/docs/alerts/template-parameters.md',
                 '/docs/alerts/variations.md',
+                '/docs/alerts/examples.md',
             ],
         },
         {
