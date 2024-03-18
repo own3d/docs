@@ -1,5 +1,7 @@
 # Remote Config <Badge text="public beta" type="warning"/>
 
+![rsc.png](..%2F..%2Fimages%2Frsc.png)
+
 ## Introduction
 
 OWN3D's Remote Config Service is a very simple key-value store which can be used to store values like strings, numbers,
@@ -9,7 +11,7 @@ reload it.
 
 ::: warning
 **Do not store sensitive data in the Remote Config!** The Remote Config is not encrypted and can be accessed by anyone
-who interacts with the extension.
+who interacts with the extension. If you need to store sensitive data, we recommend using the [Key-Value Store](kv.md).
 :::
 
 ## Segments

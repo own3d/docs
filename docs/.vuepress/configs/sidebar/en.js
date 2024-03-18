@@ -21,6 +21,8 @@ export const sidebarEn = {
                 '/docs/extensions/extension-helper.md',
                 '/docs/extensions/tokens-and-client-tokens.md',
                 '/docs/extensions/remote-config.md',
+                '/docs/extensions/edge-functions.md',
+                '/docs/extensions/kv.md',
                 '/docs/extensions/syntax-for-forms.md',
                 '/docs/extensions/designing-extensions.md',
                 '/docs/extensions/guidelines-and-policies.md',
