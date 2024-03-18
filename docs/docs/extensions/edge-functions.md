@@ -1,6 +1,7 @@
 # Edge Functions <Badge text="closed beta" type="warning"/>
 
 ![regional-edge-functions.png](..%2F..%2Fimages%2Fregional-edge-functions.png)
+
 ## Introduction
 
 Edge Functions are a powerful way to extend the functionality of your extension. They allow you to run serverless
@@ -132,7 +133,7 @@ my-function
 ├── .gitignore
 ├── .own3d
 │   └── manifest.json
-└── server.ts
+└── index.ts
 ```
 
 ### Deploy the Edge Function
@@ -146,9 +147,16 @@ own3d fn:deploy my-function
 This will deploy the Edge Function and provide you with the URL where it is deployed.
 
 ```plaintext
-Deploying my-function...
+- Compressing my-function function...
+  updating: .own3d/ (stored 0%)
+  updating: .own3d/manifest.json (deflated 24%)
+  updating: index.ts (deflated 27%)
+✔ Function compressed
+- Deploying my-function function...
+✔ Deployment is live!
 
-Deployed my-function to https://my-function.fn.ext-own3d.tv/
+Website URL: my-function-xxxxxxxxxxxx.fn.ext-own3d.tv
+Website URL: my-function.fn.ext-own3d.tv
 ```
 
 Now, you can use the URL to trigger the Edge Function.
