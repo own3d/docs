@@ -53,128 +53,7 @@ inputs:
 - The `id` of the inputs must be an alphanumeric string with a length of 3-32 characters and may contain dashes and
   underscores.
 
-## Resource Field
-
-Additional `resource` options may be defined in the `options` array, like in the `dropdown` field. When using the
-`multiple` option, the value will be an array of selected values.
-
-```yaml
-  - type: resource
-    id: alert-set
-    attributes:
-      label: Alert Set
-      description: This is a description
-      value: 1337
-      multiple: false
-      resource:
-        resolver: fetch
-        endpoint: /v1/alerts-sets
-        map:
-          label: $.data[*].name
-          value: $.data[*].id
-    validations:
-      required: true
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "alert-set": "1337"
-  }
-}
-```
-
-### Input Field
-
-The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
-The `type` attribute can be used to define the type of input. The `type` attribute is optional and defaults to `text`.
-
-```yaml
-  - type: input
-    id: text
-    attributes:
-      label: Text
-      description: This is a description
-      value: Hello World
-      type: text
-    validations:
-      required: true
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "text": "Hello World"
-  }
-}
-```
-
-### Dropdown Field
-
-The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
-
-```yaml
-  - type: dropdown
-    id: dropdown
-    attributes:
-      label: Dropdown
-      value: 2
-    options:
-      - label: Option 1
-        value: 1
-      - label: Option 2
-        value: 2
-      - label: Option 3
-        value: 3
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "dropdown": "2"
-  }
-}
-```
-
-### Checkbox Field
-
-The `checkbox` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
-a array list of options which are checked using the `value` as their identifier.
-
-```yaml
-  - type: checkbox
-    id: checkbox
-    attributes:
-      label: Checkbox
-      description: This is a description
-    options:
-      - label: Option 1
-        value: option-1
-        checked: true
-        required: true
-      - label: Option 2
-        value: option-2
-        checked: false
-        required: false
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "checkbox": [
-      "option-1"
-    ]
-  }
-}
-```
+## Fields
 
 ### Boolean Field
 
@@ -196,106 +75,6 @@ Resulting `values`:
 {
   "values": {
     "random": true
-  }
-}
-```
-
-### Chips Field
-
-The `chips` field provides a set of chips that can be selected. It behaves exactly like a `dropdown` field, but with a
-different UI.
-
-```yaml
-  - type: chips
-    id: battery
-    attributes:
-      label: Battery
-      value: full
-    options:
-      - label: Full
-        value: full
-        icon: battery-full
-      - label: Half
-        value: half
-        icon: battery-half
-      - label: Empty
-        value: empty
-        icon: battery-empty
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "battery": "full"
-  }
-}
-```
-
-### Font Settings Field
-
-The `font-settings` field provides a multi input field for font settings. It provides a list of fonts that are available
-in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equivalent to Google Fonts).
-
-```yaml
-  - type: font-settings
-    id: font-settings
-    attributes:
-      label: Font Settings
-      value:
-        font-color: "#ffffff"
-        font-family: Inter
-        font-weight: 400
-        font-size: 14
-        text-align: left
-        font-style: normal
-        letter-spacing: 0
-        line-height: 1.2
-        text-indent: 0
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "font-settings": {
-      "font-color": "#ffffff",
-      "font-family": "Inter",
-      "font-weight": 400,
-      "font-size": 14,
-      "text-align": "left",
-      "font-style": "normal",
-      "letter-spacing": "normal",
-      "line-height": 1.2
-    }
-  }
-}
-```
-
-### Slider Field
-
-The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
-required.
-
-```yaml
-  - type: slider
-    id: age
-    attributes:
-      label: Age
-      value: 18
-      min: 13
-      max: 99
-      step: 1
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "age": 18
   }
 }
 ```
@@ -338,20 +117,51 @@ Resulting `values`:
 }
 ```
 
-### Tags Field
+### Button Field
 
-The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
-which may be included or excluded from a feature, for example.
+::: warning
+The `button` field is currently not supported in the scene editor.
+:::
+
+The `button` field allows you to create a button that can be used to trigger an action. It will emit an event through
+the extension IPC module when the button is clicked. There is no `value` for this field.
 
 ```yaml
-  - type: tags
-    id: ignored-users
+  - type: button
+    id: button
     attributes:
-      label: Ignored Users
-      description: The users that will be ignored
-      value:
-        - user1
-        - user2
+      label: Button
+      value: Click Me
+```
+
+Emitted event:
+
+```js
+OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
+    console.log('Got click event', payload)
+})
+```
+
+### Checkbox Field
+
+The `checkbox` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
+a array list of options which are checked using the `value` as their identifier.
+
+```yaml
+  - type: checkbox
+    id: checkbox
+    attributes:
+      label: Checkbox
+      description: This is a description
+    options:
+      - label: Option 1
+        value: option-1
+        checked: true
+        required: true
+      - label: Option 2
+        value: option-2
+        checked: false
+        required: false
 ```
 
 Resulting `values`:
@@ -359,10 +169,94 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "ignored-users": [
-      "user1",
-      "user2"
+    "checkbox": [
+      "option-1"
     ]
+  }
+}
+```
+
+### Chips Field
+
+The `chips` field provides a set of chips that can be selected. It behaves exactly like a `dropdown` field, but with a
+different UI.
+
+```yaml
+  - type: chips
+    id: battery
+    attributes:
+      label: Battery
+      value: full
+    options:
+      - label: Full
+        value: full
+        icon: battery-full
+      - label: Half
+        value: half
+        icon: battery-half
+      - label: Empty
+        value: empty
+        icon: battery-empty
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "battery": "full"
+  }
+}
+```
+
+### Color Field
+
+The `color` field provides a color picker that can be used to select a color. The `value` must be a valid hex color
+code. The hex code can be either 6 or 8 characters long. The 8 character hex code will be used for the alpha channel.
+
+```yaml
+  - type: color
+    id: color
+    attributes:
+      label: Color
+      value: "#ff0000"
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "color": "#ff0000"
+  }
+}
+```
+
+### Dropdown Field
+
+The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
+
+```yaml
+  - type: dropdown
+    id: dropdown
+    attributes:
+      label: Dropdown
+      value: 2
+    options:
+      - label: Option 1
+        value: 1
+      - label: Option 2
+        value: 2
+      - label: Option 3
+        value: 3
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "dropdown": "2"
   }
 }
 ```
@@ -411,6 +305,91 @@ When a file is uploaded using this field, OWN3D will store the file for you. The
 and will be available until the file is deleted. The `value` of the field will be the file id which can be used to
 retrieve the file using the [File Storage API](../file-storage.md).
 
+### Font Settings Field
+
+The `font-settings` field provides a multi input field for font settings. It provides a list of fonts that are available
+in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equivalent to Google Fonts).
+
+```yaml
+  - type: font-settings
+    id: font-settings
+    attributes:
+      label: Font Settings
+      value:
+        font-color: "#ffffff"
+        font-family: Inter
+        font-weight: 400
+        font-size: 14
+        text-align: left
+        font-style: normal
+        letter-spacing: 0
+        line-height: 1.2
+        text-indent: 0
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "font-settings": {
+      "font-color": "#ffffff",
+      "font-family": "Inter",
+      "font-weight": 400,
+      "font-size": 14,
+      "text-align": "left",
+      "font-style": "normal",
+      "letter-spacing": "normal",
+      "line-height": 1.2
+    }
+  }
+}
+```
+
+### Input Field
+
+The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
+The `type` attribute can be used to define the type of input. The `type` attribute is optional and defaults to `text`.
+
+```yaml
+  - type: input
+    id: text
+    attributes:
+      label: Text
+      description: This is a description
+      value: Hello World
+      type: text
+    validations:
+      required: true
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "text": "Hello World"
+  }
+}
+```
+
+### Link Field
+
+::: warning
+The `link` field is currently not supported in the scene editor.
+:::
+
+The `link` field allows you to create a link that can be used to navigate to a specific URL. It will open the link in a
+new tab. There is no `value` for this field.
+
+```yaml
+  - type: link
+    id: link
+    attributes:
+      label: Link
+      value: https://example.com
+```
+
 ### Platforms Field
 
 The `platforms` fields allows you to select a single or multiple streaming platform connection. It works like
@@ -453,46 +432,92 @@ Resulting `values`:
 }
 ```
 
-### Button Field
+### Resource Field
 
-::: warning
-The `button` field is currently not supported in the scene editor.
-:::
-
-The `button` field allows you to create a button that can be used to trigger an action. It will emit an event through
-the extension IPC module when the button is clicked. There is no `value` for this field.
+Additional `resource` options may be defined in the `options` array, like in the `dropdown` field. When using the
+`multiple` option, the value will be an array of selected values.
 
 ```yaml
-  - type: button
-    id: button
+  - type: resource
+    id: alert-set
     attributes:
-      label: Button
-      value: Click Me
+      label: Alert Set
+      description: This is a description
+      value: 1337
+      multiple: false
+      resource:
+        resolver: fetch
+        endpoint: /v1/alerts-sets
+        map:
+          label: $.data[*].name
+          value: $.data[*].id
+    validations:
+      required: true
 ```
 
-Emitted event:
+Resulting `values`:
 
-```js
-OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
-    console.log('Got click event', payload)
-})
+```json
+{
+  "values": {
+    "alert-set": "1337"
+  }
+}
 ```
 
-### Link Field
+### Slider Field
 
-::: warning
-The `link` field is currently not supported in the scene editor.
-:::
-
-The `link` field allows you to create a link that can be used to navigate to a specific URL. It will open the link in a
-new tab. There is no `value` for this field.
+The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
+required.
 
 ```yaml
-  - type: link
-    id: link
+  - type: slider
+    id: age
     attributes:
-      label: Link
-      value: https://example.com
+      label: Age
+      value: 18
+      min: 13
+      max: 99
+      step: 1
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "age": 18
+  }
+}
+```
+
+### Tags Field
+
+The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
+which may be included or excluded from a feature, for example.
+
+```yaml
+  - type: tags
+    id: ignored-users
+    attributes:
+      label: Ignored Users
+      description: The users that will be ignored
+      value:
+        - user1
+        - user2
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "ignored-users": [
+      "user1",
+      "user2"
+    ]
+  }
+}
 ```
 
 ## Conditional Fields
