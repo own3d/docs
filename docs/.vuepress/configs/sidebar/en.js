@@ -20,12 +20,21 @@ export const sidebarEn = {
                 '/docs/extensions/README.md',
                 '/docs/extensions/extension-helper.md',
                 '/docs/extensions/tokens-and-client-tokens.md',
+                '/docs/extensions/access-control.md',
+                '/docs/extensions/live-circle.md',
                 '/docs/extensions/remote-config.md',
-                '/docs/extensions/edge-functions.md',
                 '/docs/extensions/kv.md',
                 '/docs/extensions/syntax-for-forms.md',
                 '/docs/extensions/designing-extensions.md',
                 '/docs/extensions/guidelines-and-policies.md',
+            ],
+        },
+        {
+            text: 'OWN3D Edge Functions',
+            sidebarDepth: 2,
+            collapsable: false,
+            children: [
+                '/docs/edge-functions/README.md',
             ],
         },
         {

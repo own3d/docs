@@ -1,4 +1,4 @@
-# Edge Functions <Badge text="closed beta" type="warning"/>
+# Getting Started <Badge text="closed beta" type="warning"/>
 
 ![regional-edge-functions.png](..%2F..%2Fimages%2Fregional-edge-functions.png)
 

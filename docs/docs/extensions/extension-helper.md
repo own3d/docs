@@ -1,5 +1,15 @@
 # Extension Helper <Badge text="public beta" type="warning"/>
 
+This document describes the extension helper, a piece of software that runs within the extension iframe. It provides a
+set of functions to communicate with the extension supervisor.
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and
+"OPTIONAL" in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+
+## Table of Contents
+
+[[toc]]
+
 ## Terminology
 
 - **Extension**: A piece of software that can be installed on OWN3D to add functionality.
@@ -24,15 +34,17 @@ yarn add own3d/ext-types
 
 2. Add the extension helper script to your extension
 
-> This script must be added as the first script before any other scripts to pass the review.
+> This script MUST be added as the first script before any other scripts to pass the review.
 
 ```html
+
 <script src="https://extension-files.ext-own3d.tv/latest/own3d-ext.js"></script>
 ```
 
 3. Use the extension helper
 
 ```vue
+
 <script>
   console.log(`Running ${OWN3D.ext.version} on ${OWN3D.ext.environment}`)
 
@@ -64,6 +76,20 @@ Returns the version of the extension helper.
 
 Returns the environment of the extension helper. Possible values are `production` and `development`.
 
+#### `OWN3D.ext.context`
+
+The context superglobal provides information about the context in which the extension is running.
+
+This may change during the lifecycle of the extension. Any change to the context is communicated to the extension via
+the
+[`OWN3D.ext.onContext(callback)`](#own3d-ext-oncontext-callback) event.
+
+#### `OWN3D.ext.user`
+
+The user superglobal provides information about the user who interacts with the extension.
+
+See [`OWN3D.ext.onAuthorized(callback)`](#own3d-ext-onauthorized-callback) for a list of properties.
+
 #### `OWN3D.ext.onAuthorized(callback)`
 
 Registers a callback that is called when the extension is authorized.
@@ -85,6 +111,11 @@ The callback receives an object with the following properties:
 
 ##### Example
 
+::: warning
+You MUST register this callback only once. By registering this callback, the helper will wait for the extension to be
+authorized before executing the callback. On any subsequent authorization, the callback will be called again.
+:::
+
 ```js
 OWN3D.ext.onAuthorized((data) => {
     console.log('onAuthorized', data)
@@ -100,6 +131,12 @@ Registers a callback that is called when the context is updated.
 - `callback` - A function that is called when the context is updated.
 
 ##### Example
+
+::: warning
+The context provided in the callback parameters MAY be partial and only contain the changed keys. To get a full context,
+you should use the `OWN3D.ext.context` superglobal. This callback MAY not be called for the initial context, so you
+should always use the `OWN3D.ext.context` superglobal for the initial context.
+:::
 
 ```js
 OWN3D.ext.onContext((context, changed) => {
@@ -229,7 +266,7 @@ The socket module is an event emitter. It provides a set of functions, so you ca
 
 ```js
 OWN3D.ext.socket.on('remote-config', (data) => {
-  console.log('Config changed', data)
+    console.log('Config changed', data)
 })
 ```
 
@@ -332,6 +369,7 @@ The `OWN3D.ext.features` module is currently not supported in the public beta.
 The feature-flag namespace provides information about the current global feature flags.
 
 #### `OWN3D.ext.features.isEnabled(feature: string)` <Badge text="closed beta" type="warning"/>
+
 Returns whether the current feature flag is enabled.
 
 ##### Parameters

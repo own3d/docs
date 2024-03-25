@@ -47,8 +47,8 @@ Other compatibilities are planned for the future.
 
 ## Create your first Extension
 
-You can create your own extensions
-using our [Developer Console](https://console.dev.own3d.tv).
+The following guide will help you to create your first extension, test it, and publish it to the public. You can create
+your own extensions using our [Developer Console](https://console.dev.own3d.tv).
 
 ![extension example](../../images/extensions-example.png)
 
@@ -62,7 +62,70 @@ Clone our example extension from [GitHub](https://github.com/own3d/extension-boi
 
 The entrypoint of the extension is the `index.html` file.
 
-### Step 2: Upload it to our CDN
+### Step 2: Create a new extension
+
+To create a new extension, you need to log in to the [developer portal](https://console.dev.own3d.tv/) and create a new
+extension.
+
+![chrome_fgxfMmgjoX.png](..%2F..%2Fimages%2Fchrome_fgxfMmgjoX.png)
+
+After filling out and submitting the form, OWN3D will create a new **Extension** & **Extension Version** (1.0.0) for
+you. This Extension Version will be in the [Local Test](live-circle.md) state by default.
+
+### Step 3: Add Internal Testers
+
+Within your **Extension Version**, you can add up to 10 internal testers to your extension. These testers can be added
+using the [Access Control](access-control.md) settings. You can add them by their ID or username.
+
+![chrome_fyhW4WftdM.png](..%2F..%2Fimages%2Fchrome_fyhW4WftdM.png)
+
+### Step 4: Define your Compatibilities & Test your Extension
+
+Still in your **Extension Version**, you can define the compatibilities of your extension. You can add multiple
+compatibilities to your extension, like `browser-source` or `standalone`. **Without this step, your will not be able to
+locate your extension in the OWN3D Pro Dashboard or Scene Editor.**
+
+Inside your compatibility settings you can define the following:
+
+- **Path**: The relative path to your extension's entrypoint (e.g. `index.html`).
+
+::: tip
+Because our CDN serves your extension files inside a version subdirectory  
+(e.g. [https://extension-id.ext-own3d.tv/1.0.0/index.html](https://www.youtube.com/watch?v=dQw4w9WgXcQ)), you will need
+to set your base path in your Vite, React or Vue configuration to be relative to `./` before building your extension.
+
+For Vite, this would look like this:
+
+```js
+// https://vitejs.dev/config/
+export default defineConfig({
+    base: './', // or explicit /1.0.0/ (depending on your version)
+    plugins: [vue()],
+})
+```
+:::
+
+For Scene Editor Widgets, you can define additional settings:
+
+- **Sizing**: The initial dimension and position of your widget (e.g. `300x300`).
+- **[Forms](syntax-for-forms.md)**: The form fields of your widget (e.g. `input`, `color`, `font-settings`).
+
+After defining your compatibilities, you will find **Internal Test URL's** for your extension. You can use these URL's
+to test your extension in the OWN3D Pro Dashboard.
+
+![chrome_VIMFd8NdYA.png](..%2F..%2Fimages%2Fchrome_VIMFd8NdYA.png)
+
+::: warning
+To test any widget extension, simply open our Scene Builder and add your extension as a new widget found in the
+**Extensions (Invite Only)** tab. You need to be a member of the internal testers to see your extension there.
+
+**Widgets added to your Scene Builder via this tab will be locked to the selected version and will not be updated
+automatically, even if you publish a new version!**
+
+![chrome_LjZ8dXDy6Q.png](..%2F..%2Fimages%2Fchrome_LjZ8dXDy6Q.png)
+:::
+
+### Step 5: Upload it to our CDN
 
 ::: tip
 You don't need to upload your extension to our CDN during development. You can use a local webserver with HTTPS
@@ -76,96 +139,31 @@ the [developer portal](https://console.dev.own3d.tv/).
 Within the developer portal, you can customize your extension's settings, such as the name, description, as well
 as the hosting endpoints for the widget, dashboard, and configuration page.
 
-### Step 3: Review and publish it
+### Step 6: Review and publish it
 
 After pushing your extension in a hosted-test state, you can use it in your OWN3D Pro dashboard. There you can test all
 the features of your extension. If you want to publish your extension to the public, you need to submit your extension
 for a code and feature review.
 
-## Release Circle
+## Debugging
 
-Each extension version goes through a release circle. The release circle is a process that ensures that each extension
-version is reviewed and tested before it is published to the public. For now, you can only publish one version of your
-extension at a time. Each new release will deprecate the previous version.
+### Development Tools & Feature Flags
 
-> During **Local Test** & **Hosted Test** you can select to **up to 10 [Internal Tester](#access-control) accounts** (by
-> ID or username) to make your app available for internal testing releases.
-
-### Local Test
-
-Each version begins with the local test state. In this state, you can test your extension locally without uploading it
-to our CDN. You can use a local webserver with HTTPS support to test your extension.
-
-### Hosted Test
-
-In the hosted test state, your extension is hosted on our CDN. In this state, you can test your extension how it will
-behave in the production environment and make sure that everything works as expected before submitting it for a code
-and feature review.
-
-### In Review
-
-In the review state, your extension is reviewed by our team. We check if your extension follows our guidelines and
-works as expected. If your extension is rejected, you can fix the issues and resubmit it for a review.
-
-### Rejected
-
-If your extension is rejected, you can fix the issues and resubmit it for a review. You must move your extension back
-to the local test state before you can resubmit it for a second review.
-
-### Approved
-
-If your extension is approved, you can publish it to the public.
-
-### Published
-
-If your extension is published, it is available to all or selected OWN3D users depending on
-your [Content Creator Allowlist](#access-control) settings.
-
-### Deprecated
-
-If you publish a new version of your extension, the previous version will be deprecated.
-You can roll back/restore a deprecated version of your extension at any time but not later than 30 days after the
-deprecation.
-
-## Access Control
-
-::: tip
-Extensions are currently only available to selected users. We are working on making extensions available to all OWN3D
-users in the next few months.
+::: danger
+**This tool is really for debugging purposes only!** It is not recommended to use it in a production environment, as
+some features may break or not work as expected.
 :::
 
-You can control who has access to your extension. This applies both to extensions in development and to released
-extensions that are available in our [App Discovery](designing-extensions.md#app-discovery-guidelines).
+To enable the values' inspector, call the following method in your browser console:
 
-In general, extensions are available to all OWN3D users. However, you can restrict access to your extension by using
-the Content Creator Allowlist.
+```text
+localStorage.setItem('devtools', true)
+Press: Ctrl+Shift+F
+```
 
-To install allow-listed extensions, users must visit the "**Invite Only**" section of the App Discovery page, where they
-can find and install extensions that are not available to the general public:
+![chrome_0BBIbwuEUP.png](..%2F..%2Fimages%2Fchrome_0BBIbwuEUP.png)
 
-![chrome_8zJyvF2Fg8.png](..%2F..%2Fimages%2Fchrome_8zJyvF2Fg8.png)
+Then enable the **Show Values Inspector** feature flag in the developer console. This will show you the values of the
+form fields of any widget inside the Scene Builder.
 
-There are three different types of access control for your extension available:
-
-### Public Access
-
-When not using the Content Creator Allowlist, your extension is available to all OWN3D users.
-
-### Content Creator Allowlist
-
-When using the Content Creator Allowlist, you can add up to 100 accounts to the Content Creator Allowlist (by ID
-or username) to make your extension available for specific content creators.
-
-Each extension version has its own Content Creator Allowlist.
-
-By copying an extension version, the Content Creator Allowlist will be copied too.
-
-### Internal Testers
-
-During **Local Test** & **Hosted Test** you can select to up to 10 accounts to the Internal Tester list (by
-ID or username) to make your app available for internal testing releases. These accounts will not included in the
-Content Creator Allowlist, and will lose access to the app when it is published.
-
-Each extension version has its own Internal Tester list.
-
-By copying an extension version, the Internal Tester list will be copied too.
+![chrome_8bGtvNauVp.png](..%2F..%2Fimages%2Fchrome_8bGtvNauVp.png)
