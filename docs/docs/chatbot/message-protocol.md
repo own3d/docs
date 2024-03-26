@@ -64,6 +64,7 @@ socket.on("delete-message", (data: TBD) => {
     ]
   },
   "channel": {
+    "id": "1", // own3d id
     "platform_id": "4321",
     "username": "OWN3D",
     "avatar_url": "https://api.own3d.pro/v1/resolvers/avatars/{platform}/{platform_id}"
