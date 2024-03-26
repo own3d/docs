@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-7a5684e0","path":"/docs/chatbot/giveaways.html","title":"Giveaways","lang":"en-US","frontmatter":{},"headers":[],"git":{},"filePathRelative":"docs/chatbot/giveaways.md"}');export{a as data};
