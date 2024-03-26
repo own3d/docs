@@ -4,7 +4,7 @@ Custom commands allow you to create your own commands. The Custom Command system
 
 ## Custom Commands
 
-![Create a OWN3D Pro Command](../../images/create-a-command.png)
+![Create a OWN3D Pro Command](../../images/chrome_0dw2TFUmEj.png)
 
 To create your first custom command, go to the OWN3D Pro Dashboard. There you click on Commands.
  

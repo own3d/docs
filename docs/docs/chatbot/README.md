@@ -4,7 +4,7 @@
 
 ### When does the bot enter my chat?
 
-Then chatbot is programmed to always stay in your chat. Unless your revoke the OWN3D Pro connection in Twitch.
+The EventSub-based chatbot is configured to stay in your chat whenever you log into OWN3D Pro. Unless you disconnect from OWN3D Pro in Twitch.
 
 ### Does the chatbot have an API?
 

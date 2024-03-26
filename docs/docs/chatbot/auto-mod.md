@@ -6,7 +6,7 @@ Make moderation easier with an machine learning assisted tool that helps fight h
 With /mod OWN3D you can give our Chatbot all necessary rights. Read [here](README.md#why-our-chatbot-need-s-a-moderator-role) why we need Mod.
 :::
 
-![Moderation Settings](../../images/chrome_FlkC059qKA.png)
+![Moderation Settings](../../images/chrome_UoUPu8ewtT.png)
 
 ## Scan every message for toxicity
 

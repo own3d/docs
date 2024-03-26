@@ -2,6 +2,10 @@
 
 Each command has a context, which describes where the command was called and which command it is.
 
+::: warning
+This is tested on Twitch and may not work on other platforms.
+:::
+
 ## Command
 
 | Field                   | Type   | Description                                                               |
@@ -21,17 +25,16 @@ Each command has a context, which describes where the command was called and whi
 
 ## Arguments
 
-| Field | Type   | Description                                                               |
-|-------|--------|---------------------------------------------------------------------------|
-| args  | array  | List of all arguments including base command.                             |
+| Field | Type  | Description                                   |
+|-------|-------|-----------------------------------------------|
+| args  | array | List of all arguments including base command. |
 
 ## IRC
 
-| Field       | Type   | Description                                                                                                                                                                    |
-|-------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| irc.tags    | mixed  | Twitch IRC user state object. Please checkout [`USERSTATE` (Twitch Tags)](https://dev.twitch.tv/docs/irc/tags#userstate-twitch-tags) for more information about existing tags. |
-| irc.channel | string | Raw channel username.                                                                                                                                                          |
-| irc.message | string | Raw message.                                                                                                                                                                   |
+| Field       | Type   | Description           |
+|-------------|--------|-----------------------|
+| irc.channel | string | Raw channel username. |
+| irc.message | string | Raw message.          |
 
 ## Object Reference
 
