@@ -1,4 +1,4 @@
-# Scene Editor Scene Specification
+# Scene Builder Scene Specification
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",  "MAY", and "
 OPTIONAL" in this document are to be interpreted as described in
@@ -6,7 +6,7 @@ OPTIONAL" in this document are to be interpreted as described in
 
 ## Abstract
 
-This documentation outlines the attributes and their descriptions for a Scene in the Scene Editor API response.
+This documentation outlines the attributes and their descriptions for a Scene in the Scene Builder API response.
 
 ## Restrictions
 
