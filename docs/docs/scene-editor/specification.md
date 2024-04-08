@@ -259,44 +259,48 @@ Each source contains the following attributes:
 ### Example (Text Source):
 
 ```json
-"9ba47936-9df4-4ce0-a87a-7218782f0a78": {
-"name": "text-Vyp",
-"type": "text",
-"version": 1,
-"size": {
-"width": 856.1171228516869,
-"height": 137.3838319541693
-},
-"values": {
-"text": "Upcoming Next",
-"font-settings": {
-...
-}
-}
+{
+  "9ba47936-9df4-4ce0-a87a-7218782f0a78": {
+    "name": "text-Vyp",
+    "type": "text",
+    "version": 1,
+    "size": {
+      "width": 856.1171228516869,
+      "height": 137.3838319541693
+    },
+    "values": {
+      "text": "Upcoming Next",
+      "font-settings": {
+        ...
+      }
+    }
+  }
 }
 ```
 
 ### Example (Extension Source):
 
 ```json
-"9ba5dac8-8ad6-4aea-b04d-bd4c872d4c2a": {
-"name": "extension-8AY",
-"type": "extension",
-"version": 1,
-"size": {
-"width": 1459.18196832799,
-"height": 727.2954140883276
-},
-"values": {
-"days": {...},
-"color": "#ff0000",
-"server": "http://45.146.252.122:4001/",
-"extension": {...},
-"day-of-week": "tuesday",
-"interactive": false,
-"font-settings": {...
-}
-}
+{
+  "9ba5dac8-8ad6-4aea-b04d-bd4c872d4c2a": {
+    "name": "extension-8AY",
+    "type": "extension",
+    "version": 1,
+    "size": {
+      "width": 1459.18196832799,
+      "height": 727.2954140883276
+    },
+    "values": {
+      "days": {...},
+      "color": "#ff0000",
+      "server": "http://45.146.252.122:4001/",
+      "extension": {...},
+      "day-of-week": "tuesday",
+      "interactive": false,
+      "font-settings": {...
+      }
+    }
+  }
 }
 ```
 
