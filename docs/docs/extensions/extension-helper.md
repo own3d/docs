@@ -291,6 +291,14 @@ communicate with each other via the ipc module.
 - Extensions cannot access cookies or local storage of the OWN3D platform.
 - Extensions cannot access the user session of the OWN3D platform without the user's consent.
 
+**Channels**
+
+Here is a list of channels that are available:
+
+- `obs:scene-changed`: Gets callbacks when the scene changes in OBS
+- `obs:source-visible-changed`: Gets callbacks when the visibility of the browser source changes in OBS
+- `obs:source-active-changed`: Gets callbacks when the active/inactive state of the browser source changes in OBS
+
 #### `OWN3D.ext.ipc.send(channel, payload)`
 
 Sends a message to the supervisor.
