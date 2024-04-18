@@ -293,11 +293,20 @@ communicate with each other via the ipc module.
 
 **Channels**
 
-Here is a list of channels that are available:
+Here is a list of channels that are available (OBS -> Browser Source Widget)
 
 - `obs:scene-changed`: Gets callbacks when the scene changes in OBS
 - `obs:source-visible-changed`: Gets callbacks when the visibility of the browser source changes in OBS
 - `obs:source-active-changed`: Gets callbacks when the active/inactive state of the browser source changes in OBS
+
+Some internal channels are also available (ONW3D Pro -> Alerts Engine):
+
+- `browser-source:ping`: Pings the browser source
+- `browser-source:queue-activity`: Queues an activity (activity: object)
+- `browser-source:update-config`: Updates the configuration (config: object)
+- `browser-source:interrupt-activity`: Interrupts an activity
+- `browser-source:loop-activity`: Loops an activity (loop: boolean)
+- `browser-source:preview-mode`: Sets the preview mode (preview: boolean)
 
 #### `OWN3D.ext.ipc.send(channel, payload)`
 
