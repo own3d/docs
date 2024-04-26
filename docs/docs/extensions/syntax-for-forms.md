@@ -232,6 +232,18 @@ Resulting `values`:
 }
 ```
 
+### Divider Field
+The `divider` field provides a static horizontal divider between other input fields.
+
+![divider.png](../../images/input_divider.png)
+
+```yaml
+  - type: divider
+    id: divider_1
+    attributes:
+      label: My Divider
+```
+
 ### Dropdown Field
 
 The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
