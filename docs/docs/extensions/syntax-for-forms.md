@@ -232,6 +232,15 @@ Resulting `values`:
 }
 ```
 
+### Divider
+
+The `divider` field displays a horizontal line and provides no other functionaliy.
+```yaml
+  - type: divider
+    id: divider
+```
+
+
 ### Dropdown Field
 
 The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
@@ -395,6 +404,7 @@ new tab. There is no `value` for this field.
 The `platforms` fields allows you to select a single or multiple streaming platform connection. It works like
 the `checkbox` field, but with a different UI, and it will automatically fetch the available platforms from
 the Connections API and pass them to the extension context. The `value` will be an array of selected platforms.
+`options` can be omitted. The selectable values will be the intersection of `options` (if given) and the platforms that are connected to the user account, including the `"own3d"` platform.
 
 ```yaml
   - type: platforms
@@ -402,6 +412,7 @@ the Connections API and pass them to the extension context. The `value` will be 
     options:
       - value: twitch
       - value: youtube
+      - value: own3d
     attributes:
       label: Platforms
       multiple: false
