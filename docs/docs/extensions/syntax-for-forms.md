@@ -538,7 +538,7 @@ Resulting `values`:
 ### Select Field
 
 The `select` field allow you to create a select input. We offer three different styles: `select`, `chips` and 
-`dropdown`. You can select multiple values by setting the `multiselect` attribute to `true`. If you add `group` to 
+`dropdown`. You can select multiple values by setting the `multiple` attribute to `true`. If you add `group` to 
 the options and having style `select`, the options will be grouped by the group name.
 
 ```yaml
@@ -548,7 +548,7 @@ the options and having style `select`, the options will be grouped by the group 
       label: Select a style
       description: Choose a style
       style: select # select, chips, dropdown
-      multiselect: true
+      multiple: true
       value:
         - option-1
         - option-3
