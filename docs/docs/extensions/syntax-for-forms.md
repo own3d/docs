@@ -562,11 +562,11 @@ If you choose `select` as style, you can also define the number of columns to di
       - label: Option 1
         group: Modern styles
         value: option-1
-        media: https://example.com/image.mp3
+        media: https://example.com/image.png
       - label: Option 3
         group: Flat styles
         value: option-3
-        media: https://example.com/image.mp3
+        media: https://example.com/image.png
 ```
 
 Resulting `values`:
