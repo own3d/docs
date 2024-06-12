@@ -38,6 +38,16 @@ export const sidebarEn = {
             ],
         },
         {
+            text: 'OWN3D NotifySub',
+            sidebarDepth: 1,
+            collapsable: false,
+            children: [
+                '/docs/notify-sub/README.md',
+                '/docs/notify-sub/sub-unsub.md',
+                '/docs/notify-sub/event-types.md',
+            ],
+        },
+        {
             text: 'OWN3D Alerts',
             sidebarDepth: 1,
             collapsable: false,
