@@ -382,15 +382,7 @@ The `group` field can be used to visually combine other fields into a group.
     - ...
 ```
 
-The field does not store any values.
-
-```json
-{
-  "values": {
-    "my-group": undefined
-  }
-}
-```
+The field does not save any `values` and is not available in the widget.
 
 
 ### Input Field
