@@ -177,6 +177,8 @@ Resulting `values`:
 ```
 
 ### Chips Field
+#### Deprecation warning
+> This field is deprecated starting on 15.05.2024. Please use the [select](#select-field) field with style `chip`.
 
 The `chips` field provides a set of chips that can be selected. It behaves exactly like a `dropdown` field, but with a
 different UI.
@@ -242,6 +244,8 @@ The `divider` field displays a horizontal line and provides no other functionali
 
 
 ### Dropdown Field
+#### Deprecation warning
+> This field is deprecated starting on 15.05.2024. Please use the [select](#select-field) field with style `dropdown`.
 
 The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
 
@@ -564,6 +568,53 @@ Resulting `values`:
     "ignored-users": [
       "user1",
       "user2"
+    ]
+  }
+}
+```
+
+### Select Field
+
+The `select` field allow you to create a select input. We offer three different styles: `select`, `chips` and 
+`dropdown`. You can select multiple values by setting the `multiple` attribute to `true`. If you add `group` to 
+the options and having style `select`, the options will be grouped by the group name.
+If you choose `select` as style, you can also define the number of columns to display the options in the select dropout.
+
+```yaml
+  - type: select
+    id: style
+    attributes:
+      label: Select a style
+      description: Choose a style
+      style: select # select, chips, dropdown
+      columns: 1 # 1-2 (default 1)
+      multiple: true
+      value:
+        - option-1
+        - option-3
+    options:
+      - label: Option 1
+        group: Modern styles
+        value: option-1
+        media: https://example.com/image.png
+      - label: Option 1
+        group: Modern styles
+        value: option-1
+        media: https://example.com/image.png
+      - label: Option 3
+        group: Flat styles
+        value: option-3
+        media: https://example.com/image.png
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "style": [
+      "option-1",
+      "option-3"
     ]
   }
 }
