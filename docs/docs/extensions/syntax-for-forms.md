@@ -355,6 +355,44 @@ Resulting `values`:
 }
 ```
 
+### Group Field
+The `group` field can be used to visually combine other fields into a group.
+
+```yaml
+  - type: group
+    id: my-group
+    attributes:
+      label: My Group
+    fields:
+    - type: boolean
+      id: random
+      attributes:
+        label: Random
+        description: This is a description
+        value: true
+    - type: input
+      id: text
+      attributes:
+        label: Text
+        description: This is a description
+        value: Hello World
+        type: text
+      validations:
+        required: true
+    - ...
+```
+
+The field does not store any values.
+
+```json
+{
+  "values": {
+    "my-group": undefined
+  }
+}
+```
+
+
 ### Input Field
 
 The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
