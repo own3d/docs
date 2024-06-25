@@ -13,6 +13,7 @@ These are the native inputs:
 
 - **Title**
 - **Transform**
+- **Shadow**
 - **Filters** (only available for images and videos)
 - **Opacity**
 
