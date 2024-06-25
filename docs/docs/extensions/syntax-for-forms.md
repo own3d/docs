@@ -55,6 +55,35 @@ inputs:
 
 ## Fields
 
+### Accordion Field
+The `accordion` field can be used to group any number of other fields.
+
+```yaml
+  - type: accordion
+    id: my-accordion
+    attributes:
+      label: My Accordion
+    fields:
+    - type: boolean
+      id: random
+      attributes:
+        label: Random
+        description: This is a description
+        value: true
+    - type: input
+      id: text
+      attributes:
+        label: Text
+        description: This is a description
+        value: Hello World
+        type: text
+      validations:
+        required: true
+    - ...
+```
+
+The field does not store any values.
+
 ### Boolean Field
 
 The `boolean` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
@@ -383,14 +412,6 @@ The `group` field can be used to visually combine other fields into a group.
 ```
 
 The field does not store any values.
-
-```json
-{
-  "values": {
-    "my-group": undefined
-  }
-}
-```
 
 
 ### Input Field
