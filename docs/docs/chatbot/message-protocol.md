@@ -69,12 +69,13 @@ socket.on("delete-message", (data: TBD) => {
     "username": "OWN3D",
     "avatar_url": "https://api.own3d.pro/v1/resolvers/avatars/{platform}/{platform_id}"
   },
-  "message": "Hello @World! KEKW! Kappa",
+  "message": "Hello @World! KEKW! Kappa Cheer17",
   "fragments": [
     { "type": "text", "text": "Hello " },
-    { "type": "mention", "text": "@World", "id": "42" },
+    { "type": "mention", "text": "@World" },
     { "type": "text", "text": "! KEKW! " },
-    { "type": "emote", "text": "Kappa", "id": "123" }
+    { "type": "emote", "text": "ExtraLife", "data": { "platform": "twitch", "platform_id": "302426269", "emote_set_id": "0" } },
+    { "type": "cheermote", "text": "Cheer17", "data": { "platform": "twitch", "platform_id": "cheer", "bits": 17, "tier": 1 } }
   ],
   "parent": {
     "id": "9b1aef5e-b16a-4c7a-916e-309b7d581e67",
