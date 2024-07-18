@@ -38,7 +38,7 @@ Also, other services like Discord, Twitter, and Instagram.
   "type": "platform_authorization_revoked",
   "data": {
     "user_id": "example_user_id",
-    "platform_id": "xxxx",
+    "platform_id": "example_platform_id",
     "platform": "twitch"
   }
 }
