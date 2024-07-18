@@ -29,9 +29,8 @@ The payload sent to the webhook URL will be in one of the following formats:
 ### Platform Authorization Revoked
 
 This payload is sent when a user revokes authorization for a specific platform.
-
-Platforms include Streaming services like Twitch, YouTube, and Facebook Gaming.
-Also, other services like Discord, Twitter, and Instagram.
+Platforms include Streaming services like Twitch and YouTube.
+Also, other services like Discord, TikTok and Facebook.
 
 ```json
 {
