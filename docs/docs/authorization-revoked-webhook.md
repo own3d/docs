@@ -1,4 +1,4 @@
-# OWN3D Authorization Revoked Webhook Documentation
+# Authorization Revoked Webhook
 
 ## Introduction
 
