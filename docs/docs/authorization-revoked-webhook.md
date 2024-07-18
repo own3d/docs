@@ -37,6 +37,7 @@ Also, other services like Discord, TikTok and Facebook.
   "type": "platform_authorization_revoked",
   "data": {
     "user_id": "example_user_id",
+    "client_id": "example_client_id",
     "platform_id": "example_platform_id",
     "platform": "twitch"
   }
