@@ -90,3 +90,9 @@ socket.on("delete-message", (data: TBD) => {
 }
 ```
 <!-- @formatter:on -->
+
+## Known Issues
+
+- The `cheermote` fragment may or may not keep the `bits` and `tier` attributes. This is due to the fact that the `bits` and `tier` attributes are not available for all platforms.
+- The `emote` fragment may or may not keep the `emote_set_id` attribute. This is due to the fact that the `emote_set_id` attribute is not available for all platforms.
+- The `mention` fragment may or may not contain the `id` attribute.
