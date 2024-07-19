@@ -37,11 +37,9 @@ Also, other services like Discord, TikTok and Facebook.
   "type": "platform_authorization_revoked",
   "data": {
     "user_id": "example_user_id",
-    "client_id": "example_client_id",
     "platform_id": "example_platform_id",
     "platform": "twitch",
-    "initiated_by": "user"
-    // or "platform"
+    "initiated_by": "user" // or "platform"
   }
 }
 ```
@@ -64,6 +62,21 @@ If OWN3D ID is your only OAuth client, you can use this event to delete the user
   "data": {
     "user_id": "example_user_id",
     "client_id": "example_client_id"
+  }
+}
+```
+
+### Platform Linked
+
+This payload is sent when a user links a platform to their account.
+
+```json
+{
+  "type": "platform_linked",
+  "data": {
+    "user_id": "example_user_id",
+    "platform_id": "example_platform_id",
+    "platform": "twitch"
   }
 }
 ```
