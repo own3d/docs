@@ -1,10 +1,10 @@
-# Authorization Revoked Webhook
+# ID Service Webhooks
 
 ## Introduction
 
-The OWN3D Authorization Revoked Webhook notifies your application when a user revokes authorization for a platform or
-their entire account. This documentation provides a detailed guide on how developers can implement the webhook and
-validate the timestamp and signature using PHP without any framework.
+The ID Service Webhooks notifies your application when a user revokes authorization for a platform or their entire
+account on OWN3D ID or when a user changes their personal information and preferences. This documentation provides a
+detailed guide on how developers can implement the webhook and validate the timestamp and signature using example code.
 
 ## Table of Contents
 
@@ -39,10 +39,18 @@ Also, other services like Discord, TikTok and Facebook.
     "user_id": "example_user_id",
     "client_id": "example_client_id",
     "platform_id": "example_platform_id",
-    "platform": "twitch"
+    "platform": "twitch",
+    "initiated_by": "user"
+    // or "platform"
   }
 }
 ```
+
+The `initiated_by` Field: This field clearly indicates who initiated the revocation, allowing your system to handle the
+revocation appropriately. If the value is `platform`, it suggests that the platform might have forced the disconnection
+due to password changes, technical issues, or other reasons, and you might want to consider temporary acknowledgment.
+If the value is `user`, it means the user has manually revoked the authorization, which might indicate a potential
+account deletion or a change in user preference.
 
 ### Account Authorization Revoked
 
@@ -56,6 +64,40 @@ If OWN3D ID is your only OAuth client, you can use this event to delete the user
   "data": {
     "user_id": "example_user_id",
     "client_id": "example_client_id"
+  }
+}
+```
+
+### Personal Information Updated
+
+This payload is sent when a user updates their personal information like name and email.
+
+```json
+{
+  "type": "personal_information_updated",
+  "data": {
+    "user_id": "example_user_id",
+    "user": { // contains values that have been updated
+      "name": "OWN3D_QA1",
+      "email": "developers@example.com"
+    }
+  }
+}
+```
+
+### Preferences Updated
+
+This payload is sent when a user updates their preferences.
+
+```json
+{
+  "type": "preferences_updated",
+  "data": {
+    "user_id": "example_user_id",
+    "preferences": { // contains kv values that have been updated
+      "foo": "bar",
+      "marketing_emails": false
+    }
   }
 }
 ```
