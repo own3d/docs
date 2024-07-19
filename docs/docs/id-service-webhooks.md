@@ -26,6 +26,28 @@ HTTP POST request to the configured webhook URL with the relevant payload.
 
 The payload sent to the webhook URL will be in one of the following formats:
 
+### Account Migration
+
+This payload is sent when a user migrates their account to a new platform.
+
+- This event implies a `platform_authorization_revoked` event for the old user id.
+
+```json
+{
+  "type": "account_migration",
+  "data": {
+    "old_user_id": "example_old_user_id",
+    "new_user_id": "example_new_user_id",
+    "connections": [
+      {
+        "platform_id": "example_platform_id",
+        "platform": "twitch"
+      }
+    ]
+  }
+}
+```
+
 ### Platform Authorization Revoked
 
 This payload is sent when a user revokes authorization for a specific platform.
@@ -39,7 +61,7 @@ Also, other services like Discord, TikTok and Facebook.
     "user_id": "example_user_id",
     "platform_id": "example_platform_id",
     "platform": "twitch",
-    "initiated_by": "user" // or "platform"
+    "initiated_by": "user" // platform
   }
 }
 ```
