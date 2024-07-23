@@ -6,10 +6,20 @@ export const sidebarEn = {
             collapsable: false,
             children: [
                 '/docs/README.md',
-                '/docs/authorization.md',
                 '/docs/own3d-pro-api.md',
                 '/docs/own3d-tv-api.md',
                 '/docs/developer-guidelines.md',
+            ],
+        },
+        {
+            text: 'OWN3D ID',
+            sidebarDepth: 2,
+            collapsable: false,
+            children: [
+                '/docs/authorization.md',
+                '/docs/id/webhooks.md',
+                '/docs/id/reference.md',
+                '/docs/id/account-migration.md',
             ],
         },
         {
