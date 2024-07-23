@@ -122,7 +122,7 @@ Currently, this webhook is triggered for the following changes: `name`, `email`,
 }
 ```
 
-### Preferences Updated
+### Preferences Updated <Badge text="WIP" type="warning"/>
 
 This payload is sent when a user updates their preferences.
 
