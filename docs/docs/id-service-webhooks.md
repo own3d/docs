@@ -36,12 +36,12 @@ This payload is sent when a user migrates their account to a new platform.
 {
   "type": "account_migration",
   "data": {
-    "old_user_id": "example_old_user_id",
-    "new_user_id": "example_new_user_id",
+    "old_user_id": 1337,
+    "new_user_id": 1338,
     "connections": [
       {
-        "platform_id": "example_platform_id",
-        "platform": "twitch"
+        "platform": "twitch",
+        "platform_id": "example_platform_id"
       }
     ]
   }
@@ -58,7 +58,7 @@ If OWN3D ID is your only OAuth client, you can use this event to delete the user
 {
   "type": "account_authorization_revoked",
   "data": {
-    "user_id": "example_user_id",
+    "user_id": 1337,
     "client_id": "example_client_id"
   }
 }
@@ -74,9 +74,9 @@ Also, other services like Discord, TikTok and Facebook.
 {
   "type": "platform_authorization_revoked",
   "data": {
-    "user_id": "example_user_id",
-    "platform_id": "example_platform_id",
+    "user_id": 1337,
     "platform": "twitch",
+    "platform_id": "example_platform_id",
     "initiated_by": "user" // platform
   }
 }
@@ -96,9 +96,9 @@ This payload is sent when a user links a platform to their account.
 {
   "type": "platform_linked",
   "data": {
-    "user_id": "example_user_id",
-    "platform_id": "example_platform_id",
-    "platform": "twitch"
+    "user_id": 1337,
+    "platform": "twitch",
+    "platform_id": "example_platform_id"
   }
 }
 ```
@@ -107,11 +107,13 @@ This payload is sent when a user links a platform to their account.
 
 This payload is sent when a user updates their personal information like name and email.
 
+Currently, this webhook is triggered for the following changes: `name`, `email`, `permissions`.
+
 ```json
 {
   "type": "personal_information_updated",
   "data": {
-    "user_id": "example_user_id",
+    "user_id": 1337,
     "user": { // contains values that have been updated
       "name": "OWN3D_QA1",
       "email": "developers@example.com"
@@ -128,7 +130,7 @@ This payload is sent when a user updates their preferences.
 {
   "type": "preferences_updated",
   "data": {
-    "user_id": "example_user_id",
+    "user_id": 1337,
     "preferences": { // contains kv values that have been updated
       "foo": "bar",
       "marketing_emails": false
