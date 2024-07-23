@@ -48,6 +48,22 @@ This payload is sent when a user migrates their account to a new platform.
 }
 ```
 
+### Account Authorization Revoked
+
+This payload is sent when a user revokes authorization for their entire account.
+
+If OWN3D ID is your only OAuth client, you can use this event to delete the user's data from your system.
+
+```json
+{
+  "type": "account_authorization_revoked",
+  "data": {
+    "user_id": "example_user_id",
+    "client_id": "example_client_id"
+  }
+}
+```
+
 ### Platform Authorization Revoked
 
 This payload is sent when a user revokes authorization for a specific platform.
@@ -71,22 +87,6 @@ revocation appropriately. If the value is `platform`, it suggests that the platf
 due to password changes, technical issues, or other reasons, and you might want to consider temporary acknowledgment.
 If the value is `user`, it means the user has manually revoked the authorization, which might indicate a potential
 account deletion or a change in user preference.
-
-### Account Authorization Revoked
-
-This payload is sent when a user revokes authorization for their entire account.
-
-If OWN3D ID is your only OAuth client, you can use this event to delete the user's data from your system.
-
-```json
-{
-  "type": "account_authorization_revoked",
-  "data": {
-    "user_id": "example_user_id",
-    "client_id": "example_client_id"
-  }
-}
-```
 
 ### Platform Linked
 
