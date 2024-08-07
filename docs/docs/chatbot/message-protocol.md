@@ -41,6 +41,15 @@ socket.on("clear-chat", (data: TBD) => {
 socket.on("delete-message", (data: TBD) => {
     // TODO handle clear chat
 });
+
+socket.on("ingress-event", (e: {type: string, data: any}) => {
+  // TODO handle ingress event
+  
+  // example event: "heartbeat"
+  if (e.type === "heartbeat") {
+    console.log("Received heartbeat event", e.data)
+  }
+});
 ```
 
 ## Message Reference
