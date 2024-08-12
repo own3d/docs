@@ -23,7 +23,7 @@
             }
           ],
           "default": {
-            "title": "{{name}} is now following" ,
+            "title": "{{name}} is now following",
             "subtitle": "Welcome to the community!",
             "chat_message": "Thank you for the follow, {{name}}."
           }
@@ -41,7 +41,9 @@
             }
           ],
           "default": {
-            "title": "{{name}} is now following!"
+            "title": "{{name}} is now a subscriber!",
+            "subtitle": "Welcome to the community!",
+            "chat_message": "Thank you for the subscription, {{name}}."
           }
         }
       ],
@@ -139,9 +141,8 @@
             }
           ],
           "default": {
-            "title": "{{name}} just subscribed",
-            "subtitle": "Hello there!",
-            "chat_message": "{{name}} just subscribed to my channel. Welcome to the community!"
+            "title": "{{name}} just became a member",
+            "chat_message": "{{name}} just became a member on my channel. Thanks for your support!"
           }
         }
       ],
@@ -313,7 +314,7 @@
           ],
           "default": {
             "title": "{{name}} is a member for the {{months}}. month",
-            "subtitle": "Thanks a million!",
+            "subtitle": "{{message}}",
             "chat_message": "Your continued membership greatly supports this channel - thank you, {{name}}!"
           }
         }
@@ -702,9 +703,19 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "level",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The level of the hype train",
+              "conditional": true
+            }
+          ],
           "default": {
-            "chat_message": "Choo Choo - the Hype Train started! Subs and cheers make you part of the Hype Train."
+            "title": "Hype Train Level {{level}}",
+            "chat_message": "Choo Choo - the Hype Train started on level {{level}}! Subs and cheers make you part of the Hype Train."
           }
         }
       ],
@@ -727,8 +738,26 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who was shout out",
+              "conditional": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "default": "",
+              "example": "https://twitch.tv/someone",
+              "description": "The url of the user who was shout out",
+              "conditional": false
+            }
+          ],
           "default": {
+            "title": "Shoutout to {{name}}",
             "chat_message": "Shoutout to {{name}}! Check out their stream at {{url}}."
           }
         }
@@ -755,8 +784,26 @@
       "platforms": [
         {
           "type": "twitch",
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who sent the shout out",
+              "conditional": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "default": "",
+              "example": "https://twitch.tv/someone",
+              "description": "The url of the user who sent the shout out",
+              "conditional": false
+            }
+          ],
           "default": {
+            "title": "Shoutout from {{name}}",
             "chat_message": "My channel received a shoutout from {{name}}, big thanks!"
           }
         }
@@ -792,12 +839,28 @@
               "conditional": false
             },
             {
+              "name": "user_input",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The input the user gave on the reward",
+              "conditional": false
+            },
+            {
               "name": "reward_title",
               "type": "string",
               "default": "",
               "example": "Someone",
               "description": "The title of the Reward",
               "conditional": true
+            },
+            {
+              "name": "reward_cost",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The cost of the reward",
+              "conditional": false
             }
           ],
           "default": {
@@ -853,8 +916,8 @@
               "name": "amount",
               "type": "number",
               "default": 0,
-              "example": 1000000,
-              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000",
+              "example": 100,
+              "description": "The purchase amount, eg 10.50",
               "conditional": true
             },
             {
@@ -867,13 +930,10 @@
             }
           ],
           "default": {
+            "title": "New super chat from {{name}}",
+            "subtitle": "{{message}}",
             "chat_message": "{{name}} just sent a Super Chat for {{amount}}{{currency}}. Thanks for your support!"
           }
-        },
-        {
-          "type": "twitch",
-          "parameters": [],
-          "default": {}
         }
       ],
       "examples": [
@@ -944,6 +1004,7 @@
             }
           ],
           "default": {
+            "title": "Super sticker from {{name}}",
             "chat_message": "{{name}} just sent a Super Sticker for {{amount}}{{currency}}. Thanks for your support!"
           }
         }
@@ -1098,34 +1159,26 @@
               "conditional": false
             },
             {
-              "name": "amount_value",
+              "name": "amount",
               "type": "number",
               "default": 0,
-              "example": 10000,
+              "example": 100,
               "description": "The value of the donation",
               "conditional": true
             },
             {
-              "name": "amount_currency",
+              "name": "currency",
               "type": "string",
               "default": "USD",
               "example": "USD",
               "description": "The currency of the donation",
               "conditional": true
-            },
-            {
-              "name": "amount_decimal_places",
-              "type": "number",
-              "default": 2,
-              "example": 2,
-              "description": "The number of decimal places of the donation",
-              "conditional": false
             }
           ],
           "default": {
-            "title": "{{name}} donated {{amount_value}}{{amount_currency}} for {{charity_name}}",
+            "title": "{{name}} donated {{amount}}{{currency}} for {{charity_name}}",
             "subtitle": "Thanks for the donation!",
-            "chat_message": "{{name}} just donated {{amount_value}}{{amount_currency}} for {{charity_name}}. Thanks for your contribution!"
+            "chat_message": "{{name}} just donated {{amount}}{{currency}} for {{charity_name}}. Thanks for your contribution!"
           }
         }
       ],
