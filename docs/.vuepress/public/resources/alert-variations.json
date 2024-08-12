@@ -176,7 +176,7 @@
           "platform": "youtube",
           "parameters": {
             "name": "Someone",
-            "tier": "Ehrenmann/frau"
+            "tier": "Club Member"
           }
         }
       ]
@@ -382,7 +382,7 @@
           "platform": "youtube",
           "parameters": {
             "name": "Someone",
-            "tier": "Ehrenmann/frau",
+            "tier": "Club Member",
             "months": 1,
             "message": "Love the stream! FevziGG"
           }
@@ -536,7 +536,7 @@
           "platform": "youtube",
           "parameters": {
             "gifter": "Someone",
-            "tier": "Ehrenmann/frau",
+            "tier": "Club Member",
             "amount": 1
           }
         }
@@ -723,7 +723,9 @@
         {
           "name": "Default",
           "platform": "twitch",
-          "parameters": {}
+          "parameters": {
+            "level": 3
+          }
         }
       ]
     },
@@ -768,7 +770,7 @@
           "platform": "twitch",
           "parameters": {
             "name": "Someone",
-            "url": "twitch.tv/someone"
+            "url": "https://twitch.tv/someone"
           }
         }
       ]
@@ -813,7 +815,8 @@
           "name": "Default",
           "platform": "twitch",
           "parameters": {
-            "name": "Someone"
+            "name": "Someone",
+            "url": "https://twitch.tv/someone"
           }
         }
       ]
@@ -872,7 +875,23 @@
         {
           "name": "Default",
           "platform": "twitch",
-          "parameters": {}
+          "parameters": {
+            "id": "bfe0ec8a-8e98-4285-b88c-3074da72cc6f",
+            "name": "Someone",
+            "message": "User input",
+            "status": "fulfilled",
+            "user_id": "123456789",
+            "user_login": "someone",
+            "user_input": "User input",
+            "user_name": "Someone",
+            "broadcaster_id": "987654321",
+            "broadcaster_login": "broadcaster",
+            "broadcaster_name": "Broadcaster",
+            "reward_id": "8c39c3e5-9d62-4799-80e4-f392e5cacd97",
+            "reward_title": "Reward",
+            "reward_cost": 1000,
+            "reward_prompt": "Prompt"
+          }
         }
       ]
     },
@@ -944,7 +963,7 @@
             "name": "Someone",
             "message": "Love the stream! FevziGG",
             "tier": "???",
-            "amount": 1000000,
+            "amount": 10,
             "currency": "USD"
           }
         }
@@ -1017,7 +1036,7 @@
             "name": "Someone",
             "sticker": "???",
             "tier": "???",
-            "amount": 1000000,
+            "amount": 10,
             "currency": "USD"
           }
         }
@@ -1184,7 +1203,7 @@
       ],
       "examples": [
         {
-          "name": "Default",
+          "name": "$10",
           "platform": "twitch",
           "parameters": {
             "campaign_id": "123-abc-456-def",
@@ -1193,9 +1212,22 @@
             "charity_description": "Example Charity Description",
             "charity_website": "https://example.com",
             "charity_logo": "https://example.com/logo.png",
-            "amount_value": 10000,
-            "amount_currency": "USD",
-            "amount_decimal_places": 2
+            "amount": 10.0,
+            "currency": "USD"
+          }
+        },
+        {
+          "name": "$50",
+          "platform": "twitch",
+          "parameters": {
+            "campaign_id": "123-abc-456-def",
+            "name": "Someone",
+            "charity_name": "Example Charity",
+            "charity_description": "Example Charity Description",
+            "charity_website": "https://example.com",
+            "charity_logo": "https://example.com/logo.png",
+            "amount": 50.0,
+            "currency": "USD"
           }
         }
       ]
