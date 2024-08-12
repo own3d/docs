@@ -714,6 +714,7 @@
             }
           ],
           "default": {
+            "title": "Hype Train Level {{level}}",
             "chat_message": "Choo Choo - the Hype Train started on level {{level}}! Subs and cheers make you part of the Hype Train."
           }
         }
