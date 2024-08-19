@@ -3,16 +3,18 @@
 ## Introduction
 
 NotifySub is the central event and notification system for OWN3D Pro. It handles emitted events from platforms like
-Twitch and YouTube and distributes them into relevant services. Sending custom events with arbitrary event data is
-also supported. This Guide will help you get started with subscribing to NotifySub and receiving events to your
+Twitch, YouTube and OWN3D, and distributes them into relevant services. Sending custom events with arbitrary event data
+is also supported. This Guide will help you get started with subscribing to NotifySub and receiving events to your
 application.
 
 ## Terminology
 
 ### Event Type
 
-When an event occurs, it has a certain event type. Usually they are derived from similar events from broadcasting
-platforms, like follows on Twitch or subscriptions on YouTube.
+When an event occurs, it has a certain event type. Event types in NotifySub are named based on commonly recognized terms
+like "follow" and "subscribe," aligning with how these actions are typically interpreted across various platforms. While
+some platforms (like YouTube) use "subscribe" in a non-monetary sense, NotifySub follows the broader industry standard
+where "subscribe" often indicates a paid action (like a membership).
 
 ### Notification
 
