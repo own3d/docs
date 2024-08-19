@@ -28,7 +28,7 @@ export const sidebarEn = {
             collapsable: false,
             children: [
                 '/docs/extensions/README.md',
-                '/docs/extensions/extension-helper.md',
+                '/docs/extensions/sdk.md',
                 '/docs/extensions/tokens-and-client-tokens.md',
                 '/docs/extensions/access-control.md',
                 '/docs/extensions/live-circle.md',
