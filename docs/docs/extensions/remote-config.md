@@ -176,8 +176,8 @@ This feature is only available for selected partnered developers.
 connected with your OWN3D Extension. Furthermore, you MUST use the **Extension Configuration Service** Capability.
 
 Twitch Extensions, using the Remote Config API requires different headers. To write to the Remote Config as a Twitch
-Extension, you need to use the `X-Segment-Version` header which must be set to the **Developer Writable Channel Segment
-Version** of the extension.
+Extension, you need to use the `X-Twitch-Segment-Version` header which must be set to the **Developer Writable Channel
+Segment Version** of the extension.
 
 Furthermore, you need to use the `Authorization` header with the value `Twitch <token>`. The token is the Twitch JWT
 token which is provided by the Twitch Extension Helper.
@@ -188,7 +188,7 @@ To write to the Remote Config as a Twitch Extension, you can use the following c
 const response = await fetch('https://ext.own3d.pro/v1/remote-configs/segments', {
     method: 'POST',
     headers: {
-        'X-Segment-Version': '1',
+        'X-Twitch-Segment-Version': '1',
         'Authorization': 'Twitch <token>',
         'Content-Type': 'application/json',
     },
