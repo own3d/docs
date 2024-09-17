@@ -28,7 +28,7 @@ the extension.
 
 ## Generate a JWT token
 
-To write to the Remote Config, you can either use the [Extension Helper](extension-helper.md) or generate a JWT token
+To write to the Remote Config, you can either use the [Extension SDK](sdk.md) or generate a JWT token
 manually. To generate a JWT token manually, you can use the following code snippet:
 
 ```js
@@ -48,7 +48,14 @@ const token = jwt.sign({
 To read from the Remote Config, you can use the following code snippet:
 
 ```js
-const config = await OWN3D.ext.config.getSegments()
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useRemoteConfig } from '@own3d/sdk/remote-config'
+
+const extension = initializeExtension()
+
+const { getSegments } = useRemoteConfig(extension)
+
+const config = await getSegments()
 ```
 
 The `config` object contains the following properties:
@@ -77,7 +84,8 @@ const config = await response.json()
 
 ## Write to the Remote Config Service
 
-To write to the Remote Config, you can either use the [Extension Helper](extension-helper.md) or use the Remote Config API.
+To write to the Remote Config, you can either use the [Extension Helper](extension-helper.md) or use the Remote Config
+API.
 However, writing to the `global` or `developer` segment is only possible using the Remote Config API.
 
 The API only accept objects as values. If you want to store a string, you need to wrap it in an object. Arrays will be
@@ -98,7 +106,14 @@ or `developer` segment, you need to use the Remote Config API.
 To write to the Remote Config, you can use the following code snippet:
 
 ```js
-await OWN3D.ext.config.setSegment('broadcaster', {
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useRemoteConfig } from '@own3d/sdk/remote-config'
+
+const extension = initializeExtension()
+
+const { setSegment } = useRemoteConfig(extension)
+
+await setSegment('broadcaster', {
     foo: 'bar',
 })
 ```
@@ -115,7 +130,7 @@ const response = await fetch('https://ext.own3d.pro/v1/remote-configs/segments',
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-        broadcaster: {foo: "bar"}
+        broadcaster: { foo: "bar" }
     }),
 })
 ```
@@ -126,10 +141,17 @@ To listen to Remote Config changes, you can use the following code snippet, but 
 config changes from all extensions installed by the content creator:
 
 ```js
-OWN3D.ext.socket.on('remote-config', (data) => {
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useSocket } from '@own3d/sdk/socket'
+
+const extension = initializeExtension()
+
+const { on } = useSocket(extension)
+
+on('remote-config', (data) => {
     // Only handle changes from your extension
     if (data.extension_id !== 'your_extension_id') return
-    
+
     console.log('Config changed', data)
 })
 ```
@@ -141,3 +163,92 @@ OWN3D.ext.socket.on('remote-config', (data) => {
 | `segments`     | `object` | The segments of the Remote Config that have changed.                  |
 | `extension_id` | `string` | The extension id of the extension that has changed the Remote Config. |
 | `channel_id`   | `string` | The channel id of the channel where the extension is installed.       |
+
+## Using the Remote Config in Twitch Extension
+
+::: warning
+This feature is only available for selected partnered developers.
+:::
+
+### Write using the Remote Config API (as Twitch Extension)
+
+**Prerequisite**: To be able to write to the Remote Config as a Twitch Extension, you need to have your Twitch Extension
+connected with your OWN3D Extension. Furthermore, you MUST use the **Extension Configuration Service** Capability.
+
+Twitch Extensions, using the Remote Config API requires different headers. To write to the Remote Config as a Twitch
+Extension, you need to use the `X-Segment-Version` header which must be set to the **Developer Writable Channel Segment
+Version** of the extension.
+
+Furthermore, you need to use the `Authorization` header with the value `Twitch <token>`. The token is the Twitch JWT
+token which is provided by the Twitch Extension Helper.
+
+To write to the Remote Config as a Twitch Extension, you can use the following code snippet:
+
+```js
+const response = await fetch('https://ext.own3d.pro/v1/remote-configs/segments', {
+    method: 'POST',
+    headers: {
+        'X-Segment-Version': '1',
+        'Authorization': 'Twitch <token>',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        broadcaster: { foo: "bar" }
+    }),
+})
+```
+
+### Get Remote Config changes via Twitch PubSub
+
+When using PubSub, we will send a message to the extension when the Remote Config changes. The message will have the
+following format:
+
+```json
+{
+  "event": "remote-config-updated",
+  "data": {
+    "links": {
+      "self": "https://cdn.example.com/remote-configs/..."
+    }
+  }
+}
+```
+
+A sample code snippet to handle this message is as follows:
+
+```ts
+Twitch.ext.listen('broadcast', async (_, __, message) => {
+    const payload = JSON.parse(message as string)
+    if (payload.event === 'remote-config-updated') {
+        const {data} = await axios.get(payload.data.links.self);
+
+        // handle config changes
+    }
+})
+```
+
+### Get Remote Config changes via Twitch Configuration
+
+When using the Twitch Configuration Service, we will store the remote config in the developer configuration. The
+developer configuration will have the following format:
+
+```json
+{
+  "links": {
+    "self": "https://cdn.example.com/remote-configs/..."
+  }
+}
+```
+
+A sample code snippet to handle this message is as follows:
+
+```ts
+Twitch.ext.configuration.onChanged(async () => {
+    if (Twitch.ext.configuration.developer) {
+        let payload = JSON.parse(Twitch.ext.configuration.developer.content);
+        const {data} = await axios.get(payload.links.self);
+
+        // handle config
+    }
+})
+```
