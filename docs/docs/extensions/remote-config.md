@@ -36,7 +36,7 @@ const token = jwt.sign({
     exp: Math.floor(Date.now() / 1000) + (60 * 60),
     client_id: 'your_extension_id',
     channel_id: '1', // required when writing to the developer or broadcaster segment
-    mode: 'external',
+    role: 'external',
     scopes: ['*'],
 }, 'your_jwt_secret')
 ```
