@@ -182,6 +182,8 @@ Segment Version** of the extension.
 Furthermore, you need to use the `Authorization` header with the value `Twitch <token>`. The token is the Twitch JWT
 token which is provided by the Twitch Extension Helper.
 
+Lastly, you need to use the `Client-Id` header, which must be set to the **Client ID** of the OWN3D extension.
+
 To write to the Remote Config as a Twitch Extension, you can use the following code snippet:
 
 ```js
@@ -189,6 +191,7 @@ const response = await fetch('https://ext.own3d.pro/v1/remote-configs/segments',
     method: 'POST',
     headers: {
         'X-Twitch-Segment-Version': '1',
+        'Client-Id': '1',
         'Authorization': 'Twitch <token>',
         'Content-Type': 'application/json',
     },
