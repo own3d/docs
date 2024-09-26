@@ -67,41 +67,11 @@ app.listen(80, () => {
 
 ## Getting Started
 
-Getting started with OWN3D Edge Functions is easy. The installation process is simple and you can start writing and
-deploying your Edge Functions in minutes using our CLI tool.
+Getting started with OWN3D Edge Functions is easy. The installation process is simple, and you can start writing and
+deploying your Edge Functions in minutes using our [CLI tool](../cli/).
 
-## Install Deno and the OWN3D CLI
-
-If you haven't already, you need
-to [install the Deno runtime](https://docs.deno.com/runtime/manual/getting_started/installation)
-and the [OWN3D CLI](#) using the following command:
-
-**Install Deno on Windows:**
-
-```bash
-irm https://deno.land/install.ps1 | iex
-```
-
-**Install Deno on Linux:**
-
-```bash
-curl -fsSL https://deno.land/install.sh | sh
-```
-
-
-After installing Deno, you can install the OWN3D CLI using the following command:
-
-```bash
-deno install -Arf https://cli.own3d.dev
-```
-
-You can confirm `own3d` is installed by running the following command:
-
-```bash
-own3d --help
-```
-
-Now, you can create a new Edge Function using the OWN3D CLI.
+If you haven't already our CLI tool, you can follow the instructions in
+the [CLI installation guide](../cli/README.md#install-deno-and-the-own3d-cli).
 
 ## Write and test a Deno program
 
