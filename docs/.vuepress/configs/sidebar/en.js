@@ -33,7 +33,6 @@ export const sidebarEn = {
                 '/docs/extensions/access-control.md',
                 '/docs/extensions/live-circle.md',
                 '/docs/extensions/remote-config.md',
-                '/docs/extensions/kv.md',
                 '/docs/extensions/syntax-for-forms.md',
                 '/docs/extensions/designing-extensions.md',
                 '/docs/extensions/guidelines-and-policies.md',
