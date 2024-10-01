@@ -40,11 +40,12 @@ export const sidebarEn = {
             ],
         },
         {
-            text: 'OWN3D Edge Functions',
+            text: 'OWN3D Cloud',
             sidebarDepth: 2,
             collapsable: false,
             children: [
-                '/docs/edge-functions/README.md',
+                '/docs/cloud/edge-functions.md',
+                '/docs/cloud/kv.md',
             ],
         },
         {

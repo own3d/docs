@@ -1,4 +1,4 @@
-# Getting Started <Badge text="closed beta" type="warning"/>
+# Edge Functions <Badge text="closed beta" type="warning"/>
 
 ![regional-edge-functions.png](..%2F..%2Fimages%2Fregional-edge-functions.png)
 
@@ -19,6 +19,26 @@ you to Deno.
 
 ### Use Cases
 
+### Store and Retrieve Data from the Key-Value Store
+
+Edge Functions can be used to store and retrieve data from the Key-Value Store. This is useful when you want to store
+small amounts of data, such as settings, preferences, and other small pieces of data.
+
+To learn more about the Key-Value Store, see the [Key-Value Store](../cloud/kv.md) documentation.
+
+```typescript
+import { connect } from '@gz/kv';
+
+const kv = await connect();
+
+const user = {
+    name: 'John Doe',
+    email: 'john@example.com'
+};
+
+kv.set(['user', '1'], user);
+```
+
 #### User Authentication
 
 Edge Functions can be used to authenticate and authorize requests to your extension. This is especially useful when you
@@ -27,6 +47,8 @@ want to protect your extension from unauthorized access.
 ::: tip
 You can use JavaScript modules from npm in your Deno programs with the "**npm:**" specifier in your import statements.
 :::
+
+![postman client](../../images/Postman_Exh1yNav6L.png)
 
 ```js
 import jwt from 'npm:jsonwebtoken';
@@ -87,7 +109,33 @@ You can run the program using the following command:
 deno run --allow-net server.ts
 ```
 
-## Create a New Edge Function
+## Deploy Functions using the Developer Console
+
+### Create a New Edge Function
+
+To create a new Edge Function, start by accessing the Developer Console and navigating to
+the [Edge Functions](https://console.dev.own3d.tv/resources/edge-functions) section. Click on the "Create Edge Function"
+button, which will open a new form for entering your function details.
+
+![create edge function](../../images/chrome_bWPHXYUvq5.png)
+
+First, you’ll need to provide a name for your Edge Function. This name will be part of the URL where the function is
+deployed; for example, if you name it "my-function," it will be accessible at `my-function.fn.ext-own3d.tv`. By default,
+we will generate a unique URL for your function, but you can also specify a custom URL if you prefer.
+Additionally, you can specify any environment variables that will be available to your Edge Function.
+
+## Deploy Functions using the OWN3D CLI
+
+::: warning
+The CLI tool is currently in closed beta. We recommend using the Developer Console to create and deploy Edge Functions
+until the CLI tool is available to the public.
+:::
+
+Creating and deploying Edge Functions using the OWN3D CLI allows you to create more complex Edge Functions with multiple
+files and dependencies. The CLI tool provides a simple way to create, deploy, and manage your Edge Functions without the
+need to use the Developer Console.
+
+### Create a New Edge Function
 
 To create a new Edge Function, you can use the `fn:create` command from the OWN3D CLI. This will create a new directory
 with a basic Edge Function template.

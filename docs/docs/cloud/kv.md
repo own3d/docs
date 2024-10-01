@@ -7,6 +7,10 @@
 OWN3D's Key-Value Store is a very simple NoSQL databases that allows you to store and retrieve data. It is designed to
 be used for small amounts of data, such as settings, preferences, and other small pieces of data.
 
+It also features client-side encryption, which means that the data is encrypted before it is sent to the server. The
+server only sees the encrypted data and cannot decrypt it. The encryption key is stored on the client-side and is never
+sent to the server.
+
 Values can be up to 16 KB in size. The free tier has a limit of 10,000 operations per month and a maximum storage of 10
 MB. Verified Developers can request a higher limit.
 
@@ -15,19 +19,46 @@ The Key-Value Store is for backend use only. It is not designed to be used in th
 recommend using the [Remote Config Service](remote-config.md) or combining the Key-Value Store with your own backend.
 :::
 
+## Installation
+
+> We recommend using at least version **0.2.0-rc.2** or higher of the key-value store client. You can find the latest
+> version on the [JSR](https://jsr.io/@gz/kv/versions) website. Versions below **0.2.0** are not compatible with
+> environment variables and client-side encryption.
+
+To install the key-value store client, run the following command:
+
+```bash
+# deno
+deno add jsr:@gz/kv
+
+# npm (use any of npx, yarn dlx, pnpm dlx, or bunx)
+npx jsr add @gz/kv
+```
+
 ## Opening the Key-Value Store
 
 Every Key-Value Store has a unique Access Token and is used to access the Key-Value Store. **You should keep it secret
 and never expose it in your frontend code.**
 
-```javascript
-const {connect} = "https://esm.sh/gh/own3d/kv@main";
+```typescript
+import { connect } from "@gz/kv";
 
-const kv = connect({
+const kv = await connect({
+    bucket: '9d1cb4c7-c683-4fa9-bc5f-13f5ad1ba745',
     accessToken: '9b9634a1-1655-4baf-bdf5-c04feffc68bd',
     region: 'eu-central-1'
 });
 ```
+
+::: tip
+You can use environment variables to configure the key-value store. The key-value store client will automatically use
+the [environment variables](https://jsr.io/@gz/kv@0.2.0-rc.2) if they are set.
+
+```typescript
+const kv = await connect();
+```
+
+:::
 
 ## Creating a User interface
 
@@ -84,7 +115,7 @@ transaction. If any of the operations fail, the entire transaction is rolled bac
 const key = ['users', '1'];
 const value: User = {name: 'GhostZero', email: 'example@example.com'};
 
-const res = kv.atomic()
+const res = await kv.atomic()
     .check({key, version: null /* or a version */})
     .set(key, value)
     .commit();
