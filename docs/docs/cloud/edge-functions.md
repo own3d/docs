@@ -27,16 +27,15 @@ small amounts of data, such as settings, preferences, and other small pieces of 
 To learn more about the Key-Value Store, see the [Key-Value Store](../cloud/kv.md) documentation.
 
 ```typescript
-import { connect } from '@gz/kv';
+import { connect } from 'jsr:@gz/kv';
 
 const kv = await connect();
 
-const user = {
+kv.set(['user', '1'], {
+    id: '1',
     name: 'John Doe',
     email: 'john@example.com'
-};
-
-kv.set(['user', '1'], user);
+});
 ```
 
 #### User Authentication
