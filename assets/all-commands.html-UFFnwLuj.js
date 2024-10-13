@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-496ab3ea","path":"/docs/chatbot/all-commands.html","title":"All Commands","lang":"en-US","frontmatter":{},"headers":[{"level":3,"title":"General Commands","slug":"general-commands","link":"#general-commands","children":[]}],"git":{},"filePathRelative":"docs/chatbot/all-commands.md"}');export{a as data};
