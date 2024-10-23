@@ -65,22 +65,22 @@ The `accordion` field can be used to group any number of other fields.
     attributes:
       label: My Accordion
     fields:
-    - type: boolean
-      id: random
-      attributes:
-        label: Random
-        description: This is a description
-        value: true
-    - type: input
-      id: text
-      attributes:
-        label: Text
-        description: This is a description
-        value: Hello World
-        type: text
-      validations:
-        required: true
-    - ...
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
 ```
 
 The field does not store any values.
@@ -262,6 +262,7 @@ Resulting `values`:
 }
 ```
 
+<!--
 ### Divider
 
 The `divider` field displays a horizontal line and provides no other functionaliy.
@@ -269,6 +270,7 @@ The `divider` field displays a horizontal line and provides no other functionali
   - type: divider
     id: divider
 ```
+-->
 
 
 ### Dropdown Field
@@ -394,22 +396,22 @@ The `group` field can be used to visually combine other fields into a group.
     attributes:
       label: My Group
     fields:
-    - type: boolean
-      id: random
-      attributes:
-        label: Random
-        description: This is a description
-        value: true
-    - type: input
-      id: text
-      attributes:
-        label: Text
-        description: This is a description
-        value: Hello World
-        type: text
-      validations:
-        required: true
-    - ...
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
 ```
 
 The field does not store any values.
@@ -536,6 +538,34 @@ Resulting `values`:
 }
 ```
 
+### Search Field
+The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
+Searched ancestor fields: `label`, `description`, `title`, `value`
+
+```yaml
+  - type: search
+    id: my-search
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
 ### Slider Field
 
 The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
@@ -560,6 +590,38 @@ Resulting `values`:
     "age": 18
   }
 }
+```
+
+### Tabs Field
+The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the top level field.
+the optional `templates` field in a tab specified the pre-selected tab when the user selects templates in the configuration menu.
+
+```yaml
+  - type: tabs
+    id: my-tabs
+    tabs:
+      - label: Tab1
+        fields:
+          - type: boolean
+            id: random
+            attributes:
+              label: Random
+              description: This is a description
+              value: true
+          - ...
+      - label: Tab2
+        templates: true
+        fields:
+          - type: input
+            id: text
+            attributes:
+              label: Text
+              description: This is a description
+              value: Hello World
+              type: text
+            validations:
+              required: true
+          - ...
 ```
 
 ### Tags Field
