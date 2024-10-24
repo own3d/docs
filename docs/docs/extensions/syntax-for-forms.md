@@ -653,6 +653,33 @@ Resulting `values`:
 }
 ```
 
+### Volume Field
+
+The `volume` field includes a sound icon (including muted state), a slider and a display of the current volume in percent.
+The percentage display is only visual, the value is saved as a decimal number between 0-1 (in 0.01 steps).
+
+::: warning
+Please note that sound playback without user interaction on the Browser-source only works in the OWN3D Desktop-Client and OBS.
+:::
+
+```yaml
+  - type: volume
+    id: my-volume
+    attributes:
+      label: Volume
+      value: 0
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "my-volume": 0.4
+  }
+}
+```
+
 ## Conditional Fields
 
 ::: tip
