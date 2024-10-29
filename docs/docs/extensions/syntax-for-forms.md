@@ -566,6 +566,38 @@ Searched ancestor fields: `label`, `description`, `title`, `value`
 
 The field does not store any values.
 
+### Select Field
+The `select` field is intended to summarise all types of selection lists.
+These include `dropdowns`, `chips` and the `grid` select.
+
+The select field currently only supports the `grid` style, others will follow.
+
+```yaml
+  - type: select
+    id: my-select
+    attributes:
+      type: grid
+      multiple: false | true
+      value: [option-1] # This is always an array
+    options:
+      - label: Option 1 with icon
+        value: option-1
+        icon: sparkles # Fontawesome Icon
+      - label: Option 2 with image
+        value: option-2
+        image: images/option-2-thumbnail.png # Path to image in the extension
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "my-select": ["option-1"]
+  }
+}
+```
+
 ### Slider Field
 
 The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
