@@ -50,23 +50,22 @@ You can use JavaScript modules from npm in your Deno programs with the "**npm:**
 ![postman client](../../images/Postman_Exh1yNav6L.png)
 
 ```js
-import jwt from 'npm:jsonwebtoken';
-import express from 'npm:express';
+import { decode } from 'jsr:@gz/jwt'
+import express from 'npm:express'
 
-export const verifyToken = (req, res, next) => {
+export const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (authHeader && authHeader.startsWith('Bearer ')) {
         const token = authHeader.substring(7, authHeader.length);
 
-        jwt.verify(token, 'secret', (err, decoded) => {
-            if (err) {
-                return res.status(403).json({ message: 'Invalid token' });
-            }
-
-            req.user = decoded; // Add the decoded token to the request object
+        try {
+            // Add the decoded token to the request object
+            req.user = await decode(token, 'secret', {algorithm: 'HS256'});
             next(); // Proceed to the next middleware or route handler
-        });
+        } catch (_err) {
+            return res.status(403).json({ message: 'Invalid token' });
+        }
     } else {
         res.status(401).json({ message: 'No token provided' });
     }
