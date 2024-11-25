@@ -14,11 +14,16 @@ credentials. Many platforms like Google, Facebook, and GitHub use OAuth2.
 - **Refresh Token**: A token that is used to obtain a new access token when the current one expires.
 - **Scope**: The level of access that the application is requesting.
 - **Redirect URI**: The URI that the application should redirect to after the user grants or denies access.
+- **Streaming Service**: A live-streaming service like Twitch, YouTube that the user can link to OWN3D.
+- **Third-Party Account & Connection**: An account on a third-party service like TikTok, Discord, Spotify that the user
+  can link to OWN3D to access the user's data.
+- **OWN3D Service**: A service provided by OWN3D like the Pro, Shop, etc.
+- **Third-Party App & Service**: An application that uses OWN3D's API's to access the user's data.
 
 ## Client Registration
 
-To getting started, with our API's, you need to request a client id and client secret.
-You can do this by fill out the [OAuth2 Client Registration](https://forms.gle/4miiLAksbFTEGg3c6) form with the
+To getting started, with our API's, you need to request a client id and client secret for your Third-Party App &
+Service. You can do this by fill out the [OAuth2 Client Registration](https://forms.gle/4miiLAksbFTEGg3c6) form with the
 following information:
 
 - Your application's name
@@ -124,7 +129,7 @@ If you want to request all scopes, you can use the `*` wildcard.
 window.location.href = "https://id.stream.tv/oauth/authorize?client_id=<>&redirect_uri=<>&response_type=code&scope=*";
 ```
 
-### Refresh Tokens
+### Refreshing Tokens
 
 Refresh tokens are used to obtain a new access token when the current one expires.
 With the following example, we will use the refresh token flow to get a new access token.
@@ -329,9 +334,9 @@ We currently support the following scopes:
 You will also find all scopes in our [Scope](https://github.com/own3d/id/blob/master/src/Enums/Scope.php) Enum in
 GitHub.
 
-## Linking Third-Party Accounts
+## Linking Streaming Services and Third-Party Accounts & Connections
 
-To link third-party service accounts, you can use the `/oauth/{provider}` endpoint.
+To link streaming services and third-party accounts & connections, you can use the `/oauth/{provider}` endpoint.
 
 The `provider` parameter is the name of the provider you want to link. We currently support the following
 providers: `twitch`, `youtube`, `tiktok`, `discord` and `spotify`.
@@ -348,6 +353,45 @@ third-party service. Not all providers support all values. The following values 
 **TikTok**
 
 - `login`: Always prompt the user to re-login. This will force the user to logout and re-login to TikTok.
+
+## Unlinking Streaming Services and Third-Party Accounts & Connections
+
+To unlink streaming services and third-party accounts & connections, you MUST redirect the user to the
+`https://id.stream.tv/data-and-privacy` or the `https://id.stream.tv/platforms/{id}` page. The `id` parameter is the ID
+of the connection you want to unlink.
+
+For security reasons, we do not provide an API endpoint to unlink streaming services and third-party accounts &
+connections.
+
+Obtaining the connection ID can be done by using the `/api/users/@me/connections` endpoint.
+
+```http request
+GET https://id.stream.tv/api/users/@me/connections
+Authorization: Bearer <access-token>
+Accept: application/json
+```
+
+```json
+[
+  {
+    "id": 1194592,
+    "user_id": 1,
+    "platform": "tiktok",
+    "platform_id": "1791641f-4e70-4a22-9a91-b1406caa5e16",
+    "scopes": [
+      "user.info.basic",
+      "user.info.profile",
+      "user.info.stats"
+    ],
+    "expires_at": "2024-11-18T03:24:38.000000Z",
+    "created_at": "2021-12-23T10:07:23.000000Z",
+    "updated_at": "2024-11-17T03:24:38.000000Z",
+    "platform_name": "TikTok",
+    "platform_login": "ghostzero.dev",
+    "display_name": "ghostzero"
+  }
+]
+```
 
 ## Logging Out
 
