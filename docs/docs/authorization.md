@@ -357,7 +357,7 @@ third-party service. Not all providers support all values. The following values 
 ## Unlinking Streaming Services and Third-Party Accounts & Connections
 
 To unlink streaming services and third-party accounts & connections, you MUST redirect the user to the
-`https://id.stream.tv/data-and-privacy` or the `https://id.stream.tv/platforms/{id}` page. The `id` parameter is the ID
+`https://id.stream.tv/data-and-privacy` or the `https://id.stream.tv/platforms/{connection}` page. The `connection` parameter is the ID
 of the connection you want to unlink.
 
 For security reasons, we do not provide an API endpoint to unlink streaming services and third-party accounts &
