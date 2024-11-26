@@ -83,8 +83,8 @@ The `prompt` parameter can be used to specify the authentication behavior. The f
 If no `prompt` value is provided, the user will be prompted for authorization only if they have not previously
 authorized access to the consuming application for the requested scopes.
 
-The `login-fallback` parameter can be used to specify the fallback behavior if the user is not logged in depending on
-the `prompt` value. The following values are supported: `twitch`, `youtube`, `tiktok` and other providers.
+The `login_fallback` parameter can be used to specify the fallback behavior if the user is not logged in depending on
+the `prompt` value. The following values are supported: `email`, `twitch`, `youtube`, `tiktok` and other providers.
 
 #### Approving the Request
 
