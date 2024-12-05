@@ -241,23 +241,44 @@ Resulting `values`:
 
 ### Color Field
 
-The `color` field provides a color picker that can be used to select a color. The `value` must be a valid hex color
-code. The hex code can be either 6 or 8 characters long. The 8 character hex code will be used for the alpha channel.
+The `color` field provides a color picker that can be used to select a color. The hex code can be either 6 or 8 characters long. The 8 character hex code will be used for the alpha channel.
+
+If `allow-gradient` is set, the user can choose between `color`, `linear gradient` and `radial gradient`.
+
 
 ```yaml
   - type: color
     id: color
     attributes:
       label: Color
+      allow-gradient: true
       value: "#ff0000"
 ```
 
-Resulting `values`:
+Resulting `values` for hex-color:
 
 ```json
 {
   "values": {
     "color": "#ff0000"
+  }
+}
+```
+
+Resulting `values` for `linear-gradient`
+```json
+{
+  "values": {
+    "color": "linear-gradient(90deg, #FF9602 0%, #ffffff 100%)"
+  }
+}
+```
+
+Resulting `values` for `radial-gradient`
+```json
+{
+  "values": {
+    "color": "radial-gradient(circle, #c99144ff 0%, #ffffff 100%)"
   }
 }
 ```
