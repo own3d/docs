@@ -57,6 +57,7 @@ inputs:
 ## Fields
 
 ### Accordion Field
+
 The `accordion` field can be used to group any number of other fields.
 
 ```yaml
@@ -87,7 +88,7 @@ The field does not store any values.
 
 ### Boolean Field
 
-The `boolean` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
+The `boolean` field may be used to represent a `boolean` / `on/off` value. The resulting `values` will be represented as
 a boolean value.
 
 ```yaml
@@ -174,12 +175,23 @@ OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
 
 ### Checkbox Field
 
-The `checkbox` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
-a array list of options which are checked using the `value` as their identifier.
+:::warning
+**Migration Required:** The `checkbox` field has been updated to return an array of selected values. Previously, it
+returned an object with the selected value as the key and a boolean as the value. 
+
+Please update your code to handle the new format as shown in the example below.
+
+Use `version: 2` in the field to enable the new format. The new format will be enabled by default in the future.
+To stay compatible with the old format, use `version: 1`.
+:::
+
+The `checkbox` field may be used to represent a `boolean` / `on/off`value. The resulting `values` will be represented as
+an array of selected values.
 
 ```yaml
   - type: checkbox
     id: checkbox
+    version: 2
     attributes:
       label: Checkbox
       description: This is a description
@@ -271,7 +283,6 @@ The `divider` field displays a horizontal line and provides no other functionali
     id: divider
 ```
 -->
-
 
 ### Dropdown Field
 
@@ -388,6 +399,7 @@ Resulting `values`:
 ```
 
 ### Group Field
+
 The `group` field can be used to visually combine other fields into a group.
 
 ```yaml
@@ -415,7 +427,6 @@ The `group` field can be used to visually combine other fields into a group.
 ```
 
 The field does not store any values.
-
 
 ### Input Field
 
@@ -463,10 +474,10 @@ new tab. There is no `value` for this field.
 
 ### Platforms Field
 
-The `platforms` fields allows you to select a single or multiple streaming platform connection. It works like
-the `checkbox` field, but with a different UI, and it will automatically fetch the available platforms from
-the Connections API and pass them to the extension context. The `value` will be an array of selected platforms.
-`options` can be omitted. The selectable values will be the intersection of `options` (if given) and the platforms that are connected to the user account, including the `"own3d"` platform.
+The `platforms` fields allows you to select a single or multiple streaming platform connection. It will automatically
+fetch the available platforms from the Connections API and pass them to the extension context. The `value` will be an
+array of selected platforms. `options` can be omitted. The selectable values will be the intersection of `options` (if
+given) and the platforms that are connected to the user account, including the `"own3d"` platform.
 
 ```yaml
   - type: platforms
@@ -539,6 +550,7 @@ Resulting `values`:
 ```
 
 ### Search Field
+
 The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
 Searched ancestor fields: `label`, `description`, `title`, `value`
 
@@ -567,10 +579,15 @@ Searched ancestor fields: `label`, `description`, `title`, `value`
 The field does not store any values.
 
 ### Select Field
-The `select` field is intended to summarise all types of selection lists.
-These include `dropdowns`, `chips` and the `grid` select.
 
-The select field currently only supports the `grid` style, others will follow.
+::: danger
+**Deprecated**: The `select` field is deprecated and will be removed in the future. Please use the `dropdown` field
+instead or various other fields like `chips` or `tags`.
+
+**Limited Support**: The select field currently only supports the `grid` style.
+:::
+
+The `select` field provides different ways to represent a select menu. Options may be defined in the `options` array.
 
 ```yaml
   - type: select
@@ -578,7 +595,7 @@ The select field currently only supports the `grid` style, others will follow.
     attributes:
       type: grid
       multiple: false | true
-      value: [option-1] # This is always an array
+      value: [ option-1 ] # This is always an array
     options:
       - label: Option 1 with icon
         value: option-1
@@ -593,7 +610,9 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "my-select": ["option-1"]
+    "my-select": [
+      "option-1"
+    ]
   }
 }
 ```
@@ -625,8 +644,10 @@ Resulting `values`:
 ```
 
 ### Tabs Field
-The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the top level field.
-the optional `templates` field in a tab specified the pre-selected tab when the user selects templates in the configuration menu.
+
+The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the
+top level field. The optional `templates` field in a tab specified the pre-selected tab when the user selects templates
+in the configuration menu.
 
 ```yaml
   - type: tabs
@@ -733,7 +754,7 @@ The following example shows how to use conditional fields in multiple ways:
     attributes:
       label: Options
   - id: message-timeout
-    if: values.options['hide-old-messages']
+    if: values.options.includes('hide-old-messages')
     type: input
     attributes:
       type: number
