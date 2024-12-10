@@ -56,36 +56,6 @@ inputs:
 
 ## Fields
 
-### Accordion Field
-
-The `accordion` field can be used to group any number of other fields.
-
-```yaml
-  - type: accordion
-    id: my-accordion
-    attributes:
-      label: My Accordion
-    fields:
-      - type: boolean
-        id: random
-        attributes:
-          label: Random
-          description: This is a description
-          value: true
-      - type: input
-        id: text
-        attributes:
-          label: Text
-          description: This is a description
-          value: Hello World
-          type: text
-        validations:
-          required: true
-      - ...
-```
-
-The field does not store any values.
-
 ### Boolean Field
 
 The `boolean` field may be used to represent a `boolean` / `on/off` value. The resulting `values` will be represented as
@@ -177,7 +147,7 @@ OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
 
 :::warning
 **Migration Required:** The `checkbox` field has been updated to return an array of selected values. Previously, it
-returned an object with the selected value as the key and a boolean as the value. 
+returned an object with the selected value as the key and a boolean as the value.
 
 Please update your code to handle the new format as shown in the example below.
 
@@ -398,36 +368,6 @@ Resulting `values`:
 }
 ```
 
-### Group Field
-
-The `group` field can be used to visually combine other fields into a group.
-
-```yaml
-  - type: group
-    id: my-group
-    attributes:
-      label: My Group
-    fields:
-      - type: boolean
-        id: random
-        attributes:
-          label: Random
-          description: This is a description
-          value: true
-      - type: input
-        id: text
-        attributes:
-          label: Text
-          description: This is a description
-          value: Hello World
-          type: text
-        validations:
-          required: true
-      - ...
-```
-
-The field does not store any values.
-
 ### Input Field
 
 The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
@@ -549,35 +489,6 @@ Resulting `values`:
 }
 ```
 
-### Search Field
-
-The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
-Searched ancestor fields: `label`, `description`, `title`, `value`
-
-```yaml
-  - type: search
-    id: my-search
-    fields:
-      - type: boolean
-        id: random
-        attributes:
-          label: Random
-          description: This is a description
-          value: true
-      - type: input
-        id: text
-        attributes:
-          label: Text
-          description: This is a description
-          value: Hello World
-          type: text
-        validations:
-          required: true
-      - ...
-```
-
-The field does not store any values.
-
 ### Select Field
 
 ::: danger
@@ -643,6 +554,136 @@ Resulting `values`:
 }
 ```
 
+### Tags Field
+
+The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
+which may be included or excluded from a feature, for example.
+
+```yaml
+  - type: tags
+    id: ignored-users
+    attributes:
+      label: Ignored Users
+      description: The users that will be ignored
+      value:
+        - user1
+        - user2
+```
+
+Resulting `values`:
+
+```json
+{
+  "values": {
+    "ignored-users": [
+      "user1",
+      "user2"
+    ]
+  }
+}
+```
+
+## Organizing Fields
+
+Sometimes it is necessary to group fields together. This allows you to structure the form in a more appealing way and
+makes it easier for the user to understand the form. The following fields can be used to group fields:
+
+| Field                         | Description                                                               |
+|-------------------------------|---------------------------------------------------------------------------|
+| [Accordion](#accordion-field) | A group of fields that can be collapsed and expanded.                     |
+| [Group](#group-field)         | Visually combines other fields into a group.                              |
+| [Search](#search-field)       | Makes it possible to search through fields and their ancestors.           |
+| [Tabs](#tabs-field)           | Provides a tab bar with defined tabs to structure and group other fields. |
+
+### Accordion Field
+
+The `accordion` field can be used to group any number of other fields.
+
+```yaml
+  - type: accordion
+    id: my-accordion
+    attributes:
+      label: My Accordion
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
+### Group Field
+
+The `group` field can be used to visually combine other fields into a group.
+
+```yaml
+  - type: group
+    id: my-group
+    attributes:
+      label: My Group
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
+### Search Field
+
+The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
+Searched ancestor fields: `label`, `description`, `title`, `value`
+
+```yaml
+  - type: search
+    id: my-search
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
 ### Tabs Field
 
 The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the
@@ -675,35 +716,6 @@ in the configuration menu.
             validations:
               required: true
           - ...
-```
-
-### Tags Field
-
-The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
-which may be included or excluded from a feature, for example.
-
-```yaml
-  - type: tags
-    id: ignored-users
-    attributes:
-      label: Ignored Users
-      description: The users that will be ignored
-      value:
-        - user1
-        - user2
-```
-
-Resulting `values`:
-
-```json
-{
-  "values": {
-    "ignored-users": [
-      "user1",
-      "user2"
-    ]
-  }
-}
 ```
 
 ## Conditional Fields
