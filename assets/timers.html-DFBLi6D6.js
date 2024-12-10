@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-fdaa1960","path":"/docs/chatbot/timers.html","title":"Timers","lang":"en-US","frontmatter":{},"headers":[],"git":{},"filePathRelative":"docs/chatbot/timers.md"}');export{t as data};
