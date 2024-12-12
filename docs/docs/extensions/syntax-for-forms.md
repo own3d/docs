@@ -811,3 +811,24 @@ OWN3D.ext.onContext((context, changed) => {
 ```
 
 ![img.png](../../images/extension-context.png)
+
+## Demo-Mode
+Add `has_demo_mode: true` to the manifest.yaml. This will add a "Demo-Mode"-Box to the Settings in the Scene-Builder.
+
+```yaml
+id: 98f9fab0-0714-46d8-ac77-d57130a1dc88
+inputs:
+  [...]
+has_demo_mode: true
+```
+
+![test-mode.png](../../images/extension-test-mode.png)
+
+Changing the toggle, the Supervisor gets an update:
+
+```js
+OWN3D.ext.onContext((context, changed) => {
+  // changed => ['demo_mode']
+  // context['demo_mode'] => true|false
+});
+```
