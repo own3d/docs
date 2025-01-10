@@ -17,7 +17,7 @@ These are the native inputs:
 - **Filters** (only available for images and videos)
 - **Opacity**
 
-![img.png](../../images/syntax-for-forms-static.png)
+![img.png](../../images/syntax-for-forms-static_v2.png)
 
 ## Creating Forms For Extensions
 
@@ -25,7 +25,7 @@ In opposite to native inputs, custom inputs are defined in the form file. These 
 your extension. Even our internal widgets are using this system. The following example shows how to create a form for a
 browser source:
 
-![img.png](../../images/syntax-for-forms-dynamic.png)
+![img.png](../../images/syntax-for-forms-dynamic_v2.png)
 
 Creating forms for browser sources is very easy. We use YAML syntax to define the inputs. The following example shows
 the syntax for a form with different input types:
