@@ -56,38 +56,9 @@ inputs:
 
 ## Fields
 
-### Accordion Field
-The `accordion` field can be used to group any number of other fields.
-
-```yaml
-  - type: accordion
-    id: my-accordion
-    attributes:
-      label: My Accordion
-    fields:
-      - type: boolean
-        id: random
-        attributes:
-          label: Random
-          description: This is a description
-          value: true
-      - type: input
-        id: text
-        attributes:
-          label: Text
-          description: This is a description
-          value: Hello World
-          type: text
-        validations:
-          required: true
-      - ...
-```
-
-The field does not store any values.
-
 ### Boolean Field
 
-The `boolean` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
+The `boolean` field may be used to represent a `boolean` / `on/off` value. The resulting `values` will be represented as
 a boolean value.
 
 ```yaml
@@ -174,12 +145,23 @@ OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
 
 ### Checkbox Field
 
-The `checkbox` field may be used to represent a boolean / "on/off" value. The resulting `values` will be represented as
-a array list of options which are checked using the `value` as their identifier.
+:::warning
+**Migration Required:** The `checkbox` field has been updated to return an array of selected values. Previously, it
+returned an object with the selected value as the key and a boolean as the value.
+
+Please update your code to handle the new format as shown in the example below.
+
+Use `version: 2` in the field to enable the new format. The new format will be enabled by default in the future.
+To stay compatible with the old format, use `version: 1`.
+:::
+
+The `checkbox` field may be used to represent a `boolean` / `on/off`value. The resulting `values` will be represented as
+an array of selected values.
 
 ```yaml
   - type: checkbox
     id: checkbox
+    version: 2
     attributes:
       label: Checkbox
       description: This is a description
@@ -292,7 +274,6 @@ The `divider` field displays a horizontal line and provides no other functionali
     id: divider
 ```
 -->
-
 
 ### Dropdown Field
 
@@ -408,36 +389,6 @@ Resulting `values`:
 }
 ```
 
-### Group Field
-The `group` field can be used to visually combine other fields into a group.
-
-```yaml
-  - type: group
-    id: my-group
-    attributes:
-      label: My Group
-    fields:
-      - type: boolean
-        id: random
-        attributes:
-          label: Random
-          description: This is a description
-          value: true
-      - type: input
-        id: text
-        attributes:
-          label: Text
-          description: This is a description
-          value: Hello World
-          type: text
-        validations:
-          required: true
-      - ...
-```
-
-The field does not store any values.
-
-
 ### Input Field
 
 The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
@@ -484,10 +435,10 @@ new tab. There is no `value` for this field.
 
 ### Platforms Field
 
-The `platforms` fields allows you to select a single or multiple streaming platform connection. It works like
-the `checkbox` field, but with a different UI, and it will automatically fetch the available platforms from
-the Connections API and pass them to the extension context. The `value` will be an array of selected platforms.
-`options` can be omitted. The selectable values will be the intersection of `options` (if given) and the platforms that are connected to the user account, including the `"own3d"` platform.
+The `platforms` fields allows you to select a single or multiple streaming platform connection. It will automatically
+fetch the available platforms from the Connections API and pass them to the extension context. The `value` will be an
+array of selected platforms. `options` can be omitted. The selectable values will be the intersection of `options` (if
+given) and the platforms that are connected to the user account, including the `"own3d"` platform.
 
 ```yaml
   - type: platforms
@@ -559,39 +510,16 @@ Resulting `values`:
 }
 ```
 
-### Search Field
-The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
-Searched ancestor fields: `label`, `description`, `title`, `value`
-
-```yaml
-  - type: search
-    id: my-search
-    fields:
-      - type: boolean
-        id: random
-        attributes:
-          label: Random
-          description: This is a description
-          value: true
-      - type: input
-        id: text
-        attributes:
-          label: Text
-          description: This is a description
-          value: Hello World
-          type: text
-        validations:
-          required: true
-      - ...
-```
-
-The field does not store any values.
-
 ### Select Field
-The `select` field is intended to summarise all types of selection lists.
-These include `dropdowns`, `chips` and the `grid` select.
 
-The select field currently only supports the `grid` style, others will follow.
+::: danger
+**Deprecated**: The `select` field is deprecated and will be removed in the future. Please use the `dropdown` field
+instead or various other fields like `chips` or `tags`.
+
+**Limited Support**: The select field currently only supports the `grid` style.
+:::
+
+The `select` field provides different ways to represent a select menu. Options may be defined in the `options` array.
 
 ```yaml
   - type: select
@@ -599,7 +527,7 @@ The select field currently only supports the `grid` style, others will follow.
     attributes:
       type: grid
       multiple: false | true
-      value: [option-1] # This is always an array
+      value: [ option-1 ] # This is always an array
     options:
       - label: Option 1 with icon
         value: option-1
@@ -614,7 +542,9 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "my-select": ["option-1"]
+    "my-select": [
+      "option-1"
+    ]
   }
 }
 ```
@@ -645,38 +575,6 @@ Resulting `values`:
 }
 ```
 
-### Tabs Field
-The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the top level field.
-the optional `templates` field in a tab specified the pre-selected tab when the user selects templates in the configuration menu.
-
-```yaml
-  - type: tabs
-    id: my-tabs
-    tabs:
-      - label: Tab1
-        fields:
-          - type: boolean
-            id: random
-            attributes:
-              label: Random
-              description: This is a description
-              value: true
-          - ...
-      - label: Tab2
-        templates: true
-        fields:
-          - type: input
-            id: text
-            attributes:
-              label: Text
-              description: This is a description
-              value: Hello World
-              type: text
-            validations:
-              required: true
-          - ...
-```
-
 ### Tags Field
 
 The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
@@ -704,6 +602,141 @@ Resulting `values`:
     ]
   }
 }
+```
+
+## Organizing Fields
+
+Sometimes it is necessary to group fields together. This allows you to structure the form in a more appealing way and
+makes it easier for the user to understand the form. The following fields can be used to group fields:
+
+| Field                         | Description                                                               |
+|-------------------------------|---------------------------------------------------------------------------|
+| [Accordion](#accordion-field) | A group of fields that can be collapsed and expanded.                     |
+| [Group](#group-field)         | Visually combines other fields into a group.                              |
+| [Search](#search-field)       | Makes it possible to search through fields and their ancestors.           |
+| [Tabs](#tabs-field)           | Provides a tab bar with defined tabs to structure and group other fields. |
+
+### Accordion Field
+
+The `accordion` field can be used to group any number of other fields.
+
+```yaml
+  - type: accordion
+    id: my-accordion
+    attributes:
+      label: My Accordion
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
+### Group Field
+
+The `group` field can be used to visually combine other fields into a group.
+
+```yaml
+  - type: group
+    id: my-group
+    attributes:
+      label: My Group
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
+### Search Field
+
+The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
+Searched ancestor fields: `label`, `description`, `title`, `value`
+
+```yaml
+  - type: search
+    id: my-search
+    fields:
+      - type: boolean
+        id: random
+        attributes:
+          label: Random
+          description: This is a description
+          value: true
+      - type: input
+        id: text
+        attributes:
+          label: Text
+          description: This is a description
+          value: Hello World
+          type: text
+        validations:
+          required: true
+      - ...
+```
+
+The field does not store any values.
+
+### Tabs Field
+
+The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the
+top level field. The optional `templates` field in a tab specified the pre-selected tab when the user selects templates
+in the configuration menu.
+
+```yaml
+  - type: tabs
+    id: my-tabs
+    tabs:
+      - label: Tab1
+        fields:
+          - type: boolean
+            id: random
+            attributes:
+              label: Random
+              description: This is a description
+              value: true
+          - ...
+      - label: Tab2
+        templates: true
+        fields:
+          - type: input
+            id: text
+            attributes:
+              label: Text
+              description: This is a description
+              value: Hello World
+              type: text
+            validations:
+              required: true
+          - ...
 ```
 
 ## Conditional Fields
@@ -754,7 +787,7 @@ The following example shows how to use conditional fields in multiple ways:
     attributes:
       label: Options
   - id: message-timeout
-    if: values.options['hide-old-messages']
+    if: values.options.includes('hide-old-messages')
     type: input
     attributes:
       type: number
