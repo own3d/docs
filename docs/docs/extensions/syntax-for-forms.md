@@ -72,11 +72,9 @@ a boolean value.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "random": true
-  }
+  "random": true
 }
 ```
 
@@ -107,17 +105,15 @@ The `radius` value will be used when `multiple` is set to `false`.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "border-radius": {
-      "multiple": false,
-      "radius": 0,
-      "top-left": 0,
-      "top-right": 0,
-      "bottom-left": 0,
-      "bottom-right": 0
-    }
+  "border-radius": {
+    "multiple": false,
+    "radius": 0,
+    "top-left": 0,
+    "top-right": 0,
+    "bottom-left": 0,
+    "bottom-right": 0
   }
 }
 ```
@@ -141,7 +137,7 @@ the extension IPC module when the button is clicked. There is no `value` for thi
 
 Emitted event:
 
-```js
+```js:no-line-numbers
 OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
     console.log('Got click event', payload)
 })
@@ -184,25 +180,22 @@ an array of selected values.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "checkbox": [
-      "option-1"
-    ]
-  }
+  "checkbox": [
+    "option-1"
+  ]
 }
 ```
 
 Resulting legacy `values`:
 
-```json
+```json:no-line-numbers
+// version: 1
 {
-  "values": {
-    "checkbox": {
-      "option-1": true,
-      "option-2": false
-    }
+  "checkbox": {
+    "option-1": true,
+    "option-2": false
   }
 }
 ```
@@ -234,11 +227,9 @@ different UI.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "battery": "full"
-  }
+  "battery": "full"
 }
 ```
 
@@ -263,29 +254,23 @@ If `allow-gradient` is set, the user can choose between `color`, `linear gradien
 
 Resulting `values` for hex-color:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "color": "#ff0000"
-  }
+  "color": "#ff0000"
 }
 ```
 
 Resulting `values` for `linear-gradient`
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "color": "linear-gradient(90deg, #FF9602 0%, #ffffff 100%)"
-  }
+  "color": "linear-gradient(90deg, #FF9602 0%, #ffffff 100%)"
 }
 ```
 
 Resulting `values` for `radial-gradient`
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "color": "radial-gradient(circle, #c99144ff 0%, #ffffff 100%)"
-  }
+  "color": "radial-gradient(circle, #c99144ff 0%, #ffffff 100%)"
 }
 ```
 
@@ -322,11 +307,9 @@ The `dropdown` field provides a dropdown menu. The `select` options may be defin
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "dropdown": 2
-  }
+  "dropdown": 2
 }
 ```
 
@@ -363,13 +346,11 @@ If you don't define a popup, the default popup `files` will be used. The followi
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "image": {
-      "id": "1337",
-      "type": "file"
-    }
+  "image": {
+    "id": "1337",
+    "type": "file"
   }
 }
 ```
@@ -406,19 +387,17 @@ in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equi
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "font-settings": {
-      "font-color": "#ffffff",
-      "font-family": "Inter",
-      "font-weight": 400,
-      "font-size": 14,
-      "text-align": "left",
-      "font-style": "normal",
-      "letter-spacing": "normal",
-      "line-height": 1.2
-    }
+  "font-settings": {
+    "font-color": "#ffffff",
+    "font-family": "Inter",
+    "font-weight": 400,
+    "font-size": 14,
+    "text-align": "left",
+    "font-style": "normal",
+    "letter-spacing": "normal",
+    "line-height": 1.2
   }
 }
 ```
@@ -427,8 +406,8 @@ Resulting `values`:
 
 ![Input Field](../../images/fields/input.png)
 
-The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
-The `type` attribute can be used to define the type of input. The `type` attribute is optional and defaults to `text`.
+The `input` field provides a simple text input.
+The `type` attribute can be used to define the type of input (`text` , `number`). The `type` attribute is optional and defaults to `text`.
 
 ```yaml
   - type: input
@@ -443,22 +422,20 @@ The `type` attribute can be used to define the type of input. The `type` attribu
 
 Resulting `values`:
 
-```json
+Resulting `values`:
+
+```json:no-line-numbers
 {
-  "values": {
-    "text": "Hello World"
-  }
+  "text": "Hello World"
 }
 ```
 
 If `optional: true` is set:
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "text": {
-      "toggled": true | false,
-      "value": "Hello World"
-      }
+  "text": {
+    "toggled": true | false,
+    "value": "Hello World"
   }
 }
 ```
@@ -503,14 +480,12 @@ given) and the platforms that are connected to the user account, including the `
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "platforms": [
-      "twitch",
-      "youtube"
-    ]
-  }
+  "platforms": [
+    "twitch",
+    "youtube"
+  ]
 }
 ```
 
@@ -558,11 +533,9 @@ Additional `resource` options may be defined in the `options` array, like in the
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "alert-set": "1337"
-  }
+  "alert-set": "1337"
 }
 ```
 
@@ -594,13 +567,9 @@ The `select` field provides different ways to represent a select menu. Options m
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "my-select": [
-      "option-1"
-    ]
-  }
+  "my-select": [ "option-1" ]
 }
 ```
 
@@ -624,11 +593,9 @@ required.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "age": 18
-  }
+  "age": 18
 }
 ```
 
@@ -652,14 +619,9 @@ which may be included or excluded from a feature, for example.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "ignored-users": [
-      "user1",
-      "user2"
-    ]
-  }
+  "ignored-users": [ "user1", "user2" ]
 }
 ```
 
