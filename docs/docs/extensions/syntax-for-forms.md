@@ -58,6 +58,8 @@ inputs:
 
 ### Boolean Field
 
+![Boolean Field](../../images/fields/boolean.png)
+
 The `boolean` field may be used to represent a `boolean` / `on/off` value. The resulting `values` will be represented as
 a boolean value.
 
@@ -82,9 +84,13 @@ Resulting `values`:
 
 ### Border Radius Field
 
+![Border Radius Field Single](../../images/fields/border-radius-1.png)
+![Border Radius Field Multiple](../../images/fields/border-radius-2.png)
+
 The `border-radius` field provides a beautiful input that can be used to select a border radius value. The `value` is
 required and must be an object with the following properties: `multiple`, `radius`, `top-left`, `top-right`,
-`bottom-left` & `bottom-right`. The `multiple` will allow you to set the border radius for each corner individually.
+`bottom-left` & `bottom-right`.
+`multiple` will allow you to set the border radius for each corner individually.
 The `radius` value will be used when `multiple` is set to `false`.
 
 ```yaml
@@ -155,6 +161,8 @@ Use `version: 2` in the field to enable the new format. The new format will be e
 To stay compatible with the old format, use `version: 1`.
 :::
 
+![Border Radius Field Multiple](../../images/fields/checkbox.png)
+
 The `checkbox` field may be used to represent a `boolean` / `on/off`value. The resulting `values` will be represented as
 an array of selected values.
 
@@ -188,7 +196,22 @@ Resulting `values`:
 }
 ```
 
+Resulting legacy `values`:
+
+```json
+{
+  "values": {
+    "checkbox": {
+      "option-1": true,
+      "option-2": false
+    }
+  }
+}
+```
+
 ### Chips Field
+
+![Chips Field](../../images/fields/chips.png)
 
 The `chips` field provides a set of chips that can be selected. It behaves exactly like a `dropdown` field, but with a
 different UI.
@@ -222,6 +245,9 @@ Resulting `values`:
 ```
 
 ### Color Field
+
+![Color Field](../../images/fields/color-1.png)
+![Colorpicker](../../images/fields/color-2.png)
 
 The `color` field provides a color picker that can be used to select a color. The hex code can be either 6 or 8 characters long. The 8 character hex code will be used for the alpha channel.
 
@@ -277,6 +303,8 @@ The `divider` field displays a horizontal line and provides no other functionali
 
 ### Dropdown Field
 
+![Dropdown Field](../../images/fields/dropdown.png)
+
 The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
 
 ```yaml
@@ -299,12 +327,18 @@ Resulting `values`:
 ```json
 {
   "values": {
-    "dropdown": "2"
+    "dropdown": 2
   }
 }
 ```
 
 ### File Field
+
+::: warning
+The `file` field UI will be updated soon.
+:::
+
+![File Field](../../images/fields/file.png)
 
 The `file` field allows you to upload a file. The `mimeTypes` array is required and must contain a list of mime types
 which are allowed to be uploaded but limited to the following types: `mp3`, `mp4`, `webm`, `wav`, `png`, `jpg`, `jpeg`
@@ -350,6 +384,8 @@ retrieve the file using the [File Storage API](../file-storage.md).
 
 ### Font Settings Field
 
+![Font-Settings Field](../../images/fields/font-settings.png)
+
 The `font-settings` field provides a multi input field for font settings. It provides a list of fonts that are available
 in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equivalent to Google Fonts).
 
@@ -390,6 +426,8 @@ Resulting `values`:
 ```
 
 ### Input Field
+
+![Input Field](../../images/fields/input.png)
 
 The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
 The `type` attribute can be used to define the type of input. The `type` attribute is optional and defaults to `text`.
@@ -435,6 +473,8 @@ new tab. There is no `value` for this field.
 
 ### Platforms Field
 
+![Platform Field](../../images/fields/platform.png)
+
 The `platforms` fields allows you to select a single or multiple streaming platform connection. It will automatically
 fetch the available platforms from the Connections API and pass them to the extension context. The `value` will be an
 array of selected platforms. `options` can be omitted. The selectable values will be the intersection of `options` (if
@@ -461,23 +501,32 @@ Resulting `values`:
       "twitch",
       "youtube"
     ]
-  },
-  "context": {
-    "connections": [
-      {
-        "platform": "twitch",
-        "channel_id": "1337"
-      },
-      {
-        "platform": "youtube",
-        "channel_id": "1337"
-      }
-    ]
   }
 }
 ```
 
+```json
+{
+  "context": {
+      "connections": [
+        {
+          "platform": "twitch",
+          "channel_id": "1337"
+        },
+        {
+          "platform": "youtube",
+          "channel_id": "1337"
+        }
+      ]
+    }
+}
+```
+
 ### Resource Field
+
+::: warning
+The `resource` field is currently not supported in the scene editor.
+:::
 
 Additional `resource` options may be defined in the `options` array, like in the `dropdown` field. When using the
 `multiple` option, the value will be an array of selected values.
@@ -512,12 +561,11 @@ Resulting `values`:
 
 ### Select Field
 
-::: danger
-**Deprecated**: The `select` field is deprecated and will be removed in the future. Please use the `dropdown` field
-instead or various other fields like `chips` or `tags`.
-
-**Limited Support**: The select field currently only supports the `grid` style.
+::: warning
+**Limited Support**: The `select` field currently only supports the `grid` style.
 :::
+
+![Select Field](../../images/fields/select.png)
 
 The `select` field provides different ways to represent a select menu. Options may be defined in the `options` array.
 
@@ -551,6 +599,8 @@ Resulting `values`:
 
 ### Slider Field
 
+![Select Field](../../images/fields/slider.png)
+
 The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
 required.
 
@@ -576,6 +626,8 @@ Resulting `values`:
 ```
 
 ### Tags Field
+
+![Tags Field](../../images/fields/tags.png)
 
 The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
 which may be included or excluded from a feature, for example.
@@ -620,6 +672,9 @@ makes it easier for the user to understand the form. The following fields can be
 
 The `accordion` field can be used to group any number of other fields.
 
+![Accordion Field](../../images/fields/accordion-1.png)
+![Accordion Field open](../../images/fields/accordion-2.png)
+
 ```yaml
   - type: accordion
     id: my-accordion
@@ -647,6 +702,8 @@ The `accordion` field can be used to group any number of other fields.
 The field does not store any values.
 
 ### Group Field
+
+![Group Field](../../images/fields/group.png)
 
 The `group` field can be used to visually combine other fields into a group.
 
@@ -678,6 +735,8 @@ The field does not store any values.
 
 ### Search Field
 
+![Search Field](../../images/fields/search.png)
+
 The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
 Searched ancestor fields: `label`, `description`, `title`, `value`
 
@@ -706,6 +765,8 @@ Searched ancestor fields: `label`, `description`, `title`, `value`
 The field does not store any values.
 
 ### Tabs Field
+
+![Tabs Field](../../images/fields/tabs.png)
 
 The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the
 top level field. The optional `templates` field in a tab specified the pre-selected tab when the user selects templates
