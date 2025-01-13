@@ -440,6 +440,7 @@ The `type` attribute can be used to define the type of input. The `type` attribu
       description: This is a description
       value: Hello World
       type: text
+      optional: false
     validations:
       required: true
 ```
@@ -450,6 +451,18 @@ Resulting `values`:
 {
   "values": {
     "text": "Hello World"
+  }
+}
+```
+
+If `optional: true` is set:
+```json
+{
+  "values": {
+    "text": {
+      "toggled": true | false,
+      "value": "Hello World"
+      }
   }
 }
 ```
