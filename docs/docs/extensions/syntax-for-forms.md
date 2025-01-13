@@ -43,8 +43,6 @@ inputs:
       label: Text
       description: This is a description
       value: Hello World
-    validations:
-      required: true
 ```
 
 ### Limitations
@@ -441,8 +439,6 @@ The `type` attribute can be used to define the type of input. The `type` attribu
       value: Hello World
       type: text
       optional: false
-    validations:
-      required: true
 ```
 
 Resulting `values`:
@@ -558,8 +554,6 @@ Additional `resource` options may be defined in the `options` array, like in the
         map:
           label: $.data[*].name
           value: $.data[*].id
-    validations:
-      required: true
 ```
 
 Resulting `values`:
@@ -707,8 +701,6 @@ The `accordion` field can be used to group any number of other fields.
           description: This is a description
           value: Hello World
           type: text
-        validations:
-          required: true
       - ...
 ```
 
@@ -739,8 +731,6 @@ The `group` field can be used to visually combine other fields into a group.
           description: This is a description
           value: Hello World
           type: text
-        validations:
-          required: true
       - ...
 ```
 
@@ -770,8 +760,6 @@ Searched ancestor fields: `label`, `description`, `title`, `value`
           description: This is a description
           value: Hello World
           type: text
-        validations:
-          required: true
       - ...
 ```
 
@@ -808,8 +796,6 @@ in the configuration menu.
               description: This is a description
               value: Hello World
               type: text
-            validations:
-              required: true
           - ...
 ```
 
@@ -868,8 +854,6 @@ The following example shows how to use conditional fields in multiple ways:
       label: Message Cleanup
       value: 30
       description: The number of seconds to cleanup
-    validations:
-      required: true
 ```
 
 ## Receiving Values
