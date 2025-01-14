@@ -625,6 +625,28 @@ Resulting `values`:
 }
 ```
 
+### Volume Field
+
+![Volume Field](../../images/fields/volume.png)
+
+The `volume` field provides a beautiful slider that can be used to select a volume value. The `value` is required and must be a number between 0 and 1.
+
+```yaml
+  - type: volume
+    id: volume
+    attributes:
+      label: Volume
+      value: 0.5
+```
+
+Resulting `values`:
+
+```json:no-line-numbers
+{
+  "volume": 0.5
+}
+```
+
 ## Organizing Fields
 
 Sometimes it is necessary to group fields together. This allows you to structure the form in a more appealing way and
