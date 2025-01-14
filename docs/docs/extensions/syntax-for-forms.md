@@ -413,14 +413,12 @@ The `type` attribute can be used to define the type of input (`text` , `number`)
   - type: input
     id: text
     attributes:
-      label: Text
       description: This is a description
-      value: Hello World
-      type: text
+      label: Text
       optional: false
+      type: text
+      value: Hello World
 ```
-
-Resulting `values`:
 
 Resulting `values`:
 
@@ -430,7 +428,23 @@ Resulting `values`:
 }
 ```
 
-If `optional: true` is set:
+If `optional: true` is set, the `value` will be an object with a `toggled` and `value` property.
+
+```yaml{6,9-10}
+  - type: input
+    id: text
+    attributes:
+      description: This is a description
+      label: Text
+      optional: true
+      type: text
+      value:
+        toggled: true
+        value: Hello World
+```
+
+Resulting `values`:
+
 ```json:no-line-numbers
 {
   "text": {
