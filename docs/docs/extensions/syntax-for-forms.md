@@ -17,7 +17,7 @@ These are the native inputs:
 - **Filters** (only available for images and videos)
 - **Opacity**
 
-![img.png](../../images/syntax-for-forms-static.png)
+![img.png](../../images/syntax-for-forms-static_v2.png)
 
 ## Creating Forms For Extensions
 
@@ -25,7 +25,7 @@ In opposite to native inputs, custom inputs are defined in the form file. These 
 your extension. Even our internal widgets are using this system. The following example shows how to create a form for a
 browser source:
 
-![img.png](../../images/syntax-for-forms-dynamic.png)
+![img.png](../../images/syntax-for-forms-dynamic_v2.png)
 
 Creating forms for browser sources is very easy. We use YAML syntax to define the inputs. The following example shows
 the syntax for a form with different input types:
@@ -43,8 +43,6 @@ inputs:
       label: Text
       description: This is a description
       value: Hello World
-    validations:
-      required: true
 ```
 
 ### Limitations
@@ -57,6 +55,8 @@ inputs:
 ## Fields
 
 ### Boolean Field
+
+![Boolean Field](../../images/fields/boolean.png)
 
 The `boolean` field may be used to represent a `boolean` / `on/off` value. The resulting `values` will be represented as
 a boolean value.
@@ -72,19 +72,21 @@ a boolean value.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "random": true
-  }
+  "random": true
 }
 ```
 
 ### Border Radius Field
 
+![Border Radius Field Single](../../images/fields/border-radius-1.png)
+![Border Radius Field Multiple](../../images/fields/border-radius-2.png)
+
 The `border-radius` field provides a beautiful input that can be used to select a border radius value. The `value` is
 required and must be an object with the following properties: `multiple`, `radius`, `top-left`, `top-right`,
-`bottom-left` & `bottom-right`. The `multiple` will allow you to set the border radius for each corner individually.
+`bottom-left` & `bottom-right`.
+`multiple` will allow you to set the border radius for each corner individually.
 The `radius` value will be used when `multiple` is set to `false`.
 
 ```yaml
@@ -103,17 +105,15 @@ The `radius` value will be used when `multiple` is set to `false`.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "border-radius": {
-      "multiple": false,
-      "radius": 0,
-      "top-left": 0,
-      "top-right": 0,
-      "bottom-left": 0,
-      "bottom-right": 0
-    }
+  "border-radius": {
+    "multiple": false,
+    "radius": 0,
+    "top-left": 0,
+    "top-right": 0,
+    "bottom-left": 0,
+    "bottom-right": 0
   }
 }
 ```
@@ -137,7 +137,7 @@ the extension IPC module when the button is clicked. There is no `value` for thi
 
 Emitted event:
 
-```js
+```js:no-line-numbers
 OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
     console.log('Got click event', payload)
 })
@@ -154,6 +154,8 @@ Please update your code to handle the new format as shown in the example below.
 Use `version: 2` in the field to enable the new format. The new format will be enabled by default in the future.
 To stay compatible with the old format, use `version: 1`.
 :::
+
+![Border Radius Field Multiple](../../images/fields/checkbox.png)
 
 The `checkbox` field may be used to represent a `boolean` / `on/off`value. The resulting `values` will be represented as
 an array of selected values.
@@ -178,17 +180,29 @@ an array of selected values.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "checkbox": [
-      "option-1"
-    ]
+  "checkbox": [
+    "option-1"
+  ]
+}
+```
+
+Resulting legacy `values`:
+
+```json:no-line-numbers
+// version: 1
+{
+  "checkbox": {
+    "option-1": true,
+    "option-2": false
   }
 }
 ```
 
 ### Chips Field
+
+![Chips Field](../../images/fields/chips.png)
 
 The `chips` field provides a set of chips that can be selected. It behaves exactly like a `dropdown` field, but with a
 different UI.
@@ -213,15 +227,16 @@ different UI.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "battery": "full"
-  }
+  "battery": "full"
 }
 ```
 
 ### Color Field
+
+![Color Field](../../images/fields/color-1.png)
+![Colorpicker](../../images/fields/color-2.png)
 
 The `color` field provides a color picker that can be used to select a color. The hex code can be either 6 or 8 characters long. The 8 character hex code will be used for the alpha channel.
 
@@ -239,29 +254,23 @@ If `allow-gradient` is set, the user can choose between `color`, `linear gradien
 
 Resulting `values` for hex-color:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "color": "#ff0000"
-  }
+  "color": "#ff0000"
 }
 ```
 
 Resulting `values` for `linear-gradient`
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "color": "linear-gradient(90deg, #FF9602 0%, #ffffff 100%)"
-  }
+  "color": "linear-gradient(90deg, #FF9602 0%, #ffffff 100%)"
 }
 ```
 
 Resulting `values` for `radial-gradient`
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "color": "radial-gradient(circle, #c99144ff 0%, #ffffff 100%)"
-  }
+  "color": "radial-gradient(circle, #c99144ff 0%, #ffffff 100%)"
 }
 ```
 
@@ -276,6 +285,8 @@ The `divider` field displays a horizontal line and provides no other functionali
 -->
 
 ### Dropdown Field
+
+![Dropdown Field](../../images/fields/dropdown.png)
 
 The `dropdown` field provides a dropdown menu. The `select` options may be defined in the `options` array.
 
@@ -296,15 +307,19 @@ The `dropdown` field provides a dropdown menu. The `select` options may be defin
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "dropdown": "2"
-  }
+  "dropdown": 2
 }
 ```
 
 ### File Field
+
+::: warning
+The `file` field UI will be updated soon.
+:::
+
+![File Field](../../images/fields/file.png)
 
 The `file` field allows you to upload a file. The `mimeTypes` array is required and must contain a list of mime types
 which are allowed to be uploaded but limited to the following types: `mp3`, `mp4`, `webm`, `wav`, `png`, `jpg`, `jpeg`
@@ -331,13 +346,11 @@ If you don't define a popup, the default popup `files` will be used. The followi
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "image": {
-      "id": "1337",
-      "type": "file"
-    }
+  "image": {
+    "id": "1337",
+    "type": "file"
   }
 }
 ```
@@ -349,6 +362,8 @@ and will be available until the file is deleted. The `value` of the field will b
 retrieve the file using the [File Storage API](../file-storage.md).
 
 ### Font Settings Field
+
+![Font-Settings Field](../../images/fields/font-settings.png)
 
 The `font-settings` field provides a multi input field for font settings. It provides a list of fonts that are available
 in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equivalent to Google Fonts).
@@ -372,27 +387,27 @@ in [Bunny Fonts](https://fonts.bunny.net/) (the font provider for OWN3D and equi
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "font-settings": {
-      "font-color": "#ffffff",
-      "font-family": "Inter",
-      "font-weight": 400,
-      "font-size": 14,
-      "text-align": "left",
-      "font-style": "normal",
-      "letter-spacing": "normal",
-      "line-height": 1.2
-    }
+  "font-settings": {
+    "font-color": "#ffffff",
+    "font-family": "Inter",
+    "font-weight": 400,
+    "font-size": 14,
+    "text-align": "left",
+    "font-style": "normal",
+    "letter-spacing": "normal",
+    "line-height": 1.2
   }
 }
 ```
 
 ### Input Field
 
-The `input` field provides a simple text input. It can be used for text, numbers, and other types of data.
-The `type` attribute can be used to define the type of input. The `type` attribute is optional and defaults to `text`.
+![Input Field](../../images/fields/input.png)
+
+The `input` field provides a simple text input.
+The `type` attribute can be used to define the type of input (`text` , `number`). The `type` attribute is optional and defaults to `text`.
 
 ```yaml
   - type: input
@@ -402,16 +417,25 @@ The `type` attribute can be used to define the type of input. The `type` attribu
       description: This is a description
       value: Hello World
       type: text
-    validations:
-      required: true
+      optional: false
 ```
 
 Resulting `values`:
 
-```json
+Resulting `values`:
+
+```json:no-line-numbers
 {
-  "values": {
-    "text": "Hello World"
+  "text": "Hello World"
+}
+```
+
+If `optional: true` is set:
+```json:no-line-numbers
+{
+  "text": {
+    "toggled": true | false,
+    "value": "Hello World"
   }
 }
 ```
@@ -435,6 +459,8 @@ new tab. There is no `value` for this field.
 
 ### Platforms Field
 
+![Platform Field](../../images/fields/platform.png)
+
 The `platforms` fields allows you to select a single or multiple streaming platform connection. It will automatically
 fetch the available platforms from the Connections API and pass them to the extension context. The `value` will be an
 array of selected platforms. `options` can be omitted. The selectable values will be the intersection of `options` (if
@@ -454,30 +480,37 @@ given) and the platforms that are connected to the user account, including the `
 
 Resulting `values`:
 
+```json:no-line-numbers
+{
+  "platforms": [
+    "twitch",
+    "youtube"
+  ]
+}
+```
+
 ```json
 {
-  "values": {
-    "platforms": [
-      "twitch",
-      "youtube"
-    ]
-  },
   "context": {
-    "connections": [
-      {
-        "platform": "twitch",
-        "channel_id": "1337"
-      },
-      {
-        "platform": "youtube",
-        "channel_id": "1337"
-      }
-    ]
-  }
+      "connections": [
+        {
+          "platform": "twitch",
+          "channel_id": "1337"
+        },
+        {
+          "platform": "youtube",
+          "channel_id": "1337"
+        }
+      ]
+    }
 }
 ```
 
 ### Resource Field
+
+::: warning
+The `resource` field is currently not supported in the scene editor.
+:::
 
 Additional `resource` options may be defined in the `options` array, like in the `dropdown` field. When using the
 `multiple` option, the value will be an array of selected values.
@@ -496,28 +529,23 @@ Additional `resource` options may be defined in the `options` array, like in the
         map:
           label: $.data[*].name
           value: $.data[*].id
-    validations:
-      required: true
 ```
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "alert-set": "1337"
-  }
+  "alert-set": "1337"
 }
 ```
 
 ### Select Field
 
-::: danger
-**Deprecated**: The `select` field is deprecated and will be removed in the future. Please use the `dropdown` field
-instead or various other fields like `chips` or `tags`.
-
-**Limited Support**: The select field currently only supports the `grid` style.
+::: warning
+**Limited Support**: The `select` field currently only supports the `grid` style.
 :::
+
+![Select Field](../../images/fields/select.png)
 
 The `select` field provides different ways to represent a select menu. Options may be defined in the `options` array.
 
@@ -539,17 +567,15 @@ The `select` field provides different ways to represent a select menu. Options m
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "my-select": [
-      "option-1"
-    ]
-  }
+  "my-select": [ "option-1" ]
 }
 ```
 
 ### Slider Field
+
+![Select Field](../../images/fields/slider.png)
 
 The `slider` field provides a beautiful slider that can be used to select a value. The `min`, `max` & `step` values are
 required.
@@ -567,15 +593,15 @@ required.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "age": 18
-  }
+  "age": 18
 }
 ```
 
 ### Tags Field
+
+![Tags Field](../../images/fields/tags.png)
 
 The `tags` field allow you to freely type in a list of words. This field is useful for adding a list of users, for
 which may be included or excluded from a feature, for example.
@@ -593,14 +619,31 @@ which may be included or excluded from a feature, for example.
 
 Resulting `values`:
 
-```json
+```json:no-line-numbers
 {
-  "values": {
-    "ignored-users": [
-      "user1",
-      "user2"
-    ]
-  }
+  "ignored-users": [ "user1", "user2" ]
+}
+```
+
+### Volume Field
+
+![Volume Field](../../images/fields/volume.png)
+
+The `volume` field provides a beautiful slider that can be used to select a volume value. The `value` is required and must be a number between 0 and 1.
+
+```yaml
+  - type: volume
+    id: volume
+    attributes:
+      label: Volume
+      value: 0.5
+```
+
+Resulting `values`:
+
+```json:no-line-numbers
+{
+  "volume": 0.5
 }
 ```
 
@@ -619,6 +662,9 @@ makes it easier for the user to understand the form. The following fields can be
 ### Accordion Field
 
 The `accordion` field can be used to group any number of other fields.
+
+![Accordion Field](../../images/fields/accordion-1.png)
+![Accordion Field open](../../images/fields/accordion-2.png)
 
 ```yaml
   - type: accordion
@@ -639,14 +685,14 @@ The `accordion` field can be used to group any number of other fields.
           description: This is a description
           value: Hello World
           type: text
-        validations:
-          required: true
       - ...
 ```
 
 The field does not store any values.
 
 ### Group Field
+
+![Group Field](../../images/fields/group.png)
 
 The `group` field can be used to visually combine other fields into a group.
 
@@ -669,14 +715,14 @@ The `group` field can be used to visually combine other fields into a group.
           description: This is a description
           value: Hello World
           type: text
-        validations:
-          required: true
       - ...
 ```
 
 The field does not store any values.
 
 ### Search Field
+
+![Search Field](../../images/fields/search.png)
 
 The `search` field can be used to group any number of other fields and search through them and all of their ancestors.
 Searched ancestor fields: `label`, `description`, `title`, `value`
@@ -698,14 +744,14 @@ Searched ancestor fields: `label`, `description`, `title`, `value`
           description: This is a description
           value: Hello World
           type: text
-        validations:
-          required: true
       - ...
 ```
 
 The field does not store any values.
 
 ### Tabs Field
+
+![Tabs Field](../../images/fields/tabs.png)
 
 The `tabs` field provides a tab bar with defined tabs to structure and group other fields. Recommended to be used as the
 top level field. The optional `templates` field in a tab specified the pre-selected tab when the user selects templates
@@ -734,8 +780,6 @@ in the configuration menu.
               description: This is a description
               value: Hello World
               type: text
-            validations:
-              required: true
           - ...
 ```
 
@@ -794,8 +838,6 @@ The following example shows how to use conditional fields in multiple ways:
       label: Message Cleanup
       value: 30
       description: The number of seconds to cleanup
-    validations:
-      required: true
 ```
 
 ## Receiving Values
