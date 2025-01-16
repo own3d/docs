@@ -99,34 +99,34 @@ example demonstrates how to set up a Pinia store for the extension state:
 
 ```typescript
 import { defineStore } from 'pinia'
-import { inject, ref } from 'vue'
 import type { Ref } from 'vue'
-import type { Authorized, Context, User } from '@own3d/sdk/types'
+import { inject, ref } from 'vue'
+import type { Authorized, Context } from '@own3d/sdk/types'
 import { useContext } from '@own3d/sdk/context'
 import { useAuth } from '@own3d/sdk/auth'
 
 export const useExtensionStore = defineStore('extension', () => {
-    const user: Ref<User | null> = ref(null)
-    const context: Ref<Authorized | null> = ref(null)
+  const user: Ref<Authorized | null> = ref(null)
+  const context: Ref<Context | null> = ref(null)
 
-    const extension = inject('extension')
-    const {onContext} = useContext(extension)
-    const {onAuthorized} = useAuth(extension)
+  const extension = inject('extension')
+  const {onContext} = useContext(extension)
+  const {onAuthorized} = useAuth(extension)
 
-    onContext((_context: Partial<Context>, changed: ReadonlyArray<keyof Context>) => {
-        for (const key of changed) {
-            context.value = {...context.value, [key]: _context[key]}
-        }
-    }, {immediate: true})
-
-    onAuthorized((_user: Authorized) => {
-        user.value = _user
-    })
-
-    return {
-        user,
-        context,
+  onContext((_context: Partial<Context>, changed: ReadonlyArray<keyof Context>) => {
+    for (const key of changed) {
+      context.value = {...context.value, [key]: _context[key]}
     }
+  }, {immediate: true})
+
+  onAuthorized((_user: Authorized) => {
+    user.value = _user
+  })
+
+  return {
+    user,
+    context,
+  }
 })
 ```
 
