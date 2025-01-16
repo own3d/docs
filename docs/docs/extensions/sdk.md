@@ -23,7 +23,14 @@ npm install @own3d/sdk
 ```
 
 After installing the SDK, you can import the modules you need in your project. Keep in mind that your code will be
-organized in a more modular way, and you will have to import the modules you need explicitly.
+organized in a more modular way, and you will have to import the modules explicitly.
+
+### For General JavaScript Applications
+
+::: warning
+Avoid calling `initializeExtension()` multiple times in your application. Instead, initialize the extension once and
+pass it around as needed. This approach ensures that the extension is correctly set up and avoids potential issues.
+:::
 
 ```js
 import { initializeExtension } from '@own3d/sdk/extension'
@@ -37,6 +44,112 @@ onAuthorized(async (user) => {
     console.log(user)
 })
 ```
+
+### For Vue Applications
+
+> This feature is available from version 0.0.30 onwards.
+
+If you're using Vue, we provide a dedicated Vue plugin that makes integration seamless. Follow these steps:
+
+**Step 1: Set Up the Vue Plugin**
+
+```js
+import './style.css'
+import { createApp } from 'vue'
+import { createExtension } from '@own3d/sdk/vue'
+import App from './App.vue'
+
+const extension = createExtension()
+const app = createApp(App)
+
+app.use(extension)
+app.mount('#app')
+```
+
+::: warning
+Note: Avoid calling `initializeExtension()` directly in Vue components. Use `createExtension()` during app bootstrap
+instead.
+::::
+
+**Step 2: Use the SDK in Vue Components**
+
+<!-- @formatter:off -->
+```html
+<script setup lang="ts">
+import { inject } from 'vue'
+import { useAuth } from '@own3d/sdk/auth'
+
+const extension = inject('extension')
+const {onAuthorized} = useAuth(extension)
+
+onAuthorized((user) => {
+  console.log(user)
+})
+</script>
+```
+<!-- @formatter:on -->
+
+#### Optional: Creating a Pinia Store for SDK State
+
+We recommend setting up a [Pinia](https://pinia.vuejs.org/getting-started.html) store to manage SDK state such as user
+and context. This approach makes it easier to access these states reactively across your application. The following
+example demonstrates how to set up a Pinia store for the extension state:
+
+**Step 1: Create an Extension Store:**
+
+```typescript
+import { defineStore } from 'pinia'
+import { inject, ref } from 'vue'
+import type { Ref } from 'vue'
+import type { Authorized, Context, User } from '@own3d/sdk/types'
+import { useContext } from '@own3d/sdk/context'
+import { useAuth } from '@own3d/sdk/auth'
+
+export const useExtensionStore = defineStore('extension', () => {
+    const user: Ref<User | null> = ref(null)
+    const context: Ref<Authorized | null> = ref(null)
+
+    const extension = inject('extension')
+    const {onContext} = useContext(extension)
+    const {onAuthorized} = useAuth(extension)
+
+    onContext((_context: Partial<Context>, changed: ReadonlyArray<keyof Context>) => {
+        for (const key of changed) {
+            context.value = {...context.value, [key]: _context[key]}
+        }
+    }, {immediate: true})
+
+    onAuthorized((_user: Authorized) => {
+        user.value = _user
+    })
+
+    return {
+        user,
+        context,
+    }
+})
+```
+
+**Step 2: Using the Store in a Component:**
+
+<!-- @formatter:off -->
+```html
+<script setup lang="ts">
+import { useExtensionStore } from './extension.ts'
+import { storeToRefs } from 'pinia'
+
+const extensionStore = useExtensionStore()
+const { user, context } = storeToRefs(extensionStore)
+</script>
+
+<template>
+  <div>
+    User: {{ user }}
+    Context: {{ context }}
+  </div>
+</template>
+```
+<!-- @formatter:on -->
 
 ## Modules
 
