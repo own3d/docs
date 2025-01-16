@@ -456,9 +456,7 @@ Resulting `values`:
 
 ### Link Field
 
-::: warning
-The `link` field is currently not supported in the scene editor.
-:::
+![Link Field](../../images/fields/link.png)
 
 The `link` field allows you to create a link that can be used to navigate to a specific URL. It will open the link in a
 new tab. There is no `value` for this field.
