@@ -469,6 +469,20 @@ new tab. There is no `value` for this field.
       value: https://example.com
 ```
 
+### Paragraph Field
+
+![Paragraph Field](../../images/fields/paragraph.png)
+
+The `paragraph` field allows you to display a paragraph of text. The `headline` is optional. There is no `value` for this field.
+
+```yaml
+  - type: paragraph
+    id: paragraph
+    attributes:
+      headline: Headline
+      content: Lorem ipsum dolor sit amet, consetetur sadipscing elitr…
+```
+
 ### Platforms Field
 
 ![Platform Field](../../images/fields/platform.png)
