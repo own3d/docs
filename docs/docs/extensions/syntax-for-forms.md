@@ -461,12 +461,15 @@ Resulting `values`:
 The `link` field allows you to create a link that can be used to navigate to a specific URL. It will open the link in a
 new tab. There is no `value` for this field.
 
+The `type` attribute can be used to define the type of link (`button` or `text`). The `type` attribute is optional and defaults to `text`.
+
 ```yaml
   - type: link
     id: link
     attributes:
       label: Link
       value: https://example.com
+      type: text # optional
 ```
 
 ### Paragraph Field
