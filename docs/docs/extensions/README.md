@@ -139,11 +139,110 @@ the [developer portal](https://console.dev.own3d.tv/).
 Within the developer portal, you can customize your extension's settings, such as the name, description, as well
 as the hosting endpoints for the widget, dashboard, and configuration page.
 
-### Step 6: Review and publish it
+### Step 6: Update your extension details and presence
+
+When the development of your extension is finished and you are ready to submit it for review, take some time and add
+some details and screenshots. This is required to be finished before submitting for review, as editing this information
+is not available after this step.
+
+#### Basic information
+
+We highly recommend to give your extension a clear and unique name, as well as a good description.
+This information is used for searching in our store, so a fitting description helps with discoverability of your extension. A fitting extension category will get you listed in corresponding category pages.
+
+![console_details.png](../../images/extensions/console_details.png)
+
+#### Contact information
+
+Providing contact information is required to give us and the users a way to contact you in case of questions or
+issues. Some of this information is optional, as it might not be required in certain cases, but we will let you
+know, if required information is missing for your specific extension.
+
+![console_contact.png](../../images/extensions/console_contact.png)
+
+#### Images and videos
+
+When submitting an extension, we require at least a discovery image and a logo to be uploaded. The discovery
+image will be visible in the store search, while the logo may appear in places, where less space is available.
+
+Uploading a discovery video and icon is optional, but is highly recommended. The video will be playing when hovering
+over your extension in search results and makes it more lively. The icon is especially useful for dashboard extensions,
+as those can be displayed in the dashboard sidebar.
+
+For supported formats and recommended layout techniques, please refer to the respective [section](#media-formats) below.
+
+![console_presence.png](../../images/extensions/console_presence.png)
+
+#### Version details
+
+The individual versions contain information separate from the main extension. This includes information about
+premium features that can be unlocked via purchases or a OWN3D.PRO subscription.
+
+![console_versions.png](../../images/extensions/console_versions.png)
+
+#### Screenshots
+
+Apart from using your discovery image and video, you are also able to upload screenshots, that will be displayed
+in a gallery on your extension's detail page.
+
+For supported formats and recommended layout techniques, please refer to the respective [section](#media-formats) below.
+
+![console_screenshots.png](../../images/extensions/console_screenshots.png)
+
+#### Detail sections
+
+Ever dreamed of a full store presence without the hassle of building a custom layout? We got you! By using our
+system for "detail sections", you are able to define an arbitrary amount of sections that are displayed below your
+image gallery on the detail page.
+
+All fields are required when it comes to the review process. The label is used as a tab in the header for immediate
+navigation to your presented features, while the title and text are rendered in a way that fits our store design.
+Every other section flips the text and media to provide an alternating visual.
+
+For supported formats and recommended layout techniques, please refer to the respective [section](#media-formats) below.
+
+![console_detail_sections.png](../../images/extensions/console_detail_sections.png)
+
+### Step 7: Review and publish it
 
 After pushing your extension in a hosted-test state, you can use it in your OWN3D Pro dashboard. There you can test all
 the features of your extension. If you want to publish your extension to the public, you need to submit your extension
 for a code and feature review.
+
+## Media formats
+
+### Discovery images
+
+Discovery images are required to be in a square format to fit our tile-based search in the store. We recommend to 
+limit your main content to a contained 16:9 area, as we might re-use this image in other places as well.
+
+The file dimensions are required to be 1080px in both directions.
+
+![img_square.png](../../images/extensions/img_square.png)
+
+### Discovery videos
+
+Discovery videos are required to be in a 16:9 format to fit our hover preview in the store. We recommend to limit
+your main content to a contained 4:3 area, as we will also display the video in the gallery slider on the detail
+page.
+
+The file dimensions are required to be 1280x720.
+
+![img_landscape.png](../../images/extensions/img_landscape.png)
+
+### Logos and icons
+
+Logos and icons are required to be in a square format.
+
+The file dimensions must be 150px in both directions for logos and 40px for icons.
+
+### Detail sections
+
+Detail sections are required to be in a 4:3 format to fit our layout.
+
+The file dimensions are required to be 1080x810.
+
+![img_detail_section.png](../../images/extensions/img_detail_section.png)
 
 ## Debugging
 
