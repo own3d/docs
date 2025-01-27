@@ -120,10 +120,6 @@ Resulting `values`:
 
 ### Button Field
 
-::: warning
-The `button` field is currently not supported in the scene editor.
-:::
-
 The `button` field allows you to create a button that can be used to trigger an action. It will emit an event through
 the extension IPC module when the button is clicked. There is no `value` for this field.
 
@@ -131,15 +127,18 @@ the extension IPC module when the button is clicked. There is no `value` for thi
   - type: button
     id: button
     attributes:
-      label: Button
-      value: Click Me
+      label: Click Me
 ```
 
 Emitted event:
 
 ```js:no-line-numbers
-OWN3D.ext.ipc.on('<ext-id>:inputs:<input-id>:click', (payload) => {
-    console.log('Got click event', payload)
+import { useSceneBuilder } from '@own3d/sdk/scene-builder'
+
+const { onClick } = useSceneBuilder(/* extension instance */)
+
+onClick('foo', () => {
+  console.log('clicked foo')
 })
 ```
 

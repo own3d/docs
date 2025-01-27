@@ -189,47 +189,50 @@ onContext((context, changed) => {
 })
 ```
 
-### Remote Config
+### Notifications
 
-The Remote Config module provides methods to get and set configuration values without providing a backend service. Make
-sure to check out our [Remote Config documentation](./remote-config.md) for more information.
+The Notifications module provides API methods to send notifications to the user. Notifications can have different types such as `info`, `success`, `warning`, or `error`.
 
-```js
+```typescript
 import { initializeExtension } from '@own3d/sdk/extension'
-import { useRemoteConfig } from '@own3d/sdk/remote-config'
+import { useNotifications } from '@own3d/sdk/notifications'
 
 const extension = initializeExtension()
 
-const { getSegments, setSegment } = useRemoteConfig(extension)
+const { notify, info, success, warning, error, dismiss, patch } = useNotifications(extension)
 
-const segments = await getSegments()
-console.log(segments)
+// Example: Send a custom notification
+await notify({
+    type: 'info',
+    message: 'This is a custom notification!',
+})
 
-await setSegment('creator', { key: 'value' })
-```
+// Example: Send an info notification
+await info('This is an info message.')
 
-### Socket
+// Example: Send a success notification
+await success({
+    title: 'Success',
+    message: 'Operation completed successfully.',
+})
 
-The Socket module provides methods to connect to our event bus, which is a real-time messaging system that allows you to
-receive events from the OWN3D platform. For example, you can listen for events like new subscriptions or donations via
-our [NotifySub Event Types](../notify-sub/event-types.md) or custom events. You can also use the Socket module to
-receive events from the extension itself, like Remote Config changes.
+// Example: Send a warning notification
+await warning('This is a warning message.')
 
-::: tip
-While we technically use our event bus as our transit for our PubSub system, we recommend using the PubSub module
-for this purpose, as it provides a more straightforward interface.
-:::
+// Example: Send an error notification
+await error({
+    title: 'Error',
+    message: 'An error occurred.',
+})
 
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useSocket } from '@own3d/sdk/socket'
+// Example: Dismiss a notification by ID
+await dismiss('notification-id')
 
-const extension = initializeExtension()
-
-const { on } = useSocket(extension)
-
-on('notifysub', (data) => {
-    console.log(data)
+// Example: Update (patch) an existing notification
+await patch('notification-id', {
+  type: 'success',
+  title: 'Updated Notification',
+  message: 'The notification content has been updated.',
 })
 ```
 
@@ -264,4 +267,78 @@ await publish('foo', {
 })
 ```
 
+### Remote Config
 
+The Remote Config module provides methods to get and set configuration values without providing a backend service. Make
+sure to check out our [Remote Config documentation](./remote-config.md) for more information.
+
+```js
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useRemoteConfig } from '@own3d/sdk/remote-config'
+
+const extension = initializeExtension()
+
+const { getSegments, setSegment } = useRemoteConfig(extension)
+
+const segments = await getSegments()
+console.log(segments)
+
+await setSegment('creator', { key: 'value' })
+```
+
+### Scene Builder
+
+The Scene Builder module provides methods to interact with the Scene Builder, enabling developers to create interactive and customizable scenes.
+
+```typescript
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useSceneBuilder } from '@own3d/sdk/scene-builder'
+
+const extension = initializeExtension()
+
+const { setInteractive, onClick, setValues, patchValues } = useSceneBuilder(extension)
+
+// Example: Set the Scene Builder to interactive mode
+await setInteractive(true)
+
+// Example: Listen for a click event on an input element
+onClick('input-id', () => {
+    console.log('Input clicked!')
+})
+
+// Example: Set values for Scene Builder inputs
+await setValues({
+    input1: 'value1',
+    input2: 'value2',
+})
+
+// Example: Update specific values for Scene Builder inputs
+await patchValues({
+    input1: 'newValue1',
+})
+```
+
+### Socket
+
+The Socket module provides methods to connect to our event bus, which is a real-time messaging system that allows you to
+receive events from the OWN3D platform. For example, you can listen for events like new subscriptions or donations via
+our [NotifySub Event Types](../notify-sub/event-types.md) or custom events. You can also use the Socket module to
+receive events from the extension itself, like Remote Config changes.
+
+::: tip
+While we technically use our event bus as our transit for our PubSub system, we recommend using the PubSub module
+for this purpose, as it provides a more straightforward interface.
+:::
+
+```js
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useSocket } from '@own3d/sdk/socket'
+
+const extension = initializeExtension()
+
+const { on } = useSocket(extension)
+
+on('notifysub', (data) => {
+    console.log(data)
+})
+```
