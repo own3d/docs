@@ -1,4 +1,4 @@
-# Manifest Configuration <Badge text="RFC" type="warning"/>
+# Manifest Configuration <Badge text="Public Beta" type="warning"/>
 
 The manifest file is a YAML file which contains all the information about your extension. It can be used in combination
 with the `own3d ext:deploy` command to deploy your extension to the OWN3D platform without the need to use the web

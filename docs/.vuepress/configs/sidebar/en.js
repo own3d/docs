@@ -28,10 +28,11 @@ export const sidebarEn = {
             collapsable: false,
             children: [
                 '/docs/extensions/README.md',
+                '/docs/extensions/manifest-configuration.md',
+                '/docs/extensions/live-circle.md',
+                '/docs/extensions/access-control.md',
                 '/docs/extensions/sdk.md',
                 '/docs/extensions/tokens-and-client-tokens.md',
-                '/docs/extensions/access-control.md',
-                '/docs/extensions/live-circle.md',
                 '/docs/extensions/remote-config.md',
                 '/docs/extensions/syntax-for-forms.md',
                 '/docs/extensions/designing-extensions.md',
