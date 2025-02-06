@@ -684,6 +684,7 @@ makes it easier for the user to understand the form. The following fields can be
 |-------------------------------|---------------------------------------------------------------------------|
 | [Accordion](#accordion-field) | A group of fields that can be collapsed and expanded.                     |
 | [Group](#group-field)         | Visually combines other fields into a group.                              |
+| [Row](#row-field)             | Visually combines other fields into a row.                              |
 | [Search](#search-field)       | Makes it possible to search through fields and their ancestors.           |
 | [Tabs](#tabs-field)           | Provides a tab bar with defined tabs to structure and group other fields. |
 
@@ -744,6 +745,43 @@ The `group` field can be used to visually combine other fields into a group.
           value: Hello World
           type: text
       - ...
+```
+
+The field does not store any values.
+
+### Row Field
+
+::: warning
+**Experimental:** The `row` field may not work as expected in all cases.
+:::
+
+![Row Field](../../images/fields/row.png)
+
+The `row` field can be used to group other fields into a row. The `col-span` attribute can be used to define the width of the field.
+
+We recommend using not more than a total of 4 columns in a row.
+
+Examples:
+* Two fields with `col-span:1` each will result in a row with two columns
+* Two fields with `col-span:1` and `col-span:3` will result in a row with one column that is 25% wide and one column that is 75% wide
+* Three fields with `col-span:1` each will result in a row with three columns that are 33% wide each
+
+```yaml{9,15}
+- id: row-1
+  type: row
+  fields:
+    - id: text-1
+      type: input
+      attributes:
+        label: Text 1
+        value: 'Hello'
+        col-span: 1
+    - id: text-2
+      type: input
+      attributes:
+        label: 'Text 2'
+        value: 'World'
+        col-span: 3
 ```
 
 The field does not store any values.
