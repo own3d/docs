@@ -757,14 +757,14 @@ The field does not store any values.
 
 ![Row Field](../../images/fields/row.png)
 
-The `row` field can be used to group other fields into a row. The `col-span` attribute can be used to define the width of the field.
+The `row` field can be used to group other fields into a row. The `colSpan` attribute can be used to define the width of the field.
 
 We recommend using not more than a total of 4 columns in a row.
 
 Examples:
-* Two fields with `col-span:1` each will result in a row with two columns
-* Two fields with `col-span:1` and `col-span:3` will result in a row with one column that is 25% wide and one column that is 75% wide
-* Three fields with `col-span:1` each will result in a row with three columns that are 33% wide each
+* Two fields with `colSpan: 1` each will result in a row with two columns
+* Two fields with `colSpan: 1` and `colSpan: 3` will result in a row with one column that is 25% wide and one column that is 75% wide
+* Three fields with `colSpan: 1` each will result in a row with three columns that are 33% wide each
 
 ```yaml{9,15}
 - id: row-1
@@ -775,13 +775,13 @@ Examples:
       attributes:
         label: Text 1
         value: 'Hello'
-        col-span: 1
+        colSpan: 1
     - id: text-2
       type: input
       attributes:
         label: 'Text 2'
         value: 'World'
-        col-span: 3
+        colSpan: 3
 ```
 
 The field does not store any values.
