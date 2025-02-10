@@ -534,6 +534,48 @@ Resulting `values`:
 }
 ```
 
+### Repeater Field
+
+![Repeater Field](../../images/fields/repeater.png)
+
+The `repeater` field allows you to repeat a set of fields. The `fields` array is required and must contain the fields	that should be repeated.
+
+The `cta` attribute can be used to define the label of the button that adds a new item. The `label` attribute can be used to define the label of the repeater.
+
+```yaml
+- id: my-repeater
+  type: repeater
+  fields:
+    - id: text-1
+      type: input
+      attributes:
+        label: 'Text 1'
+        value: 'Lorem ipsum'
+    - id: text-2
+      type: input
+      attributes:
+        label: 'Text 2'
+        value: 'dolor sit amet'
+  attributes:
+    cta: 'Add Item'
+    label: Item
+```
+
+Resulting `values`:
+
+```json:no-line-numbers
+{
+  "my-repeater": [
+    {
+      "text-1": "Lorem ipsum",
+      "text-2": "dolor sit amet"
+    },
+    ...
+  ]
+}
+```
+
+
 ### Resource Field
 
 ::: warning
