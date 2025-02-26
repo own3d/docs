@@ -37,6 +37,10 @@ To receive these notifications, you need to subscribe to the event types you are
 the [Socket API documentation](../alerts/examples.md#socket-api) for more information.
 
 ## Stream Online
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+  <img src="../../images/platforms/youtube.png" width="30">
+</div>
 
 This notification is sent, when a user starts a broadcast on a connected platform.
 
@@ -66,6 +70,10 @@ This notification is sent, when a user starts a broadcast on a connected platfor
 | YouTube  | PubSubHubBub    |
 
 ## Stream Offline
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+  <img src="../../images/platforms/youtube.png" width="30">
+</div>
 
 This notification is sent, when a user ends a broadcast on a connected platform.
 
@@ -95,6 +103,9 @@ This notification is sent, when a user ends a broadcast on a connected platform.
 | YouTube  | Chatbot can not find a chat instance |
 
 ## Update
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a user updates their channel information.
 
@@ -123,6 +134,11 @@ This notification is sent, when a user updates their channel information.
 | Twitch   | `channel.update` |
 
 ## Follow
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+  <img src="../../images/platforms/youtube.png" width="30">
+  <img src="../../images/platforms/kick.png" width="30">
+</div>
 
 This notification is sent, when a viewer "follows" a user channel. We define "follow" as non-monetary, which means that
 a "follow" is in fact a "subscription" on YouTube.
@@ -153,8 +169,14 @@ a "follow" is in fact a "subscription" on YouTube.
 |----------|--------------------|
 | Twitch   | `channel.follow`   |
 | YouTube  | Repeated API fetch |
+| Kick     | `channel.follow`   |
 
 ## Subscribe
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+  <img src="../../images/platforms/youtube.png" width="30">
+  <img src="../../images/platforms/kick.png" width="30">
+</div>
 
 This notification is sent, when a viewer "subscribes" to a user channel. We define "subscribe" as monetary, which means
 a "subscription" is in fact a "membership" on YouTube.
@@ -187,8 +209,14 @@ a "subscription" is in fact a "membership" on YouTube.
 |----------|----------------------------|
 | Twitch   | `channel.subscribe`        |
 | YouTube  | Membership message in chat |
+| Kick     | `channel.subscription.new` |
 
 ## Re-Subscribe
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+  <img src="../../images/platforms/youtube.png" width="30">
+  <img src="../../images/platforms/kick.png" width="30">
+</div>
 
 This notification is sent, when a viewer continues a subscription / membership on a user channel.
 
@@ -224,8 +252,14 @@ This notification is sent, when a viewer continues a subscription / membership o
 |----------|--------------------------------|
 | Twitch   | `channel.subscription.message` |
 | YouTube  | Membership milestone in chat   |
+| Kick     | `channel.subscription.renewal` |
 
 ## Gift-Subscribe
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+  <img src="../../images/platforms/youtube.png" width="30">
+  <img src="../../images/platforms/kick.png" width="30">
+</div>
 
 This notification is sent, when a viewer gifts one or more subscriptions / memberships to the community. There will
 usually be multiple `subscribe` notifications afterwards coming from the platform.
@@ -260,8 +294,12 @@ usually be multiple `subscribe` notifications afterwards coming from the platfor
 |----------|-------------------------------|
 | Twitch   | `channel.subscription.gift`   |
 | YouTube  | Membership gift event in chat |
+| Kick     | `channel.subscription.gifts`  |
 
 ## Cheer
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a viewer cheers in a channel chat.
 
@@ -294,6 +332,9 @@ This notification is sent, when a viewer cheers in a channel chat.
 | Twitch   | `channel.cheer` |
 
 ## Raid
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a broadcaster raids a user channel.
 
@@ -325,6 +366,9 @@ This notification is sent, when a broadcaster raids a user channel.
 | Twitch   | `channel.raid` |
 
 ## Superchat
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/youtube.png" width="30">
+</div>
 
 This notification is sent, when a viewer sends a Superchat message in a chat.
 
@@ -359,6 +403,9 @@ This notification is sent, when a viewer sends a Superchat message in a chat.
 | YouTube  | Superchat message in chat |
 
 ## Supersticker
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/youtube.png" width="30">
+</div>
 
 This notification is sent, when a viewer sends a Supersticker in a chat.
 
@@ -393,6 +440,9 @@ This notification is sent, when a viewer sends a Supersticker in a chat.
 | YouTube  | Supersticker message in chat |
 
 ## Shoutout Create
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a user gives a shoutout to another channel.
 
@@ -424,6 +474,9 @@ This notification is sent, when a user gives a shoutout to another channel.
 | Twitch   | `channel.shoutout.create` |
 
 ## Shoutout Receive
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a user receives a shoutout in another channel.
 
@@ -455,6 +508,9 @@ This notification is sent, when a user receives a shoutout in another channel.
 | Twitch   | `channel.shoutout.receive` |
 
 ## Hype Train Begin
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a hype train starts on a user channel.
 
@@ -485,6 +541,9 @@ This notification is sent, when a hype train starts on a user channel.
 | Twitch   | `channel.hype_train.begin` |
 
 ## Charity Donation
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a charity donation is done on a user channel.
 
@@ -522,6 +581,9 @@ This notification is sent, when a charity donation is done on a user channel.
 | Twitch   | `channel.charity_campaign.donate` |
 
 ## Custom Rewards Add
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a user adds a custom reward in their Twitch channel.
 
@@ -552,6 +614,9 @@ This notification is sent, when a user adds a custom reward in their Twitch chan
 | Twitch   | `channel.channel_points_custom_reward.add` |
 
 ## Custom Rewards Update
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a user updates a custom reward in their Twitch channel.
 
@@ -582,6 +647,9 @@ This notification is sent, when a user updates a custom reward in their Twitch c
 | Twitch   | `channel.channel_points_custom_reward.update` |
 
 ## Custom Rewards Remove
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a user removes a custom reward in their Twitch channel.
 
@@ -612,6 +680,9 @@ This notification is sent, when a user removes a custom reward in their Twitch c
 | Twitch   | `channel.channel_points_custom_reward.remove` |
 
 ## Custom Rewards Redemption Add
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a viewer redeems a custom reward in a user Twitch channel.
 
@@ -656,6 +727,9 @@ This notification is sent, when a viewer redeems a custom reward in a user Twitc
 | Twitch   | `channel.channel_points_custom_reward_redemption.add` |
 
 ## Custom Rewards Redemption Update
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/twitch.png" width="30">
+</div>
 
 This notification is sent, when a pending redemption is approved or rejected.
 
@@ -693,6 +767,9 @@ This notification is sent, when a pending redemption is approved or rejected.
 | Twitch   | `channel.channel_points_custom_reward_redemption.update` |
 
 ## Donation
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/own3d.png" width="30">
+</div>
 
 This notification is sent, when a pending redemption is approved or rejected.
 
@@ -724,6 +801,9 @@ This notification is sent, when a pending redemption is approved or rejected.
 None. This event type is coming directly via the OWN3D Pro tipping page.
 
 ## Custom
+<div style="display: flex; gap: 0.2rem; margin-top: 0.2rem">
+  <img src="../../images/platforms/own3d.png" width="30">
+</div>
 
 This notification is sent, when a custom event is triggered.
 
