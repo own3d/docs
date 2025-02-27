@@ -45,6 +45,24 @@
             "subtitle": "Welcome to the community!",
             "chat_message": "Thank you for the subscription, {{name}}."
           }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who followed",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} is now following",
+            "subtitle": "Welcome to the community!",
+            "chat_message": "Thank you for the follow, {{name}}."
+          }
         }
       ],
       "examples": [
@@ -58,6 +76,13 @@
         {
           "name": "Default",
           "platform": "youtube",
+          "parameters": {
+            "name": "Someone"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
           "parameters": {
             "name": "Someone"
           }
@@ -144,6 +169,23 @@
             "title": "{{name}} just became a member",
             "chat_message": "{{name}} just became a member on my channel. Thanks for your support!"
           }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who subscribed",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} just subscribed",
+            "chat_message": "{{name}} just subscribed. Thanks for your support!"
+          }
         }
       ],
       "examples": [
@@ -177,6 +219,13 @@
           "parameters": {
             "name": "Someone",
             "tier": "Club Member"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "name": "Someone"
           }
         }
       ]
@@ -317,6 +366,31 @@
             "subtitle": "{{message}}",
             "chat_message": "Your continued membership greatly supports this channel - thank you, {{name}}!"
           }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who re-subscribed",
+              "conditional": false
+            },
+            {
+              "name": "months",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of months the user has been subscribed",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} just resubbed for the {{months}}. month",
+            "chat_message": "{{name}} just resubbed for {{months}} month(s)! Thanks for your support!"
+          }
         }
       ],
       "examples": [
@@ -385,6 +459,14 @@
             "tier": "Club Member",
             "months": 1,
             "message": "Love the stream! FevziGG"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "name": "Someone",
+            "months": 1
           }
         }
       ]
@@ -495,6 +577,31 @@
             "subtitle": "Thanks for the community gift!",
             "chat_message": "{{gifter}}, thank you for your community gift!"
           }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "gifter",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who gifted the subscription",
+              "conditional": false
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The total amount of the subscription",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{gifter}} gifted {{amount}} subscriptions",
+            "chat_message": "{{gifter}}, thank you for gifting {{amount}} subscriptions!"
+          }
         }
       ],
       "examples": [
@@ -537,6 +644,14 @@
           "parameters": {
             "gifter": "Someone",
             "tier": "Club Member",
+            "amount": 1
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "gifter": "Someone",
             "amount": 1
           }
         }
