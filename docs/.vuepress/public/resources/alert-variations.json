@@ -25,7 +25,7 @@
           "default": {
             "title": "{{name}} is now following",
             "subtitle": "Welcome to the community!",
-            "chat_message": "Thank you for the follow, {{name}}."
+            "chat_message": ""
           }
         },
         {
@@ -43,7 +43,7 @@
           "default": {
             "title": "{{name}} is now a subscriber!",
             "subtitle": "Welcome to the community!",
-            "chat_message": "Thank you for the subscription, {{name}}."
+            "chat_message": ""
           }
         },
         {
@@ -61,7 +61,7 @@
           "default": {
             "title": "{{name}} is now following",
             "subtitle": "Welcome to the community!",
-            "chat_message": "Thank you for the follow, {{name}}."
+            "chat_message": ""
           }
         }
       ],
@@ -142,7 +142,7 @@
           ],
           "default": {
             "title": "{{name}} just subscribed",
-            "chat_message": "{{name}} just subscribed. Thanks for your support!"
+            "chat_message": ""
           }
         },
         {
@@ -167,7 +167,7 @@
           ],
           "default": {
             "title": "{{name}} just became a member",
-            "chat_message": "{{name}} just became a member on my channel. Thanks for your support!"
+            "chat_message": ""
           }
         },
         {
@@ -184,7 +184,7 @@
           ],
           "default": {
             "title": "{{name}} just subscribed",
-            "chat_message": "{{name}} just subscribed. Thanks for your support!"
+            "chat_message": ""
           }
         }
       ],
@@ -322,7 +322,7 @@
           "default": {
             "title": "{{name}} just resubbed for the {{months}}. month",
             "subtitle": "{{message}}",
-            "chat_message": "{{name}} just subscribed for the {{months}}. month. Thanks for your support!"
+            "chat_message": ""
           }
         },
         {
@@ -364,7 +364,7 @@
           "default": {
             "title": "{{name}} is a member for the {{months}}. month",
             "subtitle": "{{message}}",
-            "chat_message": "Your continued membership greatly supports this channel - thank you, {{name}}!"
+            "chat_message": ""
           }
         },
         {
@@ -389,7 +389,7 @@
           ],
           "default": {
             "title": "{{name}} just resubbed for the {{months}}. month",
-            "chat_message": "{{name}} just resubbed for {{months}} month(s)! Thanks for your support!"
+            "chat_message": ""
           }
         }
       ],
@@ -541,7 +541,7 @@
           "default": {
             "title": "{{gifter}} gifted a {{tier}} sub",
             "subtitle": "Thanks for the community gift!",
-            "chat_message": "{{gifter}}, thank you for your community gift!"
+            "chat_message": ""
           }
         },
         {
@@ -575,7 +575,7 @@
           "default": {
             "title": "{{gifter}} gifted {{amount}} memberships",
             "subtitle": "Thanks for the community gift!",
-            "chat_message": "{{gifter}}, thank you for your community gift!"
+            "chat_message": ""
           }
         },
         {
@@ -600,7 +600,7 @@
           ],
           "default": {
             "title": "{{gifter}} gifted {{amount}} subscriptions",
-            "chat_message": "{{gifter}}, thank you for gifting {{amount}} subscriptions!"
+            "chat_message": ""
           }
         }
       ],
@@ -705,7 +705,7 @@
           "default": {
             "title": "{{name}} cheered {{amount}} Bits",
             "subtitle": "{{message}}",
-            "chat_message": "Thanks for the cheer, {{name}}!"
+            "chat_message": ""
           }
         }
       ],
@@ -784,7 +784,7 @@
           "default": {
             "title": "{{name}} is raiding with a party of {{count}}",
             "subtitle": "Hello there!",
-            "chat_message": "Welcome raiders! Thank you for the raid, {{name}}!"
+            "chat_message": ""
           }
         }
       ],
@@ -830,7 +830,7 @@
           ],
           "default": {
             "title": "Hype Train Level {{level}}",
-            "chat_message": "Choo Choo - the Hype Train started on level {{level}}! Subs and cheers make you part of the Hype Train."
+            "chat_message": ""
           }
         }
       ],
@@ -875,7 +875,7 @@
           ],
           "default": {
             "title": "Shoutout to {{name}}",
-            "chat_message": "Shoutout to {{name}}! Check out their stream at {{url}}."
+            "chat_message": ""
           }
         }
       ],
@@ -921,7 +921,7 @@
           ],
           "default": {
             "title": "Shoutout from {{name}}",
-            "chat_message": "My channel received a shoutout from {{name}}, big thanks!"
+            "chat_message": ""
           }
         }
       ],
@@ -1066,7 +1066,7 @@
           "default": {
             "title": "New super chat from {{name}}",
             "subtitle": "{{message}}",
-            "chat_message": "{{name}} just sent a Super Chat for {{amount}}{{currency}}. Thanks for your support!"
+            "chat_message": ""
           }
         }
       ],
@@ -1139,7 +1139,7 @@
           ],
           "default": {
             "title": "Super sticker from {{name}}",
-            "chat_message": "{{name}} just sent a Super Sticker for {{amount}}{{currency}}. Thanks for your support!"
+            "chat_message": ""
           }
         }
       ],
@@ -1205,7 +1205,7 @@
           "default": {
             "title": "{{name}} tipped {{amount}}{{currency}}",
             "subtitle": "Appreciate your donation!",
-            "chat_message": "Thanks for the donation and for supporting the channel, {{name}}!"
+            "chat_message": ""
           }
         }
       ],
@@ -1312,7 +1312,7 @@
           "default": {
             "title": "{{name}} donated {{amount}}{{currency}} for {{charity_name}}",
             "subtitle": "Thanks for the donation!",
-            "chat_message": "{{name}} just donated {{amount}}{{currency}} for {{charity_name}}. Thanks for your contribution!"
+            "chat_message": ""
           }
         }
       ],
