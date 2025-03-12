@@ -534,6 +534,60 @@ Resulting `values`:
 }
 ```
 
+### Platform-Event Field
+With `multiple: false` you can select a single event.
+![Platform-Event Field](../../images/fields/platform-event-1.png "multiple: false")
+
+With `multiple: true` you can select multiple events.
+![Platform-Event Field](../../images/fields/platform-event-2.png)
+
+The `platform-event` field allows you to select a single or multiple events by platform. It will automatically show the available platforms and events supported by us. The `value` will be an array of selected platforms and events. `options` can be omitted. The selectable values will be the intersection of `options` (if given), the connected platforms of the user and the platforms and events that are supported by us.
+
+```yaml
+- id: example-1
+  type: platform-event
+  options:
+    - value: twitch
+    - value: youtube
+  attributes:
+    label: 'Example 1'
+```
+
+```yaml:{5}
+- id: example-2
+  type: platform-event
+  attributes:
+    label: 'Example 2'
+    multiple: true
+```
+
+Resulting `values`:
+
+```json:no-line-numbers
+{
+  "example-1": [
+    {
+      "platform": "twitch",
+      "event": "follow"
+    }
+  ],
+  "example-2": [
+    {
+      "platform": "twitch",
+      "event": "follow"
+    },
+    {
+      "platform": "twitch",
+      "event": "re-subscribe"
+    },
+    {
+      "platform": "youtube",
+      "event": "superchat"
+    }
+  ]
+}
+```
+
 ### Repeater Field
 
 ![Repeater Field](../../images/fields/repeater.png)
