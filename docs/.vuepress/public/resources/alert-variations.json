@@ -214,6 +214,15 @@
           }
         },
         {
+          "name": "Tier 1 (gifted)",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "1000",
+            "is_gift": true
+          }
+        },
+        {
           "name": "Default",
           "platform": "youtube",
           "parameters": {
