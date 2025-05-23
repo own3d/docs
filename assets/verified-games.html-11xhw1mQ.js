@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-43954902","path":"/docs/verified-games.html","title":"Game Verification","lang":"en-US","frontmatter":{},"headers":[],"git":{},"filePathRelative":"docs/verified-games.md"}');export{e as data};
