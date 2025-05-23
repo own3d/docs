@@ -32,6 +32,34 @@ to the local test state before you can resubmit it for a second review.
 
 If your extension is approved, you can publish it to the public.
 
+### Release your extension
+
+To release your extension, you need to select the version you want to publish and click on the **Release** button. This
+will publish your extension to the public.
+
+**Release Behavior**
+
+![Release Behavior](../../images/extensions/release_behavior.png)
+
+When you release your extension, you will be asked to select the release behavior. You can choose between
+
+- **Release without breaking changes**: This will publish your extension to all users immediately.
+- **Breaking Change → Shutdown old widgets → Notify users**: This will publish your extension to all users immediately
+  and shut down all old widgets. This is useful if you have made breaking changes to your extension and want to make
+  sure that all users are using the latest version. It requires the user to reconfigure the extension in their scene
+  builder.
+- **Breaking Change → Keep widgets**: This will publish your extension to all users immediately and keep all old
+  widgets. This is useful if you have made breaking changes to your extension but want to make sure that existing users
+  can still use the old version of your extension. It still requires the user to reconfigure the extension in their
+  scene builder.
+
+By default, we recommend using **Release without breaking changes**. But if you work with widgets that are not
+compatible with the new schema of your forms, you should use **Breaking Change → ...**, and select the option that fits
+your needs.
+
+> **Note**: If you select the **Breaking Change → Shutdown old widgets → Notify users** option, all users will be
+> notified about the breaking change.
+
 ## Published
 
 If your extension is published, it is available to all or selected OWN3D users depending on
