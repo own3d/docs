@@ -6,14 +6,17 @@
     "autoprefixer": "^10.4.16",
     "axios": "^1.12.2",
     "postcss": "^8.4.31",
+    "sass-embedded": "^1.92.1",
     "tailwindcss": "^3.3.5",
-    "vuepress": "^2.0.0-rc.0"
+    "vuepress": "2.0.0-rc.24"
   },
   "scripts": {
     "docs:dev": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && vuepress dev docs",
     "docs:build": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && vuepress build docs"
   },
   "dependencies": {
+    "@vuepress/bundler-vite": "2.0.0-rc.24",
+    "@vuepress/theme-default": "2.0.0-rc.112",
     "dotenv": "^17.2.2",
     "openai": "^5.20.3",
     "tsx": "^4.20.5"

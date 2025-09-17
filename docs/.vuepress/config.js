@@ -1,9 +1,11 @@
-import { defaultTheme } from 'vuepress'
-import { navbarEn, sidebarEn } from './configs'
+import {defaultTheme} from '@vuepress/theme-default'
+import { viteBundler } from '@vuepress/bundler-vite'
+import {defineUserConfig} from 'vuepress'
+import {navbarEn, sidebarEn} from './configs'
 
-const { description } = require('../../package')
+const {description} = require('../../package')
 
-export default {
+export default defineUserConfig({
     lang: 'en-US',
 
     /**
@@ -20,9 +22,9 @@ export default {
      * Extra tags to be injected to the page HTML `<head>`
      */
     head: [
-        ['meta', { name: 'theme-color', content: '#ff9602' }],
-        ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
-        ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+        ['meta', {name: 'theme-color', content: '#ff9602'}],
+        ['meta', {name: 'apple-mobile-web-app-capable', content: 'yes'}],
+        ['meta', {name: 'apple-mobile-web-app-status-bar-style', content: 'black'}],
     ],
 
     /**
@@ -46,11 +48,5 @@ export default {
         },
     }),
 
-    /**
-     * Apply plugins，ref：https://v1.vuepress.vuejs.org/zh/plugin/
-     */
-    plugins: [
-        '@vuepress/plugin-back-to-top',
-        '@vuepress/plugin-medium-zoom',
-    ],
-}
+    bundler: viteBundler(),
+})
