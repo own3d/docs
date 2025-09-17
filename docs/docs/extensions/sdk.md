@@ -342,3 +342,50 @@ on('notifysub', (data) => {
     console.log(data)
 })
 ```
+
+#### Chat Events via Socket
+
+With the Socket module, you can also receive chat-related events such as:
+
+- **`message`** – a new chat message  
+- **`delete-message`** – a single message was deleted  
+- **`clear-chat`** – the chat was cleared  
+
+Unlike direct `socket.io` connections, you do **not** need to manually join the  
+`<client_id>.<platform>.<platform_id>.chat` namespace. The SDK automatically handles this setup.
+
+Example:
+
+```js
+on('message', (msg) => {
+  console.log('New message:', msg)
+})
+
+on('delete-message', (msg) => {
+  console.log('Message deleted:', msg)
+})
+
+on('clear-chat', () => {
+  console.log('Chat cleared')
+})
+````
+
+##### Message Object Summary
+
+When handling a `message` event, the payload follows the [Message Protocol](./message-protocol.md).
+Here are the key fields you’ll typically use:
+
+| Field        | Type         | Description                                                              |
+|--------------|--------------|--------------------------------------------------------------------------|
+| `id`         | string       | Unique identifier of the message                                         |
+| `type`       | string       | Message type, e.g. `message` or `announcement`                           |
+| `timestamp`  | number       | UNIX timestamp (ms) when the message was received                        |
+| `platform`   | string       | Source platform, e.g. `twitch`, `youtube`                                |
+| `user`       | object       | Info about the sender (id, username, avatar, badges, color, …)           |
+| `channel`    | object       | Info about the channel (id, platform_id, username, avatar)               |
+| `message`    | string       | Raw message text                                                         |
+| `fragments`  | array        | Rich breakdown of the message (mentions, emotes, cheermotes, plain text) |
+| `parent`     | object\|null | Parent message (if this is a reply)                                      |
+| `attributes` | object       | Metadata such as `edited`, `highlight`, `accent`                         |
+
+👉 For the full schema and detailed fragment types, see the [Message Protocol → Message Reference](../chatbot/message-protocol.md).
