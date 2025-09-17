@@ -32,6 +32,12 @@ const files = [
     {
         path: 'docs/docs/extensions/guidelines-and-policies.md',
     },
+    {
+        path: 'docs/docs/extensions/syntax-for-forms.md',
+    },
+    {
+        path: 'docs/docs/extensions/README.md',
+    },
 ]
 
 async function update() {
