@@ -1,5 +1,78 @@
 # Syntax for Forms <Badge text="public beta" type="warning"/>
 
+When you create a browser source extension, you can define a form that allows users to customize the extension.
+This form is defined using YAML syntax and can contain various types of inputs, such as text fields, dropdowns,
+color pickers, and more. You define these inputs in a dedicated `forms.yaml` file. The OWN3D CLI picks this up during
+deployment together with your `manifest.yaml`. To learn more about the manifest file, check out the
+[Manifest Configuration](manifest-configuration.md) documentation.
+
+## What Are Forms?
+
+Forms are the structured, declarative way for an extension (primarily a `browser-source` / widget) to expose
+user‑configurable
+settings inside the Scene Builder. When a creator selects your widget instance in a scene, the Scene Builder shows a
+Settings tab. This tab merges:
+
+1. Native Inputs (built‑in properties every source may have, like Transform or Opacity) and
+2. Your Custom Form Inputs (declared in `forms.yaml`)
+
+Together they let streamers tailor appearance, behavior, data sources, sounds, animations, filtering logic, and other
+runtime characteristics without editing code.
+
+Key characteristics:
+
+- Location & Visibility: Displayed in the Scene Builder "Settings" panel for each placed instance of your extension.
+- Scope: Values are stored per scene item / extension instance (so two instances can have different settings) unless a
+  field itself aggregates or references shared resources (e.g. uploaded files).
+- Definition Source: Declared in a top‑level `forms.yaml` file sitting next to your `manifest.yaml` (legacy: inline
+  under `compatibilities.browser-source.forms`). The file contains `schema_version`, `id`, and `inputs`.
+- Complement, Not Replace: They sit alongside native inputs (Title, Transform, Shadow, Filters, Opacity). Your form
+  should only declare what is unique to your widget.
+- Live Propagation: When a user changes a value, it is automatically persisted and propagated to the running extension
+  instance. Your code receives updated values through the extension context (see Receiving Values / Extension Helper
+  section). No manual polling is required.
+- Typed & Validated: Field types (slider, color, dropdown, etc.) enforce structure, provide consistent UI, and reduce
+  validation work in your runtime code. Conditional logic can progressively disclose advanced options.
+- Versioning & Evolution: `schema_version` allows future evolution of the form schema. Changing or removing field IDs
+  can cause existing saved values to be dropped for that field; plan migrations carefully to preserve streamer setups.
+- Performance Considerations: Extremely large or deeply nested forms, or heavy conditional logic, can slow initial load
+  of the Settings tab. Prefer concise, grouped sections and only add conditional expressions where they add real value.
+
+Typical use cases:
+
+- Styling / Theme: Colors, gradients, font settings, border radius, spacing.
+- Content & Assets: Text strings, uploaded images / sounds, selecting alert sets, choosing platform events.
+- Behavior Toggles: Feature enable/disable, filtering options, timeouts, demo/test mode.
+- Dynamic Collections: Repeaters for custom lists (e.g. rotating messages, multiple layout entries).
+
+How forms relate to runtime code:
+
+- During deployment, the manifest (including the form definition) is validated by OWN3D.
+- At runtime, the platform constructs a `values` object keyed by each input `id` and injects it into the extension
+  context. Use the modular SDK helper `useContext(extension).onContext(...)` to react to initial load and incremental
+  changes (the legacy `OWN3D.ext.onContext` namespaced API is deprecated and not shown in examples below).
+- Some specialized fields (e.g. `file`, `platforms`, `platform-event`) enrich values with structured objects or arrays
+  that can directly drive logic in your widget.
+
+If you do not define a form, only native inputs will appear. Adding even a minimal form significantly enhances
+customizability and makes your widget feel first‑class to creators.
+
+> In short: A form is the contract between your extension's configurable surface and the Scene Builder UI—describe it
+> once in YAML, and OWN3D handles rendering, persistence, validation, and value delivery to your code.
+
+### Migration (Inline -> forms.yaml)
+
+If you previously defined forms inline inside `manifest.yaml` (under `compatibilities.browser-source.forms`), migrate
+by:
+
+1. Creating a new `forms.yaml` file in your extension root.
+2. Moving the form keys (`schema_version`, `id`, `inputs`, plus any supported top‑level form flags) into that file.
+3. Removing the old inline `forms:` block from `manifest.yaml`.
+4. Verifying the `id` in `forms.yaml` still matches the extension `id` in `manifest.yaml`.
+5. Redeploy with the CLI.
+
+No value changes occur; persisted user settings map by field `id` and remain intact as long as those IDs do not change.
+
 ## About YAML Syntax
 
 YAML is a human-readable data-serialization language. It is commonly used for configuration files and in applications
@@ -30,11 +103,12 @@ browser source:
 Creating forms for browser sources is very easy. We use YAML syntax to define the inputs. The following example shows
 the syntax for a form with different input types:
 
-> Each form must contain a uuid (`id`) and an array of inputs (`inputs`). The uuid is used to identify the form in the
-> scene editor which must match with your extension id. The inputs array contains all the inputs that are available in
-> the form.
+> Each form must contain a schema version (`schema_version`) and an uuid (`id`) and an array of inputs (`inputs`). The
+> uuid is used to identify the form in the scene editor which must match with your extension id. The inputs array
+> contains all the inputs that are available in the form.
 
 ```yaml
+schema_version: 1
 id: 98f9fab0-0714-46d8-ac77-d57130a1dc88
 inputs:
   - type: input
@@ -237,10 +311,10 @@ Resulting `values`:
 ![Color Field](../../images/fields/color-1.png)
 ![Colorpicker](../../images/fields/color-2.png)
 
-The `color` field provides a color picker that can be used to select a color. The hex code can be either 6 or 8 characters long. The 8 character hex code will be used for the alpha channel.
+The `color` field provides a color picker that can be used to select a color. The hex code can be either 6 or 8
+characters long. The 8 character hex code will be used for the alpha channel.
 
 If `allow-gradient` is set, the user can choose between `color`, `linear gradient` and `radial gradient`.
-
 
 ```yaml
   - type: color
@@ -260,6 +334,7 @@ Resulting `values` for hex-color:
 ```
 
 Resulting `values` for `linear-gradient`
+
 ```json:no-line-numbers
 {
   "color": "linear-gradient(90deg, #FF9602 0%, #ffffff 100%)"
@@ -267,6 +342,7 @@ Resulting `values` for `linear-gradient`
 ```
 
 Resulting `values` for `radial-gradient`
+
 ```json:no-line-numbers
 {
   "color": "radial-gradient(circle, #c99144ff 0%, #ffffff 100%)"
@@ -406,7 +482,8 @@ Resulting `values`:
 ![Input Field](../../images/fields/input.png)
 
 The `input` field provides a simple text input.
-The `type` attribute can be used to define the type of input (`text` , `number`). The `type` attribute is optional and defaults to `text`.
+The `type` attribute can be used to define the type of input (`text` , `number`). The `type` attribute is optional and
+defaults to `text`.
 
 ```yaml
   - type: input
@@ -460,7 +537,8 @@ Resulting `values`:
 The `link` field allows you to create a link that can be used to navigate to a specific URL. It will open the link in a
 new tab. There is no `value` for this field.
 
-The `type` attribute can be used to define the type of link (`button` or `text`). The `type` attribute is optional and defaults to `text`.
+The `type` attribute can be used to define the type of link (`button` or `text`). The `type` attribute is optional and
+defaults to `text`.
 
 ```yaml
   - type: link
@@ -475,7 +553,8 @@ The `type` attribute can be used to define the type of link (`button` or `text`)
 
 ![Paragraph Field](../../images/fields/paragraph.png)
 
-The `paragraph` field allows you to display a paragraph of text. The `headline` is optional. There is no `value` for this field.
+The `paragraph` field allows you to display a paragraph of text. The `headline` is optional. There is no `value` for
+this field.
 
 ```yaml
   - type: paragraph
@@ -520,28 +599,32 @@ Resulting `values`:
 ```json
 {
   "context": {
-      "connections": [
-        {
-          "platform": "twitch",
-          "channel_id": "1337"
-        },
-        {
-          "platform": "youtube",
-          "channel_id": "1337"
-        }
-      ]
-    }
+    "connections": [
+      {
+        "platform": "twitch",
+        "channel_id": "1337"
+      },
+      {
+        "platform": "youtube",
+        "channel_id": "1337"
+      }
+    ]
+  }
 }
 ```
 
 ### Platform-Event Field
+
 With `multiple: false` you can select a single event.
 ![Platform-Event Field](../../images/fields/platform-event-1.png "multiple: false")
 
 With `multiple: true` you can select multiple events.
 ![Platform-Event Field](../../images/fields/platform-event-2.png)
 
-The `platform-event` field allows you to select a single event or multiple events by platform. It will automatically show the available platforms and events supported by us. The `value` will be an array of selected platforms and events. `options` can be omitted. The selectable values will be the intersection of `options` (if given), the connected platforms of the user and the platforms and events that are supported by us.
+The `platform-event` field allows you to select a single event or multiple events by platform. It will automatically
+show the available platforms and events supported by us. The `value` will be an array of selected platforms and events.
+`options` can be omitted. The selectable values will be the intersection of `options` (if given), the connected
+platforms of the user and the platforms and events that are supported by us.
 
 ```yaml
 - id: example-1
@@ -599,9 +682,11 @@ Resulting `values`:
 
 ![Repeater Field](../../images/fields/repeater.png)
 
-The `repeater` field allows you to repeat a set of fields. The `fields` array is required and must contain the fields	that should be repeated.
+The `repeater` field allows you to repeat a set of fields. The `fields` array is required and must contain the fields
+that should be repeated.
 
-The `cta` attribute can be used to define the label of the button that adds a new item. The `label` attribute can be used to define the label of the repeater.
+The `cta` attribute can be used to define the label of the button that adds a new item. The `label` attribute can be
+used to define the label of the repeater.
 
 ```yaml
 - id: my-repeater
@@ -635,7 +720,6 @@ Resulting `values`:
   ]
 }
 ```
-
 
 ### Resource Field
 
@@ -760,7 +844,8 @@ Resulting `values`:
 
 ![Volume Field](../../images/fields/volume.png)
 
-The `volume` field provides a beautiful slider that can be used to select a volume value. The `value` is required and must be a number between 0 and 1.
+The `volume` field provides a beautiful slider that can be used to select a volume value. The `value` is required and
+must be a number between 0 and 1.
 
 ```yaml
   - type: volume
@@ -787,7 +872,7 @@ makes it easier for the user to understand the form. The following fields can be
 |-------------------------------|---------------------------------------------------------------------------|
 | [Accordion](#accordion-field) | A group of fields that can be collapsed and expanded.                     |
 | [Group](#group-field)         | Visually combines other fields into a group.                              |
-| [Row](#row-field)             | Visually combines other fields into a row.                              |
+| [Row](#row-field)             | Visually combines other fields into a row.                                |
 | [Search](#search-field)       | Makes it possible to search through fields and their ancestors.           |
 | [Tabs](#tabs-field)           | Provides a tab bar with defined tabs to structure and group other fields. |
 
@@ -860,13 +945,16 @@ The field does not store any values.
 
 ![Row Field](../../images/fields/row.png)
 
-The `row` field can be used to group other fields into a row. The `colSpan` attribute can be used to define the width of the field.
+The `row` field can be used to group other fields into a row. The `colSpan` attribute can be used to define the width of
+the field.
 
 We recommend using not more than a total of 4 columns in a row.
 
 Examples:
+
 * Two fields with `colSpan: 1` each will result in a row with two columns
-* Two fields with `colSpan: 1` and `colSpan: 3` will result in a row with one column that is 25% wide and one column that is 75% wide
+* Two fields with `colSpan: 1` and `colSpan: 3` will result in a row with one column that is 25% wide and one column
+  that is 75% wide
 * Three fields with `colSpan: 1` each will result in a row with three columns that are 33% wide each
 
 ```yaml{9,15}
@@ -1044,35 +1132,59 @@ represented in the API:
 
 ### Using the Extension Helper
 
-The values are received using the [Extension Helper](extension-helper.md) method `OWN3D.ext.onContext(...)`. The
-following example shows how to receive the values from the form:
+The values are consumed using the modular SDK via the `useContext` module (recommended). This provides strongly-typed
+access to the context and value diffs without relying on the deprecated namespaced API.
 
 ```typescript
-OWN3D.ext.onContext((context, changed) => {
-    // context['inputs'] contains the current inputs (TBC)
-    // context['values'] contains the values from the form
-});
+import {initializeExtension} from '@own3d/sdk/extension'
+import {useContext} from '@own3d/sdk/context'
+
+const extension = initializeExtension()
+const {onContext} = useContext(extension)
+
+onContext((context, changed) => {
+    // context.values contains the current form values
+    // changed is an array of keys that changed in this update
+    console.log('changed keys', changed)
+    console.log('form values', context.values)
+}, {immediate: true})
 ```
 
 ![img.png](../../images/extension-context.png)
 
 ## Demo-Mode
-Add `has_demo_mode: true` to the manifest.yaml. This will add a "Demo-Mode"-Box to the Settings in the Scene-Builder.
+
+Add `has_demo_mode: true` to the `manifest.yaml` (feature flag still lives in the manifest; the form itself is in
+`forms.yaml`). This will add a "Demo-Mode"-Box to the Settings in the Scene-Builder.
 
 ```yaml
+# manifest.yaml
+id: 98f9fab0-0714-46d8-ac77-d57130a1dc88
+has_demo_mode: true
+```
+
+```yaml
+# forms.yaml
+schema_version: 1
 id: 98f9fab0-0714-46d8-ac77-d57130a1dc88
 inputs:
-  [...]
-has_demo_mode: true
+  [ ... ]
 ```
 
 ![test-mode.png](../../images/extension-test-mode.png)
 
-Changing the toggle, the Supervisor gets an update:
+Listening for demo mode changes with the modular SDK:
 
-```js
-OWN3D.ext.onContext((context, changed) => {
-  // changed => ['demo_mode']
-  // context['demo_mode'] => true|false
-});
+```typescript
+import {initializeExtension} from '@own3d/sdk/extension'
+import {useContext} from '@own3d/sdk/context'
+
+const extension = initializeExtension()
+const {onContext} = useContext(extension)
+
+onContext((context, changed) => {
+    if (changed.includes('demo_mode')) {
+        console.log('demo mode toggled =>', context.demo_mode)
+    }
+})
 ```

@@ -26,16 +26,63 @@ store_presence:
 compatibilities:
   config:
     path: config.html
+  browser-source:
+    path: browser-source.html
 ```
 
-::: details Extension with forms
+::: details Extension with forms (current, using separate forms.yaml)
+
+`manifest.yaml`
+```yaml
+schema_version: 1
+id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
+name: Extension that offers a form
+version: 0.0.0
+description: Extension that includes a customization form
+summary: An example extension boilerplate
+store_presence:
+  images:
+    logo: assets/logo.png
+compatibilities:
+  config:
+    path: config.html
+  browser-source:
+    path: browser-source.html
+```
+
+`forms.yaml`
+```yaml
+schema_version: 1
+id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
+inputs:
+  - id: text
+    type: input
+    attributes:
+      label: Text
+      value: Hello World
+      description: This is a description
+    validations:
+      required: true
+```
+
+::: tip Migration
+Previously forms could be defined inline under `compatibilities.browser-source.forms` inside `manifest.yaml`. This inline
+syntax is now deprecated. Move the form portion into a top-level `forms.yaml` placed alongside your `manifest.yaml`.
+Keep the same `id` value so existing saved settings continue to resolve.
+:::
+
+:::
+
+::: details (Deprecated) Legacy inline forms example
+
+Do not use this format for new extensions. Shown only for reference if you encounter older projects.
 
 ```yaml
 schema_version: 1
 id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension that offers permissions
+name: Legacy Inline Forms Example
 version: 0.0.0
-description: Extension that includes permissions for moderators
+description: Uses deprecated inline forms syntax
 summary: An example extension boilerplate
 store_presence:
   images:
@@ -212,19 +259,31 @@ To provide more detail, use the Description field.
 ### `store_presence`
 
 The store presence of the extension. This key is required if you want to publish your extension in the OWN3D store.
-For more information, see [Store Presence](#store-presence-1).
+For more information, see [Store Presence](#store-presence).
 
 ### `compatibilities`
 
-The compatibilities of the extension. For more information, see [Compatibilities](#compatibilities-1).
+The compatibilities of the extension. For more information, see [Compatibilities](#compatibilities).
+
+### (Deprecated) Inline `forms` under `browser-source`
+Inline forms are deprecated. Define forms in `forms.yaml` instead. See the "Extension with forms" example and the
+[Syntax for Forms](syntax-for-forms.md) guide.
+
+### `forms.yaml` (external file)
+A separate file placed alongside `manifest.yaml` that declares the extension's configurable form. Required only if your
+extension (e.g. a `browser-source`) exposes custom settings. Must contain:
+- `schema_version`: Current form schema version (e.g. 1)
+- `id`: Must exactly match the extension `id` in `manifest.yaml`
+- `inputs`: Array of form field definitions
+Optional: validations and other field-level metadata as documented in the Syntax for Forms guide.
 
 ### `permissions`
 
-The permissions of the extension. For more information, see [Permissions](#permissions-1).
+The permissions of the extension. For more information, see [Permissions](#permissions).
 
 ### `oauth`
 
-TBD. For more information, see [OAuth](#oauth-1).
+TBD. For more information, see [OAuth](#oauth).
 
 ### `author`
 
@@ -279,6 +338,7 @@ Each compatibility includes the following
 
 The path of the compatibility.
 
-### `forms` (optional; only for `browser-source`)
+### `forms` (deprecated; only for legacy `browser-source` manifests)
 
-The forms of the compatibility.
+Use the separate `forms.yaml` file instead. This key is ignored for new submissions and will be removed in a future
+schema version.

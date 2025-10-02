@@ -24,6 +24,9 @@ const files = [
         path: 'docs/docs/extensions/designing-extensions.md',
     },
     {
+        path: 'docs/docs/extensions/manifest-configuration.md',
+    },
+    {
         path: 'docs/docs/chatbot/message-protocol.md',
     },
     {
