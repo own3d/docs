@@ -30,6 +30,12 @@ compatibilities:
     path: browser-source.html
 ```
 
+::: tip Migration
+Previously forms could be defined inline under `compatibilities.browser-source.forms` inside `manifest.yaml`. This inline
+syntax is now deprecated. Move the form portion into a top-level `forms.yaml` placed alongside your `manifest.yaml`.
+Keep the same `id` value so existing saved settings continue to resolve.
+:::
+
 ::: details Extension with forms (current, using separate forms.yaml)
 
 `manifest.yaml`
@@ -64,12 +70,6 @@ inputs:
     validations:
       required: true
 ```
-
-::: tip Migration
-Previously forms could be defined inline under `compatibilities.browser-source.forms` inside `manifest.yaml`. This inline
-syntax is now deprecated. Move the form portion into a top-level `forms.yaml` placed alongside your `manifest.yaml`.
-Keep the same `id` value so existing saved settings continue to resolve.
-:::
 
 :::
 
