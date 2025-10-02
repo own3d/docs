@@ -358,7 +358,22 @@ The `divider` field displays a horizontal line and provides no other functionali
     id: divider
 ```
 -->
+### DatetimePicker Field
+![Dropdown Field](../../images/fields/datetimepicker.png)
 
+The `datetimePicker` field provides a date and time picker.
+
+```yaml
+  - id: datetimepicker
+    type: input
+    exclude_from_template: true
+    attributes:
+      type: datetime-local
+      label: 'DateTime Picker'
+      value:
+        value: ''
+        toggled: false
+```
 ### Dropdown Field
 
 ![Dropdown Field](../../images/fields/dropdown.png)
