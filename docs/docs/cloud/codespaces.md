@@ -162,7 +162,7 @@ curl -X POST https://ext.own3d.pro/v1/codespaces/ai \
   -H "Content-Type: application/json" \
   -d '{
     "name": "My Awesome Extension",
-    "repository_url": "https://github.com/user/repo.git",
+    "initial_prompt": "Create a widget that displays the latest follower. The text colour should be changeable.",
     "user_id": "12345", // will be removed in final release
     "password": "your_password" // will be remove in final release
   }'
@@ -187,7 +187,7 @@ Creates a new extension with a codespace from a Git repository.
 #### Example Request
 
 ```bash
-curl -X POST https://ext.own3d.pro/v1/codespaces/ai \
+curl -X POST https://ext.own3d.pro/v1/codespaces \
   -H "Authorization: Bearer <YOUR_TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
