@@ -1,0 +1,1 @@
+import{_ as t,c as a,b as n,r as o,o as r}from"./app-CjLe6Czs.js";const c={};function l(s,i){const e=o("build");return r(),a("div",null,[n(e)])}const d=t(c,[["render",l]]),_=JSON.parse('{"path":"/build/","title":"","lang":"en-US","frontmatter":{"pageClass":"landing-page-wrapper"},"git":{},"filePathRelative":"build/README.md"}');export{d as comp,_ as data};
