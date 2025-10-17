@@ -1,355 +1,288 @@
-# Extension SDK
+# OWN3D Extension SDK Reference
 
-The new OWN3D Extension SDK is a collection of tools and utilities to help you build extensions for the OWN3D platform.
-It is designed to be a lightweight and easy-to-use package that provides a simple interface to interact with the OWN3D
-platform.
+The OWN3D Extension SDK is a modular, event-driven toolkit for building extensions on the OWN3D platform. This document is the authoritative reference for all SDK features, types, and usage patterns.
 
-## SDK versions: namespaced and modular
+---
 
-OWN3D provides two API versions for extensions:
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Extension Object Reference](#extension-object-reference)
+- [Module Reference](#module-reference)
+  - [Auth](#auth)
+  - [Coins](#coins)
+  - [Context](#context)
+  - [Notifications](#notifications)
+  - [PubSub](#pubsub)
+  - [Remote Config](#remote-config)
+  - [Scene Builder](#scene-builder)
+  - [Socket](#socket)
+  - [Subscription](#subscription)
+  - [IPC](#ipc)
+  - [Support](#support)
+- [Types Reference](#types-reference)
+- [Advanced Topics](#advanced-topics)
+  - [Chat and Platform Events via Socket](#chat-and-platform-events-via-socket)
+- [Appendix](#appendix)
 
-- **Javascript - Namespaced**: This version aims to be a Twitch Extension like experience. It is a single script that
-  provides the bare minimum to get started with the OWN3D Extension platform. Because the namespaced APi does not
-  benefit from ongoing new feature support, most new apps should instead use the modular API.
-- **Javascript - Modular**: This version is a collection of modules that provide a more flexible and feature-rich
-  experience. It is the recommended version for new apps.
+---
+
+## Introduction
+
+The SDK provides composable modules for authentication, context, notifications, messaging, configuration, scene interaction, and more. All modules are accessed via composable functions, passing the central `Extension` object.
+
+---
 
 ## Installation
 
-If your starting a new project, we recommend using the **modular version** of the SDK. To install the modular SDK, run:
-
+Install the modular SDK:
 ```bash
 npm install @own3d/sdk
 ```
 
-After installing the SDK, you can import the modules you need in your project. Keep in mind that your code will be
-organized in a more modular way, and you will have to import the modules explicitly.
+---
 
-### For General JavaScript Applications
+### Vue Integration
 
-::: warning
-Avoid calling `initializeExtension()` multiple times in your application. Instead, initialize the extension once and
-pass it around as needed. This approach ensures that the extension is correctly set up and avoids potential issues.
-:::
+#### Setup for Vue Applications
 
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useAuth } from '@own3d/sdk/auth'
+> **Important:** Only call `initializeExtension` (or `createExtension`) **once** in your application. The extension instance should be shared across all components to avoid duplicated state and event listeners.
 
-const extension = initializeExtension()
-
-const { onAuthorized } = useAuth(extension)
-
-onAuthorized(async (user) => {
-    console.log(user)
-})
-```
-
-### For Vue Applications
-
-> This feature is available from version 0.0.30 onwards.
-
-If you're using Vue, we provide a dedicated Vue plugin that makes integration seamless. Follow these steps:
-
-**Step 1: Set Up the Vue Plugin**
-
-```js
-import './style.css'
+##### 1. Create the Extension Instance Once
+```typescript
+// main.ts
 import { createApp } from 'vue'
 import { createExtension } from '@own3d/sdk/vue'
 import App from './App.vue'
 
-const extension = createExtension()
+const extension = createExtension() // Only call this ONCE
 const app = createApp(App)
-
 app.use(extension)
 app.mount('#app')
 ```
 
-::: warning
-Note: Avoid calling `initializeExtension()` directly in Vue components. Use `createExtension()` during app bootstrap
-instead.
-::::
+##### 2. Access the Extension in Vue Components
 
-**Step 2: Use the SDK in Vue Components**
+You can access the extension instance in any component using `<script setup>` and the Vue inject API.
 
-<!-- @formatter:off -->
-```html
+**Script Setup Example:**
+```vue
 <script setup lang="ts">
-import { inject } from 'vue'
-import { useAuth } from '@own3d/sdk/auth'
+import { inject, onMounted } from 'vue'
 
 const extension = inject('extension')
-const {onAuthorized} = useAuth(extension)
 
-onAuthorized((user) => {
-  console.log(user)
-})
-</script>
-```
-<!-- @formatter:on -->
-
-#### Optional: Creating a Pinia Store for SDK State
-
-We recommend setting up a [Pinia](https://pinia.vuejs.org/getting-started.html) store to manage SDK state such as user
-and context. This approach makes it easier to access these states reactively across your application. The following
-example demonstrates how to set up a Pinia store for the extension state:
-
-**Step 1: Create an Extension Store:**
-
-```typescript
-import { defineStore } from 'pinia'
-import type { Ref } from 'vue'
-import { inject, ref } from 'vue'
-import type { Authorized, Context } from '@own3d/sdk/types'
-import { useContext } from '@own3d/sdk/context'
-import { useAuth } from '@own3d/sdk/auth'
-
-export const useExtensionStore = defineStore('extension', () => {
-  const user: Ref<Authorized | null> = ref(null)
-  const context: Ref<Context | null> = ref(null)
-
-  const extension = inject('extension')
-  const {onContext} = useContext(extension)
-  const {onAuthorized} = useAuth(extension)
-
-  onContext((_context: Partial<Context>, changed: ReadonlyArray<keyof Context>) => {
-    for (const key of changed) {
-      context.value = {...context.value, [key]: _context[key]}
-    }
-  }, {immediate: true})
-
-  onAuthorized((_user: Authorized) => {
-    user.value = _user
-  })
-
-  return {
-    user,
-    context,
+onMounted(() => {
+  if (extension) {
+    extension.on('event', (data: any) => {
+      // handle event
+    })
   }
 })
-```
-
-**Step 2: Using the Store in a Component:**
-
-<!-- @formatter:off -->
-```html
-<script setup lang="ts">
-import { useExtensionStore } from './extension.ts'
-import { storeToRefs } from 'pinia'
-
-const extensionStore = useExtensionStore()
-const { user, context } = storeToRefs(extensionStore)
 </script>
-
-<template>
-  <div>
-    User: {{ user }}
-    Context: {{ context }}
-  </div>
-</template>
 ```
-<!-- @formatter:on -->
 
-## Modules
+---
+
+## Extension Object Reference
+
+The `Extension` object is the central context for all SDK modules. It provides event handling, messaging, user/context state, and HTTP utilities.
+
+```typescript
+export interface Extension {
+    on: (event: string, callback: (data: any) => void) => void;
+    once: (event: string, callback: (data: any) => void) => void;
+    postMessage: (event: string, data: any, callback?: (data: any) => void) => void;
+    emit: (event: string, data: any) => void;
+    user?: Authorized;
+    context?: Context;
+    axios: any;
+    state: any;
+}
+```
+
+**Initialization Example:**
+```typescript
+import { initializeExtension } from '@own3d/sdk/extension'
+const extension = initializeExtension()
+```
+
+---
+
+## Module Reference
 
 ### Auth
+Authenticate the extension and listen for user state changes.
 
-The Auth module provides methods to authenticate the extension with the OWN3D platform. It allows you to get the current
-authenticated user and listen for changes to the authentication state.
-
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
+```typescript
 import { useAuth } from '@own3d/sdk/auth'
-
-const extension = initializeExtension()
-
 const { onAuthorized } = useAuth(extension)
+onAuthorized((user) => { console.log(user) })
+```
+**Signature:**
+```typescript
+function useAuth(extension: Extension): {
+  onAuthorized: (authCallback: (auth: Authorized) => void) => void
+}
+```
 
-onAuthorized(async (user) => {
-    console.log(user)
-})
+### Coins
+Manage virtual currency, products, and transactions.
+
+```typescript
+import { useCoins } from '@own3d/sdk/coins'
+const { getProducts, showCoinsBalance, useCoins, onTransactionComplete, onTransactionCancelled } = useCoins(extension)
+getProducts().then(console.log)
+```
+**Signature:**
+```typescript
+function useCoins(extension: Extension): {
+  getProducts: () => Promise<any>,
+  showCoinsBalance: () => void,
+  useCoins: (sku: string, metadata: Metadata) => Promise<Transaction>,
+  onTransactionComplete: (callback: (transaction: Transaction) => void) => void,
+  onTransactionCancelled: (callback: (transaction: Transaction) => void) => void
+}
 ```
 
 ### Context
+Access and react to extension context changes.
 
-The Context module provides methods to get the current context of the extension. The context is a set of key-value pairs
-that describe the current state of the extension.
-
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
+```typescript
 import { useContext } from '@own3d/sdk/context'
-
-const extension = initializeExtension()
-
 const { onContext } = useContext(extension)
-
-onContext((context, changed) => {
-    console.log(context, changed)
-})
+onContext((context, changed) => { console.log(context, changed) })
+```
+**Signature:**
+```typescript
+function useContext(extension: Extension): {
+  onContext: (
+    contextCallback: <T extends Partial<Context>>(context: T, changed: ReadonlyArray<keyof T>) => void,
+    options?: { immediate: boolean }
+  ) => void
+}
 ```
 
 ### Notifications
-
-The Notifications module provides API methods to send notifications to the user. Notifications can have different types such as `info`, `success`, `warning`, or `error`.
+Send notifications to users (info, success, warning, error), dismiss, or patch them.
 
 ```typescript
-import { initializeExtension } from '@own3d/sdk/extension'
 import { useNotifications } from '@own3d/sdk/notifications'
-
-const extension = initializeExtension()
-
 const { notify, info, success, warning, error, dismiss, patch } = useNotifications(extension)
-
-// Example: Send a custom notification
-await notify({
-    type: 'info',
-    message: 'This is a custom notification!',
-})
-
-// Example: Send an info notification
-await info('This is an info message.')
-
-// Example: Send a success notification
-await success({
-    title: 'Success',
-    message: 'Operation completed successfully.',
-})
-
-// Example: Send a warning notification
-await warning('This is a warning message.')
-
-// Example: Send an error notification
-await error({
-    title: 'Error',
-    message: 'An error occurred.',
-})
-
-// Example: Dismiss a notification by ID
-await dismiss('notification-id')
-
-// Example: Update (patch) an existing notification
-await patch('notification-id', {
-  type: 'success',
-  title: 'Updated Notification',
-  message: 'The notification content has been updated.',
-})
+await info('Welcome!')
+```
+**Signature:**
+```typescript
+function useNotifications(extension: Extension): {
+  notify: (content: Notification) => Promise<NotificationResponse>,
+  dismiss: (id: string) => Promise<NotificationResponse>,
+  patch: (id: string, content: Notification) => Promise<NotificationResponse>,
+  info: (content: string | Notification) => Promise<NotificationResponse>,
+  success: (content: string | Notification) => Promise<NotificationResponse>,
+  warning: (content: string | Notification) => Promise<NotificationResponse>,
+  error: (content: string | Notification) => Promise<NotificationResponse>
+}
 ```
 
 ### PubSub
+Publish and subscribe to cross-extension messages.
 
-The PubSub module provides methods to publish and subscribe to messages on a PubSub channel. PubSub channels are used to
-send messages between different parts of the extension, like communicating between the configuration page and the scene
-builder widget. You can also use PubSub channels to send messages between different extensions.
-
-**Rate Limits**: The PubSub module has a rate limit of 30 messages per minute per combination of client ID and channel
-ID.
-
-::: warning
-Avoid using our internal IPC module for communication between different parts of your extension. Instead, use the PubSub
-module. IPC is only intended for communication between the extension and the OWN3D platform.
-:::
-
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
+```typescript
 import { usePubSub } from '@own3d/sdk/pubsub'
-
-const extension = initializeExtension()
-
 const { publish, subscribe } = usePubSub(extension)
-
-subscribe('foo', (data) => {
-    console.log(data)
-})
-
-await publish('foo', {
-    bar: 'baz',
-})
+subscribe('foo', (data) => console.log(data))
+await publish('foo', { bar: 'baz' })
+```
+**Signature:**
+```typescript
+function usePubSub(extension: Extension): {
+  publish: (event: string, data: any) => Promise<void>,
+  subscribe: (event: string, callback: (data: any) => void) => void
+}
 ```
 
 ### Remote Config
+Get and set configuration segments without a backend.
 
-The Remote Config module provides methods to get and set configuration values without providing a backend service. Make
-sure to check out our [Remote Config documentation](./remote-config.md) for more information.
-
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
+```typescript
 import { useRemoteConfig } from '@own3d/sdk/remote-config'
-
-const extension = initializeExtension()
-
 const { getSegments, setSegment } = useRemoteConfig(extension)
-
 const segments = await getSegments()
-console.log(segments)
-
 await setSegment('creator', { key: 'value' })
+```
+**Signature:**
+```typescript
+function useRemoteConfig(extension: Extension): {
+  getSegments: () => Promise<ConfigSegments>,
+  setSegment: (segment: ConfigSegmentKey, content: JsonObject) => Promise<void>
+}
 ```
 
 ### Scene Builder
-
-The Scene Builder module provides methods to interact with the Scene Builder, enabling developers to create interactive and customizable scenes.
+Interact with the Scene Builder, set values, listen for input events.
 
 ```typescript
-import { initializeExtension } from '@own3d/sdk/extension'
 import { useSceneBuilder } from '@own3d/sdk/scene-builder'
-
-const extension = initializeExtension()
-
 const { setInteractive, onClick, setValues, patchValues } = useSceneBuilder(extension)
-
-// Example: Set the Scene Builder to interactive mode
 await setInteractive(true)
-
-// Example: Listen for a click event on an input element
-onClick('input-id', () => {
-    console.log('Input clicked!')
-})
-
-// Example: Set values for Scene Builder inputs
-await setValues({
-    input1: 'value1',
-    input2: 'value2',
-})
-
-// Example: Update specific values for Scene Builder inputs
-await patchValues({
-    input1: 'newValue1',
-})
+onClick('input-id', () => console.log('Clicked!'))
+```
+**Signature:**
+```typescript
+function useSceneBuilder(extension: Extension): {
+  setInteractive: (interactive: boolean) => Promise<void>,
+  onClick: (inputId: string, callback: () => void) => void,
+  setValues: (values: Record<string, string>) => Promise<void>,
+  patchValues: (values: Record<string, string>) => Promise<void>
+}
 ```
 
 ### Socket
+The Socket module is the unified entry point for receiving both **platform events** (such as `notifysub` for new subscriptions, donations, etc.) and **chat events** (such as messages, deletions, and chat clears).
 
-The Socket module provides methods to connect to our event bus, which is a real-time messaging system that allows you to
-receive events from the OWN3D platform. For example, you can listen for events like new subscriptions or donations via
-our [NotifySub Event Types](../notify-sub/event-types.md) or custom events. You can also use the Socket module to
-receive events from the extension itself, like Remote Config changes.
+Use the Socket module to subscribe to these real-time events from the OWN3D platform:
 
-::: tip
-While we technically use our event bus as our transit for our PubSub system, we recommend using the PubSub module
-for this purpose, as it provides a more straightforward interface.
-:::
-
-```js
-import { initializeExtension } from '@own3d/sdk/extension'
+```typescript
 import { useSocket } from '@own3d/sdk/socket'
-
-const extension = initializeExtension()
-
 const { on } = useSocket(extension)
 
-on('notifysub', (data) => {
-    console.log(data)
+// Platform event (e.g., new subscription)
+on('notifysub', (event) => {
+  console.log('Platform event:', event)
 })
+
+// Chat message event
+on('message', (msg) => {
+  console.log('Chat message:', msg)
+})
+
+// Chat message deleted
+on('delete-message', (data) => {
+  console.log('Message deleted:', data)
+})
+
+// Chat cleared
+on('clear-chat', () => {
+  console.log('Chat cleared')
+})
+```
+
+**Note:** All platform and chat events are delivered through the Socket module. You do not need to use any other module for these real-time events.
+
+**Signature:**
+```typescript
+function useSocket(extension: Extension): {
+  on: (event: string, callback: (data: any) => void) => void
+}
 ```
 
 #### Chat Events via Socket
 
 With the Socket module, you can also receive chat-related events such as:
 
-- **`message`** – a new chat message  
-- **`delete-message`** – a single message was deleted  
-- **`clear-chat`** – the chat was cleared  
+- **`message`** – a new chat message
+- **`delete-message`** – a single message was deleted
+- **`clear-chat`** – the chat was cleared
 
 Unlike direct `socket.io` connections, you do **not** need to manually join the  
 `<client_id>.<platform>.<platform_id>.chat` namespace. The SDK automatically handles this setup.
@@ -389,3 +322,102 @@ Here are the key fields you’ll typically use:
 | `attributes` | object       | Metadata such as `edited`, `highlight`, `accent`                         |
 
 👉 For the full schema and detailed fragment types, see the [Message Protocol → Message Reference](../chatbot/message-protocol.md).
+
+
+### Subscription
+Trigger Pro subscription upsell dialogs.
+
+```typescript
+import { useSubscription } from '@own3d/sdk/subscription'
+const { showProSubscriptionUpsell } = useSubscription(extension)
+showProSubscriptionUpsell({ firstpromoter: { slug: 'my-slug' } })
+```
+**Signature:**
+```typescript
+function useSubscription(extension: Extension): {
+  showProSubscriptionUpsell: (options: ProSubscriptionUpsellOptions) => void
+}
+```
+
+### IPC
+Internal messaging between extension and overlay (not for extension-to-extension communication).
+
+```typescript
+import { useIpc } from '@own3d/sdk/ipc'
+const { send, invoke, on } = useIpc(extension)
+send('channel', { key: 'value' })
+invoke('channel', { key: 'value' }).then(console.log)
+```
+**Signature:**
+```typescript
+function useIpc(extension: Extension): {
+  send: (channel: string, payload: any) => void,
+  invoke: (channel: string, payload: any) => Promise<any>,
+  on: (channel: string, callback: (payload: any) => void) => void
+}
+```
+
+### Support
+Utility functions for style and font management.
+
+```typescript
+import { textStyle } from '@own3d/sdk/support'
+const style = textStyle(fontSettings)
+```
+**Signature:**
+```typescript
+function textStyle(
+  fontSettings: FontSettings | undefined | null,
+  transformer?: { [key: string]: (x: CssValue) => CssValue }
+): CssProperties
+```
+
+---
+
+## Advanced Topics
+
+### Event System
+- Use `on`, `once`, `emit` for event-driven programming.
+- All modules rely on extension events for state changes and communication.
+
+### IPC vs PubSub
+- IPC: Internal, extension ↔ overlay/platform.
+- PubSub: Cross-extension, configuration ↔ widget, etc.
+
+### Configuration
+- Remote Config module allows segment-based config without backend.
+
+### Scene Builder
+- Set interactive mode, listen for input events, set/patch values.
+
+---
+
+## Appendix
+
+### Conventions
+- All modules use composable functions: `useX(extension): XComposable`.
+- Pass the `Extension` object to all modules.
+- Strong typing throughout.
+
+### Extensibility
+- Add new modules by following the composable pattern.
+- Extend types in `types.ts` for new features.
+
+---
+
+## Example: Full Extension Setup
+
+```typescript
+import { initializeExtension } from '@own3d/sdk/extension'
+import { useAuth } from '@own3d/sdk/auth'
+import { useContext } from '@own3d/sdk/context'
+import { useNotifications } from '@own3d/sdk/notifications'
+
+const extension = initializeExtension()
+const { onAuthorized } = useAuth(extension)
+const { onContext } = useContext(extension)
+const { info } = useNotifications(extension)
+
+onAuthorized((user) => info(`Welcome, ${user.username}!`))
+onContext((context, changed) => console.log('Context changed:', changed, context))
+```

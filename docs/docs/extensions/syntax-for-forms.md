@@ -29,7 +29,7 @@ Key characteristics:
 - Complement, Not Replace: They sit alongside native inputs (Title, Transform, Shadow, Filters, Opacity). Your form
   should only declare what is unique to your widget.
 - Live Propagation: When a user changes a value, it is automatically persisted and propagated to the running extension
-  instance. Your code receives updated values through the extension context (see Receiving Values / Extension Helper
+  instance. Your code receives updated values through the extension context (see Receiving Values / Extension SDK
   section). No manual polling is required.
 - Typed & Validated: Field types (slider, color, dropdown, etc.) enforce structure, provide consistent UI, and reduce
   validation work in your runtime code. Conditional logic can progressively disclose advanced options.
@@ -49,7 +49,7 @@ How forms relate to runtime code:
 
 - During deployment, the manifest (including the form definition) is validated by OWN3D.
 - At runtime, the platform constructs a `values` object keyed by each input `id` and injects it into the extension
-  context. Use the modular SDK helper `useContext(extension).onContext(...)` to react to initial load and incremental
+  context. Use the modular Extension SDK `useContext(extension).onContext(...)` to react to initial load and incremental
   changes (the legacy `OWN3D.ext.onContext` namespaced API is deprecated and not shown in examples below).
 - Some specialized fields (e.g. `file`, `platforms`, `platform-event`) enrich values with structured objects or arrays
   that can directly drive logic in your widget.
@@ -1145,7 +1145,7 @@ represented in the API:
 }
 ```
 
-### Using the Extension Helper
+### Using the Extension SDK
 
 The values are consumed using the modular SDK via the `useContext` module (recommended). This provides strongly-typed
 access to the context and value diffs without relying on the deprecated namespaced API.

@@ -1,6 +1,6 @@
 # Usage of Tokens
 
-In our [Extension Helper](extension-helper.md) we provide two tokens: `client_token` and `token`. Each token has a
+In our [Extension SDK](sdk.md#auth) we provide two tokens: `client_token` and `token`. Each token has a
 different purpose and should be used in different scenarios.
 
 It's very important to understand the difference between the two tokens and how they are used. To avoid any
