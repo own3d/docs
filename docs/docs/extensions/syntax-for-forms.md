@@ -358,7 +358,9 @@ The `divider` field displays a horizontal line and provides no other functionali
     id: divider
 ```
 -->
+
 ### DatetimePicker Field
+
 ![Dropdown Field](../../images/fields/datetimepicker.png)
 
 The `datetimePicker` field provides a date and time picker.
@@ -374,6 +376,7 @@ The `datetimePicker` field provides a date and time picker.
         value: ''
         toggled: false
 ```
+
 ### Dropdown Field
 
 ![Dropdown Field](../../images/fields/dropdown.png)
@@ -497,8 +500,8 @@ Resulting `values`:
 ![Input Field](../../images/fields/input.png)
 
 The `input` field provides a simple text input.
-The `type` attribute can be used to define the type of input (`text` , `number`). The `type` attribute is optional and
-defaults to `text`.
+The `attributes.type` attribute can be used to define the type of input (`text` , `number`). The `attributes.type`
+attribute is optional and defaults to `text`.
 
 ```yaml
   - type: input
@@ -543,6 +546,24 @@ Resulting `values`:
     "value": "Hello World"
   }
 }
+```
+
+### Number Field
+
+To create a number field, use `type: input` and set `attributes.type: number`.
+
+**Example:**
+
+```yaml
+- type: input
+  id: borderRadius
+  attributes:
+    label: Border Radius
+    description: Border radius for quiz answers (px)
+    type: number
+    value: 12
+    min: 4
+    max: 36
 ```
 
 ### Link Field
