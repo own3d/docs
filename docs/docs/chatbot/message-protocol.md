@@ -67,7 +67,7 @@ socket.on("ingress-event", (e: {type: string, data: any}) => {
     "avatar_url": "https://api.own3d.pro/v1/resolvers/avatars/{platform}/{platform_id}",
     "color": "#000000", // nullable
     "badges": [
-      { "type": "moderator", "text": "Moderator", "id": "1234" },
+      { "type": "moderator", "text": "Moderator", "id": "1234" }, // or broadcaster / vip
       { "type": "subscriber", "text": "Subscriber", "id": "1234", "count": 1 },
       { "type": "custom", "text": "TwitchCon 2022", "id": "1234" }
     ]
