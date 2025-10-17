@@ -9,6 +9,7 @@ const openai = new OpenAI();
 const files = [
     {path: 'docs/docs/notify-sub/event-types.md'},
     {path: 'docs/docs/extensions/sdk.md'},
+    {path: 'openai/docs/sdk-source.txt'},
     {path: 'docs/docs/extensions/tokens-and-client-tokens.md'},
     {path: 'docs/docs/notify-sub/README.md', alias: 'notify-sub.md'},
     {path: 'docs/docs/extensions/remote-config.md'},
