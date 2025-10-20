@@ -13,8 +13,7 @@ If your starting a new project, we recommend using the **modular version** of th
 npm install @own3d/sdk
 ```
 
-After installing the SDK, you can import the modules you need in your project. Keep in mind that your code will be
-organized in a more modular way, and you will have to import the modules explicitly.
+After installing the SDK, you can import the modules you need in your project.
 
 ### For General JavaScript Applications
 
@@ -24,8 +23,7 @@ pass it around as needed. This approach ensures that the extension is correctly 
 :::
 
 ```js
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useAuth} from '@own3d/sdk/auth'
+import { initializeExtension, useAuth } from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -46,8 +44,8 @@ If you're using Vue, we provide a dedicated Vue plugin that makes integration se
 
 ```js
 import './style.css'
-import {createApp} from 'vue'
-import {createExtension} from '@own3d/sdk/vue'
+import { createApp } from 'vue'
+import { createExtension } from '@own3d/sdk'
 import App from './App.vue'
 
 const extension = createExtension()
@@ -68,7 +66,7 @@ instead.
 ```html
 <script setup lang="ts">
 import { inject } from 'vue'
-import { useAuth } from '@own3d/sdk/auth'
+import { useAuth } from '@own3d/sdk'
 
 const extension = inject('extension')
 const {onAuthorized} = useAuth(extension)
@@ -92,9 +90,8 @@ example demonstrates how to set up a Pinia store for the extension state:
 import {defineStore} from 'pinia'
 import type {Ref} from 'vue'
 import {inject, ref} from 'vue'
-import type {Authorized, Context} from '@own3d/sdk/types'
-import {useContext} from '@own3d/sdk/context'
-import {useAuth} from '@own3d/sdk/auth'
+import type {Authorized, Context} from '@own3d/sdk'
+import {useContext, useAuth} from '@own3d/sdk'
 
 export const useExtensionStore = defineStore('extension', () => {
     const user: Ref<Authorized | null> = ref(null)
@@ -150,8 +147,7 @@ The Auth module provides methods to authenticate the extension with the OWN3D pl
 authenticated user and listen for changes to the authentication state.
 
 ```js
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useAuth} from '@own3d/sdk/auth'
+import {initializeExtension, useAuth} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -168,8 +164,7 @@ The Context module provides methods to get the current context of the extension.
 that describe the current state of the extension.
 
 ```js
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useContext} from '@own3d/sdk/context'
+import {initializeExtension, useContext} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -186,8 +181,7 @@ The Notifications module provides API methods to send notifications to the user.
 such as `info`, `success`, `warning`, or `error`.
 
 ```typescript
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useNotifications} from '@own3d/sdk/notifications'
+import {initializeExtension, useNotifications} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -243,8 +237,7 @@ module. IPC is only intended for communication between the extension and the OWN
 :::
 
 ```js
-import {initializeExtension} from '@own3d/sdk/extension'
-import {usePubSub} from '@own3d/sdk/pubsub'
+import {initializeExtension, usePubSub} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -265,8 +258,7 @@ The Remote Config module provides methods to get and set configuration values wi
 sure to check out our [Remote Config documentation](./remote-config.md) for more information.
 
 ```js
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useRemoteConfig} from '@own3d/sdk/remote-config'
+import {initializeExtension, useRemoteConfig} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -284,8 +276,7 @@ The Scene Builder module provides methods to interact with the Scene Builder, en
 and customizable scenes.
 
 ```typescript
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useSceneBuilder} from '@own3d/sdk/scene-builder'
+import {initializeExtension, useSceneBuilder} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
@@ -325,8 +316,7 @@ for this purpose, as it provides a more straightforward interface.
 :::
 
 ```js
-import {initializeExtension} from '@own3d/sdk/extension'
-import {useSocket} from '@own3d/sdk/socket'
+import {initializeExtension, useSocket} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
