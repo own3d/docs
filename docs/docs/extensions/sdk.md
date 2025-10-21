@@ -317,12 +317,13 @@ for this purpose, as it provides a more straightforward interface.
 
 ```js
 import {initializeExtension, useSocket} from '@own3d/sdk'
+import type { NotifySub } form '@own3d/sdk'
 
 const extension = initializeExtension()
 
 const {on} = useSocket(extension)
 
-on('notifysub', (data) => {
+on('notifysub', (data: NotifySub) => {
     console.log(data)
 })
 ```

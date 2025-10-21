@@ -113,6 +113,7 @@ to display alerts, for example.
 
 ```ts
 import { io } from 'socket.io-client'
+import type { NotifySub } form '@own3d/sdk'
 
 // Connect to the socket
 const socket = io('https://socket-hel1-1.own3d.dev', {
@@ -126,7 +127,7 @@ socket.on('connect', () => {
 })
 
 // Listen for events
-socket.on('notifysub', (data) => {
+socket.on('notifysub', (data: NotifySub) => {
     console.log('Got a new event from the notification subscription service:', data)
 })
 ```
@@ -168,13 +169,14 @@ const socket = io('https://socket-hel1-1.own3d.dev', {
 Using the OWN3D Extension SDK, you can easily connect to the socket server and listen for events.
 
 ```ts
-import { useSocket } from '@own3d/sdk/socket'
+import { useSocket } from '@own3d/sdk'
+import type { NotifySub } form '@own3d/sdk'
 
 // Assume you have an initialized extension object
 const { on } = useSocket(extension)
 
 // Listen for platform events
-on('notifysub', (event) => {
+on('notifysub', (event: NotifySub) => {
     console.log('Got notify-sub event', event)
 })
 
