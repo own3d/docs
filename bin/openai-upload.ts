@@ -28,12 +28,18 @@ async function update() {
     }
 
     // Delete old files in parallel
-    const vectorStoreFiles = await openai.vectorStores.files.list(vectorStoreId, {limit: 100});
-    await Promise.all(Array.from(vectorStoreFiles, async (vectorStoreFile: any) => {
-        await openai.vectorStores.files.delete(vectorStoreFile.id, {vector_store_id: vectorStoreId});
-        await openai.files.delete(vectorStoreFile.id);
-        console.log('File deleted: ' + vectorStoreFile.id);
-    }));
+    console.log("Clearing existing files from vector store...");
+    const current = await openai.vectorStores.files.list(vectorStoreId, {
+        limit: 100
+    });
+    for (const file of current.data) {
+        console.log(`Deleting ${file.id}...`);
+        await openai.vectorStores.files.delete(file.id, {
+            vector_store_id: vectorStoreId
+        });
+        await openai.files.delete(file.id);
+    }
+    console.log("Vector store cleared.\n");
 
     // Upload and attach new files in sequence
     for (const file of files) {

@@ -315,16 +315,45 @@ While we technically use our event bus as our transit for our PubSub system, we 
 for this purpose, as it provides a more straightforward interface.
 :::
 
+The SDK exposes both a low-level `useSocket` helper (for subscribing to raw socket events delivered to the extension runtime)
+and a higher-level `useChat` composable specifically for chat-related events. For most chat handling (new messages,
+message deletes, chat clears, and message normalization) prefer `useChat` — it wraps the socket envelope and provides
+typed helpers and a `parseMessage` utility.
+
+Low-level socket example (raw events):
+
 ```js
 import {initializeExtension, useSocket} from '@own3d/sdk'
-import type { NotifySub } form '@own3d/sdk'
 
 const extension = initializeExtension()
-
 const {on} = useSocket(extension)
 
-on('notifysub', (data: NotifySub) => {
-    console.log(data)
+on('notifysub', (data) => {
+    console.log('notifysub', data)
+})
+```
+
+High-level chat example (recommended):
+
+```js
+import { initializeExtension, useChat } from '@own3d/sdk'
+
+const extension = initializeExtension()
+const { onMessage, onDeleteMessage, onClearChat, parseMessage } = useChat(extension)
+
+// Receive a normalized ChatMessage
+onMessage((msg) => {
+    console.log('New message:', msg)
+    // If you need to normalize a raw payload manually:
+    // const normalized = parseMessage(rawPayload)
+})
+
+onDeleteMessage((payload) => {
+    console.log('Message deleted:', payload)
+})
+
+onClearChat(() => {
+    console.log('Chat cleared')
 })
 ```
 
@@ -339,7 +368,7 @@ With the Socket module, you can also receive chat-related events such as:
 Unlike direct `socket.io` connections, you do **not** need to manually join the  
 `<client_id>.<platform>.<platform_id>.chat` namespace. The SDK automatically handles this setup.
 
-Example:
+Example (low-level socket `on`):
 
 ```js
 on('message', (msg) => {
@@ -353,7 +382,7 @@ on('delete-message', (msg) => {
 on('clear-chat', () => {
     console.log('Chat cleared')
 })
-````
+```
 
 ##### Message Object Summary
 
