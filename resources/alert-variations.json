@@ -1,0 +1,1360 @@
+{
+  "version": 4,
+  "variations": [
+    {
+      "name": "Follow",
+      "type": "follow",
+      "icon": {
+        "name": "heart",
+        "type": "solid"
+      },
+      "description": "Someone follows/subscribes your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who followed",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} is now following",
+            "subtitle": "Welcome to the community!",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who subscribed",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} is now a subscriber!",
+            "subtitle": "Welcome to the community!",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who followed",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} is now following",
+            "subtitle": "Welcome to the community!",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "Someone"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "name": "Someone"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Subscribe",
+      "type": "subscribe",
+      "icon": {
+        "name": "star",
+        "type": "solid"
+      },
+      "description": "Someone subscribes/become a member to your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who subscribed",
+              "conditional": false
+            },
+            {
+              "name": "tier",
+              "type": "enum",
+              "default": "1000",
+              "example": "1000",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "1000"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "2000"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "3000"
+                }
+              ],
+              "description": "The tier of the subscription",
+              "conditional": true
+            },
+            {
+              "name": "is_gift",
+              "type": "boolean",
+              "default": false,
+              "example": false,
+              "description": "Whether the subscription was gifted",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} just subscribed",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who became a member",
+              "conditional": false
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "Ehrenmann/frau",
+              "description": "The name of the Level at which the user is a member",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} just became a member",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who subscribed",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} just subscribed",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Tier 1",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "1000"
+          }
+        },
+        {
+          "name": "Tier 2",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "2000"
+          }
+        },
+        {
+          "name": "Tier 3",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "3000"
+          }
+        },
+        {
+          "name": "Tier 1 (gifted)",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "1000",
+            "is_gift": true
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "Someone",
+            "tier": "Club Member"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "name": "Someone"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Re-Subscribe",
+      "type": "re-subscribe",
+      "icon": {
+        "name": "star",
+        "type": "solid"
+      },
+      "description": "Someone re-subscribes/renews their membership to your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who re-subscribed",
+              "conditional": false
+            },
+            {
+              "name": "tier",
+              "type": "enum",
+              "default": "1000",
+              "example": "1000",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "1000"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "2000"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "3000"
+                }
+              ],
+              "description": "The tier of the subscription",
+              "conditional": true
+            },
+            {
+              "name": "months",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of months the user has been subscribed",
+              "conditional": true
+            },
+            {
+              "name": "streak",
+              "type": "number",
+              "default": 0,
+              "example": 1,
+              "description": "The number of months the user has been subscribed in a row. Null if not shared.",
+              "conditional": true
+            },
+            {
+              "name": "duration",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of months the user has been subscribed in total",
+              "conditional": true
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the subscription",
+              "conditional": false
+            },
+            {
+              "name": "emotes",
+              "type": "object",
+              "default": [],
+              "example": [
+                {
+                  "begin": 23,
+                  "end": 30,
+                  "id": "302976485"
+                }
+              ],
+              "description": "The emotes the user sent with the subscription",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} just resubbed for the {{months}}. month",
+            "subtitle": "{{message}}",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who became a member",
+              "conditional": false
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the membership",
+              "conditional": false
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "Ehrenmann/frau",
+              "description": "The name of the Level at which the user is a member",
+              "conditional": true
+            },
+            {
+              "name": "months",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of months the user has been a member",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} is a member for the {{months}}. month",
+            "subtitle": "{{message}}",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who re-subscribed",
+              "conditional": false
+            },
+            {
+              "name": "months",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of months the user has been subscribed",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} just resubbed for the {{months}}. month",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Tier 1",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "1000",
+            "months": 1,
+            "streak": 1,
+            "duration": 1,
+            "message": "Love the stream! FevziGG",
+            "emotes": [
+              {
+                "begin": 23,
+                "end": 30,
+                "id": "302976485"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Tier 2",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "2000",
+            "months": 1,
+            "streak": 1,
+            "duration": 1,
+            "message": "Love the stream! FevziGG",
+            "emotes": [
+              {
+                "begin": 23,
+                "end": 30,
+                "id": "302976485"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Tier 3",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "tier": "3000",
+            "months": 1,
+            "streak": 1,
+            "duration": 1,
+            "message": "Love the stream! FevziGG",
+            "emotes": [
+              {
+                "begin": 23,
+                "end": 30,
+                "id": "302976485"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "Someone",
+            "tier": "Club Member",
+            "months": 1,
+            "message": "Love the stream! FevziGG"
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "name": "Someone",
+            "months": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Gift-Subscribe",
+      "type": "gift-subscribe",
+      "icon": {
+        "name": "star",
+        "type": "solid"
+      },
+      "description": "Someone gifted a subscription/membership to your channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "gifter",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who gifted the subscription",
+              "conditional": false
+            },
+            {
+              "name": "tier",
+              "type": "enum",
+              "default": "1000",
+              "example": "1000",
+              "options": [
+                {
+                  "name": "Tier 1",
+                  "value": "1000"
+                },
+                {
+                  "name": "Tier 2",
+                  "value": "2000"
+                },
+                {
+                  "name": "Tier 3",
+                  "value": "3000"
+                }
+              ],
+              "description": "The tier of the subscription",
+              "conditional": true
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The total amount of the subscription",
+              "conditional": true
+            },
+            {
+              "name": "cumulative_amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The total amount of the subscription including all previous gifts",
+              "conditional": true
+            },
+            {
+              "name": "is_anonymous",
+              "type": "boolean",
+              "default": false,
+              "example": false,
+              "description": "Whether the subscription was anonymous",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{gifter}} gifted a {{tier}} sub",
+            "subtitle": "Thanks for the community gift!",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "gifter",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who became a member",
+              "conditional": true
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "Ehrenmann/frau",
+              "description": "The name of the Level at which the user is a member",
+              "conditional": true
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The total amount of the subscription",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{gifter}} gifted {{amount}} memberships",
+            "subtitle": "Thanks for the community gift!",
+            "chat_message": ""
+          }
+        },
+        {
+          "type": "kick",
+          "parameters": [
+            {
+              "name": "gifter",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who gifted the subscription",
+              "conditional": false
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The total amount of the subscription",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{gifter}} gifted {{amount}} subscriptions",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Tier 1",
+          "platform": "twitch",
+          "parameters": {
+            "gifter": "Someone",
+            "tier": "1000",
+            "amount": 1,
+            "cumulative_amount": 1,
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "Tier 2",
+          "platform": "twitch",
+          "parameters": {
+            "gifter": "Someone",
+            "tier": "2000",
+            "amount": 1,
+            "cumulative_amount": 1,
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "Tier 3",
+          "platform": "twitch",
+          "parameters": {
+            "gifter": "Someone",
+            "tier": "3000",
+            "amount": 1,
+            "cumulative_amount": 1,
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "gifter": "Someone",
+            "tier": "Club Member",
+            "amount": 1
+          }
+        },
+        {
+          "name": "Default",
+          "platform": "kick",
+          "parameters": {
+            "gifter": "Someone",
+            "amount": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cheer",
+      "type": "cheer",
+      "icon": {
+        "name": "gem",
+        "type": "solid"
+      },
+      "description": "Someone cheers on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who cheered",
+              "conditional": false
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The amount of bits the user cheered",
+              "conditional": true
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the cheer",
+              "conditional": false
+            },
+            {
+              "name": "is_anonymous",
+              "type": "boolean",
+              "default": false,
+              "example": false,
+              "description": "Whether the cheer was anonymous",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} cheered {{amount}} Bits",
+            "subtitle": "{{message}}",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "10",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "amount": 10,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "100",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "amount": 100,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "1k",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "amount": 1000,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        },
+        {
+          "name": "5k",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "amount": 5000,
+            "message": "Love the stream! FevziGG",
+            "is_anonymous": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Raid",
+      "type": "raid",
+      "icon": {
+        "name": "user-group-simple",
+        "type": "solid"
+      },
+      "description": "Someone raids your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who raided",
+              "conditional": false
+            },
+            {
+              "name": "count",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The number of viewers the user raided with",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} is raiding with a party of {{count}}",
+            "subtitle": "Hello there!",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "10",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "count": 10
+          }
+        },
+        {
+          "name": "50",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "count": 50
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hype Train Begin",
+      "type": "channel.hype_train.begin",
+      "icon": {
+        "name": "train",
+        "type": "solid"
+      },
+      "description": "A hype train begins on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "level",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The level of the hype train",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "Hype Train Level {{level}}",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "level": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shoutout Create",
+      "type": "channel.shoutout.create",
+      "icon": {
+        "name": "megaphone",
+        "type": "solid"
+      },
+      "description": "A shoutout is created on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who was shout out",
+              "conditional": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "default": "",
+              "example": "https://twitch.tv/someone",
+              "description": "The url of the user who was shout out",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "Shoutout to {{name}}",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "url": "https://twitch.tv/someone"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shoutout Receive",
+      "type": "channel.shoutout.receive",
+      "icon": {
+        "name": "megaphone",
+        "type": "solid"
+      },
+      "description": "A shoutout is received on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who sent the shout out",
+              "conditional": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "default": "",
+              "example": "https://twitch.tv/someone",
+              "description": "The url of the user who sent the shout out",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "Shoutout from {{name}}",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "name": "Someone",
+            "url": "https://twitch.tv/someone"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Channel Points Reward",
+      "type": "channel_points.redemption.add",
+      "icon": {
+        "name": "coin",
+        "type": "solid"
+      },
+      "description": "Someone redeems a channel points reward on your Twitch channel",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who redeemed the Reward",
+              "conditional": false
+            },
+            {
+              "name": "user_input",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The input the user gave on the reward",
+              "conditional": false
+            },
+            {
+              "name": "reward_title",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The title of the Reward",
+              "conditional": true
+            },
+            {
+              "name": "reward_cost",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The cost of the reward",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} redeemed {{reward_title}}"
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "twitch",
+          "parameters": {
+            "id": "bfe0ec8a-8e98-4285-b88c-3074da72cc6f",
+            "name": "Someone",
+            "message": "User input",
+            "status": "fulfilled",
+            "user_id": "123456789",
+            "user_login": "someone",
+            "user_input": "User input",
+            "user_name": "Someone",
+            "broadcaster_id": "987654321",
+            "broadcaster_login": "broadcaster",
+            "broadcaster_name": "Broadcaster",
+            "reward_id": "8c39c3e5-9d62-4799-80e4-f392e5cacd97",
+            "reward_title": "Reward",
+            "reward_cost": 1000,
+            "reward_prompt": "Prompt"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super Chat",
+      "type": "superchat",
+      "icon": {
+        "name": "message-dollar",
+        "type": "solid"
+      },
+      "description": "Someone purchased a elevated chat to highlight their message in your chat",
+      "platforms": [
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who purchased the Super Chat",
+              "conditional": false
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the Super Chat",
+              "conditional": false
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "???",
+              "description": "The tier for the paid message",
+              "conditional": true
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 0,
+              "example": 100,
+              "description": "The purchase amount, eg 10.50",
+              "conditional": true
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "example": "USD",
+              "description": "The currency in which the fund was made",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "New super chat from {{name}}",
+            "subtitle": "{{message}}",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "Someone",
+            "message": "Love the stream! FevziGG",
+            "tier": "???",
+            "amount": 10,
+            "currency": "USD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super Sticker",
+      "type": "supersticker",
+      "icon": {
+        "name": "note-sticky",
+        "type": "solid"
+      },
+      "description": "Someone purchased Super Sticker to highlight their message in your YouTube live chat",
+      "platforms": [
+        {
+          "type": "youtube",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who purchased the Super Sticker",
+              "conditional": false
+            },
+            {
+              "name": "sticker",
+              "type": "string",
+              "default": "",
+              "example": "???",
+              "description": "The unique ID of the Super Sticker",
+              "conditional": true
+            },
+            {
+              "name": "tier",
+              "type": "string",
+              "default": "",
+              "example": "???",
+              "description": "The tier for the paid sticker",
+              "conditional": true
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 0,
+              "example": 1000000,
+              "description": "The purchase amount, in micros of the purchase currency. e.g. 1 USD = 1000000",
+              "conditional": true
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "example": "USD",
+              "description": "The currency in which the fund was made",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "Super sticker from {{name}}",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "Default",
+          "platform": "youtube",
+          "parameters": {
+            "name": "Someone",
+            "sticker": "???",
+            "tier": "???",
+            "amount": 10,
+            "currency": "USD"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tip",
+      "type": "donation",
+      "icon": {
+        "name": "money-bill-1",
+        "type": "solid"
+      },
+      "description": "Someone tips to your channel",
+      "platforms": [
+        {
+          "type": "own3d",
+          "parameters": [
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who tipped",
+              "conditional": false
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 1,
+              "example": 1,
+              "description": "The amount of money the user tipped",
+              "conditional": true
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "example": "USD",
+              "description": "The currency of the tip",
+              "conditional": true
+            },
+            {
+              "name": "message",
+              "type": "string",
+              "default": "",
+              "example": "Love the stream! FevziGG",
+              "description": "The message the user sent with the tip",
+              "conditional": false
+            }
+          ],
+          "default": {
+            "title": "{{name}} tipped {{amount}}{{currency}}",
+            "subtitle": "Appreciate your donation!",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "$10",
+          "platform": "own3d",
+          "parameters": {
+            "name": "Someone",
+            "amount": 10,
+            "currency": "USD",
+            "message": "Love the stream! FevziGG"
+          }
+        },
+        {
+          "name": "$50",
+          "platform": "own3d",
+          "parameters": {
+            "name": "Someone",
+            "amount": 50,
+            "currency": "USD",
+            "message": "Love the stream! FevziGG"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Charity-Donation",
+      "type": "charity-donation",
+      "icon": {
+        "name": "hand-holding-dollar",
+        "type": "solid"
+      },
+      "description": "Someone donates to your Twitch charity campaign",
+      "platforms": [
+        {
+          "type": "twitch",
+          "parameters": [
+            {
+              "name": "campaign_id",
+              "type": "string",
+              "default": "",
+              "example": "123-abc-456-def",
+              "description": "The ID of the campaign",
+              "conditional": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "default": "",
+              "example": "Someone",
+              "description": "The name of the user who donated",
+              "conditional": false
+            },
+            {
+              "name": "charity_name",
+              "type": "string",
+              "default": "",
+              "example": "Example Charity",
+              "description": "The name of the charity",
+              "conditional": true
+            },
+            {
+              "name": "charity_description",
+              "type": "string",
+              "default": "",
+              "example": "Example Charity Description",
+              "description": "The description of the charity",
+              "conditional": false
+            },
+            {
+              "name": "charity_website",
+              "type": "string",
+              "default": "",
+              "example": "https://example.com",
+              "description": "The website of the charity",
+              "conditional": false
+            },
+            {
+              "name": "charity_logo",
+              "type": "string",
+              "default": "",
+              "example": "https://example.com/logo.png",
+              "description": "The logo of the charity",
+              "conditional": false
+            },
+            {
+              "name": "amount",
+              "type": "number",
+              "default": 0,
+              "example": 100,
+              "description": "The value of the donation",
+              "conditional": true
+            },
+            {
+              "name": "currency",
+              "type": "string",
+              "default": "USD",
+              "example": "USD",
+              "description": "The currency of the donation",
+              "conditional": true
+            }
+          ],
+          "default": {
+            "title": "{{name}} donated {{amount}}{{currency}} for {{charity_name}}",
+            "subtitle": "Thanks for the donation!",
+            "chat_message": ""
+          }
+        }
+      ],
+      "examples": [
+        {
+          "name": "$10",
+          "platform": "twitch",
+          "parameters": {
+            "campaign_id": "123-abc-456-def",
+            "name": "Someone",
+            "charity_name": "Example Charity",
+            "charity_description": "Example Charity Description",
+            "charity_website": "https://example.com",
+            "charity_logo": "https://example.com/logo.png",
+            "amount": 10.0,
+            "currency": "USD"
+          }
+        },
+        {
+          "name": "$50",
+          "platform": "twitch",
+          "parameters": {
+            "campaign_id": "123-abc-456-def",
+            "name": "Someone",
+            "charity_name": "Example Charity",
+            "charity_description": "Example Charity Description",
+            "charity_website": "https://example.com",
+            "charity_logo": "https://example.com/logo.png",
+            "amount": 50.0,
+            "currency": "USD"
+          }
+        }
+      ]
+    }
+  ]
+}
