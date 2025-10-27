@@ -6,6 +6,9 @@ import os from "os";
 
 const openai = new OpenAI();
 
+const isCanary = process.argv.includes("--canary");
+const yes = process.argv.includes("--yes");
+
 const files = [
     {path: 'docs/docs/notify-sub/event-types.md'},
     {path: 'docs/docs/extensions/sdk.md'},
@@ -20,22 +23,31 @@ const files = [
     {path: 'docs/docs/extensions/README.md'},
 ];
 
+const VECTOR_STORE_ID = isCanary
+    ? process.env.DOCS_VECTOR_STORE_CANARY_ID
+    : process.env.DOCS_VECTOR_STORE_PRODUCTION_ID;
+
+if (!isCanary && !yes) {
+    console.error("Publishing to PRODUCTION vector store. To confirm, re-run with --yes flag.");
+    process.exit(1);
+} else {
+    console.log("Publishing to CANARY vector store...");
+}
+
 async function update() {
-    const vectorStoreId = process.env.OPENAI_VECTOR_STORE;
-    if (!vectorStoreId) {
-        console.error('OPENAI_VECTOR_STORE env variable not set.');
-        process.exit(1);
-    }
+    const store = VECTOR_STORE_ID
+        ? { id: VECTOR_STORE_ID }
+        : await openai.vectorStores.create({ name: "developer-docs" });
 
     // Delete old files in parallel
-    console.log("Clearing existing files from vector store...");
-    const current = await openai.vectorStores.files.list(vectorStoreId, {
+    console.log(`Clearing existing files from vector store (${store.id})...`);
+    const current = await openai.vectorStores.files.list(store.id, {
         limit: 100
     });
     for (const file of current.data) {
         console.log(`Deleting ${file.id}...`);
         await openai.vectorStores.files.delete(file.id, {
-            vector_store_id: vectorStoreId
+            vector_store_id: store.id
         });
         await openai.files.delete(file.id);
     }
@@ -57,7 +69,7 @@ async function update() {
                 file: fs.createReadStream(filePath),
                 purpose: "assistants",
             });
-            await openai.vectorStores.files.create(vectorStoreId, {file_id: newFile.id});
+            await openai.vectorStores.files.create(store.id, {file_id: newFile.id});
             if (file.alias) {
                 console.log(`File attached: ${file.path} (as ${file.alias})`);
             } else {
