@@ -191,6 +191,29 @@ onContext((context, changed) => {
 })
 ```
 
+### DashboardExtension
+The DashboardExtension module provides methods to interact with the OWN3D Pro Dashboard. It allows you to define tabs for your Dashboard Extension and set the active tab. You can also listen for tab change events. Tabs can have different labels for different languages.
+
+```js
+import { initializeExtension, useDashboardExtension, COMPATIBILITY_DASHBOARD_EXTENSION } from '@own3d/sdk'
+const extension = initializeExtension(COMPATIBILITY_DASHBOARD_EXTENSION)
+
+const { defineDashboardTabs, setDashboardTab, onDashboardTabChanged } = useDashboardExtension(extension)
+
+defineDashboardTabs([
+    { key: 'tab1', labels: { en: 'Tab 1', de: 'Reiter 1' } },
+    { key: 'tab2', labels: { en: 'Tab 2', de: 'Reiter 2' } },
+])
+
+setDashboardTab('tab1')
+
+onDashboardTabChanged((key) => {
+    console.log('Active tab changed to:', key)
+})
+
+```
+
+
 ### Notifications
 
 The Notifications module provides API methods to send notifications to the user. Notifications can have different types
