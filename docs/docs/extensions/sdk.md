@@ -139,6 +139,22 @@ const { user, context } = storeToRefs(extensionStore)
 ```
 <!-- @formatter:on -->
 
+## Compatibility
+To define the current [compatibility](./README.md#compatibilities) of the Extension, you can use the `COMPATIBILITY_*` constants provided by the SDK. These constants help you specify which type of extension you are building, such as a Dashboard Extension or a Scene-Builder Widget.
+
+You are required to set `COMPATIBILITY_DASHBOARD_EXTENSION` for a Dashboard Extension to function correctly inside the OWN3D Pro Dashboard. For all other types of extensions, setting the compatibility is optional and not needed right now.
+
+```ts
+import {
+    createExtension,
+    COMPATIBILITY_DASHBOARD_EXTENSION,
+    COMPATIBILITY_SCENE_BUILDER_WIDGET,
+    COMPATIBILITY_CONFIGURATION_PAGE
+} from '@own3d/sdk'
+
+const extension = createExtension(COMPATIBILITY_DASHBOARD_EXTENSION)
+```
+
 ## Modules
 
 ### Auth
@@ -174,6 +190,29 @@ onContext((context, changed) => {
     console.log(context, changed)
 })
 ```
+
+### DashboardExtension
+The DashboardExtension module provides methods to interact with the OWN3D Pro Dashboard. It allows you to define tabs for your Dashboard Extension and set the active tab. You can also listen for tab change events. Tabs can have different labels for different languages.
+
+```js
+import { initializeExtension, useDashboardExtension, COMPATIBILITY_DASHBOARD_EXTENSION } from '@own3d/sdk'
+const extension = initializeExtension(COMPATIBILITY_DASHBOARD_EXTENSION)
+
+const { defineDashboardTabs, setDashboardTab, onDashboardTabChanged } = useDashboardExtension(extension)
+
+defineDashboardTabs([
+    { key: 'tab1', labels: { en: 'Tab 1', de: 'Reiter 1' } },
+    { key: 'tab2', labels: { en: 'Tab 2', de: 'Reiter 2' } },
+])
+
+setDashboardTab('tab1')
+
+onDashboardTabChanged((key) => {
+    console.log('Active tab changed to:', key)
+})
+
+```
+
 
 ### Notifications
 
