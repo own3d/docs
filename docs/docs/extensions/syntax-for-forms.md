@@ -495,6 +495,24 @@ Resulting `values`:
 }
 ```
 
+Here's an example of how to load a given font from FontBunny:
+
+```js
+function loadFont(fontFamily: string) {
+  // Check if font is already loaded
+  const existingLink = document.querySelector(`link[href*="${fontFamily.replace(/\s+/g, '+')}"]`)
+  if (existingLink) {
+    return
+  }
+
+  // Create and append link element for Bunny Fonts
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = `https://fonts.bunny.net/css?family=${fontFamily.replace(/\s+/g, '+')}:100,200,300,400,500,600,700,800,900`
+  document.head.appendChild(link)
+}
+```
+
 ### Input Field
 
 ![Input Field](../../images/fields/input.png)
