@@ -1,284 +1,154 @@
-# Manifest Configuration <Badge text="Public Alpha" type="warning"/>
+# Manifest Configuration
 
-The manifest file is a YAML file which contains all the information about your extension. It can be used in combination
-with the `own3d ext:deploy` command to deploy your extension to the OWN3D platform without the need to use the web
-interface.
+The manifest file (`manifest.yaml`) describes your extension and is used with `own3d ext:deploy` to deploy to the OWN3D
+platform. Schema version 2 splits configuration across two files: `manifest.yaml` for metadata and compatibilities, and
+an optional `forms.yaml` for browser-source input fields.
 
-::: warning
-This feature is currently in public alpha and is subject to change without notice and may not be suitable for production
-use. Please report any issues you encounter to the OWN3D team.
-:::
+## Typical AI Widget Manifest
 
-## Manifest
-
-The following is an example of a minimal manifest file:
+Most AI-generated widgets use a browser-source only manifest with a fixed canvas size:
 
 ```yaml
-schema_version: 1
-id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension Example
-version: 0.0.0
-description: An example extension boilerplate
-summary: An example extension boilerplate
-store_presence:
-  images:
-    logo: assets/logo.png
+schema_version: 2
+id: a214167b-7af5-432a-a4df-f8e2493eeb3e
+name: Bar
+version: 1.0.0
 compatibilities:
-  config:
-    path: config.html
-```
-
-::: details Extension with forms
-
-```yaml
-schema_version: 1
-id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension that offers permissions
-version: 0.0.0
-description: Extension that includes permissions for moderators
-summary: An example extension boilerplate
-store_presence:
-  images:
-    logo: assets/logo.png
-compatibilities:
-  config:
-    path: config.html
   browser-source:
-    path: browser-source.html
-    forms:
-      config_button: standalone
-      inputs:
-        - id: text
-          type: input
-          attributes:
-            label: Text
-            value: Hello World
-            description: This is a description
-          validations:
-            required: true
+    path: index.html
+    sizing:
+      width: 800
+      height: 600
 ```
-
-:::
-
-::: details Extension with permissions
-
-```yaml
-schema_version: 1
-id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension that offers permissions
-version: 0.0.0
-description: Extension that includes permissions for moderators
-summary: An example extension boilerplate
-store_presence:
-  images:
-    logo: assets/logo.png
-compatibilities:
-  config:
-    path: config.html
-permissions:
-  schedule:write:
-    name: Edit Schedule
-    description: 'Edit your schedule'
-    default: true
-```
-
-:::
-
-::: details Extension with store presence
-
-To be eligible for the store, the extension must have a store presence. The store presence includes the manifest keys
-for `store_presence`, `author`, `support`, and `legal`.
-
-```yaml
-schema_version: 1
-id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension with store presence
-version: 0.0.0
-description: Extension that includes permissions for moderators
-summary: An example extension boilerplate
-store_presence:
-  category: tools
-  images:
-    icon: assets/icon.png
-    logo: assets/logo.png
-    discovery: assets/discovery.png
-  screenshots:
-    - assets/screenshot1.png
-    - assets/screenshot2.png
-  keywords:
-    - example
-    - boilerplate
-author:
-  name: Example Author
-  email: author@example.com
-support:
-  url: https://example.com/support
-  email: support@example.com
-legal:
-  terms: https://example.com/terms
-  privacy: https://example.com/privacy
-```
-
-:::
-
-::: details Extension with OAuth scopes
-
-```yaml
-schema_version: 1
-id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension that offers permissions
-version: 0.0.0
-description: Extension that includes permissions for moderators
-summary: An example extension boilerplate
-store_presence:
-  images:
-    logo: assets/logo.png
-oauth:
-  scopes:
-    - user:read
-  redirect_uri: https://example.com/oauth
-```
-
-:::
-
-::: details Extension with Monetization support
-
-Monetization is a new feature that allows you to sell products and subscriptions within your extension. This feature is
-currently in development and is only available to a limited number of developers.
-
-Deprecation of SKU's can only be done inside the Developer Console. Deprecating a SKU will not affect existing
-subscriptions or in-app purchases that have been made and will only prevent new purchases of the SKU.
-
-```yaml
-schema_version: 1
-id: 2c0135a2-d8a6-4002-b545-0eaf9780f9db
-name: Extension that offers monetization
-version: 0.0.0
-description: Extension that includes monetization
-summary: An example extension boilerplate
-store_presence:
-  images:
-    logo: assets/logo.png
-compatibilities:
-  config:
-    path: config.html
-monetization:
-  in_app_purchase:
-    products:
-      - sku: product-sku
-        name: Product Name
-        description: Product Description
-        price: 100
-  subscriptions:
-    - sku: subscription-sku
-      name: Subscription Name
-      description: Subscription Description
-      recurrence: weekly
-      price: 100
-```
-
-:::
 
 ## Manifest Keys
 
 ### `schema_version`
 
-The version of the manifest schema. The current version is `1`.
+Must be `2`.
 
 ### `id`
 
-The unique identifier of the extension. This identifier is used to identify the extension in the OWN3D platform.
-
-You can generate a UUID using the [OWN3D Developer Console](https://console.dev.own3d.tv/resources/extensions/new).
+UUID of the extension. Generate one at
+the [OWN3D Developer Console](https://console.dev.own3d.tv/resources/extensions/new).
 
 ### `name`
 
-The name of the extension. Your name cannot include any form of the words "Extension", or "OWN3D".
+Display name of the extension. Must not contain the words "Extension" or "OWN3D".
 
 ### `version`
 
-The version of the extension.
+SemVer version string (e.g. `1.0.0`). Must match the version registered in the Developer Console.
 
 ### `description`
 
-The Description is viewable only on the Extension Details page. It should be the full details about the functions of
-your Extension. This is your chance to tell them why they should install your Extension.
+Full description shown on the Extension Details page.
 
 ### `summary`
 
-The Summary is viewable throughout OWN3D. It should be one to two brief sentences describing what your Extension does.
-To provide more detail, use the Description field.
+One or two sentences shown throughout OWN3D. Keep it short; use `description` for details.
 
-### `store_presence`
+### `base_url`
 
-The store presence of the extension. This key is required if you want to publish your extension in the OWN3D store.
-For more information, see [Store Presence](#store-presence-1).
+Optional external base URL for the extension version.
 
 ### `compatibilities`
 
-The compatibilities of the extension. For more information, see [Compatibilities](#compatibilities-1).
+Declares which surfaces the extension runs on. See [Compatibilities](#compatibilities-1).
 
-### `permissions`
+### `store_presence`
 
-The permissions of the extension. For more information, see [Permissions](#permissions-1).
+Required for store listing. See [Store Presence](#store-presence-1).
 
-### `oauth`
+### `publisher`
 
-TBD. For more information, see [OAuth](#oauth-1).
+- `name`: Publisher display name (e.g. "StreamTV Media GmbH").
 
 ### `author`
 
-The author of the Extension as shown to the public, e.g. "StreamTV Media GmbH".
+- `name`: Author display name.
+- `email`: Author contact email.
 
 ### `support`
 
-The support of the extension. This includes the following keys:
-
-- `url`: The URL of the support.
-- `email`: The email of the support.
+- `url`: Support page URL.
+- `email`: Support email address.
 
 ### `legal`
 
-The legal of the extension. This includes the following keys:
+- `terms`: Terms of service URL.
+- `privacy`: Privacy policy URL.
 
-- `terms`: The URL of the terms.
-- `privacy`: The URL of the privacy.
+### `oauth`
 
-## Store Presence
-
-The store presence of the extension is required if you want to publish your extension in the OWN3D store. The store
-presence includes the following keys:
-
-### `category`
-
-The category of the extension.
-
-### `images`
-
-The images of the extension. This includes
-
-- `icon`: The icon image of the extension.
-- `logo`: The logo image of the extension.
-- `discovery`: The discovery image of the extension.
-
-### `screenshots`
-
-The screenshots of the extension.
-
-### `keywords`
-
-The keywords of the extension.
+- `scopes`: Array of OAuth scopes (e.g. `[user:read]`).
+- `redirect_uri`: Array of allowed redirect URIs.
 
 ## Compatibilities
 
-The compatibilities of the extension include the following
+Supported types under `compatibilities`:
 
-Each compatibility includes the following
+| Key                  | Description                                |
+|----------------------|--------------------------------------------|
+| `browser-source`     | Overlay rendered as a browser source       |
+| `config`             | Configuration panel in the OWN3D dashboard |
+| `background-service` | Background service page                    |
+| `standalone`         | Standalone page                            |
 
 ### `path`
 
-The path of the compatibility.
+HTML file path for this compatibility type.
 
-### `forms` (optional; only for `browser-source`)
+### `sizing` (browser-source only)
 
-The forms of the compatibility.
+Default canvas size and position:
+
+- `x`, `y`: Default position (pixels).
+- `width`, `height`: Default size (pixels).
+
+### `resize_by_default` (browser-source only)
+
+Boolean. Whether the browser source is resizable by default. Defaults to `false`.
+
+## Store Presence
+
+Required to list in the OWN3D store. Nested under `store_presence`:
+
+### `category`
+
+Store category string.
+
+### `images`
+
+- `icon`: Icon image path.
+- `logo`: Logo image path.
+- `discovery`: Discovery banner image path.
+
+### `screenshots`
+
+Array of screenshot file paths.
+
+### `keywords`
+
+Array of search keyword strings.
+
+## Forms (forms.yaml)
+
+Forms are defined in a **separate** `forms.yaml` file — they are not allowed inside `manifest.yaml`. Forms configure
+user-editable inputs for the `browser-source` compatibility. For the full list of available input types and their
+options, see [Syntax for Forms](./syntax-for-forms.md).
+
+```yaml
+schema_version: 1
+id: a214167b-7af5-432a-a4df-f8e2493eeb3e
+has_demo_mode: false
+inputs:
+  - id: text
+    type: input
+    attributes:
+      label: Text
+      value: Hello World
+      description: This is a description
+    validations:
+      required: true
+```
