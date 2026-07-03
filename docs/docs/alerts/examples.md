@@ -111,8 +111,9 @@ to display alerts, for example.
 
 ### Use Sockets with Socket.IO
 
-```javascript
+```ts
 import { io } from 'socket.io-client'
+import type { NotifySub } form '@own3d/sdk'
 
 // Connect to the socket
 const socket = io('https://socket-hel1-1.own3d.dev', {
@@ -126,7 +127,7 @@ socket.on('connect', () => {
 })
 
 // Listen for events
-socket.on('notifysub', (data) => {
+socket.on('notifysub', (data: NotifySub) => {
     console.log('Got a new event from the notification subscription service:', data)
 })
 ```
@@ -161,18 +162,25 @@ const socket = io('https://socket-hel1-1.own3d.dev', {
 
 :::
 
-### Use Sockets with OWN3D Extension Helper <Badge text="beta" type="warning"/>
+### Use Sockets with OWN3D Extension SDK <Badge text="beta" type="warning"/>
 
-> This feature using the [OWN3D Extension Helper](extensions/extension-helper.md).
+> This feature using the [OWN3D Extension SDK](../extensions/sdk.md#socket).
 
-Using the OWN3D Extension Helper, you can easily connect to the socket server and listen for events.
+Using the OWN3D Extension SDK, you can easily connect to the socket server and listen for events.
 
-```javascript
-OWN3D.ext.socket.on('notifysub', (data) => {
-    console.log('Got notify-sub event', data)
+```ts
+import { useSocket } from '@own3d/sdk'
+import type { NotifySub } form '@own3d/sdk'
+
+// Assume you have an initialized extension object
+const { on } = useSocket(extension)
+
+// Listen for platform events
+on('notifysub', (event: NotifySub) => {
+    console.log('Got notify-sub event', event)
 })
 
-OWN3D.ext.socket.on('browser-source-updated', (data) => {
+on('browser-source-updated', (data) => {
     console.log('Got browser-source-updated event', data)
 })
 ```

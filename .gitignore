@@ -6,3 +6,4 @@
 /docs/.vuepress/.temp
 /vendor
 .env
+.env.rene

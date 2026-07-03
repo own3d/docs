@@ -2,17 +2,8 @@
 
 The new OWN3D Extension SDK is a collection of tools and utilities to help you build extensions for the OWN3D platform.
 It is designed to be a lightweight and easy-to-use package that provides a simple interface to interact with the OWN3D
-platform.
-
-## SDK versions: namespaced and modular
-
-OWN3D provides two API versions for extensions:
-
-- **Javascript - Namespaced**: This version aims to be a Twitch Extension like experience. It is a single script that
-  provides the bare minimum to get started with the OWN3D Extension platform. Because the namespaced APi does not
-  benefit from ongoing new feature support, most new apps should instead use the modular API.
-- **Javascript - Modular**: This version is a collection of modules that provide a more flexible and feature-rich
-  experience. It is the recommended version for new apps.
+platform. This version is a collection of modules that provide a more flexible and feature-rich experience. It is the
+recommended version for new apps.
 
 ## Installation
 
@@ -22,8 +13,7 @@ If your starting a new project, we recommend using the **modular version** of th
 npm install @own3d/sdk
 ```
 
-After installing the SDK, you can import the modules you need in your project. Keep in mind that your code will be
-organized in a more modular way, and you will have to import the modules explicitly.
+After installing the SDK, you can import the modules you need in your project.
 
 ### For General JavaScript Applications
 
@@ -33,12 +23,11 @@ pass it around as needed. This approach ensures that the extension is correctly 
 :::
 
 ```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useAuth } from '@own3d/sdk/auth'
+import { initializeExtension, useAuth } from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { onAuthorized } = useAuth(extension)
+const {onAuthorized} = useAuth(extension)
 
 onAuthorized(async (user) => {
     console.log(user)
@@ -56,7 +45,7 @@ If you're using Vue, we provide a dedicated Vue plugin that makes integration se
 ```js
 import './style.css'
 import { createApp } from 'vue'
-import { createExtension } from '@own3d/sdk/vue'
+import { createExtension } from '@own3d/sdk'
 import App from './App.vue'
 
 const extension = createExtension()
@@ -77,7 +66,7 @@ instead.
 ```html
 <script setup lang="ts">
 import { inject } from 'vue'
-import { useAuth } from '@own3d/sdk/auth'
+import { useAuth } from '@own3d/sdk'
 
 const extension = inject('extension')
 const {onAuthorized} = useAuth(extension)
@@ -98,35 +87,34 @@ example demonstrates how to set up a Pinia store for the extension state:
 **Step 1: Create an Extension Store:**
 
 ```typescript
-import { defineStore } from 'pinia'
-import type { Ref } from 'vue'
-import { inject, ref } from 'vue'
-import type { Authorized, Context } from '@own3d/sdk/types'
-import { useContext } from '@own3d/sdk/context'
-import { useAuth } from '@own3d/sdk/auth'
+import {defineStore} from 'pinia'
+import type {Ref} from 'vue'
+import {inject, ref} from 'vue'
+import type {Authorized, Context} from '@own3d/sdk'
+import {useContext, useAuth} from '@own3d/sdk'
 
 export const useExtensionStore = defineStore('extension', () => {
-  const user: Ref<Authorized | null> = ref(null)
-  const context: Ref<Context | null> = ref(null)
+    const user: Ref<Authorized | null> = ref(null)
+    const context: Ref<Context | null> = ref(null)
 
-  const extension = inject('extension')
-  const {onContext} = useContext(extension)
-  const {onAuthorized} = useAuth(extension)
+    const extension = inject('extension')
+    const {onContext} = useContext(extension)
+    const {onAuthorized} = useAuth(extension)
 
-  onContext((_context: Partial<Context>, changed: ReadonlyArray<keyof Context>) => {
-    for (const key of changed) {
-      context.value = {...context.value, [key]: _context[key]}
+    onContext((_context: Partial<Context>, changed: ReadonlyArray<keyof Context>) => {
+        for (const key of changed) {
+            context.value = {...context.value, [key]: _context[key]}
+        }
+    }, {immediate: true})
+
+    onAuthorized((_user: Authorized) => {
+        user.value = _user
+    })
+
+    return {
+        user,
+        context,
     }
-  }, {immediate: true})
-
-  onAuthorized((_user: Authorized) => {
-    user.value = _user
-  })
-
-  return {
-    user,
-    context,
-  }
 })
 ```
 
@@ -159,12 +147,11 @@ The Auth module provides methods to authenticate the extension with the OWN3D pl
 authenticated user and listen for changes to the authentication state.
 
 ```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useAuth } from '@own3d/sdk/auth'
+import {initializeExtension, useAuth} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { onAuthorized } = useAuth(extension)
+const {onAuthorized} = useAuth(extension)
 
 onAuthorized(async (user) => {
     console.log(user)
@@ -177,12 +164,11 @@ The Context module provides methods to get the current context of the extension.
 that describe the current state of the extension.
 
 ```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useContext } from '@own3d/sdk/context'
+import {initializeExtension, useContext} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { onContext } = useContext(extension)
+const {onContext} = useContext(extension)
 
 onContext((context, changed) => {
     console.log(context, changed)
@@ -191,15 +177,15 @@ onContext((context, changed) => {
 
 ### Notifications
 
-The Notifications module provides API methods to send notifications to the user. Notifications can have different types such as `info`, `success`, `warning`, or `error`.
+The Notifications module provides API methods to send notifications to the user. Notifications can have different types
+such as `info`, `success`, `warning`, or `error`.
 
 ```typescript
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useNotifications } from '@own3d/sdk/notifications'
+import {initializeExtension, useNotifications} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { notify, info, success, warning, error, dismiss, patch } = useNotifications(extension)
+const {notify, info, success, warning, error, dismiss, patch} = useNotifications(extension)
 
 // Example: Send a custom notification
 await notify({
@@ -230,9 +216,9 @@ await dismiss('notification-id')
 
 // Example: Update (patch) an existing notification
 await patch('notification-id', {
-  type: 'success',
-  title: 'Updated Notification',
-  message: 'The notification content has been updated.',
+    type: 'success',
+    title: 'Updated Notification',
+    message: 'The notification content has been updated.',
 })
 ```
 
@@ -251,12 +237,11 @@ module. IPC is only intended for communication between the extension and the OWN
 :::
 
 ```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { usePubSub } from '@own3d/sdk/pubsub'
+import {initializeExtension, usePubSub} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { publish, subscribe } = usePubSub(extension)
+const {publish, subscribe} = usePubSub(extension)
 
 subscribe('foo', (data) => {
     console.log(data)
@@ -273,30 +258,29 @@ The Remote Config module provides methods to get and set configuration values wi
 sure to check out our [Remote Config documentation](./remote-config.md) for more information.
 
 ```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useRemoteConfig } from '@own3d/sdk/remote-config'
+import {initializeExtension, useRemoteConfig} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { getSegments, setSegment } = useRemoteConfig(extension)
+const {getSegments, setSegment} = useRemoteConfig(extension)
 
 const segments = await getSegments()
 console.log(segments)
 
-await setSegment('creator', { key: 'value' })
+await setSegment('creator', {key: 'value'})
 ```
 
 ### Scene Builder
 
-The Scene Builder module provides methods to interact with the Scene Builder, enabling developers to create interactive and customizable scenes.
+The Scene Builder module provides methods to interact with the Scene Builder, enabling developers to create interactive
+and customizable scenes.
 
 ```typescript
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useSceneBuilder } from '@own3d/sdk/scene-builder'
+import {initializeExtension, useSceneBuilder} from '@own3d/sdk'
 
 const extension = initializeExtension()
 
-const { setInteractive, onClick, setValues, patchValues } = useSceneBuilder(extension)
+const {setInteractive, onClick, setValues, patchValues} = useSceneBuilder(extension)
 
 // Example: Set the Scene Builder to interactive mode
 await setInteractive(true)
@@ -322,24 +306,54 @@ await patchValues({
 
 The Socket module provides methods to connect to our event bus, which is a real-time messaging system that allows you to
 receive events from the OWN3D platform. For example, you can listen for events like new subscriptions or donations via
-our [NotifySub Event Types](../notify-sub/event-types.md) or custom events. You can also use the Socket module to
-receive events from the extension itself, like Remote Config changes.
+our [NotifySub Event Types](../notify-sub/event-types.md), chat-related
+events [Message Protocol](../chatbot/message-protocol.md), or custom events. You can also use the Socket module to receive events
+from the extension itself, like Remote Config changes.
 
 ::: tip
 While we technically use our event bus as our transit for our PubSub system, we recommend using the PubSub module
 for this purpose, as it provides a more straightforward interface.
 :::
 
+The SDK exposes both a low-level `useSocket` helper (for subscribing to raw socket events delivered to the extension runtime)
+and a higher-level `useChat` composable specifically for chat-related events. For most chat handling (new messages,
+message deletes, chat clears, and message normalization) prefer `useChat` — it wraps the socket envelope and provides
+typed helpers and a `parseMessage` utility.
+
+Low-level socket example (raw events):
+
 ```js
-import { initializeExtension } from '@own3d/sdk/extension'
-import { useSocket } from '@own3d/sdk/socket'
+import {initializeExtension, useSocket} from '@own3d/sdk'
 
 const extension = initializeExtension()
-
-const { on } = useSocket(extension)
+const {on} = useSocket(extension)
 
 on('notifysub', (data) => {
-    console.log(data)
+    console.log('notifysub', data)
+})
+```
+
+High-level chat example (recommended):
+
+```js
+import { initializeExtension, useChat } from '@own3d/sdk'
+
+const extension = initializeExtension()
+const { onMessage, onDeleteMessage, onClearChat, parseMessage } = useChat(extension)
+
+// Receive a normalized ChatMessage
+onMessage((msg) => {
+    console.log('New message:', msg)
+    // If you need to normalize a raw payload manually:
+    // const normalized = parseMessage(rawPayload)
+})
+
+onDeleteMessage((payload) => {
+    console.log('Message deleted:', payload)
+})
+
+onClearChat(() => {
+    console.log('Chat cleared')
 })
 ```
 
@@ -347,32 +361,32 @@ on('notifysub', (data) => {
 
 With the Socket module, you can also receive chat-related events such as:
 
-- **`message`** – a new chat message  
-- **`delete-message`** – a single message was deleted  
-- **`clear-chat`** – the chat was cleared  
+- **`message`** – a new chat message
+- **`delete-message`** – a single message was deleted
+- **`clear-chat`** – the chat was cleared
 
 Unlike direct `socket.io` connections, you do **not** need to manually join the  
 `<client_id>.<platform>.<platform_id>.chat` namespace. The SDK automatically handles this setup.
 
-Example:
+Example (low-level socket `on`):
 
 ```js
 on('message', (msg) => {
-  console.log('New message:', msg)
+    console.log('New message:', msg)
 })
 
 on('delete-message', (msg) => {
-  console.log('Message deleted:', msg)
+    console.log('Message deleted:', msg)
 })
 
 on('clear-chat', () => {
-  console.log('Chat cleared')
+    console.log('Chat cleared')
 })
-````
+```
 
 ##### Message Object Summary
 
-When handling a `message` event, the payload follows the [Message Protocol](./message-protocol.md).
+When handling a `message` event, the payload follows the [Message Protocol](../chatbot/message-protocol.md).
 Here are the key fields you’ll typically use:
 
 | Field        | Type         | Description                                                              |
@@ -388,4 +402,5 @@ Here are the key fields you’ll typically use:
 | `parent`     | object\|null | Parent message (if this is a reply)                                      |
 | `attributes` | object       | Metadata such as `edited`, `highlight`, `accent`                         |
 
-👉 For the full schema and detailed fragment types, see the [Message Protocol → Message Reference](../chatbot/message-protocol.md).
+👉 For the full schema and detailed fragment types, see
+the [Message Protocol → Message Reference](../chatbot/message-protocol.md).

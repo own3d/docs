@@ -27,7 +27,7 @@ The following example shows how to use the `coins` module to initiate a exchange
 OWN3D.ext.coins.useCoins('product-sku', { foo: 'bar' })
 ```
 
-To learn more about using the `coins` module, see the [Extension Helper Reference](extension-helper.md#own3d-ext-coins).
+To learn more about using the `useCoins` module, see the [Extension SDK](sdk.md#coins).
 
 #### Payment Lifecycle
 
@@ -91,7 +91,7 @@ receives an `onSubscriptionCancelled` callback.
 You can use these callbacks to implement specific actions or logic within your extension, providing a seamless and
 user-friendly experience throughout the subscription lifecycle.
 
-To learn more about using the `coins` module, see the [Extension Helper Reference](extension-helper.md#own3d-ext-coins).
+To learn more about using the `useCoins` module, see the [Extension SDK](sdk.md#coins).
 
 ## Commerce Webhooks
 

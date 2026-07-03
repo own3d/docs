@@ -43,7 +43,7 @@ const token = jwt.sign({
 
 ## Read from the Remote Config Service
 
-### Read using the Extension Helper
+### Read using the Extension SDK
 
 To read from the Remote Config, you can use the following code snippet:
 
@@ -84,8 +84,7 @@ const config = await response.json()
 
 ## Write to the Remote Config Service
 
-To write to the Remote Config, you can either use the [Extension Helper](extension-helper.md) or use the Remote Config
-API.
+To write to the Remote Config, you can either use the [Extension SDK](sdk.md) or use the Remote Config API.
 However, writing to the `global` or `developer` segment is only possible using the Remote Config API.
 
 The API only accept objects as values. If you want to store a string, you need to wrap it in an object. Arrays will be
@@ -96,7 +95,7 @@ will help to avoid conflicts with other services writing to the Remote Config.
 
 To empty a segment, you can send an empty object.
 
-### Write using the Extension Helper
+### Write using the Extension SDK
 
 ::: warning
 Inside the Extension, you can only write to the `broadcaster` segment of the Remote Config. To write to the `global`

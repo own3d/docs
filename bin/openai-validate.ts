@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import OpenAI from "openai";
+import OpenAI from 'openai';
 
 const openai = new OpenAI();
 
@@ -7,7 +7,8 @@ async function validate() {
     console.log('Validate store...')
     const stream = await openai.responses.create({
         model: "gpt-4o",
-        input: "Write a simple web console script using the OWN3D SDK that connects to the OWN3D chat and listens for messages. When a message is received, it should display it in the console in the following format: `{username}: {message}`",
+        input: "You are a helpful assistant that building OWN3D extensions. You have access to the entire using your documents.\n" +
+        "How to create form fields to chang the font of a text?\n how is the font applied?",
         tools: [
             {
                 type: "file_search",
