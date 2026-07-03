@@ -405,8 +405,12 @@ Resulting `values`:
 
 ![Input Field](../../images/fields/input.png)
 
-The `input` field provides a simple text input.
-The `type` attribute can be used to define the type of input (`text` , `number`). The `type` attribute is optional and defaults to `text`.
+The `input` field provides a simple text input for extension settings.
+The `attributes.type` property can be used to define the kind of input (`text`, `number`); it may be omitted and
+defaults to `text`.
+
+This is different from the `optional` flag described below, which controls whether the whole field can be toggled
+on/off — not whether the `type` attribute itself must be set.
 
 ```yaml
   - type: input
