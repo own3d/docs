@@ -13,7 +13,8 @@
   "scripts": {
     "docs:dev": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && vuepress dev docs",
     "docs:build": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && vuepress build docs",
-    "openai:upload": "tsx bin/openai-upload.ts"
+    "openai:upload": "tsx bin/openai-upload.ts --yes",
+    "openai:validate": "tsx bin/openai-validate.ts"
   },
   "dependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.24",
