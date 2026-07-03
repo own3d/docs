@@ -34,7 +34,7 @@ curl -fsSL https://deno.land/install.sh | sh
 After installing Deno, you can install the OWN3D CLI using the following command:
 
 ```bash
-deno install -Arfg https://cli.own3d.dev
+deno install -Arfg --import-map=https://cli.own3d.dev/deno.json https://cli.own3d.dev
 ```
 
 You can confirm `own3d` is installed by running the following command:
@@ -50,7 +50,7 @@ Now, you can start using the OWN3D CLI to manage your extensions and edge functi
 To update the OWN3D CLI to the latest version, you can run the following command:
 
 ```bash
-deno install -Arfg https://cli.own3d.dev
+deno install -Arfg --import-map=https://cli.own3d.dev/deno.json https://cli.own3d.dev
 ```
 
 ## Usage
