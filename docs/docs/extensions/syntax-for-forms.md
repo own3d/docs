@@ -495,6 +495,24 @@ Resulting `values`:
 }
 ```
 
+Here's an example of how to load a given font from FontBunny:
+
+```js
+function loadFont(fontFamily: string) {
+  // Check if font is already loaded
+  const existingLink = document.querySelector(`link[href*="${fontFamily.replace(/\s+/g, '+')}"]`)
+  if (existingLink) {
+    return
+  }
+
+  // Create and append link element for Bunny Fonts
+  const link = document.createElement('link')
+  link.rel = 'stylesheet'
+  link.href = `https://fonts.bunny.net/css?family=${fontFamily.replace(/\s+/g, '+')}:100,200,300,400,500,600,700,800,900`
+  document.head.appendChild(link)
+}
+```
+
 ### Input Field
 
 ![Input Field](../../images/fields/input.png)
@@ -592,14 +610,14 @@ defaults to `text`.
 
 ![Paragraph Field](../../images/fields/paragraph.png)
 
-The `paragraph` field allows you to display a paragraph of text. The `headline` is optional. There is no `value` for
+The `paragraph` field allows you to display a paragraph of text. The `title` is optional. There is no `value` for
 this field.
 
 ```yaml
   - type: paragraph
     id: paragraph
     attributes:
-      headline: Headline
+      title: Headline
       content: Lorem ipsum dolor sit amet, consetetur sadipscing elitr…
 ```
 
@@ -927,6 +945,7 @@ The `accordion` field can be used to group any number of other fields.
     id: my-accordion
     attributes:
       label: My Accordion
+      icon: gear
     fields:
       - type: boolean
         id: random
@@ -944,7 +963,7 @@ The `accordion` field can be used to group any number of other fields.
       - ...
 ```
 
-The field does not store any values.
+The `icon` attribute can be set to the name of any [Fontawesome icon](https://fontawesome.com/search).  The field does not store any values.
 
 ### Group Field
 
